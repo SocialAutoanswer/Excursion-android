@@ -1,5 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="brown">#362E28</color>
+    <color name="brown_70pc">#B3362E28</color>
+    <color name="orange">#FCBF03</color>
+    <color name="red">#FF515B</color>
+    <color name="blue">#6C9CF9</color>
+
+<!--    <color name="black">#161311</color>-->
+<!--    <color name="blumine">#30676D</color>-->
+<!--    <color name="pink">#E09CA0</color>-->
+<!--    <color name="peach">#FFD39F</color>-->
+<!--    <color name="light_gray">#D9D9D9</color>-->
+<!--    <color name="gray_blue">#53617C</color>-->
+<!--    <color name="light_gray_blue">#53617C99</color>-->
+<!--    <color name="dark_blue">#6682B9</color>-->
+<!--    <color name="light_yellow">#FAF0D0</color>-->
 </resources>
