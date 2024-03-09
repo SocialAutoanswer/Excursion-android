@@ -4,6 +4,7 @@ import buildsrc.Versions
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -42,7 +43,27 @@ dependencies {
     implementation(Libs.AndroidX.core)
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.constraintlayout)
+    implementation(Libs.AndroidX.fragments)
     implementation(Libs.Google.material)
+
+    implementation(Libs.Network.ohttp)
+    implementation(platform(Libs.Network.okhttpBom))
+    implementation(Libs.Network.okhttpLogInter)
+
+    implementation(Libs.Network.gson)
+
+    implementation(Libs.Network.retrofit)
+    implementation(Libs.Network.retrofitGson)
+    implementation(Libs.Network.retrofitRxJava3)
+
+    implementation(Libs.delegateAdapter)
+    implementation(Libs.circleImage)
+
+    implementation(Libs.DI.dagger)
+    kapt(Libs.DI.daggerCompiler)
+
+    implementation(Libs.RxJava.rxJava)
+    implementation(Libs.RxJava.rxJavaAndroid)
 }
 
 fun isNonStable(version: String): Boolean {
