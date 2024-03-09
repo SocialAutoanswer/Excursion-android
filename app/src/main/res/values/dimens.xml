@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_width">@dimen/_257sdp</dimen>
+    <dimen name="button_height">@dimen/_48sdp</dimen>
+    <dimen name="action_btn_corners">@dimen/_5sdp</dimen>
+    <dimen name="nav_btn_corners">@dimen/_8sdp</dimen>
+
+    <dimen name="big_text_size">@dimen/_40sdp</dimen>
+    <dimen name="title_text_size">@dimen/_24sdp</dimen>
+    <dimen name="main_text_size">@dimen/_16sdp</dimen>
+    <dimen name="secondary_text_size">@dimen/_12sdp</dimen>
+    <dimen name="descr_text_size">@dimen/_8sdp</dimen>
+
+</resources>
