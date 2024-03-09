@@ -16,11 +16,23 @@ object Versions {
         const val core = "1.9.0"
         const val appCompat = "1.6.1"
         const val constraintlayout = "2.1.4"
+        const val fragments = "1.5.7"
     }
 
     object Google {
         const val material = "1.11.0"
     }
+
+    object Network {
+        const val okhttp = "4.12.0"
+        const val gson = "2.10.1"
+        const val retrofit = "2.9.0"
+    }
+
+    const val dagger = "2.51"
+    const val rxJava = "3.1.8"
+    const val circleImage = "3.1.0"
+    const val delegateAdapter = "4.2"
 }
 
 object Libs {
@@ -29,6 +41,7 @@ object Libs {
         const val core = "androidx.core:core-ktx:${Versions.AndroidX.core}"
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintlayout}"
+        const val fragments = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragments}"
     }
 
     object Google {
@@ -36,12 +49,29 @@ object Libs {
     }
 
     object Network {
+        const val ohttp = "com.squareup.okhttp3:okhttp" //does not need version
+        const val okhttpLogInter = "com.squareup.okhttp3:logging-interceptor" //does not need version
+        const val okhttpBom = "com.squareup.okhttp3:okhttp-bom:${Versions.Network.okhttp}"
 
+        const val gson = "com.google.code.gson:gson:${Versions.Network.gson}"
+
+        const val retrofit = "com.squareup.retrofit2:retrofit:${Versions.Network.retrofit}"
+        const val retrofitGson = "com.squareup.retrofit2:converter-gson:${Versions.Network.retrofit}"
+        const val retrofitRxJava3 = "com.squareup.retrofit2:adapter-rxjava3:${Versions.Network.retrofit}"
     }
 
     object DI {
-
+        const val dagger = "com.google.dagger:dagger:${Versions.dagger}"
+        const val daggerCompiler = "com.google.dagger:dagger-compiler:${Versions.dagger}"
     }
+
+    object RxJava {
+        const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxJava}"
+        const val rxJavaAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxJava}"
+    }
+
+    const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
+    const val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
 
     object Test {
 
