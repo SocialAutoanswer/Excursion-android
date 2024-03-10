@@ -15,4 +15,5 @@ dependencyResolutionManagement {
 
 rootProject.name = "Exursion"
 include(":app")
- 
+include(":android-kit")
+include(":playground")

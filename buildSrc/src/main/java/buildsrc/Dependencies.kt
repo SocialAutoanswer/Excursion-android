@@ -31,6 +31,7 @@ object Versions {
 
     const val dagger = "2.51"
     const val rxJava = "3.1.8"
+    const val rxAndroid = "3.0.2"
     const val circleImage = "3.1.0"
     const val delegateAdapter = "4.2"
 }
@@ -67,7 +68,7 @@ object Libs {
 
     object RxJava {
         const val rxJava = "io.reactivex.rxjava3:rxjava:${Versions.rxJava}"
-        const val rxJavaAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxJava}"
+        const val rxJavaAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
     }
 
     const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
