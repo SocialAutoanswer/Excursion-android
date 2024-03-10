@@ -1,30 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="button_text">
+    <!--                        Buttons                             -->
+
+    <style name="button">
+        <item name="android:layout_width">@dimen/main_width</item>
+        <item name="carbon_elevation">10dp</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+    </style>
+    
+    <style name="action_button" parent="button">
+        <item name="android:layout_height">@dimen/action_btn_height</item>
+        <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/title_text_size</item>
         <item name="android:textColor">@color/white</item>
     </style>
-    
-    <style name="button" parent="button_text">
-        <item name="android:layout_width">@dimen/main_width</item>
-        <item name="android:layout_height">@dimen/button_height</item>
-        <item name="android:layout_gravity">center_horizontal</item>
-        <item name="android:gravity">center</item>
-        <item name="android:elevation">10dp</item>
+
+    <style name="neutral_button" parent="action_button">
+        <item name="android:background">@drawable/background_neutral_btn</item>
+        <item name="android:text">@string/save</item>
     </style>
 
-    <style name="save_button" parent="button">
-        <item name="android:background">@drawable/background_save_btn</item>
-    </style>
-
-    <style name="delete_button" parent="button">
+    <style name="delete_button" parent="action_button">
         <item name="android:background">@drawable/background_delete_btn</item>
+        <item name="android:text">@string/delete</item>
     </style>
+
 
     <style name="nav_button" parent="button">
+        <item name="android:layout_height">@dimen/nav_btn_height</item>
+        <item name="android:background">@drawable/background_nav_button</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/brown</item>
+        <item name="android:gravity">start|center</item>
+    </style>
 
+
+    <style name="orange_nav_button" parent="nav_button">
+        <item name="android:layout_width">@dimen/small_btn_width</item>
+        <item name="android:textColor">@color/orange</item>
+        <item name="carbon_elevationShadowColor">@color/orange</item>
+    </style>
+
+    <style name="red_nav_button" parent="nav_button">
+        <item name="carbon_elevationShadowColor">@color/red_shadow</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <!--                        Buttons                             -->
+
+
+
+    <!--                        Text                                -->
+
+    <style name="main_text">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+
+    <style name="page_title">
+        <item name="android:textSize">@dimen/page_name_text_size</item>
+        <item name="android:textColor">@color/brown</item>
     </style>
     
-    
+    <style name="red_text">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/red</item>
+    </style>
+
+    <style name="orange_text">
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/orange</item>
+    </style>
+
+
+    <style name="description_text">
+        <item name="android:textSize">@dimen/descr_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <style name="edit_text">
+        <item name="android:layout_width">@dimen/main_width</item>
+        <item name="android:layout_height">@dimen/nav_btn_height</item>
+        <item name="android:layout_gravity">center_horizontal</item>
+        <item name="android:background">@drawable/background_edit_text</item>
+        <item name="android:textSize">@dimen/main_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="title_text">
+        <item name="android:textSize">@dimen/title_text_size</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+
+    <!--                        Text                                -->
+
 </resources>
