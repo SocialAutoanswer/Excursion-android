@@ -1,0 +1,36 @@
+version: "1.0"
+linter: jetbrains/qodana-jvm-android:2023.2
+profile:
+  name: qodana.recommended.full
+exclude:
+  - name: All
+    paths:
+      - node_modules/
+      - common/node_modules/
+      - scan/node_modules/
+      - vsts/node_modules/
+      - scan/jest.config.js
+      - common/lib
+      - scan/lib
+      - scan/dist
+      - scan/__tests__
+      - vsts/lib
+      - vsts/QodanaScan
+      - build.gradle.kts
+      - settings.gradle.kts
+include:
+  - name: CheckDependencyLicenses
+  - name: Eslint
+  - name: GrazieInspection
+  - name: IdentifierGrammar
+  - name: LanguageDetectionInspection
+licenseRules:
+  - keys:
+      - Apache-2.0
+    allowed:
+      - 0BSD
+      - FPL
+projectJDK: "temurin-17"
+#short name of your JDK
+#if you use OpenJDK: go to .idea/misc.xml and change openjdk-XX to XX
+#example: openjdk-17 -> 17
