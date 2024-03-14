@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="main_width">342dp</dimen>
+    <dimen name="action_btn_height">48dp</dimen>
+    <dimen name="nav_btn_height">40dp</dimen>
+    <dimen name="small_btn_width">167dp</dimen>
+    <dimen name="action_btn_corners">5dp</dimen>
+    <dimen name="nav_btn_corners">8dp</dimen>
+
+    <dimen name="page_name_text_size">50sp</dimen>
+    <dimen name="title_text_size">24sp</dimen>
+    <dimen name="main_text_size">16sp</dimen>
+    <dimen name="descr_text_size">12sp</dimen>
+    <dimen name="smallest_text_size">8sp</dimen>
+
+    <dimen name="nav_btn_text_padding">40dp</dimen>
+    <dimen name="nav_btn_icon_padding">10dp</dimen>
+
+</resources>
