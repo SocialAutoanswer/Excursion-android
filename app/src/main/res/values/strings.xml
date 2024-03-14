@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Exursion</string>
 
-    <string name="save">Сохранить</string>
-    <string name="delete">Удалить</string>
+    <string name="main_bottom_navigation_routes">Маршруты</string>
+    <string name="main_bottom_navigation_maps">Карты</string>
+    <string name="main_bottom_navigation_recommendation">Рекомендации</string>
+    <string name="main_bottom_navigation_profile">Профиль</string>
 
 </resources>

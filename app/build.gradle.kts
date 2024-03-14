@@ -37,6 +37,9 @@ android {
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
+    buildFeatures {
+        viewBinding = true
+    }
 }
 
 dependencies {
@@ -44,6 +47,8 @@ dependencies {
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.constraintlayout)
     implementation(Libs.AndroidX.fragments)
+    implementation(Libs.AndroidX.navigationFragmentKtx)
+    implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.Google.material)
 
     implementation(Libs.Network.ohttp)
@@ -56,8 +61,9 @@ dependencies {
     implementation(Libs.Network.retrofitGson)
     implementation(Libs.Network.retrofitRxJava3)
 
-    implementation(Libs.delegateAdapter)
-    implementation(Libs.circleImage)
+    implementation(Libs.Common.delegateAdapter)
+    implementation(Libs.Common.circleImage)
+    implementation(Libs.Common.carbon)
 
     implementation(Libs.DI.dagger)
     kapt(Libs.DI.daggerCompiler)

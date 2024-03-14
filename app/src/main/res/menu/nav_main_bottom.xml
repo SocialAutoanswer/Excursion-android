@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/routes"
+        android:title="@string/main_bottom_navigation_routes"
+        android:icon="@drawable/selector_bottom_nav_route"/>
+
+    <item
+        android:id="@+id/maps"
+        android:title="@string/main_bottom_navigation_maps"
+        android:icon="@drawable/selector_bottom_nav_map"/>
+
+    <item
+        android:id="@+id/recommendation"
+        android:title="@string/main_bottom_navigation_recommendation"
+        android:icon="@drawable/selector_bottom_nav_star"/>
+
+    <item
+        android:id="@+id/profile"
+        android:title="@string/main_bottom_navigation_profile"
+        android:icon="@drawable/selector_bottom_nav_profile"/>
+
+</menu>

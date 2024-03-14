@@ -17,6 +17,7 @@ object Versions {
         const val appCompat = "1.6.1"
         const val constraintlayout = "2.1.4"
         const val fragments = "1.5.7"
+        const val navigation = "2.7.7"
     }
 
     object Google {
@@ -34,6 +35,7 @@ object Versions {
     const val rxAndroid = "3.0.2"
     const val circleImage = "3.1.0"
     const val delegateAdapter = "4.2"
+    const val carbon = "0.16.0.1"
 }
 
 object Libs {
@@ -43,6 +45,8 @@ object Libs {
         const val appCompat = "androidx.appcompat:appcompat:${Versions.AndroidX.appCompat}"
         const val constraintlayout = "androidx.constraintlayout:constraintlayout:${Versions.AndroidX.constraintlayout}"
         const val fragments = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragments}"
+        const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
+        const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
     }
 
     object Google {
@@ -71,8 +75,11 @@ object Libs {
         const val rxJavaAndroid = "io.reactivex.rxjava3:rxandroid:${Versions.rxAndroid}"
     }
 
-    const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
-    const val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
+    object Common {
+        const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
+        const val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
+        const val carbon = "tk.zielony:carbon:${Versions.carbon}"
+    }
 
     object Test {
 

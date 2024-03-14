@@ -1,15 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
+    <!-- Common styles  -->
+    <eat-comment/>
+
+    <style name="MatchParentWrapContent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchParent0dp">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="MatchParentWrapContent.PrimaryBackground">
+        <item name="android:background">@color/brown</item>
+    </style>
+
     <!--                        Buttons                             -->
 
-    <style name="button">
-        <item name="android:layout_width">@dimen/main_width</item>
+    <style name="Button">
         <item name="carbon_elevation">10dp</item>
-        <item name="android:layout_gravity">center_horizontal</item>
     </style>
     
-    <style name="action_button" parent="button">
+    <style name="action_button" parent="Button">
         <item name="android:layout_height">@dimen/action_btn_height</item>
         <item name="android:gravity">center</item>
         <item name="android:textSize">@dimen/title_text_size</item>
@@ -18,16 +33,14 @@
 
     <style name="neutral_button" parent="action_button">
         <item name="android:background">@drawable/background_neutral_btn</item>
-        <item name="android:text">@string/save</item>
     </style>
 
     <style name="delete_button" parent="action_button">
         <item name="android:background">@drawable/background_delete_btn</item>
-        <item name="android:text">@string/delete</item>
     </style>
 
 
-    <style name="nav_button" parent="button">
+    <style name="nav_button" parent="Button">
         <item name="android:layout_height">@dimen/nav_btn_height</item>
         <item name="android:background">@drawable/background_nav_button</item>
         <item name="android:textSize">@dimen/main_text_size</item>
@@ -46,9 +59,6 @@
         <item name="carbon_elevationShadowColor">@color/red_shadow</item>
         <item name="android:textColor">@color/red</item>
     </style>
-
-    <!--                        Buttons                             -->
-
 
 
     <!--                        Text                                -->
