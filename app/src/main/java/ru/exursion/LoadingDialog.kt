@@ -12,7 +12,7 @@ class LoadingDialog: DialogFragment() {
     //recommendation for DialogFragment https://developer.android.com/reference/android/app/DialogFragment#BasicDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setStyle(STYLE_NORMAL, R.style.custom_dialog)
+        setStyle(STYLE_NORMAL, R.style.CustomDialog)
     }
 
     //recommendation for DialogFragment https://islamassem.medium.com/custom-dialog-using-dialog-fragments-de6a0874b6a4
