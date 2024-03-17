@@ -2,11 +2,13 @@
 <resources>
     <color name="white">#FFFFFFFF</color>
     <color name="brown">#362E28</color>
+    <color name="brown_50pc">#80362E28</color>
     <color name="brown_70pc">#B3362E28</color>
     <color name="orange">#FCBF03</color>
     <color name="red">#FF515B</color>
     <color name="blue">#6C9CF9</color>
     <color name="red_shadow">#E01E1E</color>
+    <color name="dark_blue">#362E28FA</color>
 
     <color name="test_black">#161311</color>
     <color name="test_blumine">#30676D</color>
