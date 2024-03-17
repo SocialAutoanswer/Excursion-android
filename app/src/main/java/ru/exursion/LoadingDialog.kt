@@ -9,13 +9,13 @@ import ru.exursion.databinding.LoadingScreenBinding
 
 class LoadingDialog: DialogFragment() {
 
-    //recommendation for DialogFragment
+    //recommendation for DialogFragment https://developer.android.com/reference/android/app/DialogFragment#BasicDialog
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setStyle(STYLE_NORMAL, R.style.custom_dialog)
     }
 
-    //recommendation for DialogFragment
+    //recommendation for DialogFragment https://islamassem.medium.com/custom-dialog-using-dialog-fragments-de6a0874b6a4
     override fun onStart() {
         super.onStart()
         dialog?.window?.setLayout(
