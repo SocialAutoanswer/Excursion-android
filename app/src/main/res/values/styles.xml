@@ -91,13 +91,33 @@
 
     <!--                        Text                                -->
 
-    <style name="Text" parent="MatchParentWrapContent">
-        <item name="android:textColor">@color/brown</item>
-    </style>
+    <style name="Text" parent="MatchParentWrapContent"/>
 
     <style name="Text.Light">
         <item name="android:fontFamily">@font/roboto_light</item>
         <item name="android:textSize">@dimen/text_light</item>
+    </style>
+
+    <style name="Text.Light.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Light.Brown">
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+
+    <style name="Text.AdditionalLight">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">@dimen/text_additional_light</item>
+    </style>
+
+    <style name="Text.AdditionalLight.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.AdditionalLight.Brown">
+        <item name="android:textColor">@color/brown</item>
     </style>
 
     <style name="Text.Additional">
@@ -105,9 +125,25 @@
         <item name="android:textSize">@dimen/text_additional</item>
     </style>
 
+    <style name="Text.Additional.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Additional.Brown">
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
     <style name="Text.Main">
-        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:fontFamily">@font/roboto_bold</item>
         <item name="android:textSize">@dimen/text_main</item>
+    </style>
+
+    <style name="Text.Main.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Main.Brown">
+        <item name="android:textColor">@color/brown</item>
     </style>
 
     <style name="Text.Header">
@@ -115,10 +151,26 @@
         <item name="android:textSize">@dimen/text_header</item>
     </style>
 
+    <style name="Text.Header.White">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.Header.Brown">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
     <style name="Text.CenterHeader" parent="Text.Header">
         <item name="android:gravity">center</item>
         <item name="android:layout_marginTop">16dp</item>
         <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="Text.CenterHeader.White" parent="Text.Header">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="Text.CenterHeader.Brown" parent="Text.Header">
+        <item name="android:textColor">@color/brown</item>
     </style>
 
     <style name="EditText" parent="MatchParentWrapContent">
@@ -186,6 +238,13 @@
         <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:background">@android:color/transparent</item>
+    </style>
+
+
+    <style name="CustomRatingBar" parent="Theme.AppCompat">
+        <item name="android:progressDrawable">@drawable/custom_ratingbar</item>
+        <item name="android:minHeight">16dip</item>
+        <item name="android:maxHeight">16dip</item>
     </style>
 
 </resources>

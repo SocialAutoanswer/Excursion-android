@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/MatchParentWrapContent"
+	app:cardCornerRadius="20dp">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		style="@style/MatchParentWrapContent">
+
+
+		<ImageView
+			android:layout_width="match_parent"
+			android:layout_height="0dp"
+			android:src="@drawable/test_hotel_img"
+			android:scaleType="centerCrop"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<View
+			style="@style/MatchParent0dp"
+			android:background="@drawable/item_gradient"
+			app:layout_constraintBottom_toBottomOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent" />
+
+		<LinearLayout
+			android:id="@+id/item_text"
+			android:layout_width="match_parent"
+			android:layout_height="wrap_content"
+			android:layout_marginBottom="44dp"
+			android:layout_marginTop="16dp"
+			android:layout_marginStart="16dp"
+			android:layout_marginEnd="80dp"
+			android:orientation="vertical"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent">
+
+			<TextView
+				android:id="@+id/title"
+				style="@style/Text.Main.White"
+				android:text="Ханума"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:layout_marginBottom="16dp"/>
+
+			<TextView
+				android:id="@+id/description"
+				style="@style/Text.Additional.White"
+				android:layout_width="match_parent"
+				android:layout_height="wrap_content"
+				android:text="ул. Баумана 68"
+				android:layout_marginBottom="8dp"/>
+
+			<RatingBar
+				android:id="@+id/ratingbar"
+				style="@style/CustomRatingBar"
+				android:layout_width="wrap_content"
+				android:layout_height="wrap_content"
+				android:numStars="5"
+				android:isIndicator="false"
+				android:stepSize="0.1"
+				android:rating="5.0"/>
+
+		</LinearLayout>
+
+		<ImageView
+			android:id="@+id/arrow"
+			android:layout_width="wrap_content"
+			android:layout_height="wrap_content"
+			android:src="@drawable/ic_arrow"
+			android:layout_marginTop="16dp"
+			android:layout_marginEnd="16dp"
+			android:layout_marginBottom="96dp"
+			app:layout_constraintStart_toEndOf="@id/item_text"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent" />
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

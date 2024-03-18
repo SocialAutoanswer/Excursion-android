@@ -8,4 +8,6 @@
 
     <string name="choose_town_header">Город</string>
 
+    <string name="loading">Загрузка</string>
+
 </resources>

@@ -17,6 +17,7 @@
     <dimen name="nav_btn_icon_padding">10dp</dimen>
 
     <dimen name="text_light">8sp</dimen>
+    <dimen name="text_additional_light">12sp</dimen>
     <dimen name="text_additional">16sp</dimen>
     <dimen name="text_main">24sp</dimen>
     <dimen name="text_header">40sp</dimen>
