@@ -6,4 +6,6 @@
     <string name="main_bottom_navigation_recommendation">Рекомендации</string>
     <string name="main_bottom_navigation_profile">Профиль</string>
 
+    <string name="choose_town_header">Город</string>
+
 </resources>

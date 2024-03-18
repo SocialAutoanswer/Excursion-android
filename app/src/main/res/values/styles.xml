@@ -4,13 +4,41 @@
     <!-- Common styles  -->
     <eat-comment/>
 
+    <style name="WrapContent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchParent">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchParent.Vertical">
+        <item name="android:orientation">vertical</item>
+    </style>
+
+    <style name="MatchParent.Vertical.Padding_16dp">
+        <item name="android:paddingHorizontal">16dp</item>
+    </style>
+
     <style name="MatchParentWrapContent">
         <item name="android:layout_width">match_parent</item>
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="WrapContentMatchParent">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
     <style name="MatchParent0dp">
         <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">0dp</item>
+    </style>
+
+    <style name="WrapContent0dp">
+        <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">0dp</item>
     </style>
 
@@ -62,6 +90,48 @@
 
 
     <!--                        Text                                -->
+
+    <style name="Text" parent="MatchParentWrapContent">
+        <item name="android:textColor">@color/brown</item>
+    </style>
+
+    <style name="Text.Light">
+        <item name="android:fontFamily">@font/roboto_light</item>
+        <item name="android:textSize">@dimen/text_light</item>
+    </style>
+
+    <style name="Text.Additional">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/text_additional</item>
+    </style>
+
+    <style name="Text.Main">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">@dimen/text_main</item>
+    </style>
+
+    <style name="Text.Header">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:textSize">@dimen/text_header</item>
+    </style>
+
+    <style name="Text.CenterHeader" parent="Text.Header">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginTop">16dp</item>
+        <item name="android:layout_marginBottom">16dp</item>
+    </style>
+
+    <style name="EditText" parent="MatchParentWrapContent">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:textCursorDrawable">@drawable/shape_text_cursor</item>
+    </style>
+
+    <style name="Search" parent="EditText">
+        <item name="android:maxLines">1</item>
+        <item name="android:background">@null</item>
+        <item name="android:layout_width">0dp</item>
+    </style>
 
     <style name="main_text">
         <item name="android:textSize">@dimen/main_text_size</item>
