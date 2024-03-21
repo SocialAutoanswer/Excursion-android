@@ -8,6 +8,6 @@
 
     <string name="choose_town_header">Город</string>
 
-    <string name="loading">Загрузка</string>
+    <string name="loading_screen_title">Загрузка</string>
 
 </resources>

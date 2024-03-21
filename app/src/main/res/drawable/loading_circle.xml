@@ -11,14 +11,13 @@
         android:thicknessRatio="10"
         android:useLevel="false">
 
-        <size
-            android:width="60dp"
-            android:height="60dp" />
+        <corners android:radius="20dp"/>
 
         <gradient
             android:centerY="0.50"
             android:endColor="@color/orange"
-            android:startColor="@color/dark_blue"
+            android:centerColor="@color/dark_blue"
+            android:startColor="@android:color/transparent"
             android:type="sweep"
             android:useLevel="false" />
     </shape>

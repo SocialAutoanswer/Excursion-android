@@ -17,9 +17,7 @@
 
     <TextView
         style="@style/Text.Additional.White"
-        android:layout_width="100dp"
-        android:layout_height="20dp"
-        android:text="@string/loading"
+        android:text="@string/loading_screen_title"
         android:gravity="center"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
