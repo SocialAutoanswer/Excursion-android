@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
+	style="@style/MatchParentWrapContent">
+
+	<androidx.constraintlayout.widget.ConstraintLayout
+		style="@style/MatchParent"
+		android:background="@color/brown_70pc">
+
+		<de.hdodenhof.circleimageview.CircleImageView
+			android:id="@+id/play_btn"
+			android:layout_width="40dp"
+			android:layout_height="40dp"
+			android:layout_margin="8dp"
+			android:src="@drawable/img"
+			app:layout_constraintStart_toStartOf="parent"
+			app:layout_constraintEnd_toStartOf="@id/player_info"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent"/>
+
+
+		<androidx.constraintlayout.widget.ConstraintLayout
+			android:id="@+id/player_info"
+			android:layout_width="0dp"
+			android:layout_height="wrap_content"
+			android:layout_marginEnd="16dp"
+			android:layout_marginTop="8dp"
+			android:layout_marginBottom="12dp"
+			app:layout_constraintStart_toEndOf="@id/play_btn"
+			app:layout_constraintEnd_toEndOf="parent"
+			app:layout_constraintTop_toTopOf="parent"
+			app:layout_constraintBottom_toBottomOf="parent">
+
+			<androidx.constraintlayout.widget.ConstraintLayout
+				android:id="@+id/info_text"
+				style="@style/WrapContent"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toTopOf="parent"
+				app:layout_constraintBottom_toTopOf="@id/track_bar">
+
+				<TextView
+					android:id="@+id/name"
+					style="@style/Text.AdditionalLight.White"
+					android:text="Баумана"
+					android:layout_marginEnd="150dp"
+					app:layout_constraintStart_toStartOf="parent"
+					app:layout_constraintEnd_toStartOf="@id/time"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent"/>
+
+				<LinearLayout
+					android:id="@+id/time"
+					android:layout_width="wrap_content"
+					android:layout_height="0dp"
+					android:orientation="horizontal"
+					android:layout_marginTop="2dp"
+					android:layout_marginEnd="20dp"
+					app:layout_constraintStart_toEndOf="@id/name"
+					app:layout_constraintEnd_toEndOf="parent"
+					app:layout_constraintTop_toTopOf="parent"
+					app:layout_constraintBottom_toBottomOf="parent">
+
+					<TextView
+						android:id="@+id/current_time"
+						style="@style/Text.Light.White"
+						android:text="1:45 "/>
+
+					<TextView
+						android:id="@+id/track_duration"
+						style="@style/Text.Light.White"
+						android:text="/ 3:59"/>
+
+				</LinearLayout>
+
+
+			</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+			<SeekBar
+				android:layout_width="0dp"
+				android:layout_height="wrap_content"
+				android:id="@+id/track_bar"
+				android:thumbTint="@color/white"
+				android:progressTint="@color/white"
+				android:layout_marginTop="8dp"
+				app:layout_constraintStart_toStartOf="parent"
+				app:layout_constraintEnd_toEndOf="parent"
+				app:layout_constraintTop_toBottomOf="@id/info_text"
+				app:layout_constraintBottom_toBottomOf="parent"/>
+
+		</androidx.constraintlayout.widget.ConstraintLayout>
+
+
+	</androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.cardview.widget.CardView>

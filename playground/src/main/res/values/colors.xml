@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black">#000000</color>
+    <color name="brown">#362E28</color>
+    <color name="brown_50pc">#80362E28</color>
+    <color name="brown_70pc">#B3362E28</color>
+    <color name="orange">#FCBF03</color>
+    <color name="red">#FF515B</color>
+    <color name="blue">#6C9CF9</color>
+    <color name="red_shadow">#E01E1E</color>
+    <color name="dark_blue">#362E28FA</color>
+
+    <color name="test_black">#161311</color>
+    <color name="test_blumine">#30676D</color>
+    <color name="test_pink">#E09CA0</color>
+    <color name="test_peach">#FFD39F</color>
+    <color name="test_light_gray">#D9D9D9</color>
+    <color name="test_gray_blue">#53617C</color>
+    <color name="test_light_gray_blue">#53617C99</color>
+    <color name="test_dark_blue">#6682B9</color>
+    <color name="test_light_yellow">#FAF0D0</color>
 </resources>
