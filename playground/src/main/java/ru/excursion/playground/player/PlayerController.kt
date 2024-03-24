@@ -19,7 +19,7 @@ interface PlayerController : MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 
     fun release()
 
-    fun getDuration(): Int
+    fun setCurrentPosition(position: Int)
 
     override fun onPrepared(mp: MediaPlayer?)
 

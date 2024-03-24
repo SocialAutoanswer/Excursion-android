@@ -64,12 +64,16 @@
 					<TextView
 						android:id="@+id/current_time"
 						style="@style/Text.Light.White"
-						android:text="1:45 "/>
+						android:text="00:00"/>
+
+					<TextView
+						style="@style/Text.Light.White"
+						android:text="  /  "/>
 
 					<TextView
 						android:id="@+id/track_duration"
 						style="@style/Text.Light.White"
-						android:text="/ 3:59"/>
+						android:text="00:00"/>
 
 				</LinearLayout>
 

@@ -19,7 +19,7 @@ class AudioFocusControllerImpl(
     private val audioFocusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
         .setAudioAttributes(
             AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH)
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
                 .build()
         )
         .setOnAudioFocusChangeListener(this)
@@ -34,8 +34,7 @@ class AudioFocusControllerImpl(
             }
 
             AudioManager.AUDIOFOCUS_LOSS -> {
-                playerController?.stopMedia()
-                playerController?.release()
+                playerController?.pauseMedia()
             }
 
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->

@@ -2,6 +2,7 @@ package ru.excursion.playground.player.impl
 
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.os.Looper
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -16,15 +17,21 @@ class PlayerControllerImpl(mediaLink: String, private val stopSelf: () -> Unit) 
     private val _duration = MutableLiveData<Int>()
     val duration: LiveData<Int> = _duration
 
+    private val _isPlaying = MutableLiveData<Boolean>()
+    val isPLaying: LiveData<Boolean> = _isPlaying
+
     override fun playMedia() {
         if (!mediaPlayer.isPlaying) {
+            mediaPlayer.seekTo(currentPosition)
             mediaPlayer.start()
+            _isPlaying.postValue(mediaPlayer.isPlaying)
         }
     }
 
     override fun stopMedia() {
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
+            _isPlaying.postValue(mediaPlayer.isPlaying)
         }
     }
 
@@ -32,13 +39,17 @@ class PlayerControllerImpl(mediaLink: String, private val stopSelf: () -> Unit) 
         if (mediaPlayer.isPlaying) {
             mediaPlayer.pause()
             currentPosition = mediaPlayer.currentPosition
+            _isPlaying.postValue(mediaPlayer.isPlaying)
         }
     }
 
     override fun resumeMedia() {
         if (!mediaPlayer.isPlaying) {
+            //Log.d("myfuckingtag", "before $currentPosition local \n ${mediaPlayer.currentPosition} mp \n\n")
             mediaPlayer.seekTo(currentPosition)
+            //Log.d("myfuckingtag", "after $currentPosition local \n ${mediaPlayer.currentPosition} mp \n\n")
             mediaPlayer.start()
+            _isPlaying.postValue(mediaPlayer.isPlaying)
         }
     }
 
@@ -48,8 +59,6 @@ class PlayerControllerImpl(mediaLink: String, private val stopSelf: () -> Unit) 
     override fun release() = mediaPlayer.release()
 
     override fun onPrepared(mp: MediaPlayer?) {
-        //mediaPlayer.start()
-        Log.d("myfuckingtag", "${mp?.duration} duration")
         _duration.postValue(mp?.duration)
     }
 
@@ -96,6 +105,11 @@ class PlayerControllerImpl(mediaLink: String, private val stopSelf: () -> Unit) 
         prepareAsync()
     }
 
-    override fun getDuration() = mediaPlayer.duration
+    override fun setCurrentPosition(position: Int) {
+        currentPosition = position
+
+        Log.d("myfuckingtag", "current position: $currentPosition")
+        Log.d("myfuckingtag", (Looper.getMainLooper().thread == Thread.currentThread()).toString())
+    }
 
 }

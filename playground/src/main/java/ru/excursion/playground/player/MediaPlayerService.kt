@@ -20,6 +20,11 @@ class MediaPlayerService : Service() {
     fun subscribeOnDuration(lifecycleOwner: LifecycleOwner, callback: (Int) -> Unit) =
         (playerController as PlayerControllerImpl).duration.observe(lifecycleOwner, callback)
 
+    fun subscribeOnIsPlaying(lifecycleOwner: LifecycleOwner, callback: (Boolean) -> Unit) =
+        (playerController as PlayerControllerImpl).isPLaying.observe(lifecycleOwner, callback)
+
+    fun setCurrentPosition(position: Int) = playerController?.setCurrentPosition(position)
+
     override fun onStartCommand(intent: Intent, flags: Int, startId: Int): Int {
 
         if (!audioFocusController.requestAudioFocus()) {
@@ -30,7 +35,7 @@ class MediaPlayerService : Service() {
             ACTION_PLAY to playerController!!::playMedia,
             ACTION_PAUSE to playerController!!::pauseMedia,
             ACTION_RESUME to playerController!!::resumeMedia,
-            ACTION_STOP to playerController!!::stopMedia
+            ACTION_STOP to playerController!!::stopMedia,
         )
 
         actionMap[intent.action]?.invoke()

@@ -7,7 +7,6 @@ fun Int.toTimeFormat(): String {
     if(this < 0){
         return "00:00"
     }
-    val seconds = this / 1000
 
-    return String.format("%02d:%02d", (seconds / 3600 * 60 + ((seconds % 3600) / 60)), (seconds % 60))
+    return String.format("%02d:%02d", (this / 3600 * 60 + ((this % 3600) / 60)), (this % 60))
 }

@@ -5,15 +5,15 @@ import android.content.Context
 import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
-import android.os.Handler
 import android.os.IBinder
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.SeekBar
+import android.widget.Toast
+import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import ru.excursion.playground.R
 import ru.excursion.playground.databinding.AudioPlayerBinding
 import ru.excursion.playground.player.ACTION_PAUSE
@@ -22,39 +22,50 @@ import ru.excursion.playground.player.ACTION_RESUME
 import ru.excursion.playground.player.MediaPlayerService
 import ru.excursion.playground.toTimeFormat
 
+sealed class PlayerUI(
+    @DrawableRes
+    val img: Int,
+    val action: String
+) {
+    data object Plays: PlayerUI(R.drawable.ic_pause, ACTION_PAUSE)
+    data object Paused: PlayerUI(R.drawable.img, ACTION_PLAY)
+}
+
 class BasePlayerFragment : Fragment() {
 
-    private var player: MediaPlayerService? = null
-    var serviceBound = false
+    private val viewModel by lazy { ViewModelProvider(this)[PlayerViewModel::class.java] }
 
     private val serviceConnection: ServiceConnection = object : ServiceConnection {
         override fun onServiceConnected(name: ComponentName, service: IBinder) {
             val binder = service as MediaPlayerService.LocalBinder
-            player = binder.service
-            serviceBound = true
-
-            player!!.subscribeOnDuration(viewLifecycleOwner) { dur ->
-                duration = dur
-                playerBinding.trackDuration.text = duration.toTimeFormat()
-                playerBinding.trackBar.max = duration
-            }
+            viewModel.player = binder.service
+            viewModel.serviceBound = true
+            prepareObservers()
         }
 
         override fun onServiceDisconnected(name: ComponentName) {
-            serviceBound = false
+            viewModel.serviceBound = false
         }
     }
 
     private val onSeekBarChangeListener = object : SimpleOnSeekBarChangedListener {
-        override fun onStopTrackingTouch(seekBar: SeekBar?) {
 
+        override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+            playerBinding.currentTime.text = seekBar!!.progress.toTimeFormat()
+        }
+
+        override fun onStartTrackingTouch(seekBar: SeekBar?) {
+            callService(ACTION_PAUSE)
+        }
+
+        override fun onStopTrackingTouch(seekBar: SeekBar?) {
+            viewModel.player!!.setCurrentPosition(seekBar!!.progress * 1000)
+            playerBinding.currentTime.text = seekBar.progress.toTimeFormat()
+            callService(ACTION_RESUME)
         }
     }
 
     private val playerBinding by lazy { AudioPlayerBinding.inflate(layoutInflater) }
-
-    private val timerHandler: Handler = Handler(Looper.getMainLooper())
-    private var duration = 0
 
     private var timerRunnable = object : Runnable {
 
@@ -62,23 +73,24 @@ class BasePlayerFragment : Fragment() {
             with(playerBinding) {
                 playerBinding.trackBar.progress += 1
                 currentTime.text = trackBar.progress.toTimeFormat()
-
-                if (trackBar.progress == duration) {
-                    trackBar.progress = 0
-                    currentTime.text = 0.toTimeFormat()
-                }
             }
 
-            timerHandler.postDelayed(this, 1000)
+            viewModel.timerHandler.postDelayed(this, 1000)
+
+            if (playerBinding.trackBar.progress == viewModel.duration) {
+                //viewModel.player!!.setCurrentPosition(0) does not work! (wtf?)
+                playerBinding.trackBar.progress = 0
+                playerBinding.currentTime.text = 0.toTimeFormat()
+                callService(ACTION_PAUSE)
+            }
         }
     }
 
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        requireContext().bindService(
-            Intent(requireContext(), MediaPlayerService::class.java)
+        context.bindService(
+            Intent(context, MediaPlayerService::class.java)
                 .putExtra(
                     "media",
                     "http://192.168.1.65:3000/public/music/1587296546_trevor-daniel-falling.mp3"
@@ -86,8 +98,8 @@ class BasePlayerFragment : Fragment() {
             serviceConnection,
             Context.BIND_AUTO_CREATE
         )
-
     }
+
 
 
     override fun onCreateView(
@@ -96,49 +108,51 @@ class BasePlayerFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
 
-        playerBinding.playBtn.setOnClickListener { startPlayer(0) }
-        playerBinding.currentTime.text = 0.toTimeFormat()
-
+        setPlayerUI(PlayerUI.Paused)
         playerBinding.trackBar.setOnSeekBarChangeListener(onSeekBarChangeListener)
 
         return playerBinding.root
     }
 
-
-    private fun startPlayer(currentSecond: Int) {
-
-        if (currentSecond == 0) {
-            callService(ACTION_PLAY)
-        } else {
-            callService(ACTION_RESUME)
-        }
-
-        with(playerBinding) {
-            playBtn.setImageResource(R.drawable.ic_pause)
-            playBtn.setOnClickListener { pausePlayer() }
-            timerHandler.post(timerRunnable)
-        }
-    }
-
-
-    private fun pausePlayer() {
-        with(playerBinding) {
-            playBtn.setImageResource(R.drawable.img)
-            playBtn.setOnClickListener { startPlayer(0) }
-            timerHandler.removeCallbacks(timerRunnable)
-        }
-
-        callService(ACTION_PAUSE)
-    }
-
     private fun callService(act: String){
-        requireContext().startService(
-            Intent(
-                requireContext(),
-                MediaPlayerService::class.java
-            ).apply {
-                action = act
-            })
+        if(viewModel.serviceBound) {
+            requireContext().startService(
+                Intent(
+                    requireContext(),
+                    MediaPlayerService::class.java
+                ).apply {
+                    action = act
+                })
+        } else {
+            Toast.makeText(requireContext(), R.string.player_unable, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun prepareObservers() {
+        viewModel.player!!.subscribeOnDuration(viewLifecycleOwner) { dur ->
+            viewModel.duration = dur / 1000
+            playerBinding.trackDuration.text = viewModel.duration.toTimeFormat()
+            playerBinding.trackBar.max = viewModel.duration
+        }
+
+        viewModel.player!!.subscribeOnIsPlaying(viewLifecycleOwner) { isPlaying ->
+            if(isPlaying){
+                setPlayerUI(PlayerUI.Plays)
+                viewModel.timerHandler.post(timerRunnable)
+            } else {
+                setPlayerUI(PlayerUI.Paused)
+                viewModel.timerHandler.removeCallbacks(timerRunnable)
+            }
+        }
+
+    }
+
+
+    private fun setPlayerUI(playerUI: PlayerUI){
+        with(playerBinding){
+            playBtn.setImageResource(playerUI.img)
+            playBtn.setOnClickListener{ callService(playerUI.action) }
+        }
     }
 
 }
