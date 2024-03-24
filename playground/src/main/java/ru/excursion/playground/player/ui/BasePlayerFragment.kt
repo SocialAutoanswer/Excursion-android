@@ -6,6 +6,7 @@ import android.content.Intent
 import android.content.ServiceConnection
 import android.os.Bundle
 import android.os.IBinder
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,6 +15,8 @@ import android.widget.Toast
 import androidx.annotation.DrawableRes
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.viewbinding.ViewBinding
+import ru.bibaboba.kit.ui.BaseFragment
 import ru.excursion.playground.R
 import ru.excursion.playground.databinding.AudioPlayerBinding
 import ru.excursion.playground.player.ACTION_PAUSE
@@ -31,7 +34,7 @@ sealed class PlayerUI(
     data object Paused: PlayerUI(R.drawable.img, ACTION_PLAY)
 }
 
-class BasePlayerFragment : Fragment() {
+abstract class BasePlayerFragment : Fragment() {
 
     private val viewModel by lazy { ViewModelProvider(this)[PlayerViewModel::class.java] }
 
@@ -65,7 +68,7 @@ class BasePlayerFragment : Fragment() {
         }
     }
 
-    private val playerBinding by lazy { AudioPlayerBinding.inflate(layoutInflater) }
+    protected abstract val playerBinding : AudioPlayerBinding
 
     private var timerRunnable = object : Runnable {
 
@@ -106,12 +109,13 @@ class BasePlayerFragment : Fragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
 
         setPlayerUI(PlayerUI.Paused)
         playerBinding.trackBar.setOnSeekBarChangeListener(onSeekBarChangeListener)
 
-        return playerBinding.root
+        return super.onCreateView(inflater, container, savedInstanceState)
     }
 
     private fun callService(act: String){

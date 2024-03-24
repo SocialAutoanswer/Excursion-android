@@ -2,12 +2,11 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
 	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/main"
-	app:startDestination="@id/basePlayerFragment">
+	app:startDestination="@id/eventFragment">
 
 
 	<fragment
-		android:id="@+id/basePlayerFragment"
-		android:name="ru.excursion.playground.player.ui.BasePlayerFragment"
-		android:label="BasePlayerFragment" />
-
+		android:id="@+id/eventFragment"
+		android:name="ru.excursion.playground.EventFragment"
+		android:label="EventFragment" />
 </navigation>
