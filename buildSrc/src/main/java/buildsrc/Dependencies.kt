@@ -18,6 +18,7 @@ object Versions {
         const val constraintlayout = "2.1.4"
         const val fragments = "1.5.7"
         const val navigation = "2.7.7"
+        const val lifeCycle = "2.2.0"
     }
 
     object Google {
@@ -47,6 +48,7 @@ object Libs {
         const val fragments = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragments}"
         const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
+        const val lifeCycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
     }
 
     object Google {

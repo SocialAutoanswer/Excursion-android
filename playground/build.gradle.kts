@@ -3,6 +3,7 @@ import buildsrc.Libs
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -54,5 +55,9 @@ dependencies {
 
     implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.AndroidX.navigationFragmentKtx)
+    implementation(Libs.AndroidX.lifeCycle)
     implementation(Libs.Common.circleImage)
+
+    implementation(Libs.DI.dagger)
+    kapt(Libs.DI.daggerCompiler)
 }

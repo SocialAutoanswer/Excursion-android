@@ -1,11 +1,9 @@
 package ru.excursion.playground.player
 
 import android.media.MediaPlayer
+import androidx.lifecycle.LifecycleOwner
 
-interface PlayerController : MediaPlayer.OnPreparedListener, MediaPlayer.OnErrorListener,
-    MediaPlayer.OnCompletionListener {
-
-    fun initPlayer(mediaLink: String): MediaPlayer
+interface PlayerController {
 
     fun playMedia()
 
@@ -21,9 +19,8 @@ interface PlayerController : MediaPlayer.OnPreparedListener, MediaPlayer.OnError
 
     fun setCurrentPosition(position: Int)
 
-    override fun onPrepared(mp: MediaPlayer?)
+    fun observeDuration(lifecycleOwner: LifecycleOwner, callback: (Int) -> Unit)
 
-    override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean
+    fun observeIsPlaying(lifecycleOwner: LifecycleOwner, callback: (Boolean) -> Unit)
 
-    override fun onCompletion(mp: MediaPlayer?)
 }

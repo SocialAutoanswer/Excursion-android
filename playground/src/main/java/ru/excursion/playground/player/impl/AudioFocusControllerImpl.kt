@@ -6,42 +6,35 @@ import android.media.AudioFocusRequest
 import android.media.AudioManager
 import ru.excursion.playground.player.AudioFocusController
 import ru.excursion.playground.player.PlayerController
+import javax.inject.Inject
 
 
 class AudioFocusControllerImpl(
-    private var playerController: PlayerController?,
-    context: Context
+    audioFocusRequestBuilder: AudioFocusRequest.Builder,
+    private val playerController: PlayerController,
+    private val audioManager: AudioManager
 ) : AudioFocusController {
 
-    private var audioManager: AudioManager =
-        context.getSystemService(Context.AUDIO_SERVICE) as AudioManager
-
-    private val audioFocusRequest = AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
-        .setAudioAttributes(
-            AudioAttributes.Builder()
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build()
-        )
-        .setOnAudioFocusChangeListener(this)
-        .setAcceptsDelayedFocusGain(true)
+    private val audioFocusRequest = audioFocusRequestBuilder
+        .setOnAudioFocusChangeListener(::onAudioFocusChange)
         .build()
 
-    override fun onAudioFocusChange(focusChange: Int) {
+    private fun onAudioFocusChange(focusChange: Int) {
         when (focusChange) {
             AudioManager.AUDIOFOCUS_GAIN -> {
-                playerController?.playMedia()
-                playerController?.setVolume(1.0f, 1.0f)
+                playerController.playMedia()
+                playerController.setVolume(1.0f, 1.0f)
             }
 
-            AudioManager.AUDIOFOCUS_LOSS -> {
-                playerController?.pauseMedia()
-            }
+            AudioManager.AUDIOFOCUS_LOSS ->
+                playerController.pauseMedia()
+
 
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
-                playerController?.pauseMedia()
+                playerController.pauseMedia()
 
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
-                playerController?.setVolume(1.0f, 1.0f)
+                playerController.setVolume(1.0f, 1.0f)
         }
     }
 
