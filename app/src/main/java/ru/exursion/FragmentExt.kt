@@ -11,5 +11,5 @@ fun Fragment.dismissLoader() =
 
 
 fun Fragment.navigateToApp(navigator: AppNavigator) {
-    navigator.navigate(requireContext()::startActivity)
+    navigator.navigate(::startActivity)
 }
