@@ -1,5 +1,6 @@
 package ru.excursion.playground.player
 
+import android.app.Service
 import android.content.Context
 import android.content.Intent
 import android.media.AudioFocusRequest
@@ -7,15 +8,18 @@ import android.media.AudioManager
 import android.media.MediaPlayer
 import android.os.Binder
 import android.os.IBinder
-import androidx.lifecycle.LifecycleService
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.excursion.playground.player.di.DaggerPlayerComponent
-import ru.excursion.playground.player.di.PlayerModule
 import ru.excursion.playground.player.impl.AudioFocusControllerImpl
-import ru.excursion.playground.player.impl.PlayerControllerImpl
+import ru.excursion.playground.player.impl.MediaPlayerControllerImpl
+import ru.excursion.playground.player.interfaces.AudioFocusController
+import ru.excursion.playground.player.interfaces.MediaPlayerController
 import javax.inject.Inject
 
 
-class MediaPlayerService : LifecycleService() {
+class MediaPlayerService : Service() {
 
 
     @Inject
@@ -25,40 +29,32 @@ class MediaPlayerService : LifecycleService() {
 
     private val iBinder: IBinder = LocalBinder()
 
-    private val playerController: PlayerController by lazy {
-        PlayerControllerImpl(
+    private val mediaPlayerController: MediaPlayerController by lazy {
+        MediaPlayerControllerImpl(
             mediaPlayer,
-            ::stopSelf
+            ::updateDuration,
+            ::updateIsPlaying
         )
     }
 
     private val audioFocusController: AudioFocusController by lazy {
         AudioFocusControllerImpl(
             audioFocusRequestBuilder,
-            playerController,
+            mediaPlayerController,
             this.getSystemService(Context.AUDIO_SERVICE) as AudioManager
         )
     }
 
-    fun observeDuration(callback: (Int) -> Unit) =
-        playerController.observeDuration(this, callback)
-
-    fun observeIsPlaying(callback: (Boolean) -> Unit) =
-        playerController.observeIsPlaying(this, callback)
-
-
-    override fun onBind(intent: Intent): IBinder {
-        super.onBind(intent)
-
-        intent.getStringExtra("media")?.let { mediaLink ->
-            DaggerPlayerComponent.builder()
-                .playerModule(PlayerModule(mediaLink))
-                .build()
-                .inject(this)
-        }
-
-        return iBinder
+    override fun onCreate() {
+        super.onCreate()
+        DaggerPlayerComponent.builder()
+            .build()
+            .inject(this)
     }
+
+
+
+    override fun onBind(intent: Intent): IBinder = iBinder
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
 
@@ -68,16 +64,22 @@ class MediaPlayerService : LifecycleService() {
 
         val setPosition = {
             intent?.getIntExtra("position", 0).let { position ->
-                playerController.setCurrentPosition(position ?: 0)
+                mediaPlayerController.currentPosition = position ?: 0
+            }
+        }
+
+        val setMedia = {
+            intent?.getStringExtra("mediaLink").let { mediaLink ->
+                mediaPlayerController.setMedia(mediaLink ?: "")
             }
         }
 
         val actionMap = mapOf(
-            ACTION_PLAY to playerController::playMedia,
-            ACTION_PAUSE to playerController::pauseMedia,
-            ACTION_RESUME to playerController::resumeMedia,
-            ACTION_STOP to playerController::stopMedia,
-            ACTION_SET_POSITION to setPosition
+            ACTION_PLAY to mediaPlayerController::playMedia,
+            ACTION_PAUSE to mediaPlayerController::pauseMedia,
+            ACTION_STOP to mediaPlayerController::stopMedia,
+            ACTION_SET_POSITION to setPosition,
+            ACTION_SET_MEDIA to setMedia
         )
 
         actionMap[intent?.action]?.invoke()
@@ -88,13 +90,30 @@ class MediaPlayerService : LifecycleService() {
     override fun onDestroy() {
         super.onDestroy()
 
-        playerController.stopMedia()
+        mediaPlayerController.stopMedia()
         audioFocusController.removeAudioFocus()
+
     }
+
+    private fun updateDuration(duration: Int) = durationSubject.onNext(duration)
+    private fun updateIsPlaying(isPlaying: Boolean) = isPlayingSubject.onNext(isPlaying)
 
     inner class LocalBinder : Binder() {
         val service: MediaPlayerService
             get() = this@MediaPlayerService
+    }
+
+    companion object {
+        private val durationSubject = BehaviorSubject.create<Int>()
+        private val isPlayingSubject = BehaviorSubject.create<Boolean>()
+
+        fun observeDuration(): Observable<Int> = durationSubject.hide()
+            .observeOn(AndroidSchedulers.mainThread())
+
+        fun observeIsPlaying(): Observable<Boolean> = isPlayingSubject.hide()
+            .observeOn(AndroidSchedulers.mainThread())
+
+
     }
 
 }

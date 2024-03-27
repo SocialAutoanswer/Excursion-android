@@ -1,4 +1,4 @@
-package ru.excursion.playground.player
+package ru.excursion.playground.player.interfaces
 
 import android.media.AudioManager
 

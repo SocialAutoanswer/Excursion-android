@@ -9,7 +9,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class PlayerModule(private val mediaLink: String) {
+class PlayerModule() {
 
 
     @Provides
@@ -22,9 +22,6 @@ class PlayerModule(private val mediaLink: String) {
     @Provides
     fun provideMediaPlayer(audioAttributes: AudioAttributes) = MediaPlayer().apply {
         setAudioAttributes(audioAttributes)
-        reset()
-        setDataSource(mediaLink)
-        prepareAsync()
     }
 
 

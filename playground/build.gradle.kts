@@ -55,9 +55,13 @@ dependencies {
 
     implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.AndroidX.navigationFragmentKtx)
-    implementation(Libs.AndroidX.lifeCycle)
+    implementation(Libs.AndroidX.lifecycle)
     implementation(Libs.Common.circleImage)
 
     implementation(Libs.DI.dagger)
     kapt(Libs.DI.daggerCompiler)
+
+    implementation(Libs.RxJava.rxJava)
+    implementation(Libs.RxJava.rxJavaAndroid)
+    implementation(Libs.Common.threetenabp)
 }

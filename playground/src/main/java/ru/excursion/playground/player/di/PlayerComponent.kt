@@ -13,7 +13,6 @@ interface PlayerComponent {
     @Component.Builder
     interface Builder {
         fun build(): PlayerComponent
-        fun playerModule(playerModule: PlayerModule): Builder
     }
 
 }

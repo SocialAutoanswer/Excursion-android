@@ -37,6 +37,7 @@ object Versions {
     const val circleImage = "3.1.0"
     const val delegateAdapter = "4.2"
     const val carbon = "0.16.0.1"
+    const val threetenabp = "1.0.3"
 }
 
 object Libs {
@@ -48,7 +49,7 @@ object Libs {
         const val fragments = "androidx.fragment:fragment-ktx:${Versions.AndroidX.fragments}"
         const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
-        const val lifeCycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
+        const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
     }
 
     object Google {
@@ -81,6 +82,7 @@ object Libs {
         const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
         const val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
         const val carbon = "tk.zielony:carbon:${Versions.carbon}"
+        const val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
     }
 
     object Test {

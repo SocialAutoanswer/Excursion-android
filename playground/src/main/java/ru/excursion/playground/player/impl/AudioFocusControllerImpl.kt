@@ -1,17 +1,14 @@
 package ru.excursion.playground.player.impl
 
-import android.content.Context
-import android.media.AudioAttributes
 import android.media.AudioFocusRequest
 import android.media.AudioManager
-import ru.excursion.playground.player.AudioFocusController
-import ru.excursion.playground.player.PlayerController
-import javax.inject.Inject
+import ru.excursion.playground.player.interfaces.AudioFocusController
+import ru.excursion.playground.player.interfaces.MediaPlayerController
 
 
 class AudioFocusControllerImpl(
     audioFocusRequestBuilder: AudioFocusRequest.Builder,
-    private val playerController: PlayerController,
+    private val mediaPlayerController: MediaPlayerController,
     private val audioManager: AudioManager
 ) : AudioFocusController {
 
@@ -22,19 +19,19 @@ class AudioFocusControllerImpl(
     private fun onAudioFocusChange(focusChange: Int) {
         when (focusChange) {
             AudioManager.AUDIOFOCUS_GAIN -> {
-                playerController.playMedia()
-                playerController.setVolume(1.0f, 1.0f)
+                mediaPlayerController.playMedia()
+                mediaPlayerController.setVolume(1.0f, 1.0f)
             }
 
             AudioManager.AUDIOFOCUS_LOSS ->
-                playerController.pauseMedia()
+                mediaPlayerController.pauseMedia()
 
 
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT ->
-                playerController.pauseMedia()
+                mediaPlayerController.pauseMedia()
 
             AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK ->
-                playerController.setVolume(1.0f, 1.0f)
+                mediaPlayerController.setVolume(1.0f, 1.0f)
         }
     }
 
