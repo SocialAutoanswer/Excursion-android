@@ -2,10 +2,8 @@ package ru.excursion.playground.player.impl
 
 import android.media.MediaPlayer
 import android.util.Log
-import ru.excursion.playground.player.MediaPlayerService
 import ru.excursion.playground.player.interfaces.MediaPlayerCallbacks
 import ru.excursion.playground.player.interfaces.MediaPlayerController
-import ru.excursion.playground.player.ui.CustomPlayerView
 
 class MediaPlayerCallbacksImpl(
     private val mediaPlayerController: MediaPlayerController,

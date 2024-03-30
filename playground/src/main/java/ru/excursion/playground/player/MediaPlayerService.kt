@@ -12,6 +12,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.excursion.playground.player.di.DaggerPlayerComponent
+import ru.excursion.playground.player.di.PlayerModule
 import ru.excursion.playground.player.impl.AudioFocusControllerImpl
 import ru.excursion.playground.player.impl.MediaPlayerControllerImpl
 import ru.excursion.playground.player.interfaces.AudioFocusController
@@ -30,11 +31,7 @@ class MediaPlayerService : Service() {
     private val iBinder: IBinder = LocalBinder()
 
     private val mediaPlayerController: MediaPlayerController by lazy {
-        MediaPlayerControllerImpl(
-            mediaPlayer,
-            ::updateDuration,
-            ::updateIsPlaying
-        )
+        MediaPlayerControllerImpl(mediaPlayer)
     }
 
     private val audioFocusController: AudioFocusController by lazy {
@@ -48,12 +45,10 @@ class MediaPlayerService : Service() {
     override fun onCreate() {
         super.onCreate()
         DaggerPlayerComponent.builder()
+            .playerModule(PlayerModule(this))
             .build()
             .inject(this)
     }
-
-
-
     override fun onBind(intent: Intent): IBinder = iBinder
 
     override fun onStartCommand(intent: Intent?, flags: Int, startId: Int): Int {
@@ -94,26 +89,10 @@ class MediaPlayerService : Service() {
         audioFocusController.removeAudioFocus()
 
     }
-
-    private fun updateDuration(duration: Int) = durationSubject.onNext(duration)
-    private fun updateIsPlaying(isPlaying: Boolean) = isPlayingSubject.onNext(isPlaying)
-
+    
     inner class LocalBinder : Binder() {
         val service: MediaPlayerService
             get() = this@MediaPlayerService
-    }
-
-    companion object {
-        private val durationSubject = BehaviorSubject.create<Int>()
-        private val isPlayingSubject = BehaviorSubject.create<Boolean>()
-
-        fun observeDuration(): Observable<Int> = durationSubject.hide()
-            .observeOn(AndroidSchedulers.mainThread())
-
-        fun observeIsPlaying(): Observable<Boolean> = isPlayingSubject.hide()
-            .observeOn(AndroidSchedulers.mainThread())
-
-
     }
 
 }

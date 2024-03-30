@@ -2,21 +2,22 @@ package ru.excursion.playground.player.impl
 
 import android.content.Context
 import android.media.MediaPlayer
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Observable
+import io.reactivex.rxjava3.subjects.BehaviorSubject
 import ru.excursion.playground.player.MediaPlayerService
 import ru.excursion.playground.player.interfaces.MediaPlayerCallbacks
 import ru.excursion.playground.player.interfaces.MediaPlayerController
 
 
 class MediaPlayerControllerImpl(
-    mMediaPlayer: MediaPlayer,
-    updateDuration: (Int) -> Unit,
-    private val updateIsPlaying: (Boolean) -> Unit
+    _mediaPlayer: MediaPlayer
 ) : MediaPlayerController {
 
-    private val mediaPlayerCallbacks: MediaPlayerCallbacks = MediaPlayerCallbacksImpl(this, updateDuration)
+    private val mediaPlayerCallbacks: MediaPlayerCallbacks = MediaPlayerCallbacksImpl(this, ::updateDuration)
     private var isDataSourceAdded = false
 
-    private val mediaPlayer = mMediaPlayer.apply {
+    private val mediaPlayer = _mediaPlayer.apply {
         setOnPreparedListener(mediaPlayerCallbacks::onPrepared)
         setOnErrorListener(mediaPlayerCallbacks::onError)
         setOnCompletionListener(mediaPlayerCallbacks::onCompletion)

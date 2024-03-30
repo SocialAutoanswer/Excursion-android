@@ -1,12 +1,10 @@
 package ru.excursion.playground
 
-import android.util.Log
+import org.threeten.bp.Instant
+import org.threeten.bp.ZoneId
+import org.threeten.bp.format.DateTimeFormatter
 
-fun Int.toTimeFormat(): String {
 
-    if(this < 0){
-        return "00:00"
-    }
-
-    return String.format("%02d:%02d", (this / 3600 * 60 + ((this % 3600) / 60)), (this % 60))
-}
+fun Int.toTimeFormat(): String = DateTimeFormatter.ofPattern("mm:ss")
+    .withZone(ZoneId.of("UTC"))
+    .format(Instant.ofEpochSecond(this.toLong()))

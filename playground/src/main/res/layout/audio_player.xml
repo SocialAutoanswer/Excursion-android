@@ -9,12 +9,14 @@
 		style="@style/MatchParent"
 		android:background="@color/brown_70pc">
 
-		<de.hdodenhof.circleimageview.CircleImageView
+		<ImageView
 			android:id="@+id/play_btn"
 			android:layout_width="40dp"
 			android:layout_height="40dp"
 			android:layout_margin="8dp"
-			android:src="@drawable/img"
+			android:background="@drawable/white_circle"
+			android:src="@drawable/ic_play"
+			android:scaleType="centerInside"
 			app:layout_constraintStart_toStartOf="parent"
 			app:layout_constraintEnd_toStartOf="@id/player_info"
 			app:layout_constraintTop_toTopOf="parent"

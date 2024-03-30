@@ -10,30 +10,24 @@ import android.os.Parcelable
 import android.util.AttributeSet
 import android.view.LayoutInflater
 import android.widget.SeekBar
-import androidx.annotation.DrawableRes
 import androidx.cardview.widget.CardView
+import io.reactivex.rxjava3.core.Observable
 import ru.excursion.playground.R
 import ru.excursion.playground.databinding.AudioPlayerBinding
-import ru.excursion.playground.player.ACTION_SET_POSITION
 import ru.excursion.playground.player.MediaPlayerService
-import ru.excursion.playground.player.PlayerServiceController
+import ru.excursion.playground.player.interfaces.MediaPlayerController
+import ru.excursion.playground.player.interfaces.OnPlayerClickListener
 import ru.excursion.playground.toTimeFormat
 
-sealed class PlayerUI(
-    @DrawableRes
-    val img: Int,
-    val onClick: () -> Unit
-) {
-    data object Plays : PlayerUI(R.drawable.ic_pause, PlayerServiceController::pause)
-    data object Paused : PlayerUI(R.drawable.img, PlayerServiceController::play)
-}
 
-class CustomPlayerView(context: Context, attributes: AttributeSet) : CardView(context, attributes) {
+class PlayerView(context: Context, attributes: AttributeSet) : CardView(context, attributes) {
+
+    var placeName = ""
 
     private val binding = AudioPlayerBinding.inflate(LayoutInflater.from(context), this, false)
     private var duration = 0
     private val timerHandler: Handler = Handler(Looper.getMainLooper())
-    var name = ""
+    private var playerClickListener : OnPlayerClickListener? = null
 
     private var timerRunnable = object : Runnable {
 
@@ -48,7 +42,7 @@ class CustomPlayerView(context: Context, attributes: AttributeSet) : CardView(co
             if (binding.trackBar.progress == duration) {
                 binding.trackBar.progress = 0
                 binding.currentTime.text = 0.toTimeFormat()
-                PlayerServiceController.pause()
+                playerClickListener?.onPauseClick()
             }
         }
     }
@@ -60,72 +54,81 @@ class CustomPlayerView(context: Context, attributes: AttributeSet) : CardView(co
         }
 
         override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            PlayerServiceController.pause()
+            playerClickListener?.onPauseClick()
         }
 
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            PlayerServiceController.setPosition((seekBar?.progress ?: 0) * 1000)
+            playerClickListener?.onSetPosition((seekBar?.progress ?: 0) * 1000)
             binding.currentTime.text = (seekBar?.progress ?: 0).toTimeFormat()
-            PlayerServiceController.play()
+            playerClickListener?.onPlayClick()
         }
     }
 
 
     init {
-        prepareObservers()
-        setPlayerUI(PlayerUI.Paused)
+        setPlayerUI(false)
         binding.trackBar.setOnSeekBarChangeListener(onSeekBarChangeListener)
         addView(binding.root)
     }
 
     override fun onSaveInstanceState(): Parcelable = Bundle().apply {
-            putParcelable("superState", super.onSaveInstanceState())
-            putString("name", name)
-        }
+        putParcelable("superState", super.onSaveInstanceState())
+        putString("name", placeName)
+    }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
-        var mState = state
+        var _state = state
 
         if (state is Bundle) {
-            name = state.getString("name") ?: ""
-            mState = state.getParcelable("superState")
+            placeName = state.getString("name") ?: ""
+            _state = state.getParcelable("superState")
         }
-        super.onRestoreInstanceState(mState)
+        super.onRestoreInstanceState(_state)
     }
 
     override fun onDraw(canvas: Canvas) {
         super.onDraw(canvas)
-        binding.name.text = name
+        binding.name.text = placeName
     }
 
-
-    private fun setPlayerUI(playerUI: PlayerUI) {
-        with(binding) {
-            playBtn.setImageResource(playerUI.img)
-            playBtn.setOnClickListener { playerUI.onClick.invoke() }
-        }
+    fun setOnPlayerClickListener(listener: OnPlayerClickListener) {
+        playerClickListener = listener
     }
-
-
 
     @SuppressLint("CheckResult")
-    private fun prepareObservers() {
-        MediaPlayerService.observeDuration().subscribe { dur ->
-            duration = dur / 1000
+    fun setDurationObservable(durationObservable: Observable<Int>) {
+        durationObservable.subscribe { dur ->
+            duration = dur / 1000 //durations is given in milliseconds (divide by 1000 gives seconds)
             binding.trackDuration.text = duration.toTimeFormat()
             binding.trackBar.max = duration
         }
+    }
 
-        MediaPlayerService.observeIsPlaying().subscribe { isPlaying ->
+    @SuppressLint("CheckResult")
+    fun setIsPlayingObservable(isPlayingObservable: Observable<Boolean>) {
+        isPlayingObservable.subscribe { isPlaying ->
+            setPlayerUI(isPlaying)
+
             if (isPlaying) {
-                setPlayerUI(PlayerUI.Plays)
                 timerHandler.post(timerRunnable)
             } else {
-                setPlayerUI(PlayerUI.Paused)
                 timerHandler.removeCallbacks(timerRunnable)
             }
         }
-
     }
+
+
+    private fun setPlayerUI(isPlaying: Boolean) {
+        with(binding) {
+            if(isPlaying){
+                playBtn.setImageResource(R.drawable.ic_pause)
+                playBtn.setOnClickListener { playerClickListener?.onPauseClick() }
+            } else {
+                playBtn.setImageResource(R.drawable.ic_play)
+                playBtn.setOnClickListener { playerClickListener?.onPlayClick() }
+            }
+        }
+    }
+
 
 }
