@@ -19,6 +19,7 @@ object Versions {
         const val fragments = "1.5.7"
         const val navigation = "2.7.7"
         const val lifeCycle = "2.2.0"
+        const val splashScreen = "1.0.0"
     }
 
     object Google {
@@ -50,6 +51,7 @@ object Libs {
         const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.AndroidX.navigation}"
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
         const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
+        const val splashScreen = "androidx.core:core-splashscreen:${Versions.AndroidX.splashScreen}"
     }
 
     object Google {
