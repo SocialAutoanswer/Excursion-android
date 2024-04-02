@@ -25,8 +25,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
         with(binding) {
-            //mainBottomNavigation.itemIconTintList = null
-            //mainBottomNavigation.setupWithNavController(findNavController(R.id.nav_container))
+            mainBottomNavigation.itemIconTintList = null
+            mainBottomNavigation.setupWithNavController(findNavController(R.id.nav_container))
 
         }
     }
