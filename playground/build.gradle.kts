@@ -1,6 +1,9 @@
+import buildsrc.Libs
+
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+    id("kotlin-kapt")
 }
 
 android {
@@ -49,4 +52,17 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+
+    implementation(Libs.AndroidX.navigationUiKtx)
+    implementation(Libs.AndroidX.navigationFragmentKtx)
+    implementation(Libs.AndroidX.lifecycle)
+    implementation(Libs.Common.circleImage)
+
+    implementation(Libs.DI.dagger)
+    kapt(Libs.DI.daggerCompiler)
+
+    implementation(Libs.RxJava.rxJava)
+    implementation(Libs.RxJava.rxJavaAndroid)
+
+    implementation(Libs.Common.threetenabp)
 }

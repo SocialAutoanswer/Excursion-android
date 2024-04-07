@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+	<!-- Common styles  -->
+	<eat-comment/>
+
+	<style name="WrapContent">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="MatchParent">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">match_parent</item>
+	</style>
+
+	<style name="MatchParent.Vertical">
+		<item name="android:orientation">vertical</item>
+	</style>
+
+	<style name="MatchParent.Vertical.Padding_16dp">
+		<item name="android:paddingHorizontal">16dp</item>
+	</style>
+
+	<style name="MatchParentWrapContent">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">wrap_content</item>
+	</style>
+
+	<style name="WrapContentMatchParent">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">match_parent</item>
+	</style>
+
+	<style name="MatchParent0dp">
+		<item name="android:layout_width">match_parent</item>
+		<item name="android:layout_height">0dp</item>
+	</style>
+
+	<style name="WrapContent0dp">
+		<item name="android:layout_width">wrap_content</item>
+		<item name="android:layout_height">0dp</item>
+	</style>
+
+	<style name="MatchParentWrapContent.PrimaryBackground">
+		<item name="android:background">@color/brown</item>
+	</style>
+
+	<!--                        Buttons                             -->
+
+
+
+
+
+
+
+	<!--                        Text                                -->
+
+	<style name="Text" parent="MatchParentWrapContent"/>
+
+	<style name="Text.Light">
+		<item name="android:fontFamily">@font/roboto_light</item>
+		<item name="android:textSize">@dimen/text_light</item>
+	</style>
+
+	<style name="Text.Light.White">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.Light.Brown">
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+
+	<style name="Text.AdditionalLight">
+		<item name="android:fontFamily">@font/roboto_light</item>
+		<item name="android:textSize">@dimen/text_additional_light</item>
+	</style>
+
+	<style name="Text.AdditionalLight.White">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.AdditionalLight.Brown">
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+	<style name="Text.Additional">
+		<item name="android:fontFamily">@font/roboto_regular</item>
+		<item name="android:textSize">@dimen/text_additional</item>
+	</style>
+
+	<style name="Text.Additional.White">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.Additional.Brown">
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+	<style name="Text.Main">
+		<item name="android:fontFamily">@font/roboto_bold</item>
+		<item name="android:textSize">@dimen/text_main</item>
+	</style>
+
+	<style name="Text.Main.White">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.Main.Brown">
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+	<style name="Text.Header">
+		<item name="android:fontFamily">@font/roboto_bold</item>
+		<item name="android:textSize">@dimen/text_header</item>
+	</style>
+
+	<style name="Text.Header.White">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.Header.Brown">
+		<item name="android:fontFamily">@font/roboto_bold</item>
+	</style>
+
+	<style name="Text.CenterHeader" parent="Text.Header">
+		<item name="android:gravity">center</item>
+		<item name="android:layout_marginTop">16dp</item>
+		<item name="android:layout_marginBottom">16dp</item>
+	</style>
+
+	<style name="Text.CenterHeader.White" parent="Text.Header">
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+	<style name="Text.CenterHeader.Brown" parent="Text.Header">
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+
+
+	<style name="main_text">
+		<item name="android:textSize">@dimen/main_text_size</item>
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+
+	<style name="page_title">
+		<item name="android:textSize">@dimen/page_name_text_size</item>
+		<item name="android:textColor">@color/brown</item>
+	</style>
+
+	<style name="red_text">
+		<item name="android:textSize">@dimen/main_text_size</item>
+		<item name="android:textColor">@color/red</item>
+	</style>
+
+	<style name="orange_text">
+		<item name="android:textSize">@dimen/main_text_size</item>
+		<item name="android:textColor">@color/orange</item>
+	</style>
+
+
+	<style name="description_text">
+		<item name="android:textSize">@dimen/descr_text_size</item>
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+
+
+	<style name="title_text">
+		<item name="android:textSize">@dimen/title_text_size</item>
+		<item name="android:textColor">@color/white</item>
+	</style>
+
+
+	<!--                        Text                                -->
+
+
+	<style name="CustomDialog">
+		<item name="android:windowNoTitle">true</item>
+		<item name="android:windowFullscreen">true</item>
+		<item name="android:windowIsFloating">true</item>
+		<item name="android:windowCloseOnTouchOutside">true</item>
+		<item name="android:windowBackground">@android:color/transparent</item>
+		<item name="android:background">@android:color/transparent</item>
+	</style>
+
+
+
+</resources>

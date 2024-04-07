@@ -21,41 +21,12 @@ sealed class MainEffects: Effect {
 
 class MainActivity : AppCompatActivity() {
 
-    private val stateMachine = StateMachine.Builder()
-        .lifecycleOwner(this)
-        .addState(MainState.InitialState::class, ::onInitialState)
-        .addState(MainState.FirstState::class, ::onFirstState)
-        .addState(MainState.SecondState::class, ::onSecondState)
-        .addEffect(MainEffects.FirstEffect::class) { Toast.makeText(this, "effect!", Toast.LENGTH_SHORT).show() }
-        .initialState(MainState.InitialState)
-        .build()
 
-    private lateinit var binding: ActivityMainBinding
+    private val binding: ActivityMainBinding by lazy { ActivityMainBinding.inflate(layoutInflater) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
-        binding.firstButton.setOnClickListener {
-            stateMachine.submit(MainState.FirstState("kek"))
-        }
-        binding.secondButton.setOnClickListener {
-            stateMachine.submit(MainState.SecondState("olololololol"))
-        }
-        binding.prevButton.setOnClickListener {
-            stateMachine.backToPreviousState()
-        }
-        binding.effectButton.setOnClickListener { stateMachine.submit(MainEffects.FirstEffect) }
+        setContentView(binding.root)
     }
 
-    private fun onInitialState(state: MainState.InitialState) {
-        binding.mainText.text = "initial state"
-    }
-
-    private fun onFirstState(state: MainState.FirstState) {
-        binding.mainText.text = state.s
-    }
-
-    private fun onSecondState(state: MainState.SecondState) {
-        binding.mainText.text = "${state.s} it's second!"
-    }
 }
