@@ -1,9 +1,33 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
     <!-- Base application theme. -->
-    <style name="Base.Theme.Exursion" parent="carbon_Theme.Light.NoActionBar">
-        <item name="android:colorBackground">@color/white</item>
+    <style name="Base.Theme.Exursion" parent="Theme.AppCompat.Light.NoActionBar">
+
+        <!-- Android attributes -->
+        <item name="android:colorBackground">?attr/exc_background_color</item>
     </style>
 
-    <style name="Theme.Exursion" parent="Base.Theme.Exursion" />
+    <style name="Theme.Exursion" parent="Base.Theme.Exursion">
+        <item name="exc_background_color">@color/screeching_white</item>
+        <item name="exc_color_primary">@color/kazan_orange</item>
+        <item name="exc_bottom_navigation_color">@color/cynical_black</item>
+
+        <item name="exc_button_color_primary_active">@color/kazan_orange</item>
+        <item name="exc_button_color_primary_disabled">@color/bobobo</item>
+        <item name="exc_button_color_primary_pressed">@color/toffee_caramel_ice_cream</item>
+        <item name="exc_button_color_primary">@color/selector_button_primary_background</item>
+
+        <item name="exc_button_text_color_on_primary">@color/white</item>
+
+        <item name="exc_button_color_secondary_active">@color/cynical_black</item>
+        <item name="exc_button_color_secondary_disabled">@color/bobobo</item>
+        <item name="exc_button_color_secondary_pressed">@color/midnight_black</item>
+        <item name="exc_button_color_secondary">@color/selector_button_secondary_background</item>
+
+        <item name="exc_button_text_color_on_secondary">@color/white</item>
+
+        <item name="exc_icon_color_primary_active">@color/kazan_orange</item>
+        <item name="exc_icon_color_primary_default">@color/white</item>
+        <item name="exc_icon_color_primary">@color/selector_icon_primary</item>
+    </style>
 
 </resources>

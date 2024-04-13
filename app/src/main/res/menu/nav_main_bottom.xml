@@ -2,23 +2,23 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
 
     <item
-        android:id="@+id/routes"
+        android:id="@+id/fragment_choose_town"
         android:title="@string/main_bottom_navigation_routes"
-        android:icon="@drawable/selector_bottom_nav_route"/>
+        android:icon="@drawable/ic_route"/>
 
     <item
-        android:id="@+id/maps"
+        android:id="@+id/fragment_map"
         android:title="@string/main_bottom_navigation_maps"
-        android:icon="@drawable/selector_bottom_nav_map"/>
+        android:icon="@drawable/ic_map"/>
 
     <item
-        android:id="@+id/recommendation"
+        android:id="@+id/fragment_recommendation"
         android:title="@string/main_bottom_navigation_recommendation"
-        android:icon="@drawable/selector_bottom_nav_star"/>
+        android:icon="@drawable/ic_star"/>
 
     <item
-        android:id="@+id/profile"
+        android:id="@+id/fragment_profile"
         android:title="@string/main_bottom_navigation_profile"
-        android:icon="@drawable/selector_bottom_nav_profile"/>
+        android:icon="@drawable/ic_profile"/>
 
 </menu>

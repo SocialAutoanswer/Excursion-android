@@ -3,7 +3,7 @@ package buildsrc
 import org.gradle.api.JavaVersion
 
 object Versions {
-    const val minSdk = 24
+    const val minSdk = 26
     const val compileSdk = 34
     const val targetSdk = 34
     const val kotlin = "1.4.20"

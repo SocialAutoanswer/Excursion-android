@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--=======================-->
+    <!--     Common colors     -->
+    <!--=======================-->
+
+    <attr name="exc_color_primary" format="color" />
+    <attr name="exc_background_color" format="color" />
+    <attr name="exc_bottom_navigation_color" format="color" />
+
+    <!--=======================-->
+    <!--     Button colors     -->
+    <!--=======================-->
+
+    <attr name="exc_button_color_primary" format="color" />
+    <attr name="exc_button_color_primary_active" format="color" />
+    <attr name="exc_button_color_primary_pressed" format="color" />
+    <attr name="exc_button_color_primary_disabled" format="color" />
+
+    <attr name="exc_button_text_color_on_primary" format="color" />
+
+    <attr name="exc_button_color_secondary" format="color" />
+    <attr name="exc_button_color_secondary_active" format="color" />
+    <attr name="exc_button_color_secondary_pressed" format="color" />
+    <attr name="exc_button_color_secondary_disabled" format="color" />
+
+    <attr name="exc_button_text_color_on_secondary" format="color" />
+
+    <!--=======================-->
+    <!--      Text colors      -->
+    <!--=======================-->
+
+    <attr name="exc_text_color_main" format="color" />
+    <attr name="exc_text_color_summary" format="color" />
+    <attr name="exc_text_color_hint" format="color" />
+    <attr name="exc_text_color_primary" format="color" />
+    <attr name="exc_text_color_description" format="color" />
+    <attr name="exc_text_color_error" format="color" />
+
+    <!--=======================-->
+    <!--      Icon colors      -->
+    <!--=======================-->
+
+    <attr name="exc_icon_color_primary" format="color" />
+    <attr name="exc_icon_color_primary_active" format="color" />
+    <attr name="exc_icon_color_primary_default" format="color" />
+    <attr name="exc_icon_color_error" format="color" />
+
+</resources>

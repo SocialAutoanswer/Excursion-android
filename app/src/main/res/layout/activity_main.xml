@@ -17,9 +17,11 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
-        style="@style/MatchParentWrapContent.PrimaryBackground"
+        style="@style/MatchParentWrapContent"
         android:id="@+id/main_bottom_navigation"
+        app:backgroundTint="?attr/exc_bottom_navigation_color"
         app:menu="@menu/nav_main_bottom"
+        app:labelVisibilityMode="unlabeled"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />

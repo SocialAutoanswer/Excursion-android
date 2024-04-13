@@ -43,6 +43,9 @@ android {
 }
 
 dependencies {
+
+    implementation(project(":android-kit"))
+
     implementation(Libs.AndroidX.core)
     implementation(Libs.AndroidX.appCompat)
     implementation(Libs.AndroidX.constraintlayout)

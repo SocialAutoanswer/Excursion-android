@@ -2,6 +2,24 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
 	xmlns:tools="http://schemas.android.com/tools"
-	android:id="@+id/main_navigation">
+	android:id="@+id/main_navigation"
+	app:startDestination="@id/fragment_choose_town">
+
+	<fragment
+		android:id="@+id/fragment_choose_town"
+		android:name="ru.exursion.routes.ChooseTownFragment" />
+
+	<fragment
+		android:id="@+id/fragment_map"
+		android:name="ru.exursion.map.MapFragment" />
+
+	<fragment
+		android:id="@+id/fragment_recommendation"
+		android:name="ru.exursion.events.RecommendationFragment" />
+
+
+	<fragment
+		android:id="@+id/fragment_profile"
+		android:name="ru.exursion.profile.ProfileFragment" />
 
 </navigation>

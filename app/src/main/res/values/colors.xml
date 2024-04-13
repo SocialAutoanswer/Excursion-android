@@ -1,11 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
+    <color name="transparent">#00000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="screeching_white">#EEEEEE</color>
+    <color name="kazan_orange">#EFB12C</color>
+    <color name="bobobo">#B0B0B0</color>
+    <color name="toffee_caramel_ice_cream">#B38118</color>
+    <color name="cynical_black">#171717</color>
+    <color name="midnight_black">#262626</color>
+
+    <!-- Deprecated colors -->
     <color name="black">#000000</color>
     <color name="brown">#362E28</color>
     <color name="brown_50pc">#80362E28</color>
     <color name="brown_70pc">#B3362E28</color>
-    <color name="orange">#FCBF03</color>
     <color name="red">#FF515B</color>
     <color name="blue">#6C9CF9</color>
     <color name="red_shadow">#E01E1E</color>
