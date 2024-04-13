@@ -49,6 +49,7 @@ dependencies {
     implementation(Libs.AndroidX.fragments)
     implementation(Libs.AndroidX.navigationFragmentKtx)
     implementation(Libs.AndroidX.navigationUiKtx)
+    implementation(Libs.AndroidX.splashScreen)
     implementation(Libs.Google.material)
 
     implementation(Libs.Network.ohttp)

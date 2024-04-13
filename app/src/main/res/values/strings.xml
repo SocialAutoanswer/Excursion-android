@@ -1,11 +1,11 @@
 <resources>
-    <string name="app_name">Exursion</string>
+	<string name="app_name">Exursion</string>
 
-    <string name="main_bottom_navigation_routes">Маршруты</string>
-    <string name="main_bottom_navigation_maps">Карты</string>
-    <string name="main_bottom_navigation_recommendation">Рекомендации</string>
-    <string name="main_bottom_navigation_profile">Профиль</string>
+	<string name="main_bottom_navigation_routes">Маршруты</string>
+	<string name="main_bottom_navigation_maps">Карты</string>
+	<string name="main_bottom_navigation_recommendation">Рекомендации</string>
+	<string name="main_bottom_navigation_profile">Профиль</string>
 
-    <string name="choose_town_header">Город</string>
+	<string name="choose_town_header">Город</string>
 
 </resources>
