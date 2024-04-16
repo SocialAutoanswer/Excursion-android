@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <style name="Text" parent="MatchParentWrapContent">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textColor">?attr/exc_text_color_main</item>
+    </style>
+
+    <style name="Text.H2">
+        <item name="android:textSize">24sp</item>
+    </style>
+
+    <style name="Text.H2.ColorOnImage">
+        <item name="android:textColor">?attr/exc_text_color_on_image</item>
+    </style>
+
+    <style name="Text.H2.ColorOnImage.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Text.H2.ColorOnImage.Center.MarginVertical_70dp">
+        <item name="android:layout_marginVertical">70dp</item>
+    </style>
+
+    <style name="Text.H2.MarginHorizontal_25dp">
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+    </style>
+
+    <style name="Text.H2.MarginHorizontal_25dp.MarginTop_32dp">
+        <item name="android:layout_marginTop">32dp</item>
+    </style>
+    
+    <style name="Text.H4">
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Text.H4.WidthWrap">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="Text.H4.MarginTop_8dp">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+</resources>

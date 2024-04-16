@@ -67,7 +67,11 @@ dependencies {
 
     implementation(Libs.Common.delegateAdapter)
     implementation(Libs.Common.circleImage)
-    implementation(Libs.Common.carbon)
+
+    implementation(Libs.Common.glide)
+    kapt(Libs.Common.glideCompiler)
+    implementation(Libs.Common.glideOkHttpIntegration)
+
 
     implementation(Libs.DI.dagger)
     kapt(Libs.DI.daggerCompiler)

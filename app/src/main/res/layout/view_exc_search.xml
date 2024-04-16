@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParentWrapContent.Vertical">
+
+    <LinearLayout
+        android:id="@+id/input_container"
+        style="@style/MatchParentWrapContent.Horizontal">
+
+        <EditText
+            android:id="@+id/search_edit"
+            style="@style/MatchParent"
+            android:fontFamily="@font/roboto_regular"
+            android:layout_weight="1"
+            android:maxLines="1"
+            android:inputType="text"
+            android:scrollHorizontally="true"
+            android:background="@null"
+            android:paddingStart="16dp"
+            android:paddingTop="14dp"
+            android:paddingBottom="14dp" />
+
+        <ImageView
+            android:id="@+id/end_icon"
+            style="@style/WrapContent.LayoutCenterEnd.MarginEnd_16dp.MarginVertical_14dp"
+            tools:src="@drawable/ic_search" />
+
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/error_text"
+        style="@style/Text.H4.MarginTop_8dp"
+        android:visibility="gone" />
+
+</LinearLayout>

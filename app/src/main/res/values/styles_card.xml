@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="Card" parent="MatchParentWrapContent">
+        <item name="cardElevation">0dp</item>
+    </style>
+
+    <style name="Card.Image">
+        <item name="cardCornerRadius">7dp</item>
+    </style>
+
+</resources>

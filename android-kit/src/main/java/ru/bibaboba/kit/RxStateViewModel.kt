@@ -5,9 +5,9 @@ import io.reactivex.rxjava3.disposables.Disposable
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
 
-class RxStateViewModel<S: State, E: Effect> : StateViewModel<S, E>() {
+abstract class RxStateViewModel<S: State, E: Effect> : StateViewModel<S, E>() {
 
-    protected val compositeDisposable = CompositeDisposable()
+    private val compositeDisposable = CompositeDisposable()
 
     protected fun invokeDisposable(block: () -> Disposable) = compositeDisposable.add(block())
 

@@ -9,6 +9,7 @@ import kotlin.reflect.KClass
 
 class StateMachine private constructor(
     private val states: Map<KClass<*>, (State) -> Unit>,
+    private val stateExitCallbacks: Map<KClass<*>, (State) -> Unit>,
     private val effects: Map<KClass<*>, (Effect) -> Unit>,
     private val lifecycleOwner: LifecycleOwner?,
     private val initialState: State?,
@@ -41,6 +42,7 @@ class StateMachine private constructor(
         if (currentState == state) {
             return
         }
+        currentState?.let { stateExitCallbacks[it::class]?.invoke(it) }
         submitHard(state)
     }
 
@@ -82,6 +84,7 @@ class StateMachine private constructor(
     class Builder {
 
         private val states = HashMap<KClass<*>, (State) -> Unit>()
+        private val stateExitCallbacks = HashMap<KClass<*>, (State) -> Unit>()
         private val effects = HashMap<KClass<*>, (Effect) -> Unit>()
 
         private var stateHistoryLimit: Int? = null
@@ -93,6 +96,13 @@ class StateMachine private constructor(
         @Suppress("Unchecked_cast")
         fun <S: State> addState(stateClass: KClass<S>, callback: (S) -> Unit): Builder {
             states[stateClass] = callback as (State) -> Unit
+            return this
+        }
+
+        @Suppress("Unchecked_cast")
+        fun <S: State> addState(stateClass: KClass<S>, callback: (S) -> Unit, onExit: (S) -> Unit): Builder {
+            states[stateClass] = callback as (State) -> Unit
+            stateExitCallbacks[stateClass] = onExit as (State) -> Unit
             return this
         }
 
@@ -135,6 +145,7 @@ class StateMachine private constructor(
 
             return StateMachine(
                 states,
+                stateExitCallbacks,
                 effects,
                 lifecycleOwner,
                 initialState,

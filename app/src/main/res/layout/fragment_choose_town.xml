@@ -1,14 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
+<!-- Constraint layout focusable because of first item in hierarchy gets focus -->
+<!-- and we make it focusable to not put focus to edit text                    -->
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MatchParent">
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParent"
+    android:focusable="true">
 
+    <ru.exursion.shared.ui.ExcSearchView
+        android:id="@+id/search"
+        style="@style/ExcSearchView.MarginHorizontal_25dp.MarginTop_48dp"
+        android:hint="@string/screen_choose_town_search_hint"
+        app:endIcon="@drawable/ic_search"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+    
     <TextView
-        style="@style/WrapContent"
-        android:text="Choose town"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:id="@+id/title"
+        style="@style/Text.H2.MarginHorizontal_25dp.MarginTop_32dp"
+        android:text="@string/screen_choose_town_title"
+        app:layout_constraintTop_toBottomOf="@id/search"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/towns_list"
+        style="@style/MatchParent0dp.MarginHorizontal_25dp.MarginTop_24dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:listitem="@layout/item_town" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/sublayout_loading"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

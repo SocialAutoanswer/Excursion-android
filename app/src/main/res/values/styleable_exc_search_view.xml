@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="ExcSearchView">
+        <attr name="android:text" format="string" />
+        <attr name="android:hint" format="string" />
+        <attr name="android:textColorHint" format="color" />
+        <attr name="editBackground" format="reference" />
+        <attr name="editErrorBackground" format="reference" />
+        <attr name="endIcon" format="reference" />
+        <attr name="errorText" format="string" />
+        <attr name="errorColor" format="color" />
+    </declare-styleable>
+</resources>

@@ -8,6 +8,7 @@
     <attr name="exc_color_primary" format="color" />
     <attr name="exc_background_color" format="color" />
     <attr name="exc_bottom_navigation_color" format="color" />
+    <attr name="exc_transparent_black" format="color" />
 
     <!--=======================-->
     <!--     Button colors     -->
@@ -37,6 +38,7 @@
     <attr name="exc_text_color_primary" format="color" />
     <attr name="exc_text_color_description" format="color" />
     <attr name="exc_text_color_error" format="color" />
+    <attr name="exc_text_color_on_image" format="color" />
 
     <!--=======================-->
     <!--      Icon colors      -->
@@ -45,6 +47,13 @@
     <attr name="exc_icon_color_primary" format="color" />
     <attr name="exc_icon_color_primary_active" format="color" />
     <attr name="exc_icon_color_primary_default" format="color" />
-    <attr name="exc_icon_color_error" format="color" />
+    <attr name="exc_icon_near_text_color" format="color" />
 
+
+    <attr name="exc_search_view_style" format="reference" />
+    <attr name="exc_input_background_color" format="color" />
+    <attr name="exc_input_error_color" format="color" />
+    <attr name='exc_input_text_color_hint' format="color" />
+    <attr name="exc_input_stroke_color_default" format="color" />
+    <attr name="exc_input_stroke_color_error" format="color" />
 </resources>

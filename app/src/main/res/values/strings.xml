@@ -1,11 +1,14 @@
 <resources>
     <string name="app_name">Exursion</string>
 
+    <string name="dialog_loading_text">Загрузка</string>
+
     <string name="main_bottom_navigation_routes">Маршруты</string>
     <string name="main_bottom_navigation_maps">Карты</string>
     <string name="main_bottom_navigation_recommendation">Рекомендации</string>
     <string name="main_bottom_navigation_profile">Профиль</string>
 
-    <string name="choose_town_header">Город</string>
+    <string name="screen_choose_town_title">Выберите город</string>
+    <string name="screen_choose_town_search_hint">Введите запрос…</string>
 
 </resources>

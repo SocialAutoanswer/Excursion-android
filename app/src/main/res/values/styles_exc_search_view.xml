@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="ExcSearchView">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="editBackground">@drawable/background_edit_search</item>
+        <item name="endIcon">@drawable/ic_search</item>
+        <item name="android:textColorHint">?attr/exc_text_color_hint</item>
+        <item name="editErrorBackground">@drawable/background_edit_error</item>
+        <item name="errorColor">?attr/exc_input_error_color</item>
+    </style>
+
+    <style name="ExcSearchView.MarginHorizontal_25dp">
+        <item name="android:layout_marginStart">25dp</item>
+        <item name="android:layout_marginEnd">25dp</item>
+    </style>
+
+    <style name="ExcSearchView.MarginHorizontal_25dp.MarginTop_48dp">
+        <item name="android:layout_marginTop">48dp</item>
+    </style>
+</resources>

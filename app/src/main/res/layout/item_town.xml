@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/Card.Image">
+
+    <FrameLayout
+        style="@style/MatchParent">
+
+        <ImageView
+            android:id="@+id/background_image"
+            style="@style/MatchParent" />
+
+        <View
+            style="@style/MatchParent"
+            android:background="?attr/exc_transparent_black" />
+
+        <TextView
+            android:id="@+id/town_name"
+            style="@style/Text.H2.ColorOnImage.Center.MarginVertical_70dp" />
+
+    </FrameLayout>
+
+</androidx.cardview.widget.CardView>
