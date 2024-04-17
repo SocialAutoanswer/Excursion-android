@@ -22,4 +22,8 @@
 		android:id="@+id/fragment_profile"
 		android:name="ru.exursion.profile.ProfileFragment" />
 
+	<fragment
+		android:id="@+id/fragment_town_routes"
+		android:name="ru.exursion.routes.ui.TownRouteTypesFragment" />
+
 </navigation>

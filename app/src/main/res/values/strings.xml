@@ -11,4 +11,6 @@
     <string name="screen_choose_town_title">Выберите город</string>
     <string name="screen_choose_town_search_hint">Введите запрос…</string>
 
+    <string name="screen_town_routes_title">Маршруты</string>
+
 </resources>

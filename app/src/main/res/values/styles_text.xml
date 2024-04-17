@@ -10,6 +10,10 @@
         <item name="android:textSize">24sp</item>
     </style>
 
+    <style name="Text.H2.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="Text.H2.ColorOnImage">
         <item name="android:textColor">?attr/exc_text_color_on_image</item>
     </style>

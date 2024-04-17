@@ -48,6 +48,7 @@
     <attr name="exc_icon_color_primary_active" format="color" />
     <attr name="exc_icon_color_primary_default" format="color" />
     <attr name="exc_icon_near_text_color" format="color" />
+    <attr name="exc_icon_color_on_background" format="color" />
 
 
     <attr name="exc_search_view_style" format="reference" />

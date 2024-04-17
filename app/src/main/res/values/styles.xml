@@ -44,6 +44,10 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="MatchParentWrapContent.MarginTop_48dp">
+        <item name="android:layout_marginTop">48dp</item>
+    </style>
+
     <style name="MatchParentWrapContent.Vertical">
         <item name="android:orientation">vertical</item>
     </style>

@@ -25,7 +25,7 @@ abstract class BaseFragment<VB: ViewBinding> (private val bindingClass: Class<VB
     @CallSuper
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         getStartData()
-        setUpViews()
+        setUpViews(view)
         setUpObservers()
     }
 
@@ -33,7 +33,7 @@ abstract class BaseFragment<VB: ViewBinding> (private val bindingClass: Class<VB
     protected open fun getStartData() { }
 
     /** Here you can set up text, click listeners etc */
-    protected open fun setUpViews() { }
+    protected open fun setUpViews(view: View) { }
 
     /** Here you can set up observers for [LiveData] or anything other observable */
     protected open fun setUpObservers() { }

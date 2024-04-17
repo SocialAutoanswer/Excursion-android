@@ -16,6 +16,7 @@ class SplashActivity : AppCompatActivity() {
 
         binding.animationView.startAnimatedVectorDrawable(R.drawable.animation_splash) {
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
     }
 
