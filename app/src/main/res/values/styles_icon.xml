@@ -3,6 +3,14 @@
 
     <style name="Icon" parent="WrapContent" />
 
+    <style name="Icon.Margin_16dp">
+        <item name="android:layout_margin">16dp</item>
+    </style>
+
+    <style name="Icon.Margin_16dp.Padding_4dp">
+        <item name="android:padding">4dp</item>
+    </style>
+
     <style name="Icon.Back">
         <item name="android:layout_gravity">center_vertical</item>
         <item name="android:src">@drawable/ic_arrow_left</item>

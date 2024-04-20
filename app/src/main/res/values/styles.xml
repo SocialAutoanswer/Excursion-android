@@ -9,6 +9,10 @@
         <item name="android:layout_height">wrap_content</item>
     </style>
 
+    <style name="WrapContent.MarginTop_16dp">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
     <style name="WrapContent.LayoutCenter">
         <item name="android:layout_gravity">center</item>
     </style>
@@ -90,10 +94,13 @@
         <item name="android:background">@android:color/transparent</item>
     </style>
 
-    <style name="LoadingDialog">
+    <style name="ExcDialog">
+        <item name="android:maxWidth">340dp</item>
+        <item name="android:minWidth">340dp</item>
         <item name="android:windowNoTitle">true</item>
+        <item name="android:windowFullscreen">true</item>
         <item name="android:windowIsFloating">true</item>
-        <item name="android:windowCloseOnTouchOutside">false</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
         <item name="android:windowBackground">@android:color/transparent</item>
         <item name="android:background">@android:color/transparent</item>
     </style>

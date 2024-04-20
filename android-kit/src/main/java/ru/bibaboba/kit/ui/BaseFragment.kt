@@ -15,6 +15,8 @@ abstract class BaseFragment<VB: ViewBinding> (private val bindingClass: Class<VB
     /** Should be called between [onCreateView] and [onDestroyView] */
     protected val binding get() = _binding!!
 
+
+
     @CallSuper
     override fun onCreateView(
         inflater: LayoutInflater,

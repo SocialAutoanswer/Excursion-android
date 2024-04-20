@@ -13,4 +13,9 @@
 
     <string name="screen_town_routes_title">Маршруты</string>
 
+    <string name="dialog_network_error_title">Неполадки с интернетом</string>
+    <string name="dialog_network_error_summary">Проверьте подключение или попробуйте подключиться к другой сети - мобильной или Wi-Fi</string>
+    <string name="dialog_network_error_neutral_button">Понятно</string>
+    <string name="dialog_network_error_data_requested">Пробуем снова…</string>
+
 </resources>

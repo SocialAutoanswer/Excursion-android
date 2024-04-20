@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 class ChooseTownViewModel @Inject constructor(
     private val townsUseCase: TownsUseCase,
-): RxStateViewModel<ChooseTownViewModel.ChooseTownState, ChooseTownViewModel.ChooseTownEffect>() {
+) : RxStateViewModel<ChooseTownViewModel.ChooseTownState, ChooseTownViewModel.ChooseTownEffect>() {
 
     fun requestTownsIfNeeded() {
         if (state.value is ChooseTownState.Ready) return
@@ -21,7 +21,8 @@ class ChooseTownViewModel @Inject constructor(
         townsUseCase.getTowns()
             .doOnSubscribe { _state.postValue(ChooseTownState.Loading) }
             .subscribe({
-                _state.postValue(ChooseTownState.Ready(it))
+                _effect.postValue(ChooseTownEffect.Error)
+                //_state.postValue(ChooseTownState.Ready(it))
             }, {
                 _effect.postValue(ChooseTownEffect.Error)
             })

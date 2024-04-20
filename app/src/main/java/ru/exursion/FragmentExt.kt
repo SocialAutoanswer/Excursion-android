@@ -1,6 +1,9 @@
 package ru.exursion
 
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
+import ru.exursion.shared.ui.dialog.DialogDslPackager
+import ru.exursion.shared.ui.dialog.dialog
 
 inline fun <reified F : Fragment> F.inject() {
     val app = (context?.applicationContext as App?) ?: return
@@ -8,4 +11,17 @@ inline fun <reified F : Fragment> F.inject() {
 
     val inject = appComponent::class.java.getMethod("inject", this::class.java)
     inject.invoke(appComponent, this)
+}
+
+fun Fragment.networkErrorDialog(lambda: DialogDslPackager.() -> Unit) = dialog("network_error") {
+    val context = context ?: return@dialog
+
+    title = getString(R.string.dialog_network_error_title)
+    summary = getString(R.string.dialog_network_error_summary)
+
+    middleIcon = AppCompatResources.getDrawable(context, R.drawable.ic_no_network)
+
+    buttonText = getString(R.string.dialog_network_error_neutral_button)
+
+    lambda(this)
 }
