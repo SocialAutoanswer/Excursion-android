@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    style="@style/MatchParentWrapContent.MarginTop_48dp">
+
+    <ImageView
+        android:id="@+id/back_button"
+        style="@style/Icon.Back" />
+
+    <TextView
+        android:id="@+id/title"
+        style="@style/Text.H2.Center"
+        tools:text="Маршруты" />
+
+</FrameLayout>

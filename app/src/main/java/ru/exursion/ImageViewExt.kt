@@ -3,6 +3,7 @@ package ru.exursion
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
 import androidx.annotation.DrawableRes
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.vectordrawable.graphics.drawable.Animatable2Compat
 import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat
 
@@ -15,3 +16,5 @@ fun ImageView.startAnimatedVectorDrawable(@DrawableRes animationId: Int, onEnd: 
     setImageDrawable(animation)
     animation?.start()
 }
+
+inline fun ImageView.setDrawable(@DrawableRes drawableId: Int) = setImageDrawable(AppCompatResources.getDrawable(context, drawableId))

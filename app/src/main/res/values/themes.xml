@@ -43,6 +43,11 @@
         <item name="exc_input_stroke_color_default">@color/folklore_fog_30</item>
         <item name="exc_input_stroke_color_error">@color/romax_red</item>
         <item name="exc_input_background_color">@color/white</item>
+
+        <item name="exc_select_item_background_color">@color/white</item>
+        <item name="exc_select_item_background_color_pressed">@color/d2_gray</item>
+        <item name="exc_select_item_text_color">@color/folklore_fog</item>
+        <item name="exc_select_item_icon_color">@color/folklore_fog</item>
     </style>
 
 </resources>

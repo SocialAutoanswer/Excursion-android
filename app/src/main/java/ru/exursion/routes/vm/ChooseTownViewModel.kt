@@ -21,8 +21,7 @@ class ChooseTownViewModel @Inject constructor(
         townsUseCase.getTowns()
             .doOnSubscribe { _state.postValue(ChooseTownState.Loading) }
             .subscribe({
-                _effect.postValue(ChooseTownEffect.Error)
-                //_state.postValue(ChooseTownState.Ready(it))
+                _state.postValue(ChooseTownState.Ready(it))
             }, {
                 _effect.postValue(ChooseTownEffect.Error)
             })

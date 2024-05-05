@@ -4,30 +4,29 @@ import android.content.Context
 
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
-import ru.bibaboba.kit.ui.BaseFragment
+import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
+import ru.exursion.addItemMargins
 import ru.exursion.databinding.FragmentChooseTownBinding
 import ru.exursion.inject
 import ru.exursion.networkErrorDialog
 import ru.exursion.routes.TownsDelegateAdapter
 import ru.exursion.routes.vm.ChooseTownViewModel
-import ru.exursion.shared.ui.dialog.dialog
 import javax.inject.Inject
 
-class ChooseTownFragment : BaseFragment<FragmentChooseTownBinding>(FragmentChooseTownBinding::class.java) {
+class ChooseTownFragment : StateFragment<FragmentChooseTownBinding, ChooseTownViewModel>(FragmentChooseTownBinding::class.java) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    private val viewModel by viewModels<ChooseTownViewModel> { viewModelFactory }
+    override val viewModel by viewModels<ChooseTownViewModel> { viewModelFactory }
 
-    private val stateMachine = StateMachine.Builder()
+    override val stateMachine = StateMachine.Builder()
         .lifecycleOwner(this)
         .addLoadingState()
         .addReadyState()
@@ -44,17 +43,13 @@ class ChooseTownFragment : BaseFragment<FragmentChooseTownBinding>(FragmentChoos
     }
 
     override fun setUpViews(view: View) {
-        binding.townsList.adapter = adapter
+        binding.townsList.also {
+            it.adapter = adapter
+            it.addItemMargins(vertical = 16)
+        }
     }
 
-    override fun getStartData() {
-        viewModel.requestTownsIfNeeded()
-    }
-
-    override fun setUpObservers() {
-        viewModel.state.observe(viewLifecycleOwner, stateMachine::submit)
-        viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
-    }
+    override fun getStartData() = viewModel.requestTownsIfNeeded()
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
