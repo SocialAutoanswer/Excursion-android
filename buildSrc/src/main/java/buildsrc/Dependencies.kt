@@ -20,6 +20,7 @@ object Versions {
         const val navigation = "2.7.7"
         const val lifeCycle = "2.2.0"
         const val splashScreen = "1.0.0"
+        const val encryptedSharedPreferences = "1.0.0"
     }
 
     object Google {
@@ -53,6 +54,7 @@ object Libs {
         const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.AndroidX.navigation}"
         const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.AndroidX.splashScreen}"
+        const val encryptedSharedPreferences = "androidx.security:security-crypto:${Versions.AndroidX.encryptedSharedPreferences}"
     }
 
     object Google {

@@ -19,6 +19,8 @@ android {
         versionName = Versions.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        buildConfigField("String", "exc_url", "\"https://matchinc.ru/api/\"")
     }
 
     buildTypes {
@@ -30,15 +32,19 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = Versions.compatibility
         targetCompatibility = Versions.compatibility
     }
+
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
+
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -53,6 +59,7 @@ dependencies {
     implementation(Libs.AndroidX.navigationFragmentKtx)
     implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.AndroidX.splashScreen)
+    implementation(Libs.AndroidX.encryptedSharedPreferences)
     implementation(Libs.Google.material)
 
     implementation(Libs.Network.ohttp)

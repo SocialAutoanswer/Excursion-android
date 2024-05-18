@@ -17,4 +17,4 @@ fun ImageView.startAnimatedVectorDrawable(@DrawableRes animationId: Int, onEnd: 
     animation?.start()
 }
 
-inline fun ImageView.setDrawable(@DrawableRes drawableId: Int) = setImageDrawable(AppCompatResources.getDrawable(context, drawableId))
+fun ImageView.setDrawable(@DrawableRes drawableId: Int) = setImageDrawable(AppCompatResources.getDrawable(context, drawableId))

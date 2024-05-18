@@ -1,5 +1,6 @@
 package ru.exursion
 
+import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -14,7 +15,10 @@ import ru.exursion.routes.vm.ChooseTownViewModel
 import ru.exursion.routes.vm.TownRouteTypesViewModel
 
 @Module
-class AppModule {
+class AppModule(private val context: Context) {
+
+    @Provides
+    fun provideApplicationContext() = context
 
     @Provides
     fun provideTownsUseCase(): TownsUseCase = TownsUseCase()
