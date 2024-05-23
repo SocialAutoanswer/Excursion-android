@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.exursion.databinding.ActivitySplashBinding
+import ru.exursion.shared.ext.startAnimatedVectorDrawable
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {

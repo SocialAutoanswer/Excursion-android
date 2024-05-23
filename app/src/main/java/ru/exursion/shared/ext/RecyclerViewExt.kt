@@ -1,4 +1,4 @@
-package ru.exursion
+package ru.exursion.shared.ext
 
 import androidx.recyclerview.widget.RecyclerView
 import ru.exursion.shared.ui.MarginItemDecoration

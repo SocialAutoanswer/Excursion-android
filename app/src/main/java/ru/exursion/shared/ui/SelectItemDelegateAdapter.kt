@@ -4,7 +4,7 @@ import androidx.core.view.isVisible
 import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter
 import ru.exursion.R
 import ru.exursion.databinding.ItemSelectBinding
-import ru.exursion.setDrawable
+import ru.exursion.shared.ext.setDrawable
 
 class SelectItemDelegateAdapter(
     private val showIcon: Boolean,

@@ -20,7 +20,7 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "exc_url", "\"https://matchinc.ru/api/\"")
+        buildConfigField("String", "EXC_URL", "\"https://matchinc.ru/api/\"")
     }
 
     buildTypes {
@@ -60,6 +60,8 @@ dependencies {
     implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.AndroidX.splashScreen)
     implementation(Libs.AndroidX.encryptedSharedPreferences)
+    implementation(Libs.AndroidX.paging3)
+    implementation(Libs.AndroidX.rxPaging3)
     implementation(Libs.Google.material)
 
     implementation(Libs.Network.ohttp)

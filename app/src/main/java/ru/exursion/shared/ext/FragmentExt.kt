@@ -1,7 +1,9 @@
-package ru.exursion
+package ru.exursion.shared.ext
 
 import androidx.appcompat.content.res.AppCompatResources
 import androidx.fragment.app.Fragment
+import ru.exursion.App
+import ru.exursion.R
 import ru.exursion.shared.ui.dialog.DialogDslPackager
 import ru.exursion.shared.ui.dialog.dialog
 

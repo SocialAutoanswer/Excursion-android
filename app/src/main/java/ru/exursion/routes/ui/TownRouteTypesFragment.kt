@@ -9,9 +9,9 @@ import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
-import ru.exursion.addItemMargins
+import ru.exursion.shared.ext.addItemMargins
 import ru.exursion.databinding.FragmentTownRouteTypesBinding
-import ru.exursion.inject
+import ru.exursion.shared.ext.inject
 import ru.exursion.routes.vm.TownRouteTypesViewModel
 import ru.exursion.shared.ui.SelectItemDelegateAdapter
 import javax.inject.Inject

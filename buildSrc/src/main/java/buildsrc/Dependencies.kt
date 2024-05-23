@@ -21,6 +21,7 @@ object Versions {
         const val lifeCycle = "2.2.0"
         const val splashScreen = "1.0.0"
         const val encryptedSharedPreferences = "1.0.0"
+        const val paging3 = "3.0.0"
     }
 
     object Google {
@@ -38,7 +39,6 @@ object Versions {
     const val rxAndroid = "3.0.2"
     const val circleImage = "3.1.0"
     const val delegateAdapter = "4.2"
-    const val carbon = "0.16.0.1"
     const val threetenabp = "1.0.3"
     const val glide = "4.16.0"
 }
@@ -55,6 +55,8 @@ object Libs {
         const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.AndroidX.lifeCycle}"
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.AndroidX.splashScreen}"
         const val encryptedSharedPreferences = "androidx.security:security-crypto:${Versions.AndroidX.encryptedSharedPreferences}"
+        const val paging3 = "androidx.paging:paging-runtime-ktx:${Versions.AndroidX.paging3}"
+        const val rxPaging3 = "androidx.paging:paging-rxjava2:${Versions.AndroidX.paging3}"
     }
 
     object Google {
@@ -86,14 +88,9 @@ object Libs {
     object Common {
         const val delegateAdapter = "io.github.d00mch:delegateadapter:${Versions.delegateAdapter}"
         const val circleImage = "de.hdodenhof:circleimageview:${Versions.circleImage}"
-        const val carbon = "tk.zielony:carbon:${Versions.carbon}"
         const val threetenabp = "com.jakewharton.threetenabp:threetenabp:${Versions.threetenabp}"
         const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         const val glideOkHttpIntegration = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
-    }
-
-    object Test {
-
     }
 }

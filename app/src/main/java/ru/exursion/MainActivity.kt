@@ -26,6 +26,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    @Deprecated("using onBackPressed")
     override fun onBackPressed() {
         if (navController?.popBackStack() == false) super.onBackPressed()
     }

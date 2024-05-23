@@ -1,7 +1,7 @@
 package ru.exursion
 
 import dagger.Component
-import ru.exursion.routes.ui.ChooseTownFragment
+import ru.exursion.routes.ui.ChooseCityFragment
 import ru.exursion.routes.ui.TownRouteTypesFragment
 import ru.exursion.settings.SettingsModule
 import javax.inject.Singleton
@@ -14,7 +14,7 @@ import javax.inject.Singleton
 ])
 interface AppComponent {
 
-    fun inject(fragment: ChooseTownFragment)
+    fun inject(fragment: ChooseCityFragment)
     fun inject(fragment: TownRouteTypesFragment)
 
     @Component.Builder

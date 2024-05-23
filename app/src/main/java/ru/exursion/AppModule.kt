@@ -11,7 +11,7 @@ import ru.bibaboba.kit.dagger.ViewModelFactory
 import ru.bibaboba.kit.dagger.ViewModelKey
 import ru.exursion.routes.RouteTypesUseCase
 import ru.exursion.routes.TownsUseCase
-import ru.exursion.routes.vm.ChooseTownViewModel
+import ru.exursion.routes.vm.ChooseCityViewModel
 import ru.exursion.routes.vm.TownRouteTypesViewModel
 
 @Module
@@ -34,8 +34,8 @@ class AppModule(private val context: Context) {
 
         @Binds
         @IntoMap
-        @ViewModelKey(ChooseTownViewModel::class)
-        fun bindChooseTownsViewModel(viewModel: ChooseTownViewModel): ViewModel
+        @ViewModelKey(ChooseCityViewModel::class)
+        fun bindChooseTownsViewModel(viewModel: ChooseCityViewModel): ViewModel
 
         @Binds
         @IntoMap

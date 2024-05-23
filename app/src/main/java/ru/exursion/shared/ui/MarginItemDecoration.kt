@@ -3,7 +3,7 @@ package ru.exursion.shared.ui
 import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
-import ru.exursion.toDpPixels
+import ru.exursion.shared.ext.toDpPixels
 
 class MarginItemDecoration(
     private val marginVertical: Int = 0,

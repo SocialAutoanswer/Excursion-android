@@ -1,4 +1,4 @@
-package ru.exursion
+package ru.exursion.shared.ext
 
 import android.content.Context
 import android.util.TypedValue

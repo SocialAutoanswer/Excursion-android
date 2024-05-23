@@ -1,4 +1,4 @@
-package ru.exursion
+package ru.exursion.shared.ext
 
 import android.graphics.drawable.Drawable
 import android.widget.ImageView
