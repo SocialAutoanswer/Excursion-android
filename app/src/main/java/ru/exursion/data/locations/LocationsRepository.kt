@@ -5,7 +5,7 @@ import androidx.paging.PagingConfig
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.flowable
 import io.reactivex.rxjava3.core.Flowable
-import ru.exursion.data.locations.models.City
+import ru.exursion.data.models.City
 import javax.inject.Inject
 
 interface LocationsRepository {

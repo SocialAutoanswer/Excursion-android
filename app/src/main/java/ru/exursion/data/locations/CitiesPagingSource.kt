@@ -6,9 +6,9 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
-import ru.exursion.data.ExcursionApi
-import ru.exursion.data.locations.models.City
-import ru.exursion.data.locations.models.CityDto
+import ru.exursion.data.network.ExcursionApi
+import ru.exursion.data.models.City
+import ru.exursion.data.models.CityDto
 import javax.inject.Inject
 
 class CitiesPagingSource @Inject constructor(
