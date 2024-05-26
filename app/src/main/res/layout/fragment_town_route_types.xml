@@ -10,7 +10,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/search"/>
 
-    <ru.exursion.shared.ui.ExcSearchView
+    <ru.exursion.ui.shared.ExcSearchView
         android:id="@+id/search"
         style="@style/ExcSearchView.MarginHorizontal_25dp.MarginTop_32dp"
         android:hint="@string/screen_choose_town_search_hint"

@@ -7,23 +7,23 @@
 
 	<fragment
 		android:id="@+id/fragment_choose_town"
-		android:name="ru.exursion.routes.ui.ChooseTownFragment" />
+		android:name="ru.exursion.ui.routes.ChooseCityFragment" />
 
 	<fragment
 		android:id="@+id/fragment_map"
-		android:name="ru.exursion.map.MapFragment" />
+		android:name="ru.exursion.ui.map.MapFragment" />
 
 	<fragment
 		android:id="@+id/fragment_recommendation"
-		android:name="ru.exursion.events.RecommendationFragment" />
+		android:name="ru.exursion.ui.events.RecommendationFragment" />
 
 
 	<fragment
 		android:id="@+id/fragment_profile"
-		android:name="ru.exursion.profile.ProfileFragment" />
+		android:name="ru.exursion.ui.profile.ProfileFragment" />
 
 	<fragment
 		android:id="@+id/fragment_town_routes"
-		android:name="ru.exursion.routes.ui.TownRouteTypesFragment" />
+		android:name="ru.exursion.ui.routes.TownRouteTypesFragment" />
 
 </navigation>

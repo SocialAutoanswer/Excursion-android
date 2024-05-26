@@ -7,7 +7,7 @@
     style="@style/MatchParent"
     android:focusable="true">
 
-    <ru.exursion.shared.ui.ExcSearchView
+    <ru.exursion.ui.shared.ExcSearchView
         android:id="@+id/search"
         style="@style/ExcSearchView.MarginHorizontal_25dp.MarginTop_48dp"
         android:hint="@string/screen_choose_town_search_hint"

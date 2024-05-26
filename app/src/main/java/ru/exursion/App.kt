@@ -1,6 +1,8 @@
 package ru.exursion
 
 import android.app.Application
+import ru.exursion.di.AppComponent
+import ru.exursion.di.AppModule
 
 class App : Application() {
 
@@ -11,7 +13,7 @@ class App : Application() {
         super.onCreate()
 
         appComponent = DaggerAppComponent.builder()
-            .appModule(AppModule())
+            .appModule(AppModule(applicationContext))
             .build()
     }
 }

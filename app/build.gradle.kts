@@ -1,5 +1,6 @@
 import buildsrc.Libs
 import buildsrc.Versions
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.application")
@@ -19,6 +20,11 @@ android {
         versionName = Versions.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+
+        val testAuthToken: String? = gradleLocalProperties(rootDir).getProperty("testingAuthToken")
+
+        buildConfigField("String", "EXC_URL", "\"http://matchinc.ru/api/\"")
+        buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
     }
 
     buildTypes {
@@ -30,15 +36,19 @@ android {
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = Versions.compatibility
         targetCompatibility = Versions.compatibility
     }
+
     kotlinOptions {
         jvmTarget = Versions.jvmTarget
     }
+
     buildFeatures {
         viewBinding = true
+        buildConfig = true
     }
 }
 
@@ -53,6 +63,9 @@ dependencies {
     implementation(Libs.AndroidX.navigationFragmentKtx)
     implementation(Libs.AndroidX.navigationUiKtx)
     implementation(Libs.AndroidX.splashScreen)
+    implementation(Libs.AndroidX.encryptedSharedPreferences)
+    implementation(Libs.AndroidX.paging3)
+    implementation(Libs.AndroidX.rxPaging3)
     implementation(Libs.Google.material)
 
     implementation(Libs.Network.ohttp)
