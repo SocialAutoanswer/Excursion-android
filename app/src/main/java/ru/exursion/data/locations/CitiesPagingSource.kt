@@ -1,14 +1,11 @@
 package ru.exursion.data.locations
 
-import android.annotation.SuppressLint
-import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import androidx.paging.rxjava2.RxPagingSource
-import dagger.assisted.AssistedInject
-import io.reactivex.Single
+import androidx.paging.rxjava3.RxPagingSource
+import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
-import retrofit2.HttpException
 import ru.bibaboba.kit.util.Mapper
+import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.ExcursionApi
 import ru.exursion.data.locations.models.City
 import ru.exursion.data.locations.models.CityDto
@@ -25,22 +22,28 @@ class CitiesPagingSource @Inject constructor(
         return anchorPage.prevKey?.plus(1) ?: anchorPage.nextKey?.minus(1)
     }
 
-    @SuppressLint("CheckResult")
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, City>> {
-        api.requestCitiesPage(params.key ?: 1)
+        val pageNumber = params.key ?: 1
+
+        return api.requestCitiesPage(pageNumber)
             .observeOn(Schedulers.io())
             .map { response ->
-                val nextPageNumber =
                 if (response.isSuccessful) {
-                    LoadResult.Page(
-                        response.body()?.cities?.let {
-                            citiesMapper.mapList(it.filterNotNull())
-                        } ?: emptyList(),
-                        1, 1
-                    )
-                } else {
 
+                    val pageDto = response.body()
+
+                    val data = pageDto?.cities?.let {
+                        citiesMapper.mapList(it.filterNotNull())
+                    } ?: emptyList()
+
+                    val nextPageNumber = if (pageDto?.nextPageLink == null) null else pageNumber.inc()
+                    val previousPageNumber = if (pageDto?.previousPageLink == null) null else pageNumber.dec()
+
+                    LoadResult.Page(data, previousPageNumber, nextPageNumber)
+                } else {
+                    LoadResult.Error(CanNotGetDataException())
                 }
             }
+            .onErrorReturn { LoadResult.Error(it) }
     }
 }

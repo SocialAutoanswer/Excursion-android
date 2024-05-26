@@ -1,5 +1,6 @@
 import buildsrc.Libs
 import buildsrc.Versions
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.application")
@@ -20,7 +21,10 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
-        buildConfigField("String", "EXC_URL", "\"https://matchinc.ru/api/\"")
+        val testAuthToken: String? = gradleLocalProperties(rootDir).getProperty("testingAuthToken")
+
+        buildConfigField("String", "EXC_URL", "\"http://matchinc.ru/api/\"")
+        buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
     }
 
     buildTypes {

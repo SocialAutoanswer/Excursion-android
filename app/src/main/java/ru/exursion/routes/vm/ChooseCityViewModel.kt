@@ -1,25 +1,20 @@
 package ru.exursion.routes.vm
 
+import androidx.paging.PagingData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
-import ru.exursion.routes.TownItem
-import ru.exursion.routes.TownsUseCase
+import ru.exursion.data.locations.models.City
+import ru.exursion.routes.CitiesUseCase
 import javax.inject.Inject
 
 class ChooseCityViewModel @Inject constructor(
-    private val townsUseCase: TownsUseCase,
+    private val citiesUseCase: CitiesUseCase,
 ) : RxStateViewModel<ChooseCityViewModel.ChooseCityState, ChooseCityViewModel.ChooseCityEffect>() {
 
-    fun requestTownsIfNeeded() {
-        if (state.value is ChooseCityState.Ready) return
-
-        requestTowns()
-    }
-
-    fun requestTowns() = invokeDisposable {
-        townsUseCase.getTowns()
+    fun getCities() = invokeDisposable {
+        citiesUseCase.getCities()
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.postValue(ChooseCityState.Loading) }
             .subscribe({
@@ -29,9 +24,10 @@ class ChooseCityViewModel @Inject constructor(
             })
     }
 
+
     sealed class ChooseCityState: State {
         data object Loading : ChooseCityState()
-        data class Ready(val towns: List<TownItem>) : ChooseCityState()
+        data class Ready(val citiesData: PagingData<City>) : ChooseCityState()
     }
 
     sealed class ChooseCityEffect: Effect {

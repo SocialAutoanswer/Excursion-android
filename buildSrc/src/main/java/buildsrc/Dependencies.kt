@@ -56,7 +56,7 @@ object Libs {
         const val splashScreen = "androidx.core:core-splashscreen:${Versions.AndroidX.splashScreen}"
         const val encryptedSharedPreferences = "androidx.security:security-crypto:${Versions.AndroidX.encryptedSharedPreferences}"
         const val paging3 = "androidx.paging:paging-runtime-ktx:${Versions.AndroidX.paging3}"
-        const val rxPaging3 = "androidx.paging:paging-rxjava2:${Versions.AndroidX.paging3}"
+        const val rxPaging3 = "androidx.paging:paging-rxjava3:${Versions.AndroidX.paging3}"
     }
 
     object Google {

@@ -1,6 +1,7 @@
 package ru.exursion
 
 import dagger.Component
+import ru.exursion.data.NetworkModule
 import ru.exursion.routes.ui.ChooseCityFragment
 import ru.exursion.routes.ui.TownRouteTypesFragment
 import ru.exursion.settings.SettingsModule
@@ -10,7 +11,8 @@ import javax.inject.Singleton
 @Component(modules = [
     AppModule::class,
     AppModule.Bind::class,
-    SettingsModule::class
+    SettingsModule::class,
+    NetworkModule::class,
 ])
 interface AppComponent {
 

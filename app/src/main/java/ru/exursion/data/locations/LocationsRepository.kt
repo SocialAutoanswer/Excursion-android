@@ -1,29 +1,27 @@
 package ru.exursion.data.locations
 
-import io.reactivex.rxjava3.core.Single
-import ru.bibaboba.kit.util.Mapper
-import ru.exursion.data.ExcursionApi
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.rxjava3.flowable
+import io.reactivex.rxjava3.core.Flowable
 import ru.exursion.data.locations.models.City
-import ru.exursion.data.locations.models.CityDto
 import javax.inject.Inject
 
 interface LocationsRepository {
 
-    fun getCityPage(page: Int): Single<List<City>>
+    fun getCities(): Flowable<PagingData<City>>
 }
 
 class LocationsRepositoryImpl @Inject constructor(
-    private val api: ExcursionApi,
-    private val citiesMapper: Mapper<CityDto, City>,
+    private val citiesPagingSource: CitiesPagingSource
 ) : LocationsRepository {
 
-    override fun getCityPage(page: Int): Single<List<City>> {
-        return api.requestCitiesPage(page).map {
-            mutableListOf<City>().apply {
-                it.cities?.forEach {
-                    it?.let { add(citiesMapper.map(it)) }
-                }
-            }
-        }
+    override fun getCities(): Flowable<PagingData<City>> {
+        return Pager(
+            PagingConfig(pageSize = 100),
+            pagingSourceFactory = { citiesPagingSource }
+        ).flowable
     }
+
 }
