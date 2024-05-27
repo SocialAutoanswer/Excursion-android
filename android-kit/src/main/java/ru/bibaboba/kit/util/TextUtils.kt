@@ -13,8 +13,7 @@ fun Long.toTimeFormat(): String = DateTimeFormatter.ofPattern("mm:ss")
     .format(Instant.ofEpochMilli(this))
 
 
-fun CharSequence.isValidEmail() =
-    this.isNotEmpty() && EMAIL_ADDRESS.matcher(this).matches()
+fun CharSequence.isValidEmail() = isNotEmpty() && EMAIL_ADDRESS.matcher(this).matches()
 
 fun EditText.addTextChangedListener(listener: SimpleTextWatcher) {
     this.addTextChangedListener(listener)
