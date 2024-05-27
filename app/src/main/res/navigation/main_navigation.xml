@@ -7,7 +7,7 @@
 
 	<fragment
 		android:id="@+id/fragment_choose_town"
-		android:name="ru.exursion.ui.routes.ChooseCityFragment" />
+		android:name="ru.exursion.ui.routes.fragments.ChooseCityFragment" />
 
 	<fragment
 		android:id="@+id/fragment_map"
@@ -24,6 +24,6 @@
 
 	<fragment
 		android:id="@+id/fragment_town_routes"
-		android:name="ru.exursion.ui.routes.TownRouteTypesFragment" />
+		android:name="ru.exursion.ui.routes.fragments.TagsFragment" />
 
 </navigation>

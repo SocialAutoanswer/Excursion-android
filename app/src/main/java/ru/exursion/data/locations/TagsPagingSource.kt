@@ -5,32 +5,32 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.DefaultRxPagingSource
+import ru.exursion.data.models.Tag
+import ru.exursion.data.models.TagDto
 import ru.exursion.data.network.ExcursionApi
-import ru.exursion.data.models.City
-import ru.exursion.data.models.CityDto
 import javax.inject.Inject
 
-class CitiesPagingSource @Inject constructor(
+class TagsPagingSource @Inject constructor(
     private val api: ExcursionApi,
-    private val citiesMapper: Mapper<CityDto, City>
-) : DefaultRxPagingSource<City>() {
+    private val tagsMapper: Mapper<TagDto, Tag>
+): DefaultRxPagingSource<Tag>() {
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, City>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Tag>> {
         val pageNumber = params.key ?: 1
 
-        return api.requestCitiesPage(pageNumber)
+        return api.requestTags(pageNumber)
             .subscribeOn(Schedulers.io())
             .map { response ->
                 if (response.isSuccessful) {
 
                     val pageDto = response.body()
 
-                    val data = pageDto?.cities?.let {
-                        citiesMapper.mapList(it.filterNotNull())
+                    val data = pageDto?.tags?.let {
+                        tagsMapper.mapList(it.filterNotNull())
                     } ?: emptyList()
 
-                    val nextPageNumber = if (pageDto?.nextPageLink == null) null else pageNumber.inc()
-                    val previousPageNumber = if (pageDto?.previousPageLink == null) null else pageNumber.dec()
+                    val nextPageNumber = if (pageDto?.nextPage == null) null else pageNumber.inc()
+                    val previousPageNumber = if (pageDto?.previousPage == null) null else pageNumber.dec()
 
                     LoadResult.Page(data, previousPageNumber, nextPageNumber)
                 } else {
