@@ -1,4 +1,4 @@
-package ru.exursion.ui.auth
+package ru.exursion.ui.auth.vm
 
 import android.os.CountDownTimer
 import androidx.lifecycle.ViewModel

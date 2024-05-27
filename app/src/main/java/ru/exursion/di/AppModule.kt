@@ -20,7 +20,7 @@ import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
-import ru.exursion.ui.auth.AuthViewModel
+import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
 import ru.exursion.ui.routes.vm.ChooseCityViewModel

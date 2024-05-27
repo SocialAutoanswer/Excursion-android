@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/enterPhoneFragment"
-        android:name="ru.exursion.ui.auth.EnterEmailFragment"
+        android:name="ru.exursion.ui.auth.fragments.EnterEmailFragment"
         android:label="EnterPhoneFragment" >
         <action
             android:id="@+id/action_enterPhoneFragment_to_enterCodeFragment"
@@ -15,7 +15,7 @@
     </fragment>
     <fragment
         android:id="@+id/enterCodeFragment"
-        android:name="ru.exursion.ui.auth.EnterCodeFragment"
+        android:name="ru.exursion.ui.auth.fragments.EnterCodeFragment"
         android:label="EnterCodeFragment" >
         <action
             android:id="@+id/action_enterCodeFragment_to_enterPhoneFragment"

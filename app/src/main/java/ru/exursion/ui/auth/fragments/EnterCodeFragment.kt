@@ -1,4 +1,4 @@
-package ru.exursion.ui.auth
+package ru.exursion.ui.auth.fragments
 
 import android.content.Context
 import android.util.TypedValue
@@ -11,6 +11,7 @@ import ru.bibaboba.kit.ui.BaseFragment
 import ru.bibaboba.kit.util.toTimeFormat
 import ru.exursion.R
 import ru.exursion.databinding.FragmentEnterAuthCodeBinding
+import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 

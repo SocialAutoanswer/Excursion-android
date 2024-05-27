@@ -5,8 +5,8 @@ import ru.exursion.data.network.NetworkModule
 import ru.exursion.ui.routes.fragments.ChooseCityFragment
 import ru.exursion.ui.routes.fragments.TagsFragment
 import ru.exursion.domain.settings.SettingsModule
-import ru.exursion.ui.auth.EnterCodeFragment
-import ru.exursion.ui.auth.EnterEmailFragment
+import ru.exursion.ui.auth.fragments.EnterCodeFragment
+import ru.exursion.ui.auth.fragments.EnterEmailFragment
 import javax.inject.Singleton
 
 @Singleton
