@@ -15,43 +15,43 @@ import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
-class EnterCodeFragment :
-    BaseFragment<FragmentEnterAuthCodeBinding>(FragmentEnterAuthCodeBinding::class.java) {
+class EnterCodeFragment : BaseFragment<FragmentEnterAuthCodeBinding>(
+    FragmentEnterAuthCodeBinding::class.java
+) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
     private val viewModel by viewModels<AuthViewModel> { viewModelFactory }
-
-    private var email: String? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
     }
 
-    override fun getStartData() {
-        email = arguments?.getString("user_email")
-    }
-
     override fun setUpViews(view: View) {
-        setUpTimer()
+        val email = arguments?.getString(EnterEmailFragment.EMAIL_EXTRA)
 
         with(binding) {
-            codeEdit.setCompleteListener { completed -> continueBtn.isEnabled = completed }
-
-            continueBtn.setOnClickListener {
-                viewModel.checkCode(codeEdit.text)
-            }
-
-            codeHint.text = context?.getString(R.string.screen_enter_code_hint, email)
 
             header.title.text = context?.getString(R.string.screen_enter_code_title)
             header.backButton.setOnClickListener { findNavController().navigateUp() }
 
-            continueBtn.setOnClickListener{ viewModel.checkCode(codeHint.text.toString()) }
+            codeEdit.setCompleteListener { completed -> continueBtn.isEnabled = completed }
 
-            viewModel.startTimer()
+            continueBtn.setOnClickListener { viewModel.checkCode(codeEdit.text) }
+
+            codeHint.text = context?.getString(R.string.screen_enter_code_hint, email)
+
+            binding.timer.setOnClickListener { _ ->
+                email?.let { viewModel.sendMessageToEmail(it) }
+                binding.codeEdit.text = ""
+                viewModel.startTimer()
+                binding.timer.setOnClickListener(null)
+            }
         }
+
+        setUpTimer()
+        viewModel.startTimer()
     }
 
     private fun setUpTimer() {
@@ -66,15 +66,15 @@ class EnterCodeFragment :
         }
 
         viewModel.setOnTimerFinish {
-            binding.timer.text = context?.getHtmlString(R.string.screen_enter_code_send_code, primaryColor)
-
-            binding.timer.setOnClickListener{ _ ->
-                email?.let { viewModel.sendMessageToEmail(it) }
-                binding.codeEdit.text = ""
-                viewModel.startTimer()
-                binding.timer.setOnClickListener(null)
-            }
+            binding.timer.text = context?.getHtmlString(
+                R.string.screen_enter_code_send_code,
+                primaryColor
+            )
         }
     }
 
+    override fun onStop() {
+        super.onStop()
+        viewModel.stopTimer()
+    }
 }

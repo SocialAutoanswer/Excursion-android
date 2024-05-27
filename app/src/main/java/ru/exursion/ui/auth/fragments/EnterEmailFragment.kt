@@ -15,8 +15,13 @@ import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
-class EnterEmailFragment :
-    BaseFragment<FragmentEnterEmailBinding>(FragmentEnterEmailBinding::class.java) {
+class EnterEmailFragment : BaseFragment<FragmentEnterEmailBinding>(
+    FragmentEnterEmailBinding::class.java
+) {
+
+    companion object {
+        const val EMAIL_EXTRA = "user_email"
+    }
 
     @Inject
     lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -30,8 +35,8 @@ class EnterEmailFragment :
 
     override fun setUpViews(view: View) {
         with(binding) {
-            emailEdit.addTextChangedListener { s: CharSequence?, _: Int, _: Int, _: Int ->
-                continueBtn.isEnabled = s?.isValidEmail() ?: false
+            emailEdit.addTextChangedListener { string, _, _, _ ->
+                continueBtn.isEnabled = string?.isValidEmail() ?: false
             }
 
 
@@ -40,7 +45,7 @@ class EnterEmailFragment :
 
                 findNavController().navigate(
                     R.id.enterCodeFragment,
-                    bundleOf("user_email" to emailEdit.text.toString())
+                    bundleOf(EMAIL_EXTRA to emailEdit.text.toString())
                 )
             }
         }
