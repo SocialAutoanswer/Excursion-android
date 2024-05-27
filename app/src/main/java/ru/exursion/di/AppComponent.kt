@@ -2,8 +2,8 @@ package ru.exursion.di
 
 import dagger.Component
 import ru.exursion.data.network.NetworkModule
-import ru.exursion.ui.routes.ChooseCityFragment
-import ru.exursion.ui.routes.TownRouteTypesFragment
+import ru.exursion.ui.routes.fragments.ChooseCityFragment
+import ru.exursion.ui.routes.fragments.TagsFragment
 import ru.exursion.domain.settings.SettingsModule
 import javax.inject.Singleton
 
@@ -17,7 +17,7 @@ import javax.inject.Singleton
 interface AppComponent {
 
     fun inject(fragment: ChooseCityFragment)
-    fun inject(fragment: TownRouteTypesFragment)
+    fun inject(fragment: TagsFragment)
 
     @Component.Builder
     interface Builder {

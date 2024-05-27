@@ -12,7 +12,7 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/title"
-        app:layout_goneMarginEnd="0dp"/>
+        app:layout_goneMarginEnd="16dp"/>
 
     <TextView
         android:id="@+id/title"
@@ -21,11 +21,12 @@
         app:layout_constraintEnd_toStartOf="@id/arrow"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent" />
-    
+
     <ImageView
         android:id="@+id/arrow"
         style="@style/Icon.Margin_16dp"
         app:srcCompat="@drawable/ic_arrow_right"
+        app:layout_constraintStart_toEndOf="@id/title"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

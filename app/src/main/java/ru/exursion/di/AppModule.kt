@@ -13,13 +13,17 @@ import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.locations.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
+import ru.exursion.data.locations.TagsMapper
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
+import ru.exursion.data.models.Tag
+import ru.exursion.data.models.TagDto
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
-import ru.exursion.domain.RouteTypesUseCase
+import ru.exursion.domain.TagsUseCase
+import ru.exursion.domain.TagsUseCaseImpl
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
-import ru.exursion.ui.routes.vm.TownRouteTypesViewModel
+import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 
 @Module
 class AppModule(private val context: Context) {
@@ -27,33 +31,31 @@ class AppModule(private val context: Context) {
     @Provides
     fun provideApplicationContext() = context
 
-    @Provides
-    fun provideRouteTypesUseCase(): RouteTypesUseCase = RouteTypesUseCase()
-
     @Module
     interface Bind {
 
+
+        @Binds
+        fun bindsTagsMapper(impl: TagsMapper): Mapper<TagDto, Tag>
         @Binds
         fun bindCitiesMapper(impl: CitiesMapper): Mapper<CityDto, City>
-
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
-
+        @Binds
+        fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
         @Binds
         fun bindCitiesUseCase(impl: CitiesUseCaseImpl): CitiesUseCase
 
         @Binds
         fun bindViewModelFactory(impl: ViewModelFactory): ViewModelProvider.Factory
-
         @Binds
         @IntoMap
         @ViewModelKey(ChooseCityViewModel::class)
         fun bindChooseTownsViewModel(viewModel: ChooseCityViewModel): ViewModel
-
         @Binds
         @IntoMap
-        @ViewModelKey(TownRouteTypesViewModel::class)
-        fun bindTownRouteTypesViewModel(viewModel: TownRouteTypesViewModel): ViewModel
+        @ViewModelKey(ChooseTagsViewModel::class)
+        fun bindTownRouteTypesViewModel(viewModel: ChooseTagsViewModel): ViewModel
     }
 
 }

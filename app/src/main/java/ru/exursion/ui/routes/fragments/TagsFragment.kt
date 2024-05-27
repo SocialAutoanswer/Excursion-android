@@ -1,28 +1,27 @@
-package ru.exursion.ui.routes
+package ru.exursion.ui.routes.fragments
 
 import android.content.Context
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
+import ru.exursion.databinding.FragmentTagsBinding
 import ru.exursion.ui.shared.ext.addItemMargins
-import ru.exursion.databinding.FragmentTownRouteTypesBinding
 import ru.exursion.ui.shared.ext.inject
-import ru.exursion.ui.routes.vm.TownRouteTypesViewModel
-import ru.exursion.ui.shared.SelectItemDelegateAdapter
+import ru.exursion.ui.routes.vm.ChooseTagsViewModel
+import ru.exursion.ui.shared.TagsPagingAdapter
 import javax.inject.Inject
 
-class TownRouteTypesFragment : StateFragment<FragmentTownRouteTypesBinding, TownRouteTypesViewModel>(
-    FragmentTownRouteTypesBinding::class.java
+class TagsFragment : StateFragment<FragmentTagsBinding, ChooseTagsViewModel>(
+    FragmentTagsBinding::class.java
 ) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val viewModel by viewModels<TownRouteTypesViewModel> { viewModelFactory }
+    override val viewModel by viewModels<ChooseTagsViewModel> { viewModelFactory }
 
     override val stateMachine = StateMachine.Builder()
         .lifecycleOwner(this)
@@ -30,9 +29,7 @@ class TownRouteTypesFragment : StateFragment<FragmentTownRouteTypesBinding, Town
         .addReadyState()
         .build()
 
-    private val adapter = CompositeDelegateAdapter(SelectItemDelegateAdapter(true) {
-        //findNavController().navigate()
-    })
+    private val adapter = TagsPagingAdapter {  }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -40,7 +37,7 @@ class TownRouteTypesFragment : StateFragment<FragmentTownRouteTypesBinding, Town
     }
 
     override fun getStartData() {
-        viewModel.requestTownRouteTypes()
+        viewModel.requestTags()
     }
 
     override fun setUpViews(view: View): Unit = with(binding) {
@@ -54,13 +51,13 @@ class TownRouteTypesFragment : StateFragment<FragmentTownRouteTypesBinding, Town
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
-            TownRouteTypesViewModel.RoutesState.Loading::class,
+            ChooseTagsViewModel.ChooseTagsState.Loading::class,
             callback = { binding.loading.root.isVisible = true },
             onExit = { binding.loading.root.isVisible = false }
         )
     }
 
     private fun StateMachine.Builder.addReadyState(): StateMachine.Builder {
-        return addState(TownRouteTypesViewModel.RoutesState.Ready::class) { adapter.swapData(it.routeTypes) }
+        return addState(ChooseTagsViewModel.ChooseTagsState.TagsReady::class) { adapter.submitData(lifecycle, it.tags) }
     }
 }
