@@ -6,11 +6,15 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.exursion.R
 import ru.exursion.databinding.ActivitySplashBinding
+import ru.exursion.domain.settings.UserSettings
 import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.shared.ext.startAnimatedVectorDrawable
+import javax.inject.Inject
 
 @SuppressLint("CustomSplashScreen")
 class SplashActivity : AppCompatActivity() {
+
+    @Inject lateinit var userSettings: UserSettings
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -18,12 +22,7 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.animationView.startAnimatedVectorDrawable(R.drawable.animation_splash) {
-            if (false) { //TODO:check if user loggedIn
-                startActivity(Intent(this, MainActivity::class.java))
-            } else {
-                startActivity(Intent(this, AuthActivity::class.java))
-            }
-
+            startActivity(Intent(this, if (userSettings.token == null) AuthActivity::class.java else MainActivity::class.java))
             finish()
         }
     }
