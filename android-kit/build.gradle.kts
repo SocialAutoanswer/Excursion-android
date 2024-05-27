@@ -1,4 +1,5 @@
 import buildsrc.Libs
+import buildsrc.Versions
 
 plugins {
     id("com.android.library")
@@ -51,5 +52,5 @@ dependencies {
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.11.0")
 
-    implementation(Libs.Common.threetenabp)
+    implementation("com.jakewharton.threetenabp:threetenabp:1.0.3")
 }
