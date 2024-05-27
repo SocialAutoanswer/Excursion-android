@@ -6,6 +6,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import ru.exursion.R
 import ru.exursion.databinding.ActivitySplashBinding
+import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.shared.ext.startAnimatedVectorDrawable
 
 @SuppressLint("CustomSplashScreen")
@@ -17,7 +18,12 @@ class SplashActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.animationView.startAnimatedVectorDrawable(R.drawable.animation_splash) {
-            startActivity(Intent(this, MainActivity::class.java))
+            if (false) { //TODO:check if user loggedIn
+                startActivity(Intent(this, MainActivity::class.java))
+            } else {
+                startActivity(Intent(this, AuthActivity::class.java))
+            }
+
             finish()
         }
     }

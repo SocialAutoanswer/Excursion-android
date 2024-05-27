@@ -18,4 +18,16 @@
     <string name="dialog_network_error_neutral_button">Понятно</string>
     <string name="dialog_network_error_data_requested">Пробуем снова…</string>
 
+    <string name="screen_enter_email_title">Введите \n электронную почту</string>
+    <string name="screen_enter_email_hint">Ваш email</string>
+    <string name="screen_enter_email_code_hint">Мы отправим вам код \n подтверждения</string>
+    <string name="screen_enter_email_continue">Продолжить</string>
+    <string name="screen_enter_email_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
+
+    <string name="screen_enter_code_title">Введите \n полученный код</string>
+    <string name="screen_enter_code_hint">Введите 4-значный номер, который был \n отправлен на ваш email %1$s</string>
+    <string name="screen_enter_code_continue">Продолжить</string>
+    <string name="screen_enter_code_timer"><![CDATA[Отправить код повторно через <font color="%1$s"> %2$s </font>]]></string>
+    <string name="screen_enter_code_send_code"><![CDATA[<font color="%1$s"><u>Отправить код повторно</u></font>]]></string>
+
 </resources>

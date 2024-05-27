@@ -10,7 +10,7 @@
 
     <TextView
         android:id="@+id/title"
-        style="@style/Text.H2.Center"
+        style="@style/Text.H2.Title"
         tools:text="Маршруты" />
 
 </FrameLayout>

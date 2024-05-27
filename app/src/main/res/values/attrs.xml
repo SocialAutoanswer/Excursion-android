@@ -66,4 +66,6 @@
     <attr name="exc_select_item_background_color_pressed" format="color" />
     <attr name="exc_select_item_text_color" format="color" />
     <attr name="exc_select_item_icon_color" format="color" />
+
+    <attr name="exc_code_input_unselected_color" format="color" />
 </resources>

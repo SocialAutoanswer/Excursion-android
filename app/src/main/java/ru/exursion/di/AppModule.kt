@@ -18,6 +18,7 @@ import ru.exursion.data.models.CityDto
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
 import ru.exursion.domain.RouteTypesUseCase
+import ru.exursion.ui.auth.AuthViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.TownRouteTypesViewModel
 
@@ -54,6 +55,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(TownRouteTypesViewModel::class)
         fun bindTownRouteTypesViewModel(viewModel: TownRouteTypesViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(AuthViewModel::class)
+        fun bindAuthViewModel(viewModel: AuthViewModel): ViewModel
     }
 
 }

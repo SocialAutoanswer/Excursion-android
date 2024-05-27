@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="EditText" parent="MatchParentWrapContent">
+        <item name="android:background">@drawable/background_edit_text</item>
+        <item name="android:textColorHint">?attr/exc_input_text_color_hint</item>
+    </style>
+
+    <style name="EditText.MarginHorizontal_25dp">
+        <item name="android:layout_marginHorizontal">25dp</item>
+    </style>
+
+</resources>

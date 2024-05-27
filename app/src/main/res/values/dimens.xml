@@ -21,4 +21,6 @@
     <dimen name="text_main">24sp</dimen>
     <dimen name="text_header">40sp</dimen>
 
+    <dimen name="edit_text_corner">62dp</dimen>
+
 </resources>

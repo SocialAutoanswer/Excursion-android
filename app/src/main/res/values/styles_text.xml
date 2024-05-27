@@ -13,6 +13,11 @@
     <style name="Text.H2.NoWidth">
         <item name="android:layout_width">wrap_content</item>
     </style>
+    
+    <style name="Text.H2.Title">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:gravity">center</item>
+    </style>
 
     <style name="Text.H2.NoWidth.Center">
         <item name="android:gravity">center</item>
@@ -87,4 +92,17 @@
     <style name="Text.H4.MarginTop_8dp">
         <item name="android:layout_marginTop">8dp</item>
     </style>
+
+    <style name="Text.H5">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Text.H5.NoWidth">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Text.H5.NoWidth.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
