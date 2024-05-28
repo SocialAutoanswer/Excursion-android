@@ -19,6 +19,10 @@
         <item name="android:gravity">center</item>
     </style>
 
+    <style name="Text.H2.Title.MarginTop48dp">
+        <item name="android:layout_marginTop">48dp</item>
+    </style>
+
     <style name="Text.H2.NoWidth.Center">
         <item name="android:gravity">center</item>
     </style>
