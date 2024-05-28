@@ -30,4 +30,8 @@
     <string name="screen_enter_code_timer"><![CDATA[Отправить код повторно через <font color="%1$s"> %2$s </font>]]></string>
     <string name="screen_enter_code_send_code"><![CDATA[<font color="%1$s"><u>Отправить код повторно</u></font>]]></string>
 
+    <string name="screen_enter_password_title">Введите пароль</string>
+    <string name="screen_enter_password_input_hint">Придумайте 8-значный пароль</string>
+    <string name="screen_enter_password_continue">Продолжить</string>
+
 </resources>

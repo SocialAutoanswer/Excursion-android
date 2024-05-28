@@ -8,17 +8,16 @@
     <fragment
         android:id="@+id/enterPhoneFragment"
         android:name="ru.exursion.ui.auth.fragments.EnterEmailFragment"
-        android:label="EnterPhoneFragment" >
-        <action
-            android:id="@+id/action_enterPhoneFragment_to_enterCodeFragment"
-            app:destination="@id/enterCodeFragment" />
-    </fragment>
+        android:label="EnterPhoneFragment" />
+
     <fragment
         android:id="@+id/enterCodeFragment"
         android:name="ru.exursion.ui.auth.fragments.EnterCodeFragment"
-        android:label="EnterCodeFragment" >
-        <action
-            android:id="@+id/action_enterCodeFragment_to_enterPhoneFragment"
-            app:destination="@id/enterPhoneFragment" />
-    </fragment>
+        android:label="EnterCodeFragment" />
+
+    <fragment
+        android:id="@+id/enter_password_fragment"
+        android:name="ru.exursion.ui.auth.fragments.EnterPasswordFragment"
+        android:label="EnterPasswordFragment" />
+
 </navigation>

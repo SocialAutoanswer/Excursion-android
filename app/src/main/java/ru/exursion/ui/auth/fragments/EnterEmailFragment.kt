@@ -36,11 +36,11 @@ class EnterEmailFragment : BaseFragment<FragmentEnterEmailBinding>(
     override fun setUpViews(view: View) {
         with(binding) {
             emailEdit.addTextChangedListener { string, _, _, _ ->
-                continueBtn.isEnabled = string?.isValidEmail() ?: false
+                continueButton.isEnabled = string?.isValidEmail() ?: false
             }
 
 
-            continueBtn.setOnClickListener {
+            continueButton.setOnClickListener {
                 viewModel.sendMessageToEmail(emailEdit.text.toString())
 
                 findNavController().navigate(

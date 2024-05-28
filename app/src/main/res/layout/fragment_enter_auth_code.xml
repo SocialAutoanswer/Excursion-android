@@ -7,11 +7,9 @@
         layout="@layout/sublayout_back_button_header"
         android:id="@+id/header"
         style="@style/MatchParentWrapContent.MarginTop_48dp"
-        android:text="@string/screen_enter_code_title"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <com.jakode.verifycodeedittext.VerifyCodeEditText
         android:id="@+id/code_edit"
@@ -39,13 +37,13 @@
         android:gravity="center"
         android:text="@string/screen_enter_code_hint"
         android:textColor="?attr/exc_text_color_hint"
-        app:layout_constraintBottom_toTopOf="@id/continue_btn"
+        app:layout_constraintBottom_toTopOf="@id/continue_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/code_edit" />
 
     <Button
-        android:id="@+id/continue_btn"
+        android:id="@+id/continue_button"
         style="@style/Button.Primary.MarginHorizontal_25dp"
         android:layout_marginTop="40dp"
         android:text="@string/screen_enter_code_continue"
@@ -63,7 +61,7 @@
         android:textColor="?attr/exc_text_color_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/continue_btn"
+        app:layout_constraintTop_toBottomOf="@id/continue_button"
         app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

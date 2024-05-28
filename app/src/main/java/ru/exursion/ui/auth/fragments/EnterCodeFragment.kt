@@ -36,9 +36,12 @@ class EnterCodeFragment : BaseFragment<FragmentEnterAuthCodeBinding>(
             header.title.text = context?.getString(R.string.screen_enter_code_title)
             header.backButton.setOnClickListener { findNavController().navigateUp() }
 
-            codeEdit.setCompleteListener { completed -> continueBtn.isEnabled = completed }
+            codeEdit.setCompleteListener { completed -> continueButton.isEnabled = completed }
 
-            continueBtn.setOnClickListener { viewModel.checkCode(codeEdit.text) }
+            continueButton.setOnClickListener {
+                viewModel.checkCode(codeEdit.text)
+                findNavController().navigate(R.id.enter_password_fragment)
+            }
 
             codeHint.text = context?.getString(R.string.screen_enter_code_hint, email)
 
