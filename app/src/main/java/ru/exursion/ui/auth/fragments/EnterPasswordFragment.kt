@@ -14,7 +14,7 @@ class EnterPasswordFragment : BaseFragment<FragmentEnterPasswordBinding>(
         binding.header.title.text = getString(R.string.screen_enter_password_title)
         binding.header.backButton.setOnClickListener { findNavController().navigateUp() }
         binding.continueButton.setOnClickListener {
-
+            findNavController().navigate(R.id.enter_user_data_fragment)
         }
 
     }

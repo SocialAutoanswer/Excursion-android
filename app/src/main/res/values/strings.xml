@@ -34,4 +34,15 @@
     <string name="screen_enter_password_input_hint">Придумайте 8-значный пароль</string>
     <string name="screen_enter_password_continue">Продолжить</string>
 
+    <string name="screen_enter_user_data_title">Введите данные</string>
+    <string name="screen_enter_user_data_name_title">Имя</string>
+    <string name="screen_enter_user_data_name_hint">Иван</string>
+    <string name="screen_enter_user_data_last_name_title">Фамилия</string>
+    <string name="screen_enter_user_data_last_name_hint">Иванов</string>
+    <string name="screen_enter_user_data_birth_date_title">Дата рождения</string>
+    <string name="screen_enter_user_data_birth_date_day_hint">ДД</string>
+    <string name="screen_enter_user_data_birth_date_month_hint">ММ</string>
+    <string name="screen_enter_user_data_birth_date_year_hint">ГГГГ</string>
+    <string name="screen_enter_user_data_button_continue">Войти</string>
+
 </resources>

@@ -20,4 +20,9 @@
         android:name="ru.exursion.ui.auth.fragments.EnterPasswordFragment"
         android:label="EnterPasswordFragment" />
 
+    <fragment
+        android:id="@+id/enter_user_data_fragment"
+        android:name="ru.exursion.ui.auth.fragments.EnterUserDataFragment"
+        android:label="EnterUserDataFragment" />
+
 </navigation>
