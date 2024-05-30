@@ -25,7 +25,7 @@ class SettingsModule {
 
     @Provides
     fun provideUserSettings(
-        //sharedPreferences: SharedPreferences
-    ): UserSettings = TestUserSettingsImpl()//UserSettingsImpl(sharedPreferences)
+        sharedPreferences: SharedPreferences
+    ): UserSettings = UserSettingsImpl(sharedPreferences)
 
 }

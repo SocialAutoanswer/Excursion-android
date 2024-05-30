@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchParent">
+
+    <include
+        layout="@layout/sublayout_back_button_header"
+        android:id="@+id/header"
+        style="@style/MatchParentWrapContent.MarginTop_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.jakode.verifycodeedittext.VerifyCodeEditText
+        android:id="@+id/code_edit"
+        style="@style/WrapContent"
+        android:layout_marginTop="190dp"
+        android:inputType="number"
+        app:ViewCount="Four"
+        app:ItemSpaceSize="20dp"
+        app:BottomIconWidth="52dp"
+        app:TextColor="?attr/exc_text_color_main"
+        app:TextSize="15sp"
+        app:TextFont="@font/roboto_regular"
+        app:BottomSelectedIcon="?attr/exc_color_primary"
+        app:BottomUnSelectedIcon="?attr/exc_code_input_unselected_color"
+        app:BottomIconHeight="2dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/code_hint"
+        app:layout_constraintTop_toBottomOf="@id/header"/>
+
+    <TextView
+        android:id="@+id/code_hint"
+        style="@style/Text.H4"
+        android:layout_marginTop="48dp"
+        android:gravity="center"
+        android:text="@string/screen_enter_code_hint"
+        android:textColor="?attr/exc_text_color_hint"
+        app:layout_constraintBottom_toTopOf="@id/continue_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_edit" />
+
+    <Button
+        android:id="@+id/continue_button"
+        style="@style/Button.Primary.MarginHorizontal_25dp"
+        android:layout_marginTop="40dp"
+        android:text="@string/screen_enter_code_continue"
+        android:enabled="false"
+        app:layout_constraintBottom_toTopOf="@id/timer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/code_hint" />
+
+    <TextView
+        android:id="@+id/timer"
+        style="@style/Text.H5.NoWidth.Center"
+        android:layout_marginVertical="36dp"
+        android:text="@string/screen_enter_code_timer"
+        android:textColor="?attr/exc_text_color_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/continue_button"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -41,6 +41,7 @@ object Versions {
     const val delegateAdapter = "4.2"
     const val threetenabp = "1.0.3"
     const val glide = "4.16.0"
+    const val codeEditText = "1.2.0"
 }
 
 object Libs {
@@ -92,5 +93,6 @@ object Libs {
         const val glide = "com.github.bumptech.glide:glide:${Versions.glide}"
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         const val glideOkHttpIntegration = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
+        const val codeEditText = "com.github.jakode2020:VerifyCodeEditText:${Versions.codeEditText}"
     }
 }

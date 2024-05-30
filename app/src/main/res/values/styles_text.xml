@@ -13,6 +13,15 @@
     <style name="Text.H2.NoWidth">
         <item name="android:layout_width">wrap_content</item>
     </style>
+    
+    <style name="Text.H2.Title">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Text.H2.Title.MarginTop48dp">
+        <item name="android:layout_marginTop">48dp</item>
+    </style>
 
     <style name="Text.H2.NoWidth.Center">
         <item name="android:gravity">center</item>
@@ -49,6 +58,27 @@
 
     <style name="Text.H2.MarginHorizontal_25dp.MarginTop_32dp">
         <item name="android:layout_marginTop">32dp</item>
+    </style>
+
+    <style name="Text.H3">
+        <item name="android:fontFamily">@font/roboto_regular</item>
+        <item name="android:textSize">16sp</item>
+    </style>
+
+    <style name="Text.H3.MarginTop_32dp">
+        <item name="android:layout_marginTop">32dp</item>
+    </style>
+
+    <style name="Text.H3.MarginTop_32dp.NoWidth">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Text.H3.MarginTop_24dp">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="Text.H3.MarginTop_24dp.NoWidth">
+        <item name="android:layout_width">0dp</item>
     </style>
     
     <style name="Text.H4">
@@ -87,4 +117,17 @@
     <style name="Text.H4.MarginTop_8dp">
         <item name="android:layout_marginTop">8dp</item>
     </style>
+
+    <style name="Text.H5">
+        <item name="android:textSize">10sp</item>
+    </style>
+
+    <style name="Text.H5.NoWidth">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Text.H5.NoWidth.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
 </resources>
