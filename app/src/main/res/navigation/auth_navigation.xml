@@ -2,16 +2,16 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_navigation"
-    app:startDestination="@id/enterPhoneFragment">
+    app:startDestination="@id/enter_phone_fragment">
 
 
     <fragment
-        android:id="@+id/enterPhoneFragment"
+        android:id="@+id/enter_phone_fragment"
         android:name="ru.exursion.ui.auth.fragments.EnterEmailFragment"
         android:label="EnterPhoneFragment" />
 
     <fragment
-        android:id="@+id/enterCodeFragment"
+        android:id="@+id/enter_code_fragment"
         android:name="ru.exursion.ui.auth.fragments.EnterCodeFragment"
         android:label="EnterCodeFragment" />
 

@@ -2,8 +2,7 @@ package ru.exursion.ui.auth.fragments
 
 import android.content.Context
 import android.view.View
-import androidx.core.os.bundleOf
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.util.isValidEmail
@@ -19,14 +18,9 @@ class EnterEmailFragment : BaseFragment<FragmentEnterEmailBinding>(
     FragmentEnterEmailBinding::class.java
 ) {
 
-    companion object {
-        const val EMAIL_EXTRA = "user_email"
-    }
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    private val viewModel by viewModels<AuthViewModel> { viewModelFactory }
+    private val viewModel by activityViewModels<AuthViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -39,14 +33,9 @@ class EnterEmailFragment : BaseFragment<FragmentEnterEmailBinding>(
                 continueButton.isEnabled = string?.isValidEmail() ?: false
             }
 
-
             continueButton.setOnClickListener {
-                viewModel.sendMessageToEmail(emailEdit.text.toString())
-
-                findNavController().navigate(
-                    R.id.enterCodeFragment,
-                    bundleOf(EMAIL_EXTRA to emailEdit.text.toString())
-                )
+                viewModel.email = emailEdit.text.toString()
+                findNavController().navigate(R.id.enter_password_fragment)
             }
         }
     }

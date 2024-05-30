@@ -11,6 +11,9 @@ class AuthViewModel @Inject constructor(): ViewModel() {
         private const val TIMER_STEP_INTERVAL = 1000L
     }
 
+    var email: String? = null
+    var password: String? = null
+
     private val countDownTimer = object : CountDownTimer(TIMER_FINISH_TIME, TIMER_STEP_INTERVAL) {
         override fun onTick(millisUntilFinished: Long) {
             timerIsRunning = true
@@ -32,11 +35,7 @@ class AuthViewModel @Inject constructor(): ViewModel() {
 
     fun setOnTimerFinish(listener: () -> Unit) { onFinish = listener }
 
-    fun sendMessageToEmail(email: String) {
-
-    }
-
-    fun checkCode(code: String) {
+    fun tryToLoginOrSendCodeToEmail() {
 
     }
 
