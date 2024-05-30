@@ -1,6 +1,7 @@
 package ru.exursion.domain.settings
 
 import android.content.SharedPreferences
+import ru.exursion.BuildConfig
 import javax.inject.Inject
 
 class UserSettingsImpl @Inject constructor(
@@ -22,7 +23,7 @@ class UserSettingsImpl @Inject constructor(
     override val email: String?
         get() = prefs.getString(EMAIL_PREFS_KEY, null)
     override val token: String?
-        get() = prefs.getString(TOKEN_PREFS_KEY, null)
+        get() = prefs.getString(TOKEN_PREFS_KEY, BuildConfig.AUTH_TOKEN)
     override val avatarImage: String?
         get() = prefs.getString(AVATAR_IMAGE_PREFS_KEY, null)
 }

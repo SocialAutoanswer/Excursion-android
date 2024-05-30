@@ -6,7 +6,7 @@ import ru.exursion.BuildConfig
 
 object AuthHeaderInterceptor : Interceptor {
 
-    private var token: String = BuildConfig.AUTH_TOKEN.ifBlank { "" }
+    private var token: String = ""
 
     fun setSessionToken(token: String){
         AuthHeaderInterceptor.token = token

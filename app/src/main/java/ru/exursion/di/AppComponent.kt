@@ -1,6 +1,7 @@
 package ru.exursion.di
 
 import dagger.Component
+import ru.exursion.App
 import ru.exursion.data.network.NetworkModule
 import ru.exursion.ui.routes.fragments.ChooseCityFragment
 import ru.exursion.ui.routes.fragments.TagsFragment
@@ -18,6 +19,8 @@ import javax.inject.Singleton
     NetworkModule::class,
 ])
 interface AppComponent {
+
+    fun inject(application: App)
 
     fun inject(activity: SplashActivity)
 
