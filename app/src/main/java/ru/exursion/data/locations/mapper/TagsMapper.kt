@@ -1,4 +1,4 @@
-package ru.exursion.data.locations
+package ru.exursion.data.locations.mapper
 
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Tag

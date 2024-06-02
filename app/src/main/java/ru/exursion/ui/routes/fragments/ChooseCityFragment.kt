@@ -3,6 +3,7 @@ package ru.exursion.ui.routes.fragments
 import android.content.Context
 import android.view.View
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -31,7 +32,12 @@ class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityVi
         .addErrorEffect()
         .build()
 
-    private val adapter = CitiesPagingDataAdapter { findNavController().navigate(R.id.fragment_town_routes) }
+    private val adapter = CitiesPagingDataAdapter {
+        findNavController().navigate(
+            R.id.fragment_tags,
+            bundleOf(RoutesFragment.CITY_ID_BUNDLE_KEY to it.id)
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

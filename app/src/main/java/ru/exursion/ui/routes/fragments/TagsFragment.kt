@@ -2,9 +2,11 @@ package ru.exursion.ui.routes.fragments
 
 import android.content.Context
 import android.view.View
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
@@ -29,7 +31,16 @@ class TagsFragment : StateFragment<FragmentTagsBinding, ChooseTagsViewModel>(
         .addReadyState()
         .build()
 
-    private val adapter = TagsPagingAdapter {  }
+    private val adapter = TagsPagingAdapter {
+        findNavController().navigate(
+            R.id.fragment_routes,
+            bundleOf(
+                RoutesFragment.CITY_ID_BUNDLE_KEY to arguments?.getLong(RoutesFragment.CITY_ID_BUNDLE_KEY),
+                RoutesFragment.TAG_ID_BUNDLE_KEY to it.id,
+                RoutesFragment.TAG_NAME_BUNDLE_KEY to it.name,
+            )
+        )
+    }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

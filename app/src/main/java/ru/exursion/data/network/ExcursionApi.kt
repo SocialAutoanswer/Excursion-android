@@ -6,10 +6,12 @@ import retrofit2.http.GET
 import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.Part
+import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.bibaboba.kit.retrofit.EndpointUrl
 import ru.exursion.BuildConfig
 import ru.exursion.data.models.CitiesPageDto
+import ru.exursion.data.models.RouteRequestDto
 import ru.exursion.data.models.TagPageDto
 import ru.exursion.data.models.UserRequestDto
 
@@ -32,4 +34,10 @@ interface ExcursionApi {
     fun requestTags(
         @Query("page") page: Int
     ): Single<Response<TagPageDto>>
+
+    @GET("locations/routes/bycity/{cityId}")
+    fun requestRoutesByCity(
+        @Path("cityId") cityId: Long,
+        @Query("page") page: Int,
+    ) : Single<Response<RouteRequestDto>>
 }

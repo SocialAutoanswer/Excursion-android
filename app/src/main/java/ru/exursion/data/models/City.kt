@@ -9,6 +9,7 @@ data class CitiesPageDto(
 )
 
 data class CityDto(
+    @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
     @SerializedName("photo") val photo: String?,
     @SerializedName("longitude") val longitude: String?,
@@ -16,6 +17,7 @@ data class CityDto(
 )
 
 data class City(
+    val id: Long,
     val name: String,
     val image: String,
     val longitude: String?,

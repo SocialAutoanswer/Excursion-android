@@ -23,7 +23,11 @@
 		android:name="ru.exursion.ui.profile.ProfileFragment" />
 
 	<fragment
-		android:id="@+id/fragment_town_routes"
+		android:id="@+id/fragment_tags"
 		android:name="ru.exursion.ui.routes.fragments.TagsFragment" />
+
+	<fragment
+		android:id="@+id/fragment_routes"
+		android:name="ru.exursion.ui.routes.fragments.RoutesFragment" />
 
 </navigation>

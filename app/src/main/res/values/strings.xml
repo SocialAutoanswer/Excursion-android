@@ -45,4 +45,6 @@
     <string name="screen_enter_user_data_birth_date_year_hint">ГГГГ</string>
     <string name="screen_enter_user_data_button_continue">Войти</string>
 
+    <string name="screen_routes_paid_excursion">Платная экскурсия</string>
+
 </resources>
