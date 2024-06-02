@@ -82,12 +82,14 @@ dependencies {
     implementation(Libs.Common.circleImage)
 
     implementation(Libs.Common.glide)
+    kapt(Libs.Common.glideCompiler)
+    implementation(Libs.Common.glideOkHttpIntegration)
+
     implementation("androidx.appcompat:appcompat:1.6.1")
     implementation("com.google.android.material:material:1.12.0")
     implementation("androidx.activity:activity:1.9.0")
     implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    kapt(Libs.Common.glideCompiler)
-    implementation(Libs.Common.glideOkHttpIntegration)
+    implementation("com.github.fuzz-productions:RatingBar:1.0.6")
 
 
     implementation(Libs.DI.dagger)

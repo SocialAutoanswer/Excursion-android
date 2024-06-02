@@ -30,4 +30,8 @@
 		android:id="@+id/fragment_routes"
 		android:name="ru.exursion.ui.routes.fragments.RoutesFragment" />
 
+	<fragment
+		android:id="@+id/fragment_route_details"
+		android:name="ru.exursion.ui.routes.fragments.RouteDetailsFragment" />
+
 </navigation>

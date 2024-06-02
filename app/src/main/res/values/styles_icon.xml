@@ -16,4 +16,28 @@
         <item name="android:src">@drawable/ic_arrow_left</item>
         <item name="android:layout_marginStart">25dp</item>
     </style>
+
+    <style name="Icon.Back.MarginTop_52dp">
+        <item name="android:layout_marginTop">52dp</item>
+    </style>
+
+    <style name="Icon.MarginEnd_25dp">
+        <item name="android:layout_marginEnd">25dp</item>
+    </style>
+
+    <style name="Icon.MarginStart_25dp">
+        <item name="android:layout_marginStart">25dp</item>
+    </style>
+
+    <style name="Icon.MarginTop_24dp">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="Icon.MarginStart_25dp.MarginTop_24dp">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="Icon.MarginEnd_25dp.MarginTop_52dp">
+        <item name="android:layout_marginTop">52dp</item>
+    </style>
 </resources>

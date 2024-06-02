@@ -5,8 +5,10 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
+import ru.exursion.R
 import ru.exursion.databinding.FragmentRoutesBinding
 import ru.exursion.ui.routes.RoutesPagingDataAdapter
 import ru.exursion.ui.routes.vm.RoutesViewModel
@@ -34,7 +36,7 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
         .build()
 
     private val adapter = RoutesPagingDataAdapter {
-
+        findNavController().navigate(R.id.fragment_route_details)
     }
 
     override fun onAttach(context: Context) {

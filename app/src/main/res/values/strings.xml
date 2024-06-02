@@ -47,4 +47,14 @@
 
     <string name="screen_routes_paid_excursion">Платная экскурсия</string>
 
+    <string name="screen_route_details_buy">Купить</string>
+    <string name="screen_route_details_route">Маршрут</string>
+    <plurals name="screen_route_details_locations_amount">
+        <item quantity="one">%1$s объект</item>
+        <item quantity="other">%1$s объектов</item>
+    </plurals>
+    <string name="screen_route_details_duration">%1$s минут</string>
+    <string name="screen_route_details_kilometers">%1$s КМ</string>
+    <string name="screen_route_details_reviews">Отзывы</string>
+
 </resources>

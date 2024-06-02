@@ -9,11 +9,13 @@
     <style name="Theme.Exursion" parent="Base.Theme.Exursion">
 
         <item name="exc_search_view_style">@style/ExcSearchView</item>
+        <item name="exc_rating_bar_style">@style/RatingBar</item>
 
         <item name="exc_background_color">@color/screeching_white</item>
         <item name="exc_color_primary">@color/kazan_orange</item>
         <item name="exc_bottom_navigation_color">@color/cynical_black</item>
         <item name="exc_transparent_black">@color/black_60</item>
+        <item name="exc_divider_color">@color/midnight_black_10</item>
 
         <item name="exc_button_color_primary_active">@color/kazan_orange</item>
         <item name="exc_button_color_primary_disabled">@color/bobobo</item>
@@ -38,6 +40,10 @@
         <item name="exc_icon_color_primary">@color/selector_icon_primary</item>
         <item name="exc_icon_near_text_color">@color/folklore_fog</item>
         <item name="exc_icon_color_on_background">@color/cynical_black</item>
+        <item name="exc_icon_color_on_image">@color/white</item>
+        <item name="exc_icon_color_empty">@color/foggy_mountain</item>
+        <item name="exc_icon_user_image_background">@color/gogo_gadget_guy</item>
+        <item name="exc_icon_user_image_foreground">@color/foggy_mountain</item>
 
         <item name="exc_input_error_color">@color/romax_red</item>
         <item name="exc_input_stroke_color_default">@color/folklore_fog_30</item>

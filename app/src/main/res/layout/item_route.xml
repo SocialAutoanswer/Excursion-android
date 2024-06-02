@@ -35,6 +35,7 @@
         <TextView
             android:id="@+id/description"
             style="@style/Text.H5.ColorOnImage.MarginHorizontal_24dp.MarginTop_16dp.MarginBottom_38dp"
+            android:lines="4"
             app:layout_constraintTop_toBottomOf="@id/name"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
