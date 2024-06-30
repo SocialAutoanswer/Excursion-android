@@ -1,6 +1,7 @@
 package ru.exursion.ui.routes.fragments
 
 import android.content.Context
+import android.content.Intent
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
@@ -10,6 +11,7 @@ import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
 import ru.exursion.databinding.FragmentRoutesBinding
+import ru.exursion.ui.routes.RouteDetailsActivity
 import ru.exursion.ui.routes.RoutesPagingDataAdapter
 import ru.exursion.ui.routes.vm.RoutesViewModel
 import ru.exursion.ui.shared.ext.inject
@@ -36,7 +38,12 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
         .build()
 
     private val adapter = RoutesPagingDataAdapter {
-        findNavController().navigate(R.id.fragment_route_details)
+        //findNavController().navigate(R.id.fragment_route_details)
+        val activity = activity ?: return@RoutesPagingDataAdapter
+        Intent(activity, RouteDetailsActivity::class.java).apply {
+            putExtra(RouteDetailsActivity.ROUTE_ID, it.id)
+            startActivity(this)
+        }
     }
 
     override fun onAttach(context: Context) {

@@ -15,4 +15,7 @@ class TagsMapper @Inject constructor(): Mapper<TagDto, Tag> {
         tagsIds = input.tags?.filterNotNull() ?: emptyList()
     )
 
+    override fun mapList(input: List<TagDto>): List<Tag> {
+        return input.map(::map)
+    }
 }

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/routes_navigation"
+    app:startDestination="@id/fragment_choose_town">
+
+    <fragment
+        android:id="@+id/fragment_choose_town"
+        android:name="ru.exursion.ui.routes.fragments.ChooseCityFragment" />
+
+    <fragment
+        android:id="@+id/fragment_tags"
+        android:name="ru.exursion.ui.routes.fragments.TagsFragment" />
+
+    <fragment
+        android:id="@+id/fragment_routes"
+        android:name="ru.exursion.ui.routes.fragments.RoutesFragment" />
+
+</navigation>

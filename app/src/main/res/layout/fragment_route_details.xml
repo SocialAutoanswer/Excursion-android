@@ -127,31 +127,16 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/description"/>
 
-            <LinearLayout
-                style="@style/MatchParentWrapContent.Vertical"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/reviews_recycler"
+                style="@style/MatchParentWrapContent"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                app:layout_constraintTop_toBottomOf="@id/reviews_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/reviews_title">
-
-                <include
-                    android:id="@+id/first_review"
-                    layout="@layout/item_review"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginBottom="24dp"
-                    android:background="?attr/exc_divider_color" />
-
-                <include
-                    android:id="@+id/second_review"
-                    layout="@layout/item_review"
-                    android:layout_height="wrap_content"
-                    android:layout_width="match_parent"/>
-
-            </LinearLayout>
+                app:layout_constraintBottom_toBottomOf="parent"
+                tools:listitem="@layout/item_review"
+                tools:itemCount="2"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

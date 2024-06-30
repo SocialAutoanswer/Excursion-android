@@ -13,14 +13,25 @@ import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
+import ru.exursion.data.locations.mapper.LocationsMapper
+import ru.exursion.data.locations.mapper.RouteDetailsMapper
 import ru.exursion.data.locations.mapper.RoutesMapper
 import ru.exursion.data.locations.mapper.TagsMapper
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
+import ru.exursion.data.models.Location
+import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Review
+import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.Route
+import ru.exursion.data.models.RouteDetails
+import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
+import ru.exursion.data.reviews.ReviewsRepository
+import ru.exursion.data.reviews.ReviewsRepositoryImpl
+import ru.exursion.data.reviews.mapper.ReviewMapper
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
 import ru.exursion.domain.RoutesUseCase
@@ -47,9 +58,17 @@ class AppModule(private val context: Context) {
         fun bindCitiesMapper(impl: CitiesMapper): Mapper<CityDto, City>
         @Binds
         fun bindRoutesMapper(impl: RoutesMapper): Mapper<RouteDto, Route>
+        @Binds
+        fun bindLocationMapper(impl: LocationsMapper): Mapper<LocationDto, Location>
+        @Binds
+        fun bindRouteDetailsMapper(impl: RouteDetailsMapper): Mapper<RouteDetailsDto, RouteDetails>
+        @Binds
+        fun bindReviewMapper(impl: ReviewMapper): Mapper<ReviewDto, Review>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
+        @Binds
+        fun bindReviesRepository(impl: ReviewsRepositoryImpl): ReviewsRepository
 
         @Binds
         fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
