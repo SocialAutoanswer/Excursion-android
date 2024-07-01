@@ -97,6 +97,8 @@ dependencies {
     implementation(Libs.RxJava.rxJavaAndroid)
 
     implementation(Libs.Common.codeEditText)
+
+    implementation(Libs.Common.threetenabp)
 }
 
 fun isNonStable(version: String): Boolean {

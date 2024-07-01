@@ -14,6 +14,12 @@ import javax.inject.Inject
 interface AuthRepository {
 
     fun login(email: String, password: String): Single<Result<User>>
+
+    fun confirmAuthCode(code: String): Single<Result<Unit>>
+
+    fun sendAuthCode(email: String): Single<Result<Unit>>
+
+    fun signUp(user: User): Single<Result<Unit>>
 }
 
 class AuthRepositoryImpl @Inject constructor(

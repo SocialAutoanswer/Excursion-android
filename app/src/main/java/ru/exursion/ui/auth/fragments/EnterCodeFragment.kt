@@ -29,8 +29,6 @@ class EnterCodeFragment : BaseFragment<FragmentEnterAuthCodeBinding>(
     }
 
     override fun setUpViews(view: View) {
-        val email = arguments?.getString(EnterEmailFragment.EMAIL_EXTRA)
-
         with(binding) {
 
             header.title.text = context?.getString(R.string.screen_enter_code_title)
@@ -39,14 +37,13 @@ class EnterCodeFragment : BaseFragment<FragmentEnterAuthCodeBinding>(
             codeEdit.setCompleteListener { completed -> continueButton.isEnabled = completed }
 
             continueButton.setOnClickListener {
-                viewModel.checkCode(codeEdit.text)
-                findNavController().navigate(R.id.enter_password_fragment)
+                viewModel.confirmAuthCode(codeEdit.text)
             }
 
-            codeHint.text = context?.getString(R.string.screen_enter_code_hint, email)
+            codeHint.text = context?.getString(R.string.screen_enter_code_hint, viewModel.email)
 
             binding.timer.setOnClickListener { _ ->
-                email?.let { viewModel.sendMessageToEmail(it) }
+                viewModel.sendAuthCode()
                 binding.codeEdit.text = ""
                 viewModel.startTimer()
                 binding.timer.setOnClickListener(null)

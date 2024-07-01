@@ -10,6 +10,9 @@ import dagger.multibindings.IntoMap
 import ru.bibaboba.kit.dagger.ViewModelFactory
 import ru.bibaboba.kit.dagger.ViewModelKey
 import ru.bibaboba.kit.util.Mapper
+import ru.exursion.data.auth.AuthRepository
+import ru.exursion.data.auth.AuthRepositoryImpl
+import ru.exursion.data.auth.UserMapper
 import ru.exursion.data.locations.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
@@ -18,6 +21,10 @@ import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
+import ru.exursion.data.models.User
+import ru.exursion.data.models.UserRequestDto
+import ru.exursion.domain.AuthUseCase
+import ru.exursion.domain.AuthUseCaseImpl
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
 import ru.exursion.ui.auth.vm.AuthViewModel
@@ -46,6 +53,14 @@ class AppModule(private val context: Context) {
         fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
         @Binds
         fun bindCitiesUseCase(impl: CitiesUseCaseImpl): CitiesUseCase
+
+        @Binds
+        fun bindUserMapper(impl: UserMapper): Mapper<UserRequestDto, User>
+        @Binds
+        fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+
+        @Binds
+        fun bindAuthUseCase(impl: AuthUseCaseImpl): AuthUseCase
 
         @Binds
         fun bindViewModelFactory(impl: ViewModelFactory): ViewModelProvider.Factory

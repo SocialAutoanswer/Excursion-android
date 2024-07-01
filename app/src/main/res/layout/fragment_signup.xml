@@ -3,11 +3,11 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchParent">
 
-    
-    <TextView
-        android:id="@+id/title"
-        style="@style/Text.H2.Title.MarginTop48dp"
-        android:text="@string/screen_enter_email_title"
+
+    <include
+        android:id="@+id/header"
+        layout="@layout/sublayout_back_button_header"
+        style="@style/MatchParentWrapContent.MarginTop_48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
@@ -15,33 +15,41 @@
     <EditText
         android:id="@+id/email_edit"
         style="@style/EditText.MarginHorizontal_25dp"
-        android:layout_marginTop="100dp"
-        android:padding="16dp"
+        android:layout_marginTop="126dp"
         android:inputType="textEmailAddress"
-        android:textColor="?attr/exc_text_color_main"
-        android:hint="@string/screen_enter_email_hint"
-        android:textColorHint="?attr/exc_text_color_hint"
+        android:hint="@string/screen_signup_email_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/title" />
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/pass_edit"/>
+
+    <EditText
+        android:id="@+id/pass_edit"
+        style="@style/EditText.MarginHorizontal_25dp.MarginTop_16dp"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:hint="@string/screen_signup_password_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/email_edit" />
 
     <TextView
         android:id="@+id/code_hint"
         style="@style/Text.H4"
         android:layout_marginTop="124dp"
         android:gravity="center"
-        android:text="@string/screen_enter_email_code_hint"
+        android:text="@string/screen_signup_code_hint"
         android:textColor="?attr/exc_text_color_hint"
         app:layout_constraintBottom_toTopOf="@id/continue_button"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/email_edit" />
+        app:layout_constraintTop_toBottomOf="@id/pass_edit" />
 
     <Button
         android:id="@+id/continue_button"
         style="@style/Button.Primary.MarginHorizontal_25dp"
         android:layout_marginTop="40dp"
-        android:text="@string/screen_enter_email_continue"
+        android:text="@string/screen_signup_continue"
         android:enabled="false"
         app:layout_constraintBottom_toTopOf="@id/continue_hint"
         app:layout_constraintEnd_toEndOf="parent"
@@ -52,7 +60,7 @@
         android:id="@+id/continue_hint"
         style="@style/Text.H5.NoWidth.Center"
         android:layout_marginVertical="24dp"
-        android:text="@string/screen_enter_email_continue_hint"
+        android:text="@string/screen_signup_continue_hint"
         android:textColor="?attr/exc_text_color_hint"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

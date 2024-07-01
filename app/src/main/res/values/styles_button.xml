@@ -37,4 +37,25 @@
         <item name="android:layout_marginBottom">32dp</item>
     </style>
 
+    <style name="Button.Secondary">
+        <item name="android:background">@drawable/background_button_secondary</item>
+        <item name="android:textColor">?attr/exc_button_text_color_on_secondary</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth">
+        <item name="android:layout_width">0dp</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth.MarginHorizontal_16dp">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="Button.Secondary.MarginHorizontal_25dp">
+        <item name="android:layout_marginHorizontal">25dp</item>
+    </style>
+
+    <style name="Button.Secondary.MarginHorizontal_25dp.MarginTop_16dp">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
 </resources>

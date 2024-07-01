@@ -18,11 +18,11 @@
     <string name="dialog_network_error_neutral_button">Понятно</string>
     <string name="dialog_network_error_data_requested">Пробуем снова…</string>
 
-    <string name="screen_enter_email_title">Введите\nэлектронную почту</string>
-    <string name="screen_enter_email_hint">Ваш email</string>
-    <string name="screen_enter_email_code_hint">Мы отправим вам код\nподтверждения</string>
-    <string name="screen_enter_email_continue">Продолжить</string>
-    <string name="screen_enter_email_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
+    <string name="screen_signup_email_hint">Ваш email</string>
+    <string name="screen_signup_password_hint">Придумайте 8-значный пароль</string>
+    <string name="screen_signup_code_hint">Мы отправим вам код\nподтверждения</string>
+    <string name="screen_signup_continue">Продолжить</string>
+    <string name="screen_signup_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
 
     <string name="screen_enter_code_title">Введите\nполученный код</string>
     <string name="screen_enter_code_hint">Введите 4-значный номер, который был \n отправлен на ваш email %1$s</string>
@@ -30,9 +30,10 @@
     <string name="screen_enter_code_timer"><![CDATA[Отправить код повторно через <font color="%1$s"> %2$s </font>]]></string>
     <string name="screen_enter_code_send_code"><![CDATA[<font color="%1$s"><u>Отправить код повторно</u></font>]]></string>
 
-    <string name="screen_enter_password_title">Введите пароль</string>
-    <string name="screen_enter_password_input_hint">Придумайте 8-значный пароль</string>
-    <string name="screen_enter_password_continue">Продолжить</string>
+    <string name="screen_signin_email_hint">Ваш email</string>
+    <string name="screen_signin_password_hint">Ваш пароль</string>
+    <string name="screen_signin_continue">Продолжить</string>
+    <string name="screen_signin_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
 
     <string name="screen_enter_user_data_title">Введите данные</string>
     <string name="screen_enter_user_data_name_title">Имя</string>
@@ -43,6 +44,10 @@
     <string name="screen_enter_user_data_birth_date_day_hint">ДД</string>
     <string name="screen_enter_user_data_birth_date_month_hint">ММ</string>
     <string name="screen_enter_user_data_birth_date_year_hint">ГГГГ</string>
-    <string name="screen_enter_user_data_button_continue">Войти</string>
+    <string name="screen_enter_user_data_button_continue">Продолжить</string>
+    
+    
+    <string name="screen_choose_auth_method_signin_button">Вход</string>
+    <string name="screen_choose_auth_method_signup_button">Регистрация</string>
 
 </resources>
