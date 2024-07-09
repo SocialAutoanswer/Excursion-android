@@ -89,6 +89,18 @@
         <item name="android:textSize">16sp</item>
     </style>
 
+    <style name="Text.H3.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Text.H3.Bold">
+        <item name="android:fontFamily">@font/roboto_bold</item>
+    </style>
+
+    <style name="Text.H3.Bold.Center">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="Text.H3.MarginTop_32dp">
         <item name="android:layout_marginTop">32dp</item>
     </style>
@@ -220,6 +232,16 @@
 
     <style name="Text.H5.ColorOnPrimary.NoWidth.Padding_4dp">
         <item name="android:padding">4dp</item>
+    </style>
+
+    <style name="Text.H5.Neutral">
+        <item name="android:textColor">?attr/exc_color_primary</item>
+        <item name="android:gravity">center</item>
+    </style>
+    
+    <style name="Text.H5.Negative">
+        <item name="android:textColor">?attr/exc_text_color_negative</item>
+        <item name="android:gravity">center</item>
     </style>
 
 </resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchParent">
+
+    <include
+        layout="@layout/sublayout_back_button_header"
+        android:id="@+id/header"
+        style="@style/MatchParentWrapContent.MarginTop_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/main_text"
+        style="@style/Text.H3.Center"
+        android:text="@string/screen_feedback_text"
+        android:layout_marginTop="278dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/app_icons"/>
+
+    <LinearLayout
+        android:id="@+id/app_icons"
+        style="@style/MatchParentWrapContent"
+        android:orientation="horizontal"
+        android:gravity="center"
+        android:layout_marginTop="32dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/main_text"
+        app:layout_constraintBottom_toTopOf="@id/web_link">
+
+        <ImageButton
+            android:id="@+id/telegram_btn"
+            style="@style/Icon.MarginHorizontal_12dp"
+            android:src="@drawable/ic_telegram"/>
+
+        <ImageButton
+            android:id="@+id/whatsapp_btn"
+            style="@style/Icon.MarginHorizontal_12dp"
+            android:src="@drawable/ic_whatsapp"/>
+
+
+    </LinearLayout>
+
+
+    <TextView
+        android:id="@+id/web_link"
+        style="@style/Text.H5.Neutral"
+        android:layout_marginTop="24dp"
+        android:text="@string/screen_feedback_link"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/app_icons"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

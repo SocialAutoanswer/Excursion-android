@@ -43,6 +43,7 @@
     <attr name="exc_text_color_description" format="color" />
     <attr name="exc_text_color_error" format="color" />
     <attr name="exc_text_color_on_image" format="color" />
+    <attr name="exc_text_color_negative" format="color" />
 
     <!--=======================-->
     <!--      Icon colors      -->

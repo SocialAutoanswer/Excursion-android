@@ -34,6 +34,7 @@
         <item name="exc_text_color_main">@color/cynical_black</item>
         <item name="exc_text_color_on_image">@color/white</item>
         <item name="exc_text_color_hint">@color/folklore_fog</item>
+        <item name="exc_text_color_negative">@color/romax_red</item>
 
         <item name="exc_icon_color_primary_active">@color/kazan_orange</item>
         <item name="exc_icon_color_primary_default">@color/white</item>

@@ -57,4 +57,33 @@
     <string name="screen_route_details_kilometers">%1$s КМ</string>
     <string name="screen_route_details_reviews">Отзывы</string>
 
+    <string name="screen_profile_title">Профиль</string>
+    <string name="screen_profile_favorite">Избранное</string>
+    <string name="screen_profile_faq">FAQ</string>
+    <string name="screen_profile_notifications">Уведомления</string>
+    <string name="screen_profile_decor">Оформление</string>
+    <string name="screen_profile_feedback">Обратная связь</string>
+    <string name="screen_profile_about_app">О приложении</string>
+    <string name="screen_profile_privacy_policy">Политика конфиденциальности</string>
+    <string name="screen_profile_logout"><u>Выйти</u></string>
+
+    <string name="screen_redact_profile_title">Профиль</string>
+    <string name="screen_redact_profile_name_title">Имя</string>
+    <string name="screen_redact_profile_last_name_title">Фамилия</string>
+    <string name="screen_redact_profile_email_title">Почта</string>
+    <string name="screen_redact_profile_password_title">Пароль</string>
+    <string name="screen_redact_profile_save">Сохранить</string>
+    <string name="screen_redact_profile_remove_profile"><u>Удалить аккаунт</u></string>
+
+    <string name="screen_settings_notifications_title">Уведомления</string>
+    <string name="screen_settings_notifications_hint">Вы можете включить уведомления \n для рассылки новостей</string>
+    <string name="screen_settings_notifications_news">Новости</string>
+
+    <string name="screen_settings_decor_title">Оформление</string>
+    <string name="screen_settings_decor_hint">Вы можете включить темную \n или светлую тему</string>
+    <string name="screen_settings_decor_theme">Тема</string>
+    
+    <string name="screen_feedback_title">Обратная связь</string>
+    <string name="screen_feedback_text">Напишите нам, если у вас есть \n предложения или возникли вопросы</string>
+    <string name="screen_feedback_link"><u>Ссылка на сайт</u></string>
 </resources>
