@@ -14,40 +14,88 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <TextView
-        android:id="@+id/title"
-        style="@style/Text.H2.NoWidth.Center.MarginHorizontal_26dp.MarginTop_32dp"
+    <LinearLayout
+        android:id="@+id/content"
+        style="@style/MatchParentWrapContent"
+        android:orientation="vertical"
+        android:layout_marginTop="32dp"
+        android:paddingHorizontal="26dp"
+        android:gravity="center"
+        app:layout_constraintWidth_max="400dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_goneMarginTop="0dp"
-        tools:text="Network error" />
+        app:layout_goneMarginTop="0dp">
 
-    <ImageView
-        android:id="@+id/middle_icon"
-        style="@style/WrapContent.MarginTop_16dp"
-        app:layout_constraintTop_toBottomOf="@id/title"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_goneMarginTop="0dp"
-        tools:src="@drawable/ic_star" />
+        <TextView
+            android:id="@+id/title"
+            android:visibility="gone"
+            style="@style/Text.H2.NoWidth.Center"
+            tools:text="Вы действительно хотите удалить аккаунт?" />
 
-    <TextView
-        android:id="@+id/summary"
-        style="@style/Text.H4.NoWidth.Center.MarginHorizontal_26dp.MarginTop_16dp"
-        app:layout_constraintTop_toBottomOf="@id/middle_icon"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_goneMarginTop="0dp"
-        tools:text="Check your network connection and try againg..." />
+        <ImageView
+            android:id="@+id/middle_icon"
+            android:visibility="gone"
+            style="@style/WrapContent.MarginTop_16dp"
+            tools:src="@drawable/ic_star" />
+
+        <TextView
+            android:id="@+id/secondary_title"
+            style="@style/Text.H2.NoWidth.Center"
+            android:visibility="gone"
+            android:textSize="20sp"
+            android:layout_marginTop="24dp"
+            tools:text="Network error" />
+
+        <TextView
+            android:id="@+id/summary"
+            android:visibility="gone"
+            style="@style/Text.H4.NoWidth.Center"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="16dp"
+            tools:text="Check your network \n connection and try againg..." />
+
+    </LinearLayout>
+
+
 
     <Button
         android:id="@+id/neutral_button"
+        android:visibility="gone"
         style="@style/Button.Primary.NoWidth.MarginHorizontal_16dp.MarginTop_24dp.MarginBottom_32dp"
-        app:layout_constraintTop_toBottomOf="@id/summary"
+        app:layout_constraintTop_toBottomOf="@id/content"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:text="Try again"/>
+
+    <LinearLayout
+        style="@style/WrapContent"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_marginVertical="32dp"
+        android:paddingHorizontal="16dp"
+        app:layout_constraintTop_toBottomOf="@id/content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <Button
+            android:id="@+id/confirm_button"
+            style="@style/Button.Secondary"
+            android:visibility="gone"
+            android:layout_marginEnd="4dp"
+            android:layout_weight="1"
+            tools:text="Да" />
+
+        <Button
+            android:id="@+id/reject_button"
+            style="@style/Button.Primary"
+            android:visibility="gone"
+            android:layout_marginStart="4dp"
+            android:layout_weight="1"
+            tools:text="Нет" />
+
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

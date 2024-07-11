@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.fragment.app.DialogFragment
 import ru.exursion.R
 import ru.exursion.databinding.FragmentDialogExcBinding
@@ -17,13 +20,18 @@ class ExcDialog : DialogFragment() {
     protected val binding get() = _binding!!
 
     private var title: String? = null
+    private var secondaryTitle: String? = null
     private var summary: String? = null
     private var icon: Drawable? = null
+    private var titleIsBold: Boolean? = null
 
-    private var buttonText: String? = null
+    private var neutralButtonText: String? = null
+    private var rejectButtonText: String? = null
+    private var confirmButtonText: String? = null
 
     private var onNeutralButtonClick: ((Dialog?) -> Unit)? = null
     private var onDismissCallback: ((Dialog?) -> Unit)? = null
+    private var onConfirmCallback: ((Dialog?) -> Unit)? = null
 
     fun setTitle(title: String) {
         this.title = title
@@ -37,8 +45,20 @@ class ExcDialog : DialogFragment() {
         this.summary = summary
     }
 
-    fun setButtonText(text: String) {
-        buttonText = text
+    fun setSecondaryTitle(secondaryTitle: String) {
+        this.secondaryTitle = secondaryTitle
+    }
+
+    fun setRejectButtonText(rejectButtonText: String) {
+        this.rejectButtonText = rejectButtonText
+    }
+
+    fun setConfirmButtonText(confirmButtonText: String) {
+        this.confirmButtonText = confirmButtonText
+    }
+
+    fun setNeutralButtonText(text: String) {
+        neutralButtonText = text
     }
 
     fun setOnNeutralButtonClickListener(onClick: (Dialog?) -> Unit) {
@@ -47,6 +67,14 @@ class ExcDialog : DialogFragment() {
 
     fun setOnDismiss(callback: (Dialog?) -> Unit) {
         onDismissCallback = callback
+    }
+
+    fun setOnConfirmButtonClick(callback: (Dialog?) -> Unit) {
+        onConfirmCallback = callback
+    }
+
+    fun setTitleIsBold(state: Boolean) {
+        titleIsBold = state
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,13 +91,24 @@ class ExcDialog : DialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.title.text = title
-        binding.summary.text = summary
+        setUpView(binding.title, title, null)
+        setUpView(binding.secondaryTitle, secondaryTitle, null)
+        setUpView(binding.summary, summary, null)
 
-        binding.middleIcon.setImageDrawable(icon)
+        icon?.let {
+            binding.middleIcon.setImageDrawable(it)
+            binding.middleIcon.visibility = View.VISIBLE
+        }
 
-        binding.neutralButton.text = buttonText
-        binding.neutralButton.setOnClickListener { onNeutralButtonClick?.invoke(dialog) }
+        if(titleIsBold == true) {
+            context?.let {
+                binding.title.typeface = ResourcesCompat.getFont(it, R.font.roboto_bold)
+            }
+        }
+
+        setUpView(binding.neutralButton, neutralButtonText, null)
+        setUpView(binding.rejectButton, rejectButtonText, onDismissCallback)
+        setUpView(binding.confirmButton, confirmButtonText, onConfirmCallback)
 
         binding.close.setOnClickListener { dialog?.dismiss() }
     }
@@ -78,5 +117,18 @@ class ExcDialog : DialogFragment() {
         super.onDismiss(dialog)
         onDismissCallback?.invoke(this.dialog)
         _binding = null
+    }
+
+    private fun setUpView(view: TextView, text: String?, clickListener: ((Dialog?) -> Unit)?) {
+        text?.let {
+            view.visibility = View.VISIBLE
+            view.text = it
+        }
+
+        if(view is Button) {
+            clickListener?.let { listener ->
+                view.setOnClickListener { listener.invoke(this.dialog) }
+            }
+        }
     }
 }
