@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/profile_navigation"
+    app:startDestination="@id/profileFragment">
+
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="ru.exursion.ui.profile.ProfileFragment"
+        android:label="ProfileFragment" >
+        <action
+            android:id="@+id/action_profileFragment_to_redactProfileFragment"
+            app:destination="@id/redactProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_notificationSettingsFragment"
+            app:destination="@id/notificationSettingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_decorSettingsFragment"
+            app:destination="@id/decorSettingsFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_feedbackFragment"
+            app:destination="@id/feedbackFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_aboutAppFragment"
+            app:destination="@id/aboutAppFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_favoritesFragment"
+            app:destination="@id/favoritesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/redactProfileFragment"
+        android:name="ru.exursion.ui.profile.RedactProfileFragment"
+        android:label="RedactProfileFragment" >
+        <action
+            android:id="@+id/action_redactProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="ru.exursion.ui.profile.QuestionsFragment"
+        android:label="QuestionsFragment" >
+        <action
+            android:id="@+id/action_questionsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/notificationSettingsFragment"
+        android:name="ru.exursion.ui.profile.NotificationSettingsFragment"
+        android:label="NotificationSettingsFragment" >
+        <action
+            android:id="@+id/action_notificationSettingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/decorSettingsFragment"
+        android:name="ru.exursion.ui.profile.DecorSettingsFragment"
+        android:label="DecorSettingsFragment" >
+        <action
+            android:id="@+id/action_decorSettingsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/feedbackFragment"
+        android:name="ru.exursion.ui.profile.FeedbackFragment"
+        android:label="FeedbackFragment" >
+        <action
+            android:id="@+id/action_feedbackFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/aboutAppFragment"
+        android:name="ru.exursion.ui.profile.AboutAppFragment"
+        android:label="AboutAppFragment" >
+        <action
+            android:id="@+id/action_aboutAppFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/favoritesFragment"
+        android:name="ru.exursion.ui.profile.FavoritesFragment"
+        android:label="FavoritesFragment" >
+        <action
+            android:id="@+id/action_favoritesFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+    </fragment>
+</navigation>

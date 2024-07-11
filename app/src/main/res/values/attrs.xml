@@ -32,6 +32,12 @@
 
     <attr name="exc_button_text_color_on_secondary" format="color" />
 
+    <attr name="exc_button_color_forward_active" format="color" />
+    <attr name="exc_button_color_forward_pressed" format="color" />
+    <attr name="exc_button_color_forward" format="color" />
+
+    <attr name="exc_button_text_color_on_forward" format="color" />
+
     <!--=======================-->
     <!--      Text colors      -->
     <!--=======================-->
@@ -43,6 +49,7 @@
     <attr name="exc_text_color_description" format="color" />
     <attr name="exc_text_color_error" format="color" />
     <attr name="exc_text_color_on_image" format="color" />
+    <attr name="exc_text_color_negative" format="color" />
 
     <!--=======================-->
     <!--      Icon colors      -->

@@ -28,4 +28,9 @@ class SettingsModule {
         sharedPreferences: SharedPreferences
     ): UserSettings = UserSettingsImpl(sharedPreferences)
 
+    @Provides
+    fun provideAppSettings(
+        sharedPreferences: SharedPreferences
+    ): AppSettings = AppSettingsImpl(sharedPreferences)
+
 }
