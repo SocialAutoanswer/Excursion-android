@@ -22,9 +22,13 @@ android {
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
         val testAuthToken: String? = gradleLocalProperties(rootDir).getProperty("testingAuthToken")
+        val supportPhoneNumber: String? = gradleLocalProperties(rootDir).getProperty("supportPhoneNumber")
+        val supportTelegramUserId: String? = gradleLocalProperties(rootDir).getProperty("supportTelegramUserId")
 
         buildConfigField("String", "EXC_URL", "\"http://matchinc.ru/api/\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
+        buildConfigField("String", "SUPPORT_PHONE_NUMBER", "\"$supportPhoneNumber\"")
+        buildConfigField("String", "SUPPORT_TELEGRAM_USER_ID", "\"$supportTelegramUserId\"")
     }
 
     buildTypes {

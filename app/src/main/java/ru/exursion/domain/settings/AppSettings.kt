@@ -17,7 +17,7 @@ class AppSettingsImpl @Inject constructor(
     override var darkThemeState: Boolean = false
         get() = prefs.getBoolean(DARK_THEME_STATE_KEY, false)
         set(state) {
-            prefs.edit().putBoolean(DARK_THEME_STATE_KEY, field).apply()
+            prefs.edit().putBoolean(DARK_THEME_STATE_KEY, state).apply()
             field = state
         }
 }

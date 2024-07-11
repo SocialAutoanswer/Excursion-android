@@ -10,6 +10,7 @@ class SwitchSettingsAdapter: ViewBindingDelegateAdapter<SwitchSetting, ItemSwitc
 
     override fun ItemSwitchSettingBinding.onBind(item: SwitchSetting) {
         settingName.text = item.title
+        settingSwitch.isChecked = item.state
         settingSwitch.setOnCheckedChangeListener(item.onCheckedChangedListener)
     }
 
