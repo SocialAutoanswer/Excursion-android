@@ -4,11 +4,13 @@ import android.content.Context
 import android.view.View
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.ui.BaseFragment
+import ru.bibaboba.kit.ui.getColorByAttr
 import ru.bibaboba.kit.ui.utils.ThemeUtil
 import ru.exursion.R
 import ru.exursion.data.models.SwitchSetting
 import ru.exursion.databinding.FragmentDecorSettingsBinding
 import ru.exursion.domain.settings.AppSettings
+import ru.exursion.ui.shared.ext.addItemDivider
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
@@ -22,7 +24,7 @@ class DecorSettingsFragment:
         inject()
     }
 
-    override fun setUpViews(view: View) = with(binding) {
+    override fun setUpViews(view: View): Unit = with(binding) {
         val switchSettings = listOf(
             SwitchSetting(getString(R.string.screen_settings_decor_theme), appSettings.darkThemeState, ::setDarkTheme)
         )
@@ -31,6 +33,9 @@ class DecorSettingsFragment:
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
         header.title.text = getString(R.string.screen_profile_decor)
         settingRecycler.adapter = adapter
+        context?.getColorByAttr(R.attr.exc_divider_color)?.let {
+            settingRecycler.addItemDivider(it)
+        }
     }
 
     private fun setDarkTheme(state: Boolean) {

@@ -35,11 +35,13 @@
         <ImageButton
             android:id="@+id/telegram_btn"
             style="@style/Icon.MarginHorizontal_12dp"
+            app:tint="?attr/exc_color_primary"
             android:src="@drawable/ic_telegram"/>
 
         <ImageButton
             android:id="@+id/whatsapp_btn"
             style="@style/Icon.MarginHorizontal_12dp"
+            app:tint="?attr/exc_color_primary"
             android:src="@drawable/ic_whatsapp"/>
 
 

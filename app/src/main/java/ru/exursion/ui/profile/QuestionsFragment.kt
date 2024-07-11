@@ -6,6 +6,7 @@ import ru.bibaboba.kit.ui.BaseFragment
 import ru.exursion.R
 import ru.exursion.data.models.Question
 import ru.exursion.databinding.FragmentQuestionsBinding
+import ru.exursion.ui.shared.ext.addItemMargins
 
 class QuestionsFragment: BaseFragment<FragmentQuestionsBinding>(FragmentQuestionsBinding::class.java) {
 
@@ -18,6 +19,7 @@ class QuestionsFragment: BaseFragment<FragmentQuestionsBinding>(FragmentQuestion
         header.title.text = getString(R.string.screen_profile_faq)
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
         questionRecycler.adapter = adapter
+        questionRecycler.addItemMargins(0, 16)
     }
 
 }

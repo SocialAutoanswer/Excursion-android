@@ -1,5 +1,6 @@
 package ru.exursion.ui.profile
 
+import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter
@@ -20,10 +21,10 @@ class DropDownQuestionAdapter : ViewBindingDelegateAdapter<Question, ItemFrequen
 
         uncoverBtn.setOnClickListener{
             if(!answerText.isVisible) {
-                uncoverBtn.setImageDrawable(root.context.getDrawable(R.drawable.ic_cross_rounded))
+                uncoverBtn.setImageDrawable(AppCompatResources.getDrawable(root.context, R.drawable.ic_cross_rounded))
                 DropDownItemUtil.expand(answerText)
             } else {
-                uncoverBtn.setImageDrawable(root.context.getDrawable(R.drawable.ic_plus))
+                uncoverBtn.setImageDrawable(AppCompatResources.getDrawable(root.context, R.drawable.ic_plus))
                 DropDownItemUtil.collapse(answerText)
             }
         }

@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchParentWrapContent"
-    android:paddingHorizontal="25dp">
+    android:paddingHorizontal="25dp"
+    android:layout_marginBottom="20dp">
 
     <TextView
         android:id="@+id/setting_name"
