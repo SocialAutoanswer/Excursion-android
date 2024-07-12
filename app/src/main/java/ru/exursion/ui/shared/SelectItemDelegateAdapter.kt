@@ -2,31 +2,29 @@ package ru.exursion.ui.shared
 
 import androidx.core.view.isVisible
 import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter
+import ru.bibaboba.kit.ui.getDrawableByName
 import ru.exursion.R
 import ru.exursion.databinding.ItemSelectBinding
 import ru.exursion.ui.shared.ext.setDrawable
+import ru.exursion.ui.shared.ext.setDrawableStart
 
 class SelectItemDelegateAdapter(
-    private val showIcon: Boolean,
     private val onItemClick: (SelectItem) -> Unit
 ) : ViewBindingDelegateAdapter<SelectItem, ItemSelectBinding>(ItemSelectBinding::inflate) {
 
     override fun ItemSelectBinding.onBind(item: SelectItem) {
-        title.text = item.title
+        root.text = item.title
 
         root.setOnClickListener {
             onItemClick(item)
         }
 
-        if (showIcon) {
-            startIcon.isVisible = true
-            item.image?.also {
-                // TODO: implement load of icon
-            } ?: run {
-                startIcon.setDrawable(R.drawable.ic_cross)
+        item.image?.also {
+            root.context.getDrawableByName(item.image)?.let { drawable ->
+                root.setDrawableStart(drawable)
             }
-        } else {
-            startIcon.isVisible = false
+        } ?: run {
+            root.setDrawableStart(R.drawable.ic_cross)
         }
     }
 

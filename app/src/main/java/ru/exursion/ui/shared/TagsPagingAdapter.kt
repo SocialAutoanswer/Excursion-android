@@ -8,6 +8,7 @@ import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.bibaboba.kit.ui.getDrawableByName
 import ru.exursion.data.models.Tag
 import ru.exursion.databinding.ItemSelectBinding
+import ru.exursion.ui.shared.ext.setDrawableStart
 
 
 class TagsPagingAdapter(
@@ -24,11 +25,10 @@ class TagsPagingAdapter(
     ): ItemViewHolder<ItemSelectBinding, Tag> {
         return ItemViewHolder.create(parent) { binding, tag ->
             with(binding) {
-                title.text = tag.name
+                root.text = tag.name
 
-                startIcon.context.getDrawableByName(tag.iconName)?.let {
-                    startIcon.isVisible = true
-                    startIcon.setImageDrawable(it)
+                root.context.getDrawableByName(tag.iconName)?.let {
+                    root.setDrawableStart(it)
                 }
 
                 root.setOnClickListener {
