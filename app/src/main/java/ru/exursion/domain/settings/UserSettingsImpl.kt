@@ -26,4 +26,6 @@ class UserSettingsImpl @Inject constructor(
         get() = prefs.getString(TOKEN_PREFS_KEY, BuildConfig.AUTH_TOKEN)
     override val avatarImage: String?
         get() = prefs.getString(AVATAR_IMAGE_PREFS_KEY, null)
+
+    override fun clearAllPrefs() = prefs.edit().clear().apply()
 }

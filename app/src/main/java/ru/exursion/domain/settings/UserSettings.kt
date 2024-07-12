@@ -6,4 +6,6 @@ interface UserSettings {
     val email: String?
     val token: String?
     val avatarImage: String?
+
+    fun clearAllPrefs()
 }

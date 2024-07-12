@@ -10,6 +10,7 @@ import ru.exursion.ui.SplashActivity
 import ru.exursion.ui.auth.fragments.EnterCodeFragment
 import ru.exursion.ui.auth.fragments.EnterEmailFragment
 import ru.exursion.ui.profile.DecorSettingsFragment
+import ru.exursion.ui.profile.ProfileFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
 import javax.inject.Singleton
 
@@ -32,6 +33,7 @@ interface AppComponent {
     fun inject(fragment: EnterCodeFragment)
     fun inject(fragment: RoutesFragment)
     fun inject(fragment: DecorSettingsFragment)
+    fun inject(fragment: ProfileFragment)
 
     @Component.Builder
     interface Builder {
