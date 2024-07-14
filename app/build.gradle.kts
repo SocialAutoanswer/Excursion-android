@@ -23,7 +23,7 @@ android {
 
         val testAuthToken: String? = gradleLocalProperties(rootDir).getProperty("testingAuthToken")
 
-        buildConfigField("String", "EXC_URL", "\"http://matchinc.ru/api/\"")
+        buildConfigField("String", "EXC_URL", "\"https://killroyka-matchinc-c837.twc1.net/api/\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
     }
 

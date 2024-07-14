@@ -1,5 +1,6 @@
 package ru.bibaboba.kit.util
 
+import android.text.Editable
 import android.util.Patterns.EMAIL_ADDRESS
 import android.widget.EditText
 import ru.bibaboba.kit.ui.utils.SimpleTextWatcher
@@ -22,3 +23,5 @@ fun CharSequence.isValidPassword() = isNotEmpty() && this.length > PASSWORD_MIN_
 fun EditText.addTextChangedListener(listener: SimpleTextWatcher) {
     this.addTextChangedListener(listener)
 }
+
+fun Editable.toInt(): Int = this.toString().toInt()

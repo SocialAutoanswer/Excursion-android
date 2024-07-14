@@ -11,7 +11,8 @@ data class UserRequestDto(
 data class UserDto(
     @SerializedName("first_name") val firstName: String?,
     @SerializedName("last_name") val lastName: String?,
-    @SerializedName("email") val email: String?
+    @SerializedName("email") val email: String?,
+    @SerializedName("password") val password: String?
 )
 
 data class BirthDate(
@@ -23,10 +24,11 @@ data class BirthDate(
 }
 
 data class User(
-    val firstName: String,
-    val lastName: String,
-    val birthDate: BirthDate,
-    val email: String,
-    val token: String,
-    val avatarImage: String,
+    var firstName: String,
+    var lastName: String,
+    var birthDate: BirthDate,
+    var email: String,
+    var token: String,
+    var avatarImage: String,
+    var password: String?
 )

@@ -23,17 +23,21 @@
     <string name="screen_signup_code_hint">Мы отправим вам код\nподтверждения</string>
     <string name="screen_signup_continue">Продолжить</string>
     <string name="screen_signup_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
+    <string name="screen_signup_email_error">Такая почта уже зарегестрирована!</string>
 
     <string name="screen_enter_code_title">Введите\nполученный код</string>
     <string name="screen_enter_code_hint">Введите 4-значный номер, который был \n отправлен на ваш email %1$s</string>
     <string name="screen_enter_code_continue">Продолжить</string>
     <string name="screen_enter_code_timer"><![CDATA[Отправить код повторно через <font color="%1$s"> %2$s </font>]]></string>
     <string name="screen_enter_code_send_code"><![CDATA[<font color="%1$s"><u>Отправить код повторно</u></font>]]></string>
+    <string name="screen_enter_code_incorrect_code">Неверный код!</string>
 
     <string name="screen_signin_email_hint">Ваш email</string>
     <string name="screen_signin_password_hint">Ваш пароль</string>
     <string name="screen_signin_continue">Продолжить</string>
     <string name="screen_signin_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>
+    <string name="screen_signin_error_password">Неверный пароль</string>
+    <string name="screen_signin_error_email">Такая почта не зарегестрирована</string>
 
     <string name="screen_enter_user_data_title">Введите данные</string>
     <string name="screen_enter_user_data_name_title">Имя</string>
@@ -50,4 +54,5 @@
     <string name="screen_choose_auth_method_signin_button">Вход</string>
     <string name="screen_choose_auth_method_signup_button">Регистрация</string>
 
+    <string name="undefined_error">Что-то пошло не так</string>
 </resources>

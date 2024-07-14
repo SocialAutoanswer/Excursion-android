@@ -1,6 +1,7 @@
 package ru.exursion.domain.settings
 
 import android.content.SharedPreferences
+import ru.exursion.data.models.User
 import javax.inject.Inject
 
 class UserSettingsImpl @Inject constructor(
@@ -15,14 +16,31 @@ class UserSettingsImpl @Inject constructor(
         private const val AVATAR_IMAGE_PREFS_KEY = "user_avatar_image"
     }
 
-    override val firstName: String?
+    override var firstName: String?
         get() = prefs.getString(FIRST_NAME_PREFS_KEY, null)
-    override val lastName: String?
+        set(name) = prefs.edit().putString(FIRST_NAME_PREFS_KEY, name).apply()
+
+    override var lastName: String?
         get() = prefs.getString(LAST_NAME_PREFS_KEY, null)
-    override val email: String?
+        set(name) = prefs.edit().putString(LAST_NAME_PREFS_KEY, name).apply()
+
+    override var email: String?
         get() = prefs.getString(EMAIL_PREFS_KEY, null)
-    override val token: String?
+        set(email) = prefs.edit().putString(EMAIL_PREFS_KEY, email).apply()
+
+    override var token: String?
         get() = prefs.getString(TOKEN_PREFS_KEY, null)
-    override val avatarImage: String?
+        set(token) = prefs.edit().putString(TOKEN_PREFS_KEY, token).apply()
+
+    override var avatarImage: String?
         get() = prefs.getString(AVATAR_IMAGE_PREFS_KEY, null)
+        set(name) = prefs.edit().putString(AVATAR_IMAGE_PREFS_KEY, name).apply()
+
+    override fun fillAllPrefs(user: User?) {
+        firstName = user?.firstName
+        lastName = user?.lastName
+        email = user?.email
+        token = user?.token
+        avatarImage = user?.avatarImage
+    }
 }
