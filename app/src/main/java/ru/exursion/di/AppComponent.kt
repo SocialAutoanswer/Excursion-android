@@ -8,7 +8,9 @@ import ru.exursion.ui.routes.fragments.TagsFragment
 import ru.exursion.domain.settings.SettingsModule
 import ru.exursion.ui.SplashActivity
 import ru.exursion.ui.auth.fragments.EnterCodeFragment
-import ru.exursion.ui.auth.fragments.EnterEmailFragment
+import ru.exursion.ui.auth.fragments.EnterUserDataFragment
+import ru.exursion.ui.auth.fragments.SignInFragment
+import ru.exursion.ui.auth.fragments.SignUpFragment
 import ru.exursion.ui.profile.DecorSettingsFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
 import javax.inject.Singleton
@@ -28,8 +30,10 @@ interface AppComponent {
 
     fun inject(fragment: ChooseCityFragment)
     fun inject(fragment: TagsFragment)
-    fun inject(fragment: EnterEmailFragment)
+    fun inject(fragment: SignUpFragment)
     fun inject(fragment: EnterCodeFragment)
+    fun inject(fragment: SignInFragment)
+    fun inject(fragment: EnterUserDataFragment)
     fun inject(fragment: RoutesFragment)
     fun inject(fragment: DecorSettingsFragment)
 

@@ -25,7 +25,7 @@ android {
         val supportPhoneNumber: String? = gradleLocalProperties(rootDir).getProperty("supportPhoneNumber")
         val supportTelegramUserId: String? = gradleLocalProperties(rootDir).getProperty("supportTelegramUserId")
 
-        buildConfigField("String", "EXC_URL", "\"http://matchinc.ru/api/\"")
+        buildConfigField("String", "EXC_URL", "\"https://killroyka-matchinc-c837.twc1.net/api/\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
         buildConfigField("String", "SUPPORT_PHONE_NUMBER", "\"$supportPhoneNumber\"")
         buildConfigField("String", "SUPPORT_TELEGRAM_USER_ID", "\"$supportTelegramUserId\"")
@@ -103,6 +103,8 @@ dependencies {
     implementation(Libs.RxJava.rxJavaAndroid)
 
     implementation(Libs.Common.codeEditText)
+
+    implementation(Libs.Common.threetenabp)
 }
 
 fun isNonStable(version: String): Boolean {

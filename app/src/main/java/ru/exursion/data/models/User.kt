@@ -1,6 +1,7 @@
 package ru.exursion.data.models
 
 import com.google.gson.annotations.SerializedName
+import org.threeten.bp.LocalDate
 
 
 data class UserRequestDto(
@@ -11,13 +12,22 @@ data class UserRequestDto(
 data class UserDto(
     @SerializedName("first_name") val firstName: String?,
     @SerializedName("last_name") val lastName: String?,
-    @SerializedName("email") val email: String?
+    @SerializedName("email") val email: String?,
+    @SerializedName("password") val password: String?
+)
+
+data class EmailConfirmCode(
+    @SerializedName("email_confirm_code") val code: String?
 )
 
 data class User(
-    val firstName: String,
-    val lastName: String,
-    val email: String,
-    val token: String,
-    val avatarImage: String,
-)
+    var firstName: String?,
+    var lastName: String?,
+    var birthDate: LocalDate?,
+    var email: String?,
+    var token: String?,
+    var avatarImage: String?,
+    var password: String?
+) {
+    constructor() : this(null, null, null, null, null, null, null)
+}

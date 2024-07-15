@@ -10,6 +10,9 @@ import dagger.multibindings.IntoMap
 import ru.bibaboba.kit.dagger.ViewModelFactory
 import ru.bibaboba.kit.dagger.ViewModelKey
 import ru.bibaboba.kit.util.Mapper
+import ru.exursion.data.auth.AuthRepository
+import ru.exursion.data.auth.AuthRepositoryImpl
+import ru.exursion.data.auth.UserMapper
 import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
@@ -29,6 +32,14 @@ import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
+import ru.exursion.data.models.User
+import ru.exursion.data.models.UserRequestDto
+import ru.exursion.data.profile.ProfileRepository
+import ru.exursion.data.profile.ProfileRepositoryImpl
+import ru.exursion.domain.AuthUseCase
+import ru.exursion.domain.AuthUseCaseImpl
+import ru.exursion.domain.ProfileUseCase
+import ru.exursion.domain.ProfileUseCaseImpl
 import ru.exursion.data.reviews.ReviewsRepository
 import ru.exursion.data.reviews.ReviewsRepositoryImpl
 import ru.exursion.data.reviews.mapper.ReviewMapper
@@ -39,6 +50,7 @@ import ru.exursion.domain.RoutesUseCaseImpl
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
+import ru.exursion.ui.SplashViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 import ru.exursion.ui.routes.vm.RoutesViewModel
@@ -78,6 +90,20 @@ class AppModule(private val context: Context) {
         fun bindRoutesUseCase(impl: RoutesUseCaseImpl): RoutesUseCase
 
         @Binds
+        fun bindUserMapper(impl: UserMapper): Mapper<UserRequestDto, User>
+        @Binds
+        fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+
+        @Binds
+        fun bindAuthUseCase(impl: AuthUseCaseImpl): AuthUseCase
+
+        @Binds
+        fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
+
+        @Binds
+        fun bindProfileUseCase(impl: ProfileUseCaseImpl): ProfileUseCase
+
+        @Binds
         fun bindViewModelFactory(impl: ViewModelFactory): ViewModelProvider.Factory
 
         @Binds
@@ -94,6 +120,11 @@ class AppModule(private val context: Context) {
         @ViewModelKey(ChooseTagsViewModel::class)
         fun bindTownRouteTypesViewModel(viewModel: ChooseTagsViewModel): ViewModel
 
+        @Binds
+        @IntoMap
+        @ViewModelKey(SplashViewModel::class)
+        fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
+      
         @Binds
         @IntoMap
         @ViewModelKey(RoutesViewModel::class)

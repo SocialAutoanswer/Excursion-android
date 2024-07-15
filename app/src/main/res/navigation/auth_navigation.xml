@@ -2,27 +2,60 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/auth_navigation"
-    app:startDestination="@id/enter_phone_fragment">
+    app:startDestination="@id/choose_auth_method_fragment">
 
 
     <fragment
-        android:id="@+id/enter_phone_fragment"
-        android:name="ru.exursion.ui.auth.fragments.EnterEmailFragment"
-        android:label="EnterPhoneFragment" />
+        android:id="@+id/signup_fragment"
+        android:name="ru.exursion.ui.auth.fragments.SignUpFragment"
+        android:label="EnterPhoneFragment" >
+        <action
+            android:id="@+id/action_signup_fragment_to_enter_user_data_fragment"
+            app:destination="@id/enter_user_data_fragment" />
+        <action
+            android:id="@+id/action_signup_fragment_to_enter_code_fragment"
+            app:destination="@id/enter_code_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/enter_code_fragment"
         android:name="ru.exursion.ui.auth.fragments.EnterCodeFragment"
-        android:label="EnterCodeFragment" />
+        android:label="EnterCodeFragment" >
+        <action
+            android:id="@+id/action_enter_code_fragment_to_signup_fragment"
+            app:destination="@id/signup_fragment" />
+    </fragment>
 
     <fragment
-        android:id="@+id/enter_password_fragment"
-        android:name="ru.exursion.ui.auth.fragments.EnterPasswordFragment"
-        android:label="EnterPasswordFragment" />
+        android:id="@+id/signin_fragment"
+        android:name="ru.exursion.ui.auth.fragments.SignInFragment"
+        android:label="EnterPasswordFragment" >
+        <action
+            android:id="@+id/action_signin_fragment_to_choose_auth_method_fragment2"
+            app:destination="@id/choose_auth_method_fragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/enter_user_data_fragment"
         android:name="ru.exursion.ui.auth.fragments.EnterUserDataFragment"
-        android:label="EnterUserDataFragment" />
+        android:label="EnterUserDataFragment" >
+        <action
+            android:id="@+id/action_enter_user_data_fragment_to_choose_auth_method_fragment"
+            app:destination="@id/choose_auth_method_fragment" />
+        <action
+            android:id="@+id/action_enter_user_data_fragment_to_signup_fragment"
+            app:destination="@id/signup_fragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/choose_auth_method_fragment"
+        android:name="ru.exursion.ui.auth.fragments.ChooseAuthMethodFragment"
+        android:label="ChooseAuthMethodFragment" >
+        <action
+            android:id="@+id/action_choose_auth_method_fragment_to_signin_fragment"
+            app:destination="@id/signin_fragment" />
+        <action
+            android:id="@+id/action_choose_auth_method_fragment_to_enter_user_data_fragment"
+            app:destination="@id/enter_user_data_fragment" />
+    </fragment>
 
 </navigation>
