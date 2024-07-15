@@ -5,7 +5,7 @@
         <item name="android:textColor">?attr/exc_text_color_main</item>
         <item name="android:background">@drawable/background_edit_text</item>
         <item name="android:textColorHint">?attr/exc_input_text_color_hint</item>
-        <item name="android:padding">16dp</item>
+        <item name="android:padding">14dp</item>
     </style>
 
     <style name="EditText.MarginStart_25dp">
@@ -46,6 +46,10 @@
 
     <style name="EditText.MarginHorizontal_25dp">
         <item name="android:layout_marginHorizontal">25dp</item>
+    </style>
+
+    <style name="EditText.MarginHorizontal_25dp.MarginTop_8dp">
+        <item name="android:layout_marginTop">8dp</item>
     </style>
 
     <style name="EditText.MarginHorizontal_25dp.MarginTop_16dp">

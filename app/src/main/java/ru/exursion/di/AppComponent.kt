@@ -1,6 +1,7 @@
 package ru.exursion.di
 
 import dagger.Component
+import ru.exursion.App
 import ru.exursion.data.network.NetworkModule
 import ru.exursion.ui.routes.fragments.ChooseCityFragment
 import ru.exursion.ui.routes.fragments.TagsFragment
@@ -10,6 +11,8 @@ import ru.exursion.ui.auth.fragments.EnterCodeFragment
 import ru.exursion.ui.auth.fragments.EnterUserDataFragment
 import ru.exursion.ui.auth.fragments.SignInFragment
 import ru.exursion.ui.auth.fragments.SignUpFragment
+import ru.exursion.ui.profile.DecorSettingsFragment
+import ru.exursion.ui.routes.fragments.RoutesFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -21,6 +24,8 @@ import javax.inject.Singleton
 ])
 interface AppComponent {
 
+    fun inject(application: App)
+
     fun inject(activity: SplashActivity)
 
     fun inject(fragment: ChooseCityFragment)
@@ -29,6 +34,8 @@ interface AppComponent {
     fun inject(fragment: EnterCodeFragment)
     fun inject(fragment: SignInFragment)
     fun inject(fragment: EnterUserDataFragment)
+    fun inject(fragment: RoutesFragment)
+    fun inject(fragment: DecorSettingsFragment)
 
     @Component.Builder
     interface Builder {

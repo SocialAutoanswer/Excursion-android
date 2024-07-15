@@ -17,6 +17,18 @@
         <item name="android:layout_width">0dp</item>
     </style>
 
+    <style name="Button.Primary.NoWidth.MarginStart_25dp">
+        <item name="android:layout_marginStart">25dp</item>
+    </style>
+
+    <style name="Button.Primary.NoWidth.MarginStart_25dp.MarginTop_24dp">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="Button.Primary.NoWidth.MarginStart_25dp.MarginTop_24dp.MarginBottom_32dp">
+        <item name="android:layout_marginBottom">32dp</item>
+    </style>
+
     <style name="Button.Primary.NoWidth.MarginHorizontal_16dp">
         <item name="android:layout_marginHorizontal">16dp</item>
     </style>
@@ -56,6 +68,47 @@
 
     <style name="Button.Secondary.MarginHorizontal_25dp.MarginTop_16dp">
         <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth.MarginStart_8dp">
+        <item name="android:layout_marginStart">8dp</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp">
+        <item name="android:layout_marginEnd">25dp</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp.MarginTop_24dp">
+        <item name="android:layout_marginTop">24dp</item>
+    </style>
+
+    <style name="Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp.MarginTop_24dp.MarginBottom_32dp">
+        <item name="android:layout_marginBottom">32dp</item>
+    </style>
+
+    <style name="Button.Forward">
+        <item name="android:background">@drawable/background_forward_button</item>
+        <item name="android:drawableEnd">@drawable/ic_arrow_right</item>
+        <item name="android:paddingHorizontal">16dp</item>
+        <item name="android:paddingVertical">14dp</item>
+        <item name="android:gravity">start|center</item>
+        <item name="android:textColor">?attr/exc_select_item_text_color</item>
+        <item name="android:textSize">14sp</item>
+    </style>
+
+    <style name="Button.Forward.MarginHorizontal_25dp">
+        <item name="android:layout_marginHorizontal">25dp</item>
+    </style>
+
+    <style name="Button.Forward.MarginHorizontal_25dp.MarginTop_16dp">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+
+    <style name="Switch" parent="WrapContent">
+        <item name="trackTint">@color/selector_switch_track</item>
+        <item name="thumbTint">?attr/exc_button_text_color_on_primary</item>
+        <item name="showText">false</item>
     </style>
 
 </resources>

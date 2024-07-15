@@ -9,6 +9,10 @@
     <attr name="exc_background_color" format="color" />
     <attr name="exc_bottom_navigation_color" format="color" />
     <attr name="exc_transparent_black" format="color" />
+    <attr name="exc_divider_color" format="color" />
+
+    <attr name="exc_search_view_style" format="reference" />
+    <attr name="exc_rating_bar_style" format="reference" />
 
     <!--=======================-->
     <!--     Button colors     -->
@@ -28,6 +32,12 @@
 
     <attr name="exc_button_text_color_on_secondary" format="color" />
 
+    <attr name="exc_button_color_forward_active" format="color" />
+    <attr name="exc_button_color_forward_pressed" format="color" />
+    <attr name="exc_button_color_forward" format="color" />
+
+    <attr name="exc_button_text_color_on_forward" format="color" />
+
     <!--=======================-->
     <!--      Text colors      -->
     <!--=======================-->
@@ -39,6 +49,7 @@
     <attr name="exc_text_color_description" format="color" />
     <attr name="exc_text_color_error" format="color" />
     <attr name="exc_text_color_on_image" format="color" />
+    <attr name="exc_text_color_negative" format="color" />
 
     <!--=======================-->
     <!--      Icon colors      -->
@@ -49,12 +60,15 @@
     <attr name="exc_icon_color_primary_default" format="color" />
     <attr name="exc_icon_near_text_color" format="color" />
     <attr name="exc_icon_color_on_background" format="color" />
+    <attr name="exc_icon_color_on_image" format="color" />
+    <attr name="exc_icon_color_empty" format="color" />
+    <attr name="exc_icon_user_image_background" format="color" />
+    <attr name="exc_icon_user_image_foreground" format="color" />
 
     <!--========================-->
     <!--      Input colors      -->
     <!--========================-->
 
-    <attr name="exc_search_view_style" format="reference" />
     <attr name="exc_input_background_color" format="color" />
     <attr name="exc_input_error_color" format="color" />
     <attr name='exc_input_text_color_hint' format="color" />

@@ -37,6 +37,11 @@
             android:exported="true"
             android:windowSoftInputMode="adjustPan" />
 
+        <activity
+            android:name=".ui.routes.RouteDetailsActivity"
+            android:exported="false"
+            android:windowSoftInputMode="adjustPan"/>
+
     </application>
 
 </manifest>

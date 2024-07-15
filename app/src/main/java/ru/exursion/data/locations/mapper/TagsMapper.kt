@@ -1,4 +1,4 @@
-package ru.exursion.data.locations
+package ru.exursion.data.locations.mapper
 
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Tag
@@ -15,4 +15,7 @@ class TagsMapper @Inject constructor(): Mapper<TagDto, Tag> {
         tagsIds = input.tags?.filterNotNull() ?: emptyList()
     )
 
+    override fun mapList(input: List<TagDto>): List<Tag> {
+        return input.map(::map)
+    }
 }

@@ -27,7 +27,7 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     override val viewModel by viewModels<AuthViewModel> { viewModelFactory }
-
+    
     override val stateMachine = StateMachine.Builder()
         .addLoadingState()
         .addSuccessState()
@@ -35,7 +35,7 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
         .addNetworkErrorEffect()
         .addIncorrectCodeEffect()
         .build()
-
+    
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()

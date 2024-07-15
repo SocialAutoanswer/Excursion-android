@@ -2,6 +2,7 @@ package ru.exursion.domain.settings
 
 import android.content.SharedPreferences
 import ru.exursion.data.models.User
+import ru.exursion.BuildConfig
 import javax.inject.Inject
 
 class UserSettingsImpl @Inject constructor(
@@ -29,12 +30,13 @@ class UserSettingsImpl @Inject constructor(
         set(email) = prefs.edit().putString(EMAIL_PREFS_KEY, email).apply()
 
     override var token: String?
-        get() = prefs.getString(TOKEN_PREFS_KEY, null)
+        get() = prefs.getString(TOKEN_PREFS_KEY, BuildConfig.AUTH_TOKEN)
         set(token) = prefs.edit().putString(TOKEN_PREFS_KEY, token).apply()
 
     override var avatarImage: String?
         get() = prefs.getString(AVATAR_IMAGE_PREFS_KEY, null)
         set(name) = prefs.edit().putString(AVATAR_IMAGE_PREFS_KEY, name).apply()
+
 
     override fun fillAllPrefs(user: User?) {
         firstName = user?.firstName

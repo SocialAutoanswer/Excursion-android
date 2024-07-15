@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-	xmlns:tools="http://schemas.android.com/tools"
+	xmlns:app="http://schemas.android.com/apk/res-auto"
 	android:id="@+id/main_navigation"
-	app:startDestination="@id/fragment_choose_town">
+	app:startDestination="@id/routes_navigation">
 
-	<fragment
-		android:id="@+id/fragment_choose_town"
-		android:name="ru.exursion.ui.routes.fragments.ChooseCityFragment" />
+	<include app:graph="@navigation/routes_navigation" />
 
 	<fragment
 		android:id="@+id/fragment_map"
@@ -17,13 +14,6 @@
 		android:id="@+id/fragment_recommendation"
 		android:name="ru.exursion.ui.events.RecommendationFragment" />
 
-
-	<fragment
-		android:id="@+id/fragment_profile"
-		android:name="ru.exursion.ui.profile.ProfileFragment" />
-
-	<fragment
-		android:id="@+id/fragment_town_routes"
-		android:name="ru.exursion.ui.routes.fragments.TagsFragment" />
+	<include app:graph="@navigation/profile_navigation" />
 
 </navigation>

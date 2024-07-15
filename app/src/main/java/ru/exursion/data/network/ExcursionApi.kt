@@ -7,11 +7,15 @@ import retrofit2.http.DELETE
 import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.bibaboba.kit.retrofit.EndpointUrl
 import ru.exursion.BuildConfig
 import ru.exursion.data.models.CitiesPageDto
 import ru.exursion.data.models.EmailConfirmCode
+import ru.exursion.data.models.ReviewDto
+import ru.exursion.data.models.RouteDetailsDto
+import ru.exursion.data.models.RouteRequestDto
 import ru.exursion.data.models.TagPageDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
@@ -59,4 +63,20 @@ interface ExcursionApi {
     fun requestTags(
         @Query("page") page: Int
     ): Single<Response<TagPageDto>>
+
+    @GET("locations/routes/bycity/{cityId}")
+    fun requestRoutesByCity(
+        @Path("cityId") cityId: Long,
+        @Query("page") page: Int,
+    ): Single<Response<RouteRequestDto>>
+
+    @GET("locations/routes/{routeId}")
+    fun requestRouteDetailsById(
+        @Path("routeId") routeId: Long,
+    ): Single<Response<RouteDetailsDto>>
+
+    @GET("reviews/route/{routeId}")
+    fun requestRouteReviews(
+        @Path("routeId") routeId: Long,
+    ): Single<Response<List<ReviewDto>>>
 }

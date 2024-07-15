@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchParent">
+
+    <include
+        layout="@layout/sublayout_back_button_header"
+        android:id="@+id/header"
+        style="@style/MatchParentWrapContent.MarginTop_48dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/hint"
+        style="@style/Text.H4.ColorSelectItem"
+        android:text="@string/screen_settings_notifications_hint"
+        android:layout_marginTop="40dp"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/header"
+        app:layout_constraintBottom_toTopOf="@id/setting_recycler"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/setting_recycler"
+        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_marginTop="32dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/hint"
+        app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

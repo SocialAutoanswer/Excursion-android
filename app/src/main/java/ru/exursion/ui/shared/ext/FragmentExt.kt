@@ -23,7 +23,7 @@ fun Fragment.networkErrorDialog(lambda: DialogDslPackager.() -> Unit) = dialog("
 
     middleIcon = AppCompatResources.getDrawable(context, R.drawable.ic_no_network)
 
-    buttonText = getString(R.string.dialog_network_error_neutral_button)
+    neutralButtonText = getString(R.string.dialog_network_error_neutral_button)
 
     lambda(this)
 }
