@@ -11,6 +11,10 @@ data object IncorrectPassword : AuthException()
 
 data object IncorrectEmail : AuthException()
 
+data object ProfileNotVerified : AuthException()
+
 data object EmailAlreadyRegistered : AuthException()
 
 data object IncorrectCode: AuthException()
+
+data object InvalidToken: AuthException()

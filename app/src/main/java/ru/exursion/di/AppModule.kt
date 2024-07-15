@@ -23,13 +23,18 @@ import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.User
 import ru.exursion.data.models.UserRequestDto
+import ru.exursion.data.profile.ProfileRepository
+import ru.exursion.data.profile.ProfileRepositoryImpl
 import ru.exursion.domain.AuthUseCase
 import ru.exursion.domain.AuthUseCaseImpl
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
+import ru.exursion.domain.ProfileUseCase
+import ru.exursion.domain.ProfileUseCaseImpl
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
+import ru.exursion.ui.SplashViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 
@@ -63,6 +68,12 @@ class AppModule(private val context: Context) {
         fun bindAuthUseCase(impl: AuthUseCaseImpl): AuthUseCase
 
         @Binds
+        fun bindProfileRepository(impl: ProfileRepositoryImpl): ProfileRepository
+
+        @Binds
+        fun bindProfileUseCase(impl: ProfileUseCaseImpl): ProfileUseCase
+
+        @Binds
         fun bindViewModelFactory(impl: ViewModelFactory): ViewModelProvider.Factory
         @Binds
         @IntoMap
@@ -78,6 +89,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(ChooseTagsViewModel::class)
         fun bindTownRouteTypesViewModel(viewModel: ChooseTagsViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(SplashViewModel::class)
+        fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
     }
 
 }

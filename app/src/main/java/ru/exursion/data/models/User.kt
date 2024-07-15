@@ -15,6 +15,10 @@ data class UserDto(
     @SerializedName("password") val password: String?
 )
 
+data class EmailConfirmCode(
+    @SerializedName("email_confirm_code") val code: String?
+)
+
 data class BirthDate(
     private val day: Int,
     private val month: Int,
@@ -24,11 +28,13 @@ data class BirthDate(
 }
 
 data class User(
-    var firstName: String,
-    var lastName: String,
-    var birthDate: BirthDate,
-    var email: String,
-    var token: String,
-    var avatarImage: String,
+    var firstName: String?,
+    var lastName: String?,
+    var birthDate: BirthDate?,
+    var email: String?,
+    var token: String?,
+    var avatarImage: String?,
     var password: String?
-)
+) {
+    constructor() : this(null, null, null, null, null, null, null)
+}

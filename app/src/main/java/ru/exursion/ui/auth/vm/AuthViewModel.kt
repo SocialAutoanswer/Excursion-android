@@ -4,11 +4,11 @@ import android.os.CountDownTimer
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
+import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.EmailAlreadyRegistered
 import ru.exursion.data.IncorrectCode
 import ru.exursion.data.IncorrectPassword
 import ru.exursion.data.InternalServerError
-import ru.exursion.data.models.BirthDate
 import ru.exursion.data.models.User
 import ru.exursion.domain.AuthUseCase
 import javax.inject.Inject
@@ -22,7 +22,7 @@ class AuthViewModel @Inject constructor(
         private const val TIMER_STEP_INTERVAL = 1000L
     }
 
-    val user = User("", "", BirthDate(-1, -1, -1), "", "", "", "").copy()
+    val user = User()
 
     private val countDownTimer = object : CountDownTimer(TIMER_FINISH_TIME, TIMER_STEP_INTERVAL) {
         override fun onTick(millisUntilFinished: Long) {
@@ -57,6 +57,7 @@ class AuthViewModel @Inject constructor(
             }, {
                 when (it) {
                     is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
+                    is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
                 }
                 _state.postValue(AuthState.Idle)
@@ -72,6 +73,7 @@ class AuthViewModel @Inject constructor(
                 when (it) {
                     is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
                     is EmailAlreadyRegistered -> _effect.postValue(AuthEffect.EmailAlreadyRegistered)
+                    is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
                 }
                 _state.postValue(AuthState.Idle)
@@ -88,6 +90,7 @@ class AuthViewModel @Inject constructor(
                 when (it) {
                     is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
                     is IncorrectPassword -> _effect.postValue(AuthEffect.IncorrectPassword)
+                    is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
                 }
                 _state.postValue(AuthState.Idle)
@@ -103,6 +106,7 @@ class AuthViewModel @Inject constructor(
                 when (it) {
                     is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
                     is IncorrectCode -> _effect.postValue(AuthEffect.IncorrectCode)
+                    is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
                 }
                 _state.postValue(AuthState.Idle)

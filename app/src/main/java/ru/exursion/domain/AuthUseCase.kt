@@ -52,8 +52,9 @@ class AuthUseCaseImpl @Inject constructor(
                     Single.just(result)
                 }
             }
-            .doOnSuccess {
-                if(it.isSuccess) userSettings.fillAllPrefs(it.getOrNull())
+            .doAfterSuccess {
+                if(it.isFailure) return@doAfterSuccess
+                userSettings.fillAllPrefs(it.getOrNull())
             }
             .observeOn(AndroidSchedulers.mainThread())
 
