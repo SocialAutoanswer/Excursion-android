@@ -6,12 +6,12 @@ import android.widget.EditText
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import org.threeten.bp.LocalDate
 import ru.bibaboba.kit.ui.BaseFragment
 import ru.bibaboba.kit.ui.utils.SimpleTextWatcher
 import ru.bibaboba.kit.util.NumberEditTextFilter
 import ru.bibaboba.kit.util.toInt
 import ru.exursion.R
-import ru.exursion.data.models.BirthDate
 import ru.exursion.databinding.FragmentEnterUserDataBinding
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
@@ -44,10 +44,10 @@ class EnterUserDataFragment : BaseFragment<FragmentEnterUserDataBinding>(
             continueButton.setOnClickListener {
                 viewModel.user.firstName = nameInput.text.toString()
                 viewModel.user.lastName = lastNameInput.text.toString()
-                viewModel.user.birthDate = BirthDate(
-                    dateDayInput.text.toInt(),
+                viewModel.user.birthDate = LocalDate.of(
+                    dateYearInput.text.toInt(),
                     dateMonthInput.text.toInt(),
-                    dateYearInput.text.toInt()
+                    dateDayInput.text.toInt()
                 )
 
                 findNavController().navigate(R.id.signup_fragment)

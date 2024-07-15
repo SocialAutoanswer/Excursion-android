@@ -1,6 +1,7 @@
 package ru.exursion.data.models
 
 import com.google.gson.annotations.SerializedName
+import org.threeten.bp.LocalDate
 
 
 data class UserRequestDto(
@@ -19,18 +20,10 @@ data class EmailConfirmCode(
     @SerializedName("email_confirm_code") val code: String?
 )
 
-data class BirthDate(
-    private val day: Int,
-    private val month: Int,
-    private val year: Int
-) {
-    val date = "$day-$month-$year"
-}
-
 data class User(
     var firstName: String?,
     var lastName: String?,
-    var birthDate: BirthDate?,
+    var birthDate: LocalDate?,
     var email: String?,
     var token: String?,
     var avatarImage: String?,

@@ -10,11 +10,11 @@ import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.util.isValidEmail
 import ru.bibaboba.kit.ui.StateFragment
-import ru.bibaboba.kit.util.addTextChangedListener
 import ru.bibaboba.kit.util.isValidPassword
 import ru.exursion.R
 import ru.exursion.databinding.FragmentSignupBinding
 import ru.exursion.ui.auth.vm.AuthViewModel
+import ru.exursion.ui.shared.ext.addTextChangedListener
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
 import ru.exursion.ui.shared.ext.setErrorState

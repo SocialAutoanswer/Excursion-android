@@ -19,6 +19,7 @@ import ru.exursion.ui.MainActivity
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
+import ru.exursion.ui.shared.ext.setDefaultState
 import ru.exursion.ui.shared.ext.setErrorState
 import javax.inject.Inject
 
@@ -48,7 +49,12 @@ class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
         header.backButton.setOnClickListener { findNavController().navigateUp() }
 
         val enableButtonListener = SimpleTextWatcher { _, _, _, _ ->
-            continueButton.isEnabled = isFieldsValid()
+            val isFieldsValid = isFieldsValid()
+            continueButton.isEnabled = isFieldsValid
+
+            if(isFieldsValid) {
+                passEdit.setDefaultState()
+            }
         }
 
         emailEdit.addTextChangedListener(enableButtonListener)
