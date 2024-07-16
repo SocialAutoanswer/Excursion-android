@@ -42,7 +42,15 @@ class SplashActivity : AppCompatActivity() {
         AuthHeaderInterceptor.setSessionToken(userSettings.token ?: "")
 
         viewModel.profileVerified.observe(this) { verified ->
-            startActivity(Intent(this, if (userSettings.token == null || !verified) AuthActivity::class.java else MainActivity::class.java))
+            val intent = if (userSettings.token == null || !verified) {
+                Intent(this, AuthActivity::class.java).apply {
+                    putExtra(AuthActivity.FRAGMENT_TO_NAVIGATE, R.id.enter_code_fragment)
+                }
+            } else {
+                Intent(this, MainActivity::class.java)
+            }
+
+            startActivity(intent)
             finish()
         }
 

@@ -11,10 +11,12 @@ import ru.exursion.data.IncorrectPassword
 import ru.exursion.data.InternalServerError
 import ru.exursion.data.models.User
 import ru.exursion.domain.AuthUseCase
+import ru.exursion.domain.settings.UserSettings
 import javax.inject.Inject
 
 class AuthViewModel @Inject constructor(
-    private val authUseCase: AuthUseCase
+    private val authUseCase: AuthUseCase,
+    private val userSettings: UserSettings
 ) : RxStateViewModel<AuthViewModel.AuthState, AuthViewModel.AuthEffect>() {
 
     companion object {
@@ -23,6 +25,9 @@ class AuthViewModel @Inject constructor(
     }
 
     val user = User()
+
+    val userEmail: String
+        get() = user.email ?: userSettings.email ?: ""
 
     private val countDownTimer = object : CountDownTimer(TIMER_FINISH_TIME, TIMER_STEP_INTERVAL) {
         override fun onTick(millisUntilFinished: Long) {

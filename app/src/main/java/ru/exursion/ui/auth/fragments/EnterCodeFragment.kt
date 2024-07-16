@@ -16,6 +16,7 @@ import ru.bibaboba.kit.util.toTimeFormat
 import ru.exursion.R
 import ru.exursion.databinding.FragmentEnterAuthCodeBinding
 import ru.exursion.ui.MainActivity
+import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
@@ -41,54 +42,56 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
         inject()
     }
 
-    override fun setUpViews(view: View) {
-        with(binding) {
+    override fun setUpViews(view: View) = with(binding) {
+        header.title.text = context?.getString(R.string.screen_enter_code_title)
+        header.backButton.setOnClickListener { findNavController().navigateUp() }
 
-            header.title.text = context?.getString(R.string.screen_enter_code_title)
-            header.backButton.setOnClickListener { findNavController().navigateUp() }
+        codeEdit.setCompleteListener { completed -> continueButton.isEnabled = completed }
 
-            codeEdit.setCompleteListener { completed -> continueButton.isEnabled = completed }
-
-            continueButton.setOnClickListener {
-                viewModel.confirmAuthCode(codeEdit.text)
-            }
-
-            codeHint.text = context?.getString(R.string.screen_enter_code_hint, viewModel.user.email)
-
-            binding.timer.setOnClickListener { _ ->
-                viewModel.sendAuthCode()
-                binding.codeEdit.text = ""
-                viewModel.startTimer()
-                binding.timer.setOnClickListener(null)
-            }
+        continueButton.setOnClickListener {
+            viewModel.confirmAuthCode(codeEdit.text)
         }
 
-        setUpTimer()
-        viewModel.startTimer()
-    }
+        codeHint.text = context?.getString(R.string.screen_enter_code_hint, viewModel.userEmail)
 
-    private fun setUpTimer() {
+        timer.setOnClickListener { _ ->
+            codeEdit.text = ""
+            timer.setOnClickListener(null)
+            viewModel.sendAuthCode()
+            viewModel.startTimer()
+        }
+
         val primaryColor = context?.getColorByAttr(R.attr.exc_color_primary).toString()
 
+        setUpTimer(primaryColor)
+
+        if (arguments?.getBoolean(AuthActivity.IS_START_SCREEN) == true) {
+            header.backButton.isVisible = false
+            setUpTimerFinished(primaryColor)
+        } else {
+            viewModel.startTimer()
+        }
+    }
+
+    private fun setUpTimer(color: String) {
         viewModel.setOnTimerTick { currentMilly ->
             binding.timer.text = context?.getHtmlString(
                 R.string.screen_enter_code_timer,
-                primaryColor,
+                color,
                 currentMilly.toTimeFormat()
             )
         }
 
-        viewModel.setOnTimerFinish {
-            binding.timer.text = context?.getHtmlString(
-                R.string.screen_enter_code_send_code,
-                primaryColor
-            )
-        }
+        viewModel.setOnTimerFinish { setUpTimerFinished(color) }
     }
 
     override fun onStop() {
         super.onStop()
         viewModel.stopTimer()
+    }
+
+    private fun setUpTimerFinished(color: String) {
+        binding.timer.text = context?.getHtmlString(R.string.screen_enter_code_send_code, color)
     }
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
