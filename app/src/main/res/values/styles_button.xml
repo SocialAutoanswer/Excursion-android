@@ -58,6 +58,18 @@
         <item name="android:layout_width">0dp</item>
     </style>
 
+    <style name="Button.Secondary.NoWidth.MarginHorizontal_16dp">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="Button.Secondary.MarginHorizontal_25dp">
+        <item name="android:layout_marginHorizontal">25dp</item>
+    </style>
+
+    <style name="Button.Secondary.MarginHorizontal_25dp.MarginTop_16dp">
+        <item name="android:layout_marginTop">16dp</item>
+    </style>
+
     <style name="Button.Secondary.NoWidth.MarginStart_8dp">
         <item name="android:layout_marginStart">8dp</item>
     </style>

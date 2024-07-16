@@ -34,7 +34,7 @@ object Versions {
         const val retrofit = "2.9.0"
     }
 
-    const val dagger = "2.51"
+    const val dagger = "2.51.1"
     const val rxJava = "3.1.8"
     const val rxAndroid = "3.0.2"
     const val circleImage = "3.1.0"

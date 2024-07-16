@@ -24,12 +24,24 @@
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
+    <style name="EditText.MarginStart_25dp.MarginTop_16dp.Gravity_Center">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="EditText.MarginStart_8dp.MarginTop_16dp">
         <item name="android:layout_marginTop">16dp</item>
     </style>
 
+    <style name="EditText.MarginStart_8dp.MarginTop_16dp.GravityCenter">
+        <item name="android:gravity">center</item>
+    </style>
+
     <style name="EditText.MarginStart_8dp.MarginEnd_25dp.MarginTop_16dp">
         <item name="android:layout_marginTop">16dp</item>
+    </style>
+
+    <style name="EditText.MarginStart_8dp.MarginEnd_25dp.MarginTop_16dp.GravityCenter">
+        <item name="android:gravity">center</item>
     </style>
 
     <style name="EditText.MarginHorizontal_25dp">

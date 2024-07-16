@@ -10,87 +10,66 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
-import ru.bibaboba.kit.ui.getColorByAttr
-import ru.bibaboba.kit.ui.getHtmlString
-import ru.bibaboba.kit.util.toTimeFormat
+import ru.bibaboba.kit.ui.utils.SimpleTextWatcher
+import ru.bibaboba.kit.util.isValidEmail
+import ru.bibaboba.kit.util.isValidPassword
 import ru.exursion.R
-import ru.exursion.databinding.FragmentEnterAuthCodeBinding
+import ru.exursion.databinding.FragmentSigninBinding
 import ru.exursion.ui.MainActivity
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
+import ru.exursion.ui.shared.ext.setDefaultState
+import ru.exursion.ui.shared.ext.setErrorState
 import javax.inject.Inject
 
-class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewModel>(
-    FragmentEnterAuthCodeBinding::class.java
+class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
+    FragmentSigninBinding::class.java
 ) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     override val viewModel by viewModels<AuthViewModel> { viewModelFactory }
-    
+
     override val stateMachine = StateMachine.Builder()
         .addLoadingState()
         .addSuccessState()
         .addErrorEffect()
         .addNetworkErrorEffect()
-        .addIncorrectCodeEffect()
+        .addIncorrectPasswordEffect()
+        .addEmailNotRegisteredEffect()
         .build()
-    
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
-        viewModel.sendAuthCode()
     }
 
-    override fun setUpViews(view: View) {
-        with(binding) {
+    override fun setUpViews(view: View) = with(binding) {
+        header.title.text = getString(R.string.screen_choose_auth_method_signin_button)
+        header.backButton.setOnClickListener { findNavController().navigateUp() }
 
-            header.title.text = context?.getString(R.string.screen_enter_code_title)
-            header.backButton.setOnClickListener { findNavController().navigateUp() }
+        val enableButtonListener = SimpleTextWatcher { _, _, _, _ ->
+            val isFieldsValid = isFieldsValid()
+            continueButton.isEnabled = isFieldsValid
 
-            codeEdit.setCompleteListener { completed -> continueButton.isEnabled = completed }
-
-            continueButton.setOnClickListener {
-                viewModel.confirmAuthCode(codeEdit.text)
-            }
-
-            codeHint.text = context?.getString(R.string.screen_enter_code_hint, viewModel.user.email)
-
-            binding.timer.setOnClickListener { _ ->
-                viewModel.sendAuthCode()
-                binding.codeEdit.text = ""
-                viewModel.startTimer()
-                binding.timer.setOnClickListener(null)
+            if(isFieldsValid) {
+                passEdit.setDefaultState()
             }
         }
 
-        setUpTimer()
-        viewModel.startTimer()
-    }
+        emailEdit.addTextChangedListener(enableButtonListener)
+        passEdit.addTextChangedListener(enableButtonListener)
 
-    private fun setUpTimer() {
-        val primaryColor = context?.getColorByAttr(R.attr.exc_color_primary).toString()
-
-        viewModel.setOnTimerTick { currentMilly ->
-            binding.timer.text = context?.getHtmlString(
-                R.string.screen_enter_code_timer,
-                primaryColor,
-                currentMilly.toTimeFormat()
-            )
-        }
-
-        viewModel.setOnTimerFinish {
-            binding.timer.text = context?.getHtmlString(
-                R.string.screen_enter_code_send_code,
-                primaryColor
-            )
+        continueButton.setOnClickListener {
+            viewModel.user.email = emailEdit.text.toString()
+            viewModel.user.password = passEdit.text.toString()
+            viewModel.signIn()
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        viewModel.stopTimer()
-    }
+    private fun FragmentSigninBinding.isFieldsValid() =
+        emailEdit.text.isValidEmail()
+                && passEdit.text.isValidPassword()
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
@@ -100,13 +79,13 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
         )
     }
 
+
     private fun StateMachine.Builder.addSuccessState(): StateMachine.Builder {
         return addState(AuthViewModel.AuthState.Success::class) {
             val activity = activity ?: return@addState
             startActivity(Intent(activity, MainActivity::class.java))
         }
     }
-
 
     private fun StateMachine.Builder.addNetworkErrorEffect(): StateMachine.Builder {
         return addEffect(AuthViewModel.AuthEffect.NetworkError::class) {
@@ -119,10 +98,17 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
         }
     }
 
-    private fun StateMachine.Builder.addIncorrectCodeEffect(): StateMachine.Builder {
-        return addEffect(AuthViewModel.AuthEffect.IncorrectCode::class) {
-            //binding.codeEdit.setErrorState or smth
-            Toast.makeText(context, R.string.screen_enter_code_incorrect_code, Toast.LENGTH_LONG).show()
+    private fun StateMachine.Builder.addIncorrectPasswordEffect(): StateMachine.Builder {
+        return addEffect(AuthViewModel.AuthEffect.IncorrectPassword::class) {
+            binding.passEdit.setErrorState()
+            Toast.makeText(context, R.string.screen_signin_error_password, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun StateMachine.Builder.addEmailNotRegisteredEffect(): StateMachine.Builder {
+        return addEffect(AuthViewModel.AuthEffect.EmailNotRegistered::class) {
+            binding.emailEdit.setErrorState()
+            Toast.makeText(context, R.string.screen_signin_error_email, Toast.LENGTH_SHORT).show()
         }
     }
 

@@ -55,7 +55,7 @@
 
     <EditText
         android:id="@+id/date_day_input"
-        style="@style/EditText.MarginStart_25dp.MarginTop_16dp"
+        style="@style/EditText.MarginStart_25dp.MarginTop_16dp.Gravity_Center"
         android:layout_width="0dp"
         android:hint="@string/screen_enter_user_data_birth_date_day_hint"
         android:maxLength="2"
@@ -68,7 +68,7 @@
 
     <EditText
         android:id="@+id/date_month_input"
-        style="@style/EditText.MarginStart_8dp.MarginTop_16dp"
+        style="@style/EditText.MarginStart_8dp.MarginTop_16dp.GravityCenter"
         android:layout_width="0dp"
         android:hint="@string/screen_enter_user_data_birth_date_month_hint"
         android:maxLength="2"
@@ -81,7 +81,7 @@
 
     <EditText
         android:id="@+id/date_year_input"
-        style="@style/EditText.MarginStart_8dp.MarginEnd_25dp.MarginTop_16dp"
+        style="@style/EditText.MarginStart_8dp.MarginEnd_25dp.MarginTop_16dp.GravityCenter"
         android:layout_width="0dp"
         android:maxLength="4"
         android:inputType="date"
@@ -94,6 +94,7 @@
         android:id="@+id/continue_button"
         style="@style/Button.Primary.MarginHorizontal_25dp.MarginTop_50dp"
         android:text="@string/screen_enter_user_data_button_continue"
+        android:enabled="false"
         app:layout_constraintTop_toBottomOf="@id/date_month_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
