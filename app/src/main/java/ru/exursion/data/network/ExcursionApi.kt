@@ -34,7 +34,7 @@ interface ExcursionApi {
         @Body user: UserDto
     ): Single<Response<UserRequestDto>>
 
-    @GET("auth/send_confirm_code/")
+    @GET("auth/send_email_confirm_code/")
     fun sendVerificationCode(): Single<Response<Unit>>
 
     @POST("auth/emailconfirm/")

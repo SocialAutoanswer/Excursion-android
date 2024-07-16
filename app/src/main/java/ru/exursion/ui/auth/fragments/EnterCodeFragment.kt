@@ -39,7 +39,7 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
-        viewModel.sendAuthCode()
+        //viewModel.sendAuthCode()
     }
 
     override fun setUpViews(view: View) {
@@ -111,9 +111,10 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
     private fun StateMachine.Builder.addNetworkErrorEffect(): StateMachine.Builder {
         return addEffect(AuthViewModel.AuthEffect.NetworkError::class) {
             networkErrorDialog {
-                onClick { it?.dismiss() }
+                onNeutralClick { it?.dismiss() }
                 onDismiss {
                     Toast.makeText(context, R.string.dialog_network_error_data_requested, Toast.LENGTH_SHORT).show()
+                    //viewModel.sendAuthCode()
                 }
             }
         }

@@ -72,7 +72,7 @@ class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityVi
     private fun StateMachine.Builder.addErrorEffect(): StateMachine.Builder {
         return addEffect(ChooseCityViewModel.ChooseCityEffect.Error::class) {
             networkErrorDialog {
-                onClick { it?.dismiss() }
+                onNeutralClick { it?.dismiss() }
                 onDismiss {
                     Toast.makeText(context, R.string.dialog_network_error_data_requested, Toast.LENGTH_SHORT).show()
                 }

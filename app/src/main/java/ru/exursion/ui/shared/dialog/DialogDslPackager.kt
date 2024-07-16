@@ -18,7 +18,7 @@ class DialogDslPackager {
     private var onDismiss: ((Dialog?) -> Unit)? = null
     private var onConfirm: ((Dialog?) -> Unit)? = null
 
-    fun onClick(callback: (Dialog?) -> Unit) {
+    fun onNeutralClick(callback: (Dialog?) -> Unit) {
         onNeutralClick = callback
     }
 

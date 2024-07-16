@@ -90,9 +90,10 @@ class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
     private fun StateMachine.Builder.addNetworkErrorEffect(): StateMachine.Builder {
         return addEffect(AuthViewModel.AuthEffect.NetworkError::class) {
             networkErrorDialog {
-                onClick { it?.dismiss() }
+                onNeutralClick { it?.dismiss() }
                 onDismiss {
                     Toast.makeText(context, R.string.dialog_network_error_data_requested, Toast.LENGTH_SHORT).show()
+                    viewModel.signIn()
                 }
             }
         }
