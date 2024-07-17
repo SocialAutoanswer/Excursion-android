@@ -22,6 +22,7 @@ object Versions {
         const val splashScreen = "1.0.0"
         const val encryptedSharedPreferences = "1.0.0"
         const val paging3 = "3.0.0"
+        const val swipereFreshLayout = "1.1.0"
     }
 
     object Google {
@@ -58,6 +59,7 @@ object Libs {
         const val encryptedSharedPreferences = "androidx.security:security-crypto:${Versions.AndroidX.encryptedSharedPreferences}"
         const val paging3 = "androidx.paging:paging-runtime-ktx:${Versions.AndroidX.paging3}"
         const val rxPaging3 = "androidx.paging:paging-rxjava3:${Versions.AndroidX.paging3}"
+        const val swipeRefreshLayout = "androidx.swiperefreshlayout:swiperefreshlayout:${Versions.AndroidX.swipereFreshLayout}"
     }
 
     object Google {

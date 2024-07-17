@@ -13,6 +13,7 @@ import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.auth.AuthRepository
 import ru.exursion.data.auth.AuthRepositoryImpl
 import ru.exursion.data.auth.UserMapper
+import ru.exursion.data.auth.UserRequestMapper
 import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
@@ -24,6 +25,8 @@ import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Question
+import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.Review
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.Route
@@ -33,9 +36,11 @@ import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.User
+import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 import ru.exursion.data.profile.ProfileRepository
 import ru.exursion.data.profile.ProfileRepositoryImpl
+import ru.exursion.data.profile.QuestionMapper
 import ru.exursion.domain.AuthUseCase
 import ru.exursion.domain.AuthUseCaseImpl
 import ru.exursion.domain.ProfileUseCase
@@ -51,6 +56,7 @@ import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
 import ru.exursion.ui.SplashViewModel
+import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 import ru.exursion.ui.routes.vm.RoutesViewModel
@@ -76,6 +82,10 @@ class AppModule(private val context: Context) {
         fun bindRouteDetailsMapper(impl: RouteDetailsMapper): Mapper<RouteDetailsDto, RouteDetails>
         @Binds
         fun bindReviewMapper(impl: ReviewMapper): Mapper<ReviewDto, Review>
+        @Binds
+        fun bindQuestionMapper(impl: QuestionMapper): Mapper<QuestionDto, Question>
+        @Binds
+        fun bindUserMapper(impl: UserMapper): Mapper<UserDto, User>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
@@ -90,7 +100,7 @@ class AppModule(private val context: Context) {
         fun bindRoutesUseCase(impl: RoutesUseCaseImpl): RoutesUseCase
 
         @Binds
-        fun bindUserMapper(impl: UserMapper): Mapper<UserRequestDto, User>
+        fun bindUserRequestMapper(impl: UserRequestMapper): Mapper<UserRequestDto, User>
         @Binds
         fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
 
@@ -129,6 +139,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(RoutesViewModel::class)
         fun bindRoutesViewModel(viewModel: RoutesViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(ProfileViewModel::class)
+        fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
     }
 
 }

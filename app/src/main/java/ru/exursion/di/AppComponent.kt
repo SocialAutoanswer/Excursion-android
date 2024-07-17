@@ -13,6 +13,8 @@ import ru.exursion.ui.auth.fragments.SignInFragment
 import ru.exursion.ui.auth.fragments.SignUpFragment
 import ru.exursion.ui.profile.DecorSettingsFragment
 import ru.exursion.ui.profile.ProfileFragment
+import ru.exursion.ui.profile.QuestionsFragment
+import ru.exursion.ui.profile.RedactProfileFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
 import javax.inject.Singleton
 
@@ -38,6 +40,8 @@ interface AppComponent {
     fun inject(fragment: RoutesFragment)
     fun inject(fragment: DecorSettingsFragment)
     fun inject(fragment: ProfileFragment)
+    fun inject(fragment: QuestionsFragment)
+    fun inject(fragment: RedactProfileFragment)
 
     @Component.Builder
     interface Builder {

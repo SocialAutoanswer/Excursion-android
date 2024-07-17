@@ -17,21 +17,20 @@
             style="@style/Text.H3"
             android:text="Вопрос 1"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/uncover_btn"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"/>
+            app:layout_constraintBottom_toBottomOf="parent" />
 
         <ImageButton
             android:id="@+id/uncover_btn"
             style="@style/Icon"
-            android:layout_height="0dp"
             android:scaleType="center"
             android:adjustViewBounds="true"
             android:src="@drawable/ic_plus"
             app:tint="?attr/exc_color_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

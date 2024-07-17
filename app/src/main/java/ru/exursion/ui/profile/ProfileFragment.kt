@@ -1,27 +1,40 @@
 package ru.exursion.ui.profile
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import ru.bibaboba.kit.ui.BaseFragment
+import ru.bibaboba.kit.states.StateMachine
+import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
 import ru.exursion.databinding.FragmentProfileBinding
-import ru.exursion.domain.settings.AppSettings
 import ru.exursion.domain.settings.UserSettings
-import ru.exursion.ui.MainActivity
 import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.shared.dialog.dialog
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
-class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::class.java) {
+class ProfileFragment :
+    StateFragment<FragmentProfileBinding, ProfileViewModel>(FragmentProfileBinding::class.java) {
 
     @Inject lateinit var userSettings: UserSettings
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
+
+    override val stateMachine = StateMachine.Builder()
+        .addProfileReceivedState()
+        .addErrorEffect()
+        .build()
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
+        viewModel.getProfile()
     }
 
     override fun setUpViews(view: View) = with(binding) {
@@ -50,4 +63,16 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    @SuppressLint("SetTextI18n")
+    private fun StateMachine.Builder.addProfileReceivedState(): StateMachine.Builder {
+        return addState(ProfileViewModel.ProfileState.ProfileReceived::class) {
+            binding.userName.text = "${it.user?.firstName} ${it.user?.lastName}"
+        }
+    }
+
+    private fun StateMachine.Builder.addErrorEffect(): StateMachine.Builder {
+        return addEffect(ProfileViewModel.ProfileEffect.Error::class) {
+            Toast.makeText(context, R.string.undefined_error, Toast.LENGTH_SHORT).show()
+        }
+    }
 }

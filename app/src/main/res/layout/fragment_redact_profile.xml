@@ -81,32 +81,33 @@
         android:id="@+id/email_input"
         style="@style/EditText.MarginHorizontal_25dp.MarginTop_8dp"
         android:inputType="textEmailAddress"
+        android:enabled="false"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_title" />
 
-    <TextView
-        android:id="@+id/password_title"
-        style="@style/Text.H3.MarginTop_24dp.NoWidth"
-        android:text="@string/screen_redact_profile_password_title"
-        app:layout_constraintTop_toBottomOf="@id/email_input"
-        app:layout_constraintStart_toStartOf="@id/password_input"
-        app:layout_constraintEnd_toEndOf="@id/password_input" />
+<!--    <TextView-->
+<!--        android:id="@+id/password_title"-->
+<!--        style="@style/Text.H3.MarginTop_24dp.NoWidth"-->
+<!--        android:text="@string/screen_redact_profile_password_title"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/email_input"-->
+<!--        app:layout_constraintStart_toStartOf="@id/password_input"-->
+<!--        app:layout_constraintEnd_toEndOf="@id/password_input" />-->
 
-    <EditText
-        android:id="@+id/password_input"
-        style="@style/EditText.MarginHorizontal_25dp.MarginTop_8dp"
-        android:inputType="textPassword"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/password_title" />
+<!--    <EditText-->
+<!--        android:id="@+id/password_input"-->
+<!--        style="@style/EditText.MarginHorizontal_25dp.MarginTop_8dp"-->
+<!--        android:inputType="textPassword"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@id/password_title" />-->
 
 
     <Button
         android:id="@+id/save_button"
         style="@style/Button.Primary.MarginHorizontal_25dp.MarginTop_50dp"
         android:text="@string/screen_redact_profile_save"
-        app:layout_constraintTop_toBottomOf="@id/password_input"
+        app:layout_constraintTop_toBottomOf="@id/email_input"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintBottom_toTopOf="@id/remove_profile"/>

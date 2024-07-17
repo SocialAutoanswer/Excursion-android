@@ -12,4 +12,6 @@ interface UserSettings {
     fun clearAllPrefs()
 
     fun fillAllPrefs(user: User?)
+
+    fun getUser(): User
 }

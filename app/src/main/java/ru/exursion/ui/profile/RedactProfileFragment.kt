@@ -1,19 +1,54 @@
 package ru.exursion.ui.profile
 
+import android.content.Context
 import android.content.Intent
 import android.view.View
+import android.widget.Toast
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import ru.bibaboba.kit.ui.BaseFragment
+import ru.bibaboba.kit.states.StateMachine
+import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
+import ru.exursion.data.models.User
 import ru.exursion.databinding.FragmentRedactProfileBinding
 import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.shared.dialog.dialog
+import ru.exursion.ui.shared.ext.inject
+import ru.exursion.ui.shared.ext.networkErrorDialog
+import javax.inject.Inject
 
 class RedactProfileFragment :
-    BaseFragment<FragmentRedactProfileBinding>(FragmentRedactProfileBinding::class.java) {
+    StateFragment<FragmentRedactProfileBinding, ProfileViewModel>(FragmentRedactProfileBinding::class.java) {
+
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    override val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
+
+    override val stateMachine = StateMachine.Builder()
+        .addProfileReceivedState()
+        .addProfileEditedState()
+        .addProfileDeletedState()
+        .addErrorEffect()
+        .build()
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
+        viewModel.getProfile()
+    }
 
     override fun setUpViews(view: View) = with(binding) {
         backButton.setOnClickListener{ findNavController().navigateUp() }
+
+        saveButton.setOnClickListener{
+            viewModel.editProfile(
+                User().apply {
+                    firstName = binding.nameInput.toString()
+                    lastName = binding.lastNameInput.toString()
+                    email = binding.emailInput.toString()
+                }
+            )
+        }
 
         removeProfile.setOnClickListener{
             dialog("delete_profile") {
@@ -23,15 +58,45 @@ class RedactProfileFragment :
                 rejectButtonText = getString(R.string.dialog_delete_profile_reject)
 
                 onConfirm {
-                    val activity = activity ?: return@onConfirm
-                    //viewModel.deleteProfile()
+                    viewModel.deleteProfile()
                     it?.dismiss()
-                    startActivity(Intent(activity, AuthActivity::class.java))
                 }
-
                 onDismiss { it?.dismiss() }
             }
         }
     }
+
+    private fun StateMachine.Builder.addProfileReceivedState(): StateMachine.Builder {
+        return addState(ProfileViewModel.ProfileState.ProfileReceived::class) {
+            with(binding) {
+                nameInput.setText(it.user?.firstName)
+                lastNameInput.setText(it.user?.lastName)
+                emailInput.setText(it.user?.email)
+            }
+        }
+    }
+
+    private fun StateMachine.Builder.addProfileEditedState(): StateMachine.Builder {
+        return addState(ProfileViewModel.ProfileState.ProfileEdited::class) {
+            Toast.makeText(context, R.string.screen_redact_profile_edit_success, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun StateMachine.Builder.addProfileDeletedState(): StateMachine.Builder {
+        return addState(ProfileViewModel.ProfileState.ProfileDeleted::class) {
+            val activity = activity ?: return@addState
+            startActivity(Intent(activity, AuthActivity::class.java))
+        }
+    }
+
+    private fun StateMachine.Builder.addErrorEffect(): StateMachine.Builder {
+        return addEffect(ProfileViewModel.ProfileEffect.Error::class) {
+            networkErrorDialog {
+                onClick { it?.dismiss() }
+            }
+        }
+    }
+
+
 
 }

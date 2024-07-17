@@ -13,6 +13,8 @@ import ru.bibaboba.kit.retrofit.EndpointUrl
 import ru.exursion.BuildConfig
 import ru.exursion.data.models.CitiesPageDto
 import ru.exursion.data.models.EmailConfirmCode
+import ru.exursion.data.models.PageDto
+import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteRequestDto
@@ -43,7 +45,7 @@ interface ExcursionApi {
     ): Single<Response<Unit>>
 
     @GET("auth/profile/")
-    fun getProfile(): Single<Response<UserRequestDto>>
+    fun getProfile(): Single<Response<UserDto>>
 
     @PUT("auth/profile/")
     fun editProfile(
@@ -52,6 +54,11 @@ interface ExcursionApi {
 
     @DELETE("auth/profile/")
     fun deleteProfile(): Single<Response<Unit>>
+
+    @GET("questions/")
+    fun getQuestions(
+        @Query("page") page: Int
+    ): Single<Response<PageDto<QuestionDto>>>
 
 
     @GET("locations/cities/")

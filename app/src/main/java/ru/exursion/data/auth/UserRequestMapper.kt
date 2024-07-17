@@ -7,7 +7,7 @@ import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 import javax.inject.Inject
 
-class UserMapper @Inject constructor(): Mapper<UserRequestDto, User> {
+class UserRequestMapper @Inject constructor(): Mapper<UserRequestDto, User> {
     override fun map(input: UserRequestDto): User = User(
         input.user?.firstName ?: "",
         input.user?.lastName ?: "",
@@ -19,9 +19,23 @@ class UserMapper @Inject constructor(): Mapper<UserRequestDto, User> {
     )
 }
 
-fun User.toDto() = UserDto(
-    firstName,
-    lastName,
-    email,
-    password
-)
+class UserMapper @Inject constructor(): Mapper<UserDto, User> {
+
+    override fun map(input: UserDto): User = User(
+        input.firstName ?: "",
+        input.lastName ?: "",
+        null,
+        input.email ?: "",
+        null,
+        null,
+        null
+    )
+
+    override fun reverseMap(input: User): UserDto = UserDto(
+        input.firstName,
+        input.lastName,
+        input.email,
+        input.password
+    )
+
+}
