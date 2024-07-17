@@ -8,7 +8,7 @@ import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.EmailAlreadyRegistered
 import ru.exursion.data.IncorrectCode
 import ru.exursion.data.IncorrectPassword
-import ru.exursion.data.InternalServerError
+import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.User
 import ru.exursion.domain.AuthUseCase
 import ru.exursion.domain.settings.UserSettings
@@ -61,7 +61,7 @@ class AuthViewModel @Inject constructor(
                 _state.postValue(AuthState.CodeSent)
             }, {
                 when (it) {
-                    is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
+                    is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
                     is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
                 }
@@ -76,7 +76,7 @@ class AuthViewModel @Inject constructor(
                 _state.postValue(AuthState.Success)
             }, {
                 when (it) {
-                    is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
+                    is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
                     is EmailAlreadyRegistered -> _effect.postValue(AuthEffect.EmailAlreadyRegistered)
                     is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
@@ -93,7 +93,7 @@ class AuthViewModel @Inject constructor(
                 _state.postValue(AuthState.Success)
             }, {
                 when (it) {
-                    is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
+                    is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
                     is IncorrectPassword -> _effect.postValue(AuthEffect.IncorrectPassword)
                     is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)
@@ -109,7 +109,7 @@ class AuthViewModel @Inject constructor(
                 _state.postValue(AuthState.Success)
             }, {
                 when (it) {
-                    is InternalServerError -> _effect.postValue(AuthEffect.NetworkError)
+                    is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
                     is IncorrectCode -> _effect.postValue(AuthEffect.IncorrectCode)
                     is CanNotGetDataException -> _effect.postValue(AuthEffect.NetworkError)
                     else -> _effect.postValue(AuthEffect.Error)

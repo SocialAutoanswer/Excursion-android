@@ -3,6 +3,8 @@
 
     <string name="dialog_loading_text">Загрузка</string>
 
+    <string name="error_forbidden_text">Ваша почта не подтверждена или вы были заблокированы</string>
+
     <string name="main_bottom_navigation_routes">Маршруты</string>
     <string name="main_bottom_navigation_maps">Карты</string>
     <string name="main_bottom_navigation_recommendation">Рекомендации</string>
@@ -54,7 +56,7 @@
     <string name="screen_choose_auth_method_signin_button">Вход</string>
     <string name="screen_choose_auth_method_signup_button">Регистрация</string>
 
-    <string name="undefined_error">Что-то пошло не так</string>
+    <string name="undefined_error">Что-то пошло не так…</string>
     <string name="screen_routes_paid_excursion">Платная экскурсия</string>
 
     <string name="screen_route_details_buy">Купить</string>

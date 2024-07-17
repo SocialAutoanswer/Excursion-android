@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
-import ru.exursion.data.InternalServerError
+import ru.exursion.data.InternalServerException
 import ru.exursion.data.InvalidToken
 import ru.exursion.data.ProfileNotVerified
 import ru.exursion.data.auth.toDto
@@ -33,7 +33,7 @@ class ProfileRepositoryImpl @Inject constructor(
                     Result.success(userMapper.map(userRequestDto))
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         403 -> Result.failure(ProfileNotVerified)
                         401 -> Result.failure(InvalidToken)
                         else -> Result.failure(CanNotGetDataException())
@@ -51,7 +51,7 @@ class ProfileRepositoryImpl @Inject constructor(
                     Result.success(Unit)
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         403 -> Result.failure(ProfileNotVerified)
                         else -> Result.failure(CanNotGetDataException())
                     }
@@ -68,7 +68,7 @@ class ProfileRepositoryImpl @Inject constructor(
                     Result.success(Unit)
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         403 -> Result.failure(ProfileNotVerified)
                         else -> Result.failure(CanNotGetDataException())
                     }

@@ -53,4 +53,10 @@ dependencies {
     implementation("com.google.android.material:material:1.11.0")
 
     implementation("com.jakewharton.threetenabp:threetenabp:1.0.3")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-rx3:1.8.1")
+
+    implementation(Libs.AndroidX.paging3)
+    implementation(Libs.AndroidX.rxPaging3)
 }

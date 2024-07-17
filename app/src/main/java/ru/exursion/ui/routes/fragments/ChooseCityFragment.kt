@@ -17,6 +17,7 @@ import ru.exursion.ui.routes.CitiesPagingDataAdapter
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
+import ru.exursion.ui.shared.ext.addErrorHandlers
 import javax.inject.Inject
 
 class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityViewModel>(FragmentChooseTownBinding::class.java) {
@@ -37,7 +38,7 @@ class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityVi
             R.id.fragment_tags,
             bundleOf(RoutesFragment.CITY_ID_BUNDLE_KEY to it.id)
         )
-    }
+    }.apply { addErrorHandlers(this@ChooseCityFragment) }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

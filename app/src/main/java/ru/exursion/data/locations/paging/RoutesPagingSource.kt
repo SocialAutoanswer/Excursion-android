@@ -37,7 +37,7 @@ class RoutesPagingSource @AssistedInject constructor(
 
                     LoadResult.Page(data, previousPageNumber, nextPageNumber)
                 } else {
-                    LoadResult.Error(CanNotGetDataException())
+                    handleHttpErrors(response)
                 }
             }
     }

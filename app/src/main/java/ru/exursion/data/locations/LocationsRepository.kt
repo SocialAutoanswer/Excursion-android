@@ -10,7 +10,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
-import ru.exursion.data.InternalServerError
+import ru.exursion.data.InternalServerException
 import ru.exursion.data.locations.paging.CitiesPagingSource
 import ru.exursion.data.locations.paging.RoutesPagingSource
 import ru.exursion.data.locations.paging.TagsPagingSource
@@ -63,7 +63,7 @@ class LocationsRepositoryImpl @Inject constructor(
                     Result.success(routeDetailsMapper.map(dto))
                 } else {
                     when(it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         else -> Result.failure(CanNotGetDataException())
                     }
                 }

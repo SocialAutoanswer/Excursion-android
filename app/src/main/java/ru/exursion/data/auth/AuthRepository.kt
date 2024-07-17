@@ -7,7 +7,7 @@ import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.EmailAlreadyRegistered
 import ru.exursion.data.IncorrectCode
 import ru.exursion.data.IncorrectPassword
-import ru.exursion.data.InternalServerError
+import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.EmailConfirmCode
 import ru.exursion.data.models.User
 import ru.exursion.data.models.UserRequestDto
@@ -39,7 +39,7 @@ class AuthRepositoryImpl @Inject constructor(
                     Result.success(userMapper.map(userRequestDto))
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         400 -> Result.failure(IncorrectPassword)
                         else -> Result.failure(CanNotGetDataException())
                     }
@@ -57,7 +57,7 @@ class AuthRepositoryImpl @Inject constructor(
                     Result.success(userMapper.map(userRequestDto))
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         400 -> Result.failure(EmailAlreadyRegistered)
                         else -> Result.failure(CanNotGetDataException())
                     }
@@ -74,7 +74,7 @@ class AuthRepositoryImpl @Inject constructor(
                     Result.success(Unit)
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         else -> Result.failure(CanNotGetDataException())
                     }
                 }
@@ -90,7 +90,7 @@ class AuthRepositoryImpl @Inject constructor(
                     Result.success(Unit)
                 } else {
                     when (it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         400 -> Result.failure(IncorrectCode)
                         else -> Result.failure(CanNotGetDataException())
                     }

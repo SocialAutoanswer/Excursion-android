@@ -3,7 +3,6 @@ package ru.exursion.data.locations.paging
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
-import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.DefaultRxPagingSource
 import ru.exursion.data.network.ExcursionApi
 import ru.exursion.data.models.City
@@ -34,7 +33,7 @@ class CitiesPagingSource @Inject constructor(
 
                     LoadResult.Page(data, previousPageNumber, nextPageNumber)
                 } else {
-                    LoadResult.Error(CanNotGetDataException())
+                    handleHttpErrors(response)
                 }
             }
     }
