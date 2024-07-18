@@ -47,7 +47,7 @@ class QuestionsFragment: StateFragment<FragmentQuestionsBinding, ProfileViewMode
 
         adapter.addLoadStateListener { loadState ->
             if(loadState.prepend.endOfPaginationReached) {
-                binding.emptyLayout.root.isVisible = adapter.itemCount == 1
+                binding.emptyLayout.root.isVisible = adapter.itemCount == 0
             }
         }
 
