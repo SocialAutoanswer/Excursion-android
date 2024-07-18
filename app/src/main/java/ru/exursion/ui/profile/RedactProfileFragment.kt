@@ -93,7 +93,7 @@ class RedactProfileFragment :
     private fun StateMachine.Builder.addErrorEffect(): StateMachine.Builder {
         return addEffect(ProfileViewModel.ProfileEffect.Error::class) {
             networkErrorDialog {
-                onClick { it?.dismiss() }
+                onNeutralClick { it?.dismiss() }
                 onDismiss { it?.dismiss() }
             }
         }
