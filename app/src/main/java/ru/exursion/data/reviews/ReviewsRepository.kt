@@ -4,7 +4,7 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
-import ru.exursion.data.InternalServerError
+import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.Review
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.network.ExcursionApi
@@ -28,7 +28,7 @@ class ReviewsRepositoryImpl @Inject constructor(
                     Result.success(reviewMapper.mapList(dto))
                 } else {
                     when(it.code()) {
-                        500 -> Result.failure(InternalServerError())
+                        500 -> Result.failure(InternalServerException())
                         else -> Result.failure(CanNotGetDataException())
                     }
                 }

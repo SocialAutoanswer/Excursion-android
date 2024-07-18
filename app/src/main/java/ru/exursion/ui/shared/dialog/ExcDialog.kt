@@ -106,7 +106,7 @@ class ExcDialog : DialogFragment() {
             }
         }
 
-        setUpView(binding.neutralButton, neutralButtonText, null)
+        setUpView(binding.neutralButton, neutralButtonText, onNeutralButtonClick)
         setUpView(binding.rejectButton, rejectButtonText, onDismissCallback)
         setUpView(binding.confirmButton, confirmButtonText, onConfirmCallback)
 

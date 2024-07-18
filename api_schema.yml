@@ -1,0 +1,1297 @@
+openapi: 3.0.3
+info:
+  title: Your Project API
+  version: 1.0.0
+  description: Your project description
+paths:
+  /api/auth/emailconfirm/:
+    put:
+      operationId: auth_emailconfirm_update
+      tags:
+        - auth
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/login/:
+    post:
+      operationId: auth_login_create
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Login'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Login'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Login'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Login'
+          description: ''
+  /api/auth/password_change/:
+    put:
+      operationId: auth_password_change_update
+      tags:
+        - auth
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          description: No response body
+  /api/auth/profile/:
+    get:
+      operationId: auth_profile_retrieve
+      tags:
+        - auth
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    put:
+      operationId: auth_profile_update
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/User'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/User'
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+          description: ''
+    delete:
+      operationId: auth_profile_destroy
+      tags:
+        - auth
+      security:
+        - knoxApiToken: []
+      responses:
+        '204':
+          description: No response body
+  /api/auth/register/:
+    post:
+      operationId: auth_register_create
+      tags:
+        - auth
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Register'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Register'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Register'
+        required: true
+      security:
+        - jwtAuth: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Register'
+          description: ''
+  /api/auth/send_email_confirm_code/:
+    get:
+      operationId: auth_send_email_confirm_code_retrieve
+      tags:
+        - auth
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          description: No response body
+  /api/auth/send_password_cange_code/:
+    get:
+      operationId: auth_send_password_cange_code_retrieve
+      tags:
+        - auth
+      security:
+        - jwtAuth: []
+        - {}
+      responses:
+        '200':
+          description: No response body
+  /api/events/:
+    get:
+      operationId: events_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - events
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventListList'
+          description: ''
+  /api/events/{id}/:
+    get:
+      operationId: events_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - events
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ''
+  /api/events/bytag/{tag_id}/:
+    get:
+      operationId: events_bytag_retrieve
+      parameters:
+        - in: path
+          name: tag_id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - events
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/EventList'
+          description: ''
+  /api/events/tags/:
+    get:
+      operationId: events_tags_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - events
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedEventTagList'
+          description: ''
+  /api/hotels/:
+    get:
+      operationId: hotels_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - hotels
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedHotelList'
+          description: ''
+  /api/hotels/{id}/:
+    get:
+      operationId: hotels_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - hotels
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HotelDetail'
+          description: ''
+  /api/locations/:
+    get:
+      operationId: locations_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/locations/{id}/:
+    get:
+      operationId: locations_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Location'
+          description: ''
+  /api/locations/bycity/{city_id}:
+    get:
+      operationId: locations_bycity_list
+      parameters:
+        - in: path
+          name: city_id
+          schema:
+            type: integer
+          required: true
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/locations/byroute/{route_id}/:
+    get:
+      operationId: locations_byroute_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - in: path
+          name: route_id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/locations/bytag/{tag_id}/:
+    get:
+      operationId: locations_bytag_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - in: path
+          name: tag_id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/locations/cities/:
+    get:
+      operationId: locations_cities_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedCityList'
+          description: ''
+  /api/locations/tags/:
+    get:
+      operationId: locations_tags_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTagListList'
+          description: ''
+  /api/locations/tags/{id}/:
+    get:
+      operationId: locations_tags_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - locations
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Tag'
+          description: ''
+  /api/questions/:
+    get:
+      operationId: questions_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - questions
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedQuestionList'
+          description: ''
+  /api/reviews/{type}/{route_id}/:
+    get:
+      operationId: reviews_retrieve
+      parameters:
+        - in: path
+          name: route_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+      tags:
+        - reviews
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    post:
+      operationId: reviews_create
+      parameters:
+        - in: path
+          name: route_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+      tags:
+        - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    put:
+      operationId: reviews_update
+      parameters:
+        - in: path
+          name: route_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+      tags:
+        - reviews
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Review'
+          application/x-www-form-urlencoded:
+            schema:
+              $ref: '#/components/schemas/Review'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Review'
+        required: true
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Review'
+          description: ''
+    delete:
+      operationId: reviews_destroy
+      parameters:
+        - in: path
+          name: route_id
+          schema:
+            type: integer
+          required: true
+        - in: path
+          name: type
+          schema:
+            type: string
+          required: true
+      tags:
+        - reviews
+      security:
+        - knoxApiToken: []
+      responses:
+        '204':
+          description: No response body
+  /api/routes/:
+    get:
+      operationId: routes_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - routes
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          description: No response body
+  /api/routes/{id}/:
+    get:
+      operationId: routes_retrieve
+      parameters:
+        - in: path
+          name: id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - routes
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Route'
+          description: ''
+  /api/routes/bycity/{city_id}/:
+    get:
+      operationId: routes_bycity_list
+      parameters:
+        - in: path
+          name: city_id
+          schema:
+            type: integer
+          required: true
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - routes
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/routes/bytag/{tag_id}/:
+    get:
+      operationId: routes_bytag_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+        - in: path
+          name: tag_id
+          schema:
+            type: integer
+          required: true
+      tags:
+        - routes
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedLocationListList'
+          description: ''
+  /api/routes/tags/:
+    get:
+      operationId: routes_tags_list
+      parameters:
+        - name: page
+          required: false
+          in: query
+          description: A page number within the paginated result set.
+          schema:
+            type: integer
+      tags:
+        - routes
+      security:
+        - knoxApiToken: []
+      responses:
+        '200':
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaginatedTagListList'
+          description: ''
+components:
+  schemas:
+    BlankEnum:
+      enum:
+        - ''
+    City:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        photo:
+          type: string
+          format: uri
+        longitude:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        latitude:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+      required:
+        - id
+        - name
+        - photo
+    EventList:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        start_date:
+          type: string
+          format: date
+        location:
+          type: string
+          maxLength: 255
+        photos:
+          type: array
+          items:
+            type: integer
+      required:
+        - location
+        - name
+        - photos
+        - start_date
+    EventTag:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 50
+        picture:
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/PictureEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+      required:
+        - name
+    Hotel:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        raiting:
+          type: integer
+          maximum: 5
+          minimum: 1
+        address:
+          type: string
+      required:
+        - address
+        - name
+    HotelDetail:
+      type: object
+      properties:
+        name:
+          type: string
+          maxLength: 100
+        description:
+          type: string
+        raiting:
+          type: integer
+          maximum: 5
+          minimum: 1
+        address:
+          type: string
+        social_media:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        phone_number:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+      required:
+        - address
+        - description
+        - name
+        - phone_number
+        - social_media
+    Location:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        city:
+          allOf:
+            - $ref: '#/components/schemas/Nested'
+          readOnly: true
+        audios:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        photos:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+        - audios
+        - city
+        - id
+        - name
+        - photos
+    LocationList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 80
+        city:
+          type: integer
+        description:
+          type: string
+          nullable: true
+          maxLength: 1500
+        latitude:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+        longitude:
+          type: string
+          format: decimal
+          pattern: ^-?\d{0,3}(?:\.\d{0,6})?$
+          nullable: true
+      required:
+        - city
+        - id
+        - name
+    Login:
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+      required:
+        - email
+        - password
+    Nested:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        url:
+          type: string
+          format: uri
+          maxLength: 200
+        picture:
+          type: string
+          maxLength: 255
+        hotel:
+          type: integer
+      required:
+        - hotel
+        - id
+        - name
+        - picture
+        - url
+    NullEnum:
+      enum:
+        - null
+    PaginatedCityList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/City'
+    PaginatedEventListList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventList'
+    PaginatedEventTagList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/EventTag'
+    PaginatedHotelList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Hotel'
+    PaginatedLocationListList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/LocationList'
+    PaginatedQuestionList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/Question'
+    PaginatedTagListList:
+      type: object
+      properties:
+        count:
+          type: integer
+          example: 123
+        next:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=4
+        previous:
+          type: string
+          nullable: true
+          format: uri
+          example: http://api.example.org/accounts/?page=2
+        results:
+          type: array
+          items:
+            $ref: '#/components/schemas/TagList'
+    PictureEnum:
+      enum:
+        - photo
+        - active_live
+        - events
+        - square
+        - culture
+        - cafe
+        - places
+        - bed
+        - users1
+        - health
+        - shopping
+        - museum
+        - theater
+        - shopping_centre
+        - souvenir
+        - all
+        - binoculars
+        - historical
+        - religion
+        - stars
+        - glasses
+        - users2
+        - search
+        - route
+        - time
+        - distance
+        - date
+        - phone
+        - instagram
+        - telegram
+        - whatsapp
+      type: string
+      description: |-
+        * `photo` - иконка фото
+        * `active_live` - иконка актив образ жизни
+        * `events` - иконка события
+        * `square` - иконка сквер
+        * `culture` - иконка культура
+        * `cafe` - иконка кафе
+        * `places` - иконка достопримечательности
+        * `bed` - иконка кровать
+        * `users1` - иконка юзеры
+        * `health` - иконка здоровье
+        * `shopping` - иконка шоппинг
+        * `museum` - иконка музей
+        * `theater` - иконка театр
+        * `shopping_centre` - иконка тц
+        * `souvenir` - иконка сувенир
+        * `all` - иконка все
+        * `binoculars` - иконка бинокль
+        * `historical` - иконка исторические
+        * `religion` - иконка религия
+        * `stars` - иконка звезды
+        * `glasses` - иконка бокалы
+        * `users2` - иконка юзеры
+        * `search` - иконка поиск
+        * `route` - маршрут
+        * `time` - время
+        * `distance` - расстояние
+        * `date` - дата
+        * `phone` - иконка телефон
+        * `instagram` - иконка инстаграм
+        * `telegram` - telegram
+        * `whatsapp` - whatsapp
+    Question:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        title:
+          type: string
+          maxLength: 100
+        question:
+          type: string
+        answer:
+          type: string
+      required:
+        - answer
+        - id
+        - question
+        - title
+    Register:
+      type: object
+      properties:
+        first_name:
+          type: string
+        last_name:
+          type: string
+        email:
+          type: string
+          format: email
+        password:
+          type: string
+      required:
+        - email
+        - first_name
+        - last_name
+        - password
+    Review:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        review:
+          type: string
+        created_at:
+          type: string
+          format: date-time
+          readOnly: true
+        raiting:
+          type: integer
+          maximum: 5
+          minimum: 1
+        user:
+          type: integer
+        location:
+          type: integer
+          nullable: true
+        route:
+          type: integer
+          nullable: true
+      required:
+        - created_at
+        - id
+        - review
+        - user
+    Route:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 255
+        description:
+          type: string
+          nullable: true
+          maxLength: 1500
+        length:
+          type: number
+          format: double
+          nullable: true
+          description: Расстояние пешего маршрута в километрах
+        duration:
+          type: integer
+          maximum: 2147483647
+          minimum: -2147483648
+          nullable: true
+          description: Время в минутах для прохождения маршрута
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+        - id
+        - locations
+        - name
+        - tags
+    Tag:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        picture:
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/PictureEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        tags:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+        routes:
+          type: array
+          items:
+            $ref: '#/components/schemas/Nested'
+          readOnly: true
+      required:
+        - id
+        - name
+        - routes
+        - tags
+    TagList:
+      type: object
+      properties:
+        id:
+          type: integer
+          readOnly: true
+        name:
+          type: string
+          maxLength: 50
+        picture:
+          nullable: true
+          oneOf:
+            - $ref: '#/components/schemas/PictureEnum'
+            - $ref: '#/components/schemas/BlankEnum'
+            - $ref: '#/components/schemas/NullEnum'
+        tags:
+          type: array
+          items:
+            type: integer
+            nullable: true
+        routes:
+          type: array
+          items:
+            type: integer
+      required:
+        - id
+        - name
+        - routes
+    User:
+      type: object
+      properties:
+        first_name:
+          type: string
+          title: Имя
+          maxLength: 150
+        last_name:
+          type: string
+          title: Фамилия
+          maxLength: 150
+        email:
+          type: string
+          format: email
+          title: Почта
+          maxLength: 254
+  securitySchemes:
+    jwtAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+    knoxApiToken:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: Token-based authentication with required prefix "Token"

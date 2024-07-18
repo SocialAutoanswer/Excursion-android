@@ -20,6 +20,7 @@ import ru.exursion.databinding.ActivitySplashBinding
 import ru.exursion.domain.ProfileUseCase
 import ru.exursion.domain.settings.UserSettings
 import ru.exursion.ui.auth.AuthActivity
+import ru.exursion.ui.shared.ext.networkErrorDialog
 import ru.exursion.ui.shared.ext.startAnimatedVectorDrawable
 import javax.inject.Inject
 
@@ -42,7 +43,23 @@ class SplashActivity : AppCompatActivity() {
         AuthHeaderInterceptor.setSessionToken(userSettings.token ?: "")
 
         viewModel.profileVerified.observe(this) { verified ->
-            startActivity(Intent(this, if (userSettings.token == null || !verified) AuthActivity::class.java else MainActivity::class.java))
+            if (verified == null) {
+                networkErrorDialog {
+                    onDismiss { finish() }
+                    onNeutralClick { finish() }
+                }
+                return@observe
+            }
+
+            val intent = if (userSettings.token == null || verified == false) {
+                Intent(this, AuthActivity::class.java).apply {
+                    putExtra(AuthActivity.FRAGMENT_TO_NAVIGATE, R.id.enter_code_fragment)
+                }
+            } else {
+                Intent(this, MainActivity::class.java)
+            }
+
+            startActivity(intent)
             finish()
         }
 
@@ -61,8 +78,8 @@ class SplashViewModel @Inject constructor(
 
     private fun invokeDisposable(block: () -> Disposable) = compositeDisposable.add(block())
 
-    private val _profileVerified = MutableLiveData<Boolean>()
-    val profileVerified: LiveData<Boolean> = _profileVerified
+    private val _profileVerified = MutableLiveData<Boolean?>()
+    val profileVerified: LiveData<Boolean?> = _profileVerified
 
     fun getProfile() = invokeDisposable {
         profileUseCase.getProfile()
@@ -72,7 +89,7 @@ class SplashViewModel @Inject constructor(
                 _profileVerified.postValue(when (it) {
                     is ProfileNotVerified -> false
                     is InvalidToken -> false
-                    else -> true
+                    else -> null
                 })
             })
     }
