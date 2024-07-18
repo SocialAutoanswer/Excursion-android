@@ -8,6 +8,7 @@ import javax.inject.Inject
 class QuestionMapper @Inject constructor(): Mapper<QuestionDto, Question> {
 
     override fun map(input: QuestionDto) = Question(
+        input.id ?: -1,
         input.question ?: "",
         input.answer ?: ""
     )

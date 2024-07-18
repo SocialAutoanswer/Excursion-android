@@ -11,21 +11,21 @@
         android:id="@+id/notify_image"
         android:layout_width="match_parent"
         android:layout_height="250dp"
-        android:src="@color/cardview_dark_background"/>
+        android:src="@drawable/ic_cross_rounded"/>
 
     <TextView
         android:id="@+id/notify_text"
         style="@style/Text.H2.Bold"
         android:gravity="center"
         android:layout_marginTop="26dp"
-        android:text="Уведомление"/>
+        android:text="@string/screen_empty_list_title"/>
 
     <TextView
         android:id="@+id/notify_description"
         style="@style/Text.H3"
         android:gravity="center"
         android:layout_marginTop="16dp"
-        android:text="Что можно сделать"/>
+        android:text="@string/screen_empty_list_description"/>
 
 
 </LinearLayout>

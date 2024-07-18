@@ -17,7 +17,7 @@ class ProfileViewModel @Inject constructor(
         profileUseCase.getProfile()
             .doOnSubscribe { _state.postValue(ProfileState.Loading) }
             .subscribe({ profile ->
-                _state.postValue(ProfileState.ProfileReceived(profile.getOrNull()))
+                _state.postValue(ProfileState.ProfileReceived(profile))
             }, {
                 _effect.postValue(ProfileEffect.Error)
             })
@@ -26,8 +26,7 @@ class ProfileViewModel @Inject constructor(
     fun editProfile(user: User) = invokeDisposable {
         profileUseCase.editProfile(user)
             .doOnSubscribe { _state.postValue(ProfileState.Loading) }
-            .subscribe(
-                {
+            .subscribe({
                     _state.postValue(ProfileState.ProfileEdited)
                 }, {
                     _effect.postValue(ProfileEffect.Error)

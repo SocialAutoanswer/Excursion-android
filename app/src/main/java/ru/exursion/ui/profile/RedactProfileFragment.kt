@@ -42,11 +42,11 @@ class RedactProfileFragment :
 
         saveButton.setOnClickListener{
             viewModel.editProfile(
-                User().apply {
-                    firstName = binding.nameInput.toString()
-                    lastName = binding.lastNameInput.toString()
+                User(
+                    firstName = binding.nameInput.toString(),
+                    lastName = binding.lastNameInput.toString(),
                     email = binding.emailInput.toString()
-                }
+                )
             )
         }
 
@@ -86,6 +86,7 @@ class RedactProfileFragment :
         return addState(ProfileViewModel.ProfileState.ProfileDeleted::class) {
             val activity = activity ?: return@addState
             startActivity(Intent(activity, AuthActivity::class.java))
+            activity.finish()
         }
     }
 
@@ -93,6 +94,7 @@ class RedactProfileFragment :
         return addEffect(ProfileViewModel.ProfileEffect.Error::class) {
             networkErrorDialog {
                 onClick { it?.dismiss() }
+                onDismiss { it?.dismiss() }
             }
         }
     }

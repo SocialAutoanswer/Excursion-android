@@ -58,6 +58,7 @@ class ProfileFragment :
                     userSettings.clearAllPrefs()
                     it?.dismiss()
                     startActivity(Intent(activity, AuthActivity::class.java))
+                    activity.finish()
                 }
             }
         }

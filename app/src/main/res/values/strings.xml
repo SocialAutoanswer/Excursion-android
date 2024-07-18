@@ -109,4 +109,7 @@
     <string name="dialog_logout_title">Вы действительно \n хотите выйти?</string>
     <string name="dialog_logout_confirm">Да</string>
     <string name="dialog_logout_reject">Нет</string>
+    
+    <string name="screen_empty_list_title">Ничего не удалось найти</string>
+    <string name="screen_empty_list_description">Пожалуйста, попробуйте обновить страницу</string>
 </resources>

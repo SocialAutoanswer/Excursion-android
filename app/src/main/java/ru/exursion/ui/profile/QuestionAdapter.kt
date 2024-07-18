@@ -12,11 +12,10 @@ import ru.exursion.data.models.Question
 import ru.exursion.databinding.ItemFrequentlyQuestionBinding
 
 
-class DropDownQuestionAdapter(
-
-) : PagingDataAdapter<Question, ItemViewHolder<ItemFrequentlyQuestionBinding, Question>>(
-    QuestionsDiffUtilCallback
-) {
+class DropDownQuestionAdapter :
+    PagingDataAdapter<Question, ItemViewHolder<ItemFrequentlyQuestionBinding, Question>>(
+        QuestionsDiffUtilCallback
+    ) {
 
     override fun onBindViewHolder(
         holder: ItemViewHolder<ItemFrequentlyQuestionBinding, Question>,
@@ -51,7 +50,7 @@ class DropDownQuestionAdapter(
 
 private object QuestionsDiffUtilCallback : DiffUtil.ItemCallback<Question>() {
     override fun areItemsTheSame(oldItem: Question, newItem: Question): Boolean {
-        return oldItem.answer == newItem.answer
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Question, newItem: Question): Boolean {

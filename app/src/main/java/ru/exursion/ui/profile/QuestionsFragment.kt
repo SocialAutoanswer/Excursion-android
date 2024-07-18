@@ -3,7 +3,6 @@ package ru.exursion.ui.profile
 import android.content.Context
 import android.view.View
 import android.widget.Toast
-import androidx.appcompat.content.res.AppCompatResources
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -39,8 +38,6 @@ class QuestionsFragment: StateFragment<FragmentQuestionsBinding, ProfileViewMode
     }
 
     override fun setUpViews(view: View): Unit = with(binding) {
-        setUpEmptyView()
-
         header.title.text = getString(R.string.screen_profile_faq)
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
         questionRecycler.also {
@@ -50,18 +47,13 @@ class QuestionsFragment: StateFragment<FragmentQuestionsBinding, ProfileViewMode
 
         adapter.addLoadStateListener { loadState ->
             if(loadState.prepend.endOfPaginationReached) {
-                binding.emptyLayout.root.isVisible = adapter.itemCount < 1
+                binding.emptyLayout.root.isVisible = adapter.itemCount == 1
             }
         }
 
         refreshLayout.setOnRefreshListener { viewModel.getQuestions() }
     }
 
-    private fun setUpEmptyView() = with(binding.emptyLayout) {
-        notifyText.text = getString(R.string.screen_faq_empty_list_title)
-        notifyDescription.text = getString(R.string.screen_faq_empty_list_description)
-        notifyImage.setImageDrawable(AppCompatResources.getDrawable(root.context, R.drawable.ic_no_network))
-    }
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
