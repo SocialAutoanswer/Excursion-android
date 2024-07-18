@@ -9,5 +9,9 @@ interface UserSettings {
     val token: String?
     val avatarImage: String?
 
+    fun clearAllPrefs()
+
     fun fillAllPrefs(user: User?)
+
+    fun getUser(): User
 }

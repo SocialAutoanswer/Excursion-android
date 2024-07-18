@@ -10,13 +10,13 @@ import javax.inject.Inject
 
 interface AuthUseCase {
 
-    fun signUp(user: User): Single<Result<User>>
+    fun signUp(user: User): Single<User>
 
-    fun signIn(user: User): Single<Result<User>>
+    fun signIn(user: User): Single<User>
 
-    fun sendAuthCode(): Single<Result<Unit>>
+    fun sendAuthCode(): Single<Unit>
 
-    fun confirmAuthCode(code: String): Single<Result<Unit>>
+    fun confirmAuthCode(code: String): Single<Unit>
 
 }
 
@@ -28,55 +28,51 @@ class AuthUseCaseImpl @Inject constructor(
 
     override fun signUp(user: User) =
         repository.signUp(user)
-            .flatMap { result ->
-                if (result.isFailure) {
-                    Single.error(result.exceptionOrNull() ?: Exception())
-                } else {
-                    Single.just(result)
-                }
-            }
             .doAfterSuccess {
                 if(it.isFailure) return@doAfterSuccess
 
                 userSettings.fillAllPrefs(it.getOrNull())
                 AuthHeaderInterceptor.setSessionToken(it.getOrNull()?.token ?: "")
             }
+            .map { result ->
+                if (result.isFailure) {
+                    error(result.exceptionOrNull() ?: Exception())
+                }
+
+                result.getOrNull() ?: User()
+            }
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun signIn(user: User) =
         repository.login(user)
-            .flatMap { result ->
-                if (result.isFailure) {
-                    Single.error(result.exceptionOrNull() ?: Exception())
-                } else {
-                    Single.just(result)
-                }
-            }
             .doAfterSuccess {
                 if(it.isFailure) return@doAfterSuccess
                 userSettings.fillAllPrefs(it.getOrNull())
+            }
+            .map { result ->
+                if (result.isFailure) {
+                    error(result.exceptionOrNull() ?: Exception())
+                }
+
+                result.getOrNull() ?: User()
             }
             .observeOn(AndroidSchedulers.mainThread())
 
 
     override fun sendAuthCode() =
         repository.sendAuthCode()
-            .flatMap { result ->
+            .map { result ->
                 if (result.isFailure) {
-                    Single.error(result.exceptionOrNull() ?: Exception())
-                } else {
-                    Single.just(result)
+                    error(result.exceptionOrNull() ?: Exception())
                 }
             }
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun confirmAuthCode(code: String) =
         repository.confirmAuthCode(code)
-            .flatMap { result ->
+            .map { result ->
                 if (result.isFailure) {
-                    Single.error(result.exceptionOrNull() ?: Exception())
-                } else {
-                    Single.just(result)
+                    error(result.exceptionOrNull() ?: Exception())
                 }
             }
             .observeOn(AndroidSchedulers.mainThread())

@@ -10,6 +10,7 @@ import ru.exursion.data.IncorrectPassword
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.EmailConfirmCode
 import ru.exursion.data.models.User
+import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 import ru.exursion.data.network.ExcursionApi
 import javax.inject.Inject
@@ -27,16 +28,17 @@ interface AuthRepository {
 
 class AuthRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
-    private val userMapper: Mapper<UserRequestDto, User>
+    private val userMapper: Mapper<UserDto, User>,
+    private val userRequestMapper: Mapper<UserRequestDto, User>
 ) : AuthRepository {
 
     override fun login(user: User): Single<Result<User>> {
-        return api.login(user.toDto())
+        return api.login(userMapper.reverseMap(user))
             .subscribeOn(Schedulers.io())
             .map {
                 if (it.isSuccessful) {
                     val userRequestDto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    Result.success(userMapper.map(userRequestDto))
+                    Result.success(userRequestMapper.map(userRequestDto))
                 } else {
                     when (it.code()) {
                         500 -> Result.failure(InternalServerException())
@@ -49,12 +51,12 @@ class AuthRepositoryImpl @Inject constructor(
     }
 
     override fun signUp(user: User): Single<Result<User>> {
-        return api.signUp(user.toDto())
+        return api.signUp(userMapper.reverseMap(user))
             .subscribeOn(Schedulers.io())
             .map {
                 if (it.isSuccessful) {
                     val userRequestDto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    Result.success(userMapper.map(userRequestDto))
+                    Result.success(userRequestMapper.map(userRequestDto))
                 } else {
                     when (it.code()) {
                         500 -> Result.failure(InternalServerException())

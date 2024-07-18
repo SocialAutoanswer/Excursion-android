@@ -21,13 +21,11 @@ data class EmailConfirmCode(
 )
 
 data class User(
-    var firstName: String?,
-    var lastName: String?,
-    var birthDate: LocalDate?,
-    var email: String?,
-    var token: String?,
-    var avatarImage: String?,
-    var password: String?
-) {
-    constructor() : this(null, null, null, null, null, null, null)
-}
+    var firstName: String? = "",
+    var lastName: String? = "",
+    var birthDate: LocalDate? = null,
+    var email: String? = "",
+    var token: String? = "",
+    var avatarImage: String? = "",
+    var password: String? = ""
+)

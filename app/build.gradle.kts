@@ -105,6 +105,8 @@ dependencies {
     implementation(Libs.Common.codeEditText)
 
     implementation(Libs.Common.threetenabp)
+
+    implementation(Libs.AndroidX.swipeRefreshLayout)
 }
 
 fun isNonStable(version: String): Boolean {

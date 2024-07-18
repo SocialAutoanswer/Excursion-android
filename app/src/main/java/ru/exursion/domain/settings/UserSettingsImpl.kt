@@ -37,6 +37,7 @@ class UserSettingsImpl @Inject constructor(
         get() = prefs.getString(AVATAR_IMAGE_PREFS_KEY, null)
         set(name) = prefs.edit().putString(AVATAR_IMAGE_PREFS_KEY, name).apply()
 
+    override fun clearAllPrefs() = prefs.edit().clear().apply()
 
     override fun fillAllPrefs(user: User?) {
         firstName = user?.firstName
@@ -45,4 +46,6 @@ class UserSettingsImpl @Inject constructor(
         token = user?.token
         avatarImage = user?.avatarImage
     }
+
+    override fun getUser() = User(firstName, lastName, null, email, token, avatarImage, null)
 }

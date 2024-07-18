@@ -1,14 +1,11 @@
 package ru.exursion.data.locations
 
-import androidx.paging.Pager
-import androidx.paging.PagingConfig
 import androidx.paging.PagingData
-import androidx.paging.PagingSource
-import androidx.paging.rxjava3.flowable
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
+import ru.bibaboba.kit.util.createPagingDataFlowable
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.locations.paging.CitiesPagingSource
@@ -43,15 +40,15 @@ class LocationsRepositoryImpl @Inject constructor(
     }
 
     override fun getCities(): Flowable<PagingData<City>> {
-        return createPagingDataFlowable { citiesPagingSource }
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { citiesPagingSource }
     }
 
     override fun getTags(): Flowable<PagingData<Tag>> {
-        return createPagingDataFlowable { tagsPagingSource }
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { tagsPagingSource }
     }
 
     override fun getRoutesByCity(cityId: Long): Flowable<PagingData<Route>> {
-        return createPagingDataFlowable { routesPagingSourceFactory.create(cityId) }
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { routesPagingSourceFactory.create(cityId) }
     }
 
     override fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>> {
@@ -70,13 +67,5 @@ class LocationsRepositoryImpl @Inject constructor(
             }
     }
 
-    private fun <K: Any, V: Any> createPagingDataFlowable(
-        pageSize: Int = DEFAULT_PAGE_SIZE,
-        pagingSourceFactory: () -> PagingSource<K, V>
-    ): Flowable<PagingData<V>> {
-        return Pager(
-            PagingConfig(pageSize = pageSize),
-            pagingSourceFactory = pagingSourceFactory
-        ).flowable
-    }
+
 }
