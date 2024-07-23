@@ -6,8 +6,10 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.bibaboba.kit.ui.getDrawableByName
+import ru.exursion.R
 import ru.exursion.data.models.Tag
 import ru.exursion.databinding.ItemSelectBinding
+import ru.exursion.ui.shared.ext.setDrawable
 
 
 class TagsPagingAdapter(
@@ -26,14 +28,13 @@ class TagsPagingAdapter(
             with(binding) {
                 title.text = tag.name
 
-                startIcon.context.getDrawableByName(tag.iconName)?.let {
-                    startIcon.isVisible = true
-                    startIcon.setImageDrawable(it)
-                }
+                startIcon.isVisible = true
 
-                root.setOnClickListener {
-                    onTagClick(tag)
-                }
+                startIcon.context.getDrawableByName(tag.iconName)?.let {
+                    startIcon.setImageDrawable(it)
+                } ?: run { startIcon.setDrawable(R.drawable.ic_cross) }
+
+                root.setOnClickListener { onTagClick(tag) }
             }
         }
     }
