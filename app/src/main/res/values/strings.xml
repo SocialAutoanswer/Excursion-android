@@ -114,4 +114,6 @@
     
     <string name="screen_empty_list_title">Ничего не удалось найти</string>
     <string name="screen_empty_list_description">Пожалуйста, попробуйте обновить страницу</string>
+
+    <string name="screen_map_search_hint">Введите запрос...</string>
 </resources>

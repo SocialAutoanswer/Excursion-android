@@ -43,6 +43,7 @@ object Versions {
     const val threetenabp = "1.0.3"
     const val glide = "4.16.0"
     const val codeEditText = "1.2.0"
+    const val ysndexMapKit = "4.6.1-full"
 }
 
 object Libs {
@@ -96,5 +97,6 @@ object Libs {
         const val glideCompiler = "com.github.bumptech.glide:compiler:${Versions.glide}"
         const val glideOkHttpIntegration = "com.github.bumptech.glide:okhttp3-integration:${Versions.glide}"
         const val codeEditText = "com.github.jakode2020:VerifyCodeEditText:${Versions.codeEditText}"
+        const val yandexMapKit = "com.yandex.android:maps.mobile:${Versions.ysndexMapKit}"
     }
 }

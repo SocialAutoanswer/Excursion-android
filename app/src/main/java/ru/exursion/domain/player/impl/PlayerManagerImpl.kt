@@ -1,18 +1,15 @@
-package ru.excursion.playground.player.impl
+package ru.exursion.domain.player.impl
 
 import android.content.Context
 import android.content.Intent
-import ru.excursion.playground.player.ACTION_PAUSE
-import ru.excursion.playground.player.ACTION_PLAY
-import ru.excursion.playground.player.ACTION_SET_MEDIA
-import ru.excursion.playground.player.ACTION_SET_POSITION
-import ru.excursion.playground.player.MediaPlayerService
-import ru.excursion.playground.player.interfaces.MediaPlayerController
-import ru.excursion.playground.player.interfaces.OnPlayerClickListener
-import ru.excursion.playground.player.interfaces.PlayerManager
-import javax.inject.Singleton
+import ru.exursion.domain.player.ACTION_PAUSE
+import ru.exursion.domain.player.ACTION_PLAY
+import ru.exursion.domain.player.ACTION_SET_MEDIA
+import ru.exursion.domain.player.ACTION_SET_POSITION
+import ru.exursion.domain.player.MediaPlayerService
+import ru.exursion.domain.player.interfaces.MediaPlayerController
+import ru.exursion.domain.player.interfaces.PlayerManager
 
-@Singleton
 class PlayerManagerImpl(private val context: Context): PlayerManager {
 
     override fun play() = callService(ACTION_PLAY)
@@ -23,8 +20,9 @@ class PlayerManagerImpl(private val context: Context): PlayerManager {
 
     override fun setPosition(position: Int) = callService(ACTION_SET_POSITION, "position", position)
 
-    override fun getDurationObservable() = MediaPlayerController.observeDuration()
     override fun getIsPlayingObservable() = MediaPlayerController.observeIsPlaying()
+
+    override fun getCurrentPositionObservable() = MediaPlayerController.observeCurrentPosition()
 
     private fun callService(act: String) {
         context.startService(

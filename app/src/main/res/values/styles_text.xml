@@ -182,6 +182,14 @@
         <item name="android:textSize">12sp</item>
     </style>
 
+    <style name="Text.H5.MarginHorizontal_16dp">
+        <item name="android:layout_marginHorizontal">16dp</item>
+    </style>
+
+    <style name="Text.H5.MarginHorizontal_16dp.MarginTop_8dp">
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+
     <style name="Text.H5.MarginHorizontal_25dp">
         <item name="android:layout_marginHorizontal">25dp</item>
     </style>
@@ -242,6 +250,14 @@
     <style name="Text.H5.Negative">
         <item name="android:textColor">?attr/exc_text_color_negative</item>
         <item name="android:gravity">center</item>
+    </style>
+
+    <style name="Text.H6" parent="WrapContent">
+        <item name="android:textSize">8sp</item>
+    </style>
+
+    <style name="Text.H6.Grey">
+        <item name="android:textColor">?attr/exc_text_color_hint</item>
     </style>
 
 </resources>

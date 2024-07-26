@@ -1,12 +1,7 @@
 package ru.exursion.data.models
 
 import com.google.gson.annotations.SerializedName
-
-data class CitiesPageDto(
-    @SerializedName("next") val nextPageLink: String?,
-    @SerializedName("previous") val previousPageLink: String?,
-    @SerializedName("data") val cities: List<CityDto?>?,
-)
+import com.yandex.mapkit.geometry.Point
 
 data class CityDto(
     @SerializedName("id") val id: Long?,
@@ -20,6 +15,5 @@ data class City(
     val id: Long,
     val name: String,
     val image: String,
-    val longitude: String?,
-    val latitude: String?,
+    val point: Point?
 )

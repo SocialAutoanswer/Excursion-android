@@ -1,6 +1,10 @@
 package ru.exursion.di
 
 import android.content.Context
+import android.media.AudioAttributes
+import android.media.AudioFocusRequest
+import android.media.AudioManager
+import android.media.MediaPlayer
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import dagger.Binds
@@ -17,14 +21,23 @@ import ru.exursion.data.auth.UserRequestMapper
 import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
+import ru.exursion.data.locations.mapper.AudioLocationMapper
+import ru.exursion.data.locations.mapper.AudioMapper
 import ru.exursion.data.locations.mapper.LocationsMapper
+import ru.exursion.data.locations.mapper.PhotoMapper
 import ru.exursion.data.locations.mapper.RouteDetailsMapper
 import ru.exursion.data.locations.mapper.RoutesMapper
 import ru.exursion.data.locations.mapper.TagsMapper
+import ru.exursion.data.models.Audio
+import ru.exursion.data.models.AudioDto
+import ru.exursion.data.models.AudioLocation
+import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Photo
+import ru.exursion.data.models.PhotoDto
 import ru.exursion.data.models.Question
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.Review
@@ -50,12 +63,17 @@ import ru.exursion.data.reviews.ReviewsRepositoryImpl
 import ru.exursion.data.reviews.mapper.ReviewMapper
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
+import ru.exursion.domain.LocationUseCase
+import ru.exursion.domain.LocationUseCaseImpl
 import ru.exursion.domain.RoutesUseCase
 import ru.exursion.domain.RoutesUseCaseImpl
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
+import ru.exursion.domain.player.impl.PlayerManagerImpl
+import ru.exursion.domain.player.interfaces.PlayerManager
 import ru.exursion.ui.SplashViewModel
+import ru.exursion.ui.map.MapViewModel
 import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
@@ -66,6 +84,28 @@ class AppModule(private val context: Context) {
 
     @Provides
     fun provideApplicationContext() = context
+
+    @Provides
+    fun provideAudioAttributes(): AudioAttributes =
+        AudioAttributes.Builder()
+            .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+            .setUsage(AudioAttributes.USAGE_MEDIA)
+            .build()
+
+    @Provides
+    fun provideMediaPlayer(audioAttributes: AudioAttributes) = MediaPlayer().apply {
+        setAudioAttributes(audioAttributes)
+    }
+
+
+    @Provides
+    fun provideAudioFocusBuilder(audioAttributes: AudioAttributes) : AudioFocusRequest.Builder =
+        AudioFocusRequest.Builder(AudioManager.AUDIOFOCUS_GAIN)
+            .setAudioAttributes(audioAttributes)
+            .setAcceptsDelayedFocusGain(true)
+
+    @Provides
+    fun providePlayerManager() : PlayerManager = PlayerManagerImpl(context)
 
     @Module
     interface Bind {
@@ -86,6 +126,12 @@ class AppModule(private val context: Context) {
         fun bindQuestionMapper(impl: QuestionMapper): Mapper<QuestionDto, Question>
         @Binds
         fun bindUserMapper(impl: UserMapper): Mapper<UserDto, User>
+        @Binds
+        fun bindPhotoMapper(impl: PhotoMapper): Mapper<PhotoDto, Photo>
+        @Binds
+        fun bindAudioMapper(impl: AudioMapper): Mapper<AudioDto, Audio>
+        @Binds
+        fun bindAudioLocationMapper(impl: AudioLocationMapper): Mapper<AudioLocationDto, AudioLocation>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
@@ -98,6 +144,8 @@ class AppModule(private val context: Context) {
         fun bindCitiesUseCase(impl: CitiesUseCaseImpl): CitiesUseCase
         @Binds
         fun bindRoutesUseCase(impl: RoutesUseCaseImpl): RoutesUseCase
+        @Binds
+        fun bindLocationUseCase(impl: LocationUseCaseImpl): LocationUseCase
 
         @Binds
         fun bindUserRequestMapper(impl: UserRequestMapper): Mapper<UserRequestDto, User>
@@ -144,6 +192,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(ProfileViewModel::class)
         fun bindProfileViewModel(viewModel: ProfileViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(MapViewModel::class)
+        fun bindMapViewModel(viewModel: MapViewModel): ViewModel
     }
 
 }

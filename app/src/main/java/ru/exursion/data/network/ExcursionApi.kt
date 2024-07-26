@@ -11,8 +11,10 @@ import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.bibaboba.kit.retrofit.EndpointUrl
 import ru.exursion.BuildConfig
-import ru.exursion.data.models.CitiesPageDto
+import ru.exursion.data.models.AudioLocationDto
+import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.EmailConfirmCode
+import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
@@ -64,7 +66,7 @@ interface ExcursionApi {
     @GET("locations/cities/")
     fun requestCitiesPage(
         @Query("page") page: Int
-    ): Single<Response<CitiesPageDto>>
+    ): Single<Response<PageDto<CityDto>>>
 
     @GET("locations/tags/")
     fun requestTags(
@@ -86,4 +88,15 @@ interface ExcursionApi {
     fun requestRouteReviews(
         @Path("routeId") routeId: Long,
     ): Single<Response<List<ReviewDto>>>
+
+    @GET("locations/bycity/{cityId}")
+    fun requestLocationsByCity(
+        @Path("cityId") cityId: Long,
+        @Query("page") page: Int
+    ): Single<Response<PageDto<LocationDto>>>
+
+    @GET("locations/{id}")
+    fun getLocationById(
+        @Path("id") locationId: Long
+    ): Single<Response<AudioLocationDto>>
 }

@@ -1,12 +1,10 @@
-package ru.excursion.playground.player.interfaces
+package ru.exursion.domain.player.interfaces
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Observable
 import io.reactivex.rxjava3.subjects.BehaviorSubject
 
 interface MediaPlayerController {
-
-    var currentPosition: Int
 
     fun playMedia()
 
@@ -20,17 +18,20 @@ interface MediaPlayerController {
 
     fun setMedia(mediaLink: String)
 
-    fun updateDuration(duration: Int) = durationSubject.onNext(duration)
+    fun setPosition(position: Int)
+
     fun updateIsPlaying(isPlaying: Boolean) = isPlayingSubject.onNext(isPlaying)
 
-    companion object {
-        private val durationSubject = BehaviorSubject.create<Int>()
-        private val isPlayingSubject = BehaviorSubject.create<Boolean>()
+    fun updateCurrentPosition(currentPosition: Int) = currentPositionSubject.onNext(currentPosition)
 
-        fun observeDuration(): Observable<Int> = durationSubject.hide()
-            .observeOn(AndroidSchedulers.mainThread())
+    companion object {
+        private val isPlayingSubject = BehaviorSubject.create<Boolean>()
+        private val currentPositionSubject = BehaviorSubject.create<Int>()
 
         fun observeIsPlaying(): Observable<Boolean> = isPlayingSubject.hide()
+            .observeOn(AndroidSchedulers.mainThread())
+
+        fun observeCurrentPosition(): Observable<Int> = currentPositionSubject.hide()
             .observeOn(AndroidSchedulers.mainThread())
     }
 

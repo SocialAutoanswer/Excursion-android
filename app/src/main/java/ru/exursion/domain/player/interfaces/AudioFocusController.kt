@@ -1,6 +1,5 @@
-package ru.excursion.playground.player.interfaces
+package ru.exursion.domain.player.interfaces
 
-import android.media.AudioManager
 
 interface AudioFocusController {
     fun requestAudioFocus(): Boolean

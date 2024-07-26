@@ -1,6 +1,7 @@
 package ru.exursion
 
 import android.app.Application
+import com.yandex.mapkit.MapKitFactory
 import ru.bibaboba.kit.ui.utils.ThemeUtil
 import ru.exursion.data.network.AuthHeaderInterceptor
 import ru.exursion.di.AppComponent
@@ -25,6 +26,8 @@ class App : Application() {
             .appModule(AppModule(applicationContext))
             .build()
             .also { it.inject(this) }
+
+        MapKitFactory.setApiKey(BuildConfig.MAPKIT_API_KEY)
 
         userSettings.token?.let { AuthHeaderInterceptor.setSessionToken(it) }
         ThemeUtil.setDarkThemeState(appSettings.darkThemeState)

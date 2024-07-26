@@ -1,4 +1,4 @@
-package ru.excursion.playground.player
+package ru.exursion.domain.player
 
 const val ACTION_PLAY: String = "ru.excursion.action.PLAY"
 const val ACTION_PAUSE: String = "ru.excursion.action.PAUSE"

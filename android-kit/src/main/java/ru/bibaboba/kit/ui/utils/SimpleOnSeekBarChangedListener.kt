@@ -1,4 +1,4 @@
-package ru.excursion.playground.player.ui
+package ru.bibaboba.kit.ui.utils
 
 import android.widget.SeekBar
 

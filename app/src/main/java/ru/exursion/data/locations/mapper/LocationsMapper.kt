@@ -1,5 +1,6 @@
 package ru.exursion.data.locations.mapper
 
+import com.yandex.mapkit.geometry.Point
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
@@ -10,8 +11,7 @@ class LocationsMapper @Inject constructor() : Mapper<LocationDto, Location> {
         id = input.id ?: -1,
         name = input.name ?: "",
         description = input.description ?: "",
-        longitude = input.longitude ?: 0.0,
-        latitude = input.latitude ?: 0.0,
+        point = Point(input.latitude ?: 0.0, input.longitude ?: 0.0),
         cityId = input.cityId ?: 0L,
         routesIds = input.routes?.filterNotNull() ?: emptyList()
     )

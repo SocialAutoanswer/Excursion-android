@@ -1,10 +1,10 @@
-package ru.excursion.playground.player.impl
+package ru.exursion.domain.player.impl
 
 import android.media.AudioFocusRequest
 import android.media.AudioManager
-import ru.excursion.playground.player.interfaces.AudioFocusCallbacks
-import ru.excursion.playground.player.interfaces.AudioFocusController
-import ru.excursion.playground.player.interfaces.MediaPlayerController
+import ru.exursion.domain.player.interfaces.AudioFocusCallbacks
+import ru.exursion.domain.player.interfaces.AudioFocusController
+import ru.exursion.domain.player.interfaces.MediaPlayerController
 
 
 class AudioFocusControllerImpl(
