@@ -29,8 +29,8 @@ class QuestionPagingSource @Inject constructor(
                         questionMapper.mapList(it.filterNotNull())
                     } ?: emptyList()
 
-                    val nextPageNumber = if (pageDto?.nextPage == null) null else pageNumber.inc()
-                    val previousPageNumber = if (pageDto?.previousPage == null) null else pageNumber.dec()
+                    val nextPageNumber = if (pageDto?.nextPageLink == null) null else pageNumber.inc()
+                    val previousPageNumber = if (pageDto?.previousPageLink == null) null else pageNumber.dec()
 
                     LoadResult.Page(data, previousPageNumber, nextPageNumber)
                 } else {

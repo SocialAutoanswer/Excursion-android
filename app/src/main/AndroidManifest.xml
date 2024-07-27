@@ -18,6 +18,17 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31">
 
+        <service android:name="ru.exursion.domain.player.MediaPlayerService"
+            android:exported="true">
+            <intent-filter>
+                <action android:name="ru.exursion.action.PLAY"/>
+                <action android:name="ru.exursion.action.PAUSE"/>
+                <action android:name="ru.exursion.action.RESUME"/>
+                <action android:name="ru.exursion.action.STOP"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </service>
+
         <activity
             android:name=".ui.SplashActivity"
             android:exported="true">

@@ -11,7 +11,11 @@ import ru.exursion.data.InternalServerException
 import ru.exursion.data.locations.paging.CitiesPagingSource
 import ru.exursion.data.locations.paging.RoutesPagingSource
 import ru.exursion.data.locations.paging.TagsPagingSource
+import ru.exursion.data.models.AudioLocation
+import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
+import ru.exursion.data.models.Location
+import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
@@ -25,6 +29,8 @@ interface LocationsRepository {
     fun getTags(): Flowable<PagingData<Tag>>
     fun getRoutesByCity(cityId: Long): Flowable<PagingData<Route>>
     fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>>
+    fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>>
+    fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
 }
 
 class LocationsRepositoryImpl @Inject constructor(
@@ -32,7 +38,9 @@ class LocationsRepositoryImpl @Inject constructor(
     private val routeDetailsMapper: Mapper<RouteDetailsDto, RouteDetails>,
     private val citiesPagingSource: CitiesPagingSource,
     private val tagsPagingSource: TagsPagingSource,
-    private val routesPagingSourceFactory: RoutesPagingSource.Factory
+    private val routesPagingSourceFactory: RoutesPagingSource.Factory,
+    private val locationMapper: Mapper<LocationDto, Location>,
+    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>
 ) : LocationsRepository {
 
     companion object {
@@ -67,5 +75,42 @@ class LocationsRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>> {
+        return api.requestLocationsByCity(cityId, 1)
+            .subscribeOn(Schedulers.io())
+            .map {
+                if(it.isSuccessful) {
+                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                    
+                    val data = dto.data?.let { locations ->
+                        locationMapper.mapList(locations.filterNotNull())
+                    } ?: emptyList()
+                    
+                    Result.success(data)
+                    
+                } else {
+                    when(it.code()) {
+                        500 -> Result.failure(InternalServerException())
+                        else -> Result.failure(CanNotGetDataException())
+                    }
+                }
+            }
+    }
+
+    override fun getLocationById(locationId: Long): Single<Result<AudioLocation>> {
+        return api.getLocationById(locationId)
+            .subscribeOn(Schedulers.io())
+            .map {
+                if(it.isSuccessful) {
+                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                    Result.success(audioLocationMapper.map(dto))
+                } else {
+                    when(it.code()) {
+                        500 -> Result.failure(InternalServerException())
+                        else -> Result.failure(CanNotGetDataException())
+                    }
+                }
+            }
+    }
 
 }

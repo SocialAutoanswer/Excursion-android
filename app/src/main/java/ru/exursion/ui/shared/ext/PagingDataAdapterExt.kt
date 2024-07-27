@@ -3,7 +3,6 @@ package ru.exursion.ui.shared.ext
 import android.content.Intent
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
@@ -43,8 +42,10 @@ fun <T: Any, VH: ViewHolder> PagingDataAdapter<T, VH>.addErrorHandlers(
     }
 }
 
-private val defaultUnauthorizedHandler: ErrorHandler = {
-    findNavController().navigate(R.id.choose_auth_method_fragment)
+private val defaultUnauthorizedHandler: ErrorHandler = lambda@{
+    val activity = this.activity ?: return@lambda
+    startActivity(Intent(activity, AuthActivity::class.java))
+    activity.finish()
 }
 
 // TODO: мб нужно будут переписать под заглушки в списке

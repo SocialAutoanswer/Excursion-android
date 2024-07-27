@@ -4,9 +4,9 @@ import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.DefaultRxPagingSource
-import ru.exursion.data.network.ExcursionApi
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
+import ru.exursion.data.network.ExcursionApi
 import javax.inject.Inject
 
 class CitiesPagingSource @Inject constructor(
@@ -24,7 +24,7 @@ class CitiesPagingSource @Inject constructor(
 
                     val pageDto = response.body()
 
-                    val data = pageDto?.cities?.let {
+                    val data = pageDto?.data?.let {
                         citiesMapper.mapList(it.filterNotNull())
                     } ?: emptyList()
 

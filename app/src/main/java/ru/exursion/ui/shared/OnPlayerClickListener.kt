@@ -1,4 +1,4 @@
-package ru.excursion.playground.player.interfaces
+package ru.exursion.ui.shared
 
 interface OnPlayerClickListener {
 

@@ -13,6 +13,7 @@
 
     <attr name="exc_search_view_style" format="reference" />
     <attr name="exc_rating_bar_style" format="reference" />
+    <attr name="exc_card_on_background_color" format="color" />
 
     <!--=======================-->
     <!--     Button colors     -->

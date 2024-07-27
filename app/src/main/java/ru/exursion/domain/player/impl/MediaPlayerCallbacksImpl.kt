@@ -1,20 +1,15 @@
-package ru.excursion.playground.player.impl
+package ru.exursion.domain.player.impl
 
 import android.media.MediaPlayer
 import android.util.Log
-import ru.excursion.playground.player.interfaces.MediaPlayerCallbacks
-import ru.excursion.playground.player.interfaces.MediaPlayerController
+import ru.exursion.domain.player.interfaces.MediaPlayerCallbacks
+import ru.exursion.domain.player.interfaces.MediaPlayerController
 
 class MediaPlayerCallbacksImpl(
     private val mediaPlayerController: MediaPlayerController,
-    private val updateDuration: (Int) -> Unit
 ) : MediaPlayerCallbacks {
 
-    override fun onPrepared(mp: MediaPlayer?) {
-        if (mp != null) {
-            updateDuration(mp.duration)
-        }
-    }
+    override fun onPrepared(mp: MediaPlayer?) {}
 
     override fun onError(mp: MediaPlayer?, what: Int, extra: Int): Boolean {
         when (what) {
@@ -37,7 +32,7 @@ class MediaPlayerCallbacksImpl(
     }
 
     override fun onCompletion(mp: MediaPlayer?) {
-        mediaPlayerController.currentPosition = 0
+        mediaPlayerController.setPosition(0)
         mediaPlayerController.pauseMedia()
     }
 }

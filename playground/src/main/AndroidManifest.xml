@@ -13,16 +13,7 @@
         android:networkSecurityConfig="@xml/network_security_config">
 
 
-        <service android:name=".player.MediaPlayerService"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="ru.exursion.action.PLAY"/>
-                <action android:name="ru.exursion.action.PAUSE"/>
-                <action android:name="ru.exursion.action.RESUME"/>
-                <action android:name="ru.exursion.action.STOP"/>
-                <data android:mimeType="text/plain"/>
-            </intent-filter>
-        </service>
+
 
         <activity
             android:name=".MainActivity"

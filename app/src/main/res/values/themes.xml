@@ -63,6 +63,8 @@
         <item name="exc_select_item_text_color">@color/folklore_fog</item>
         <item name="exc_select_item_icon_color">@color/folklore_fog</item>
         <item name="exc_code_input_unselected_color">@color/white</item>
+        
+        <item name="exc_card_on_background_color">@color/white</item>
     </style>
 
 </resources>

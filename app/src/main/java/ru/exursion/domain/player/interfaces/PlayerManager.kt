@@ -1,4 +1,4 @@
-package ru.excursion.playground.player.interfaces
+package ru.exursion.domain.player.interfaces
 
 import io.reactivex.rxjava3.core.Observable
 
@@ -12,8 +12,8 @@ interface PlayerManager {
 
     fun setMedia(mediaLink: String)
 
-    fun getDurationObservable() : Observable<Int>
-
     fun getIsPlayingObservable() : Observable<Boolean>
+
+    fun getCurrentPositionObservable() : Observable<Int>
 
 }
