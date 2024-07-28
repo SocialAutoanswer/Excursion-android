@@ -9,7 +9,6 @@ import ru.bibaboba.kit.util.createPagingDataFlowable
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.locations.paging.CitiesPagingSource
-import ru.exursion.data.locations.paging.RoutesPagingSource
 import ru.exursion.data.locations.paging.TagsPagingSource
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.AudioLocationDto
@@ -20,14 +19,17 @@ import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
+import ru.exursion.data.models.TagDto
+import ru.exursion.data.models.TagItem
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.data.network.createHttpError
 import javax.inject.Inject
 
 interface LocationsRepository {
 
     fun getCities(): Flowable<PagingData<City>>
-    fun getTags(): Flowable<PagingData<Tag>>
-    fun getRoutesByCity(cityId: Long): Flowable<PagingData<Route>>
+    fun getTags(): Flowable<PagingData<TagItem>>
+    fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>>
     fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>>
     fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>>
     fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
@@ -38,9 +40,9 @@ class LocationsRepositoryImpl @Inject constructor(
     private val routeDetailsMapper: Mapper<RouteDetailsDto, RouteDetails>,
     private val citiesPagingSource: CitiesPagingSource,
     private val tagsPagingSource: TagsPagingSource,
-    private val routesPagingSourceFactory: RoutesPagingSource.Factory,
     private val locationMapper: Mapper<LocationDto, Location>,
-    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>
+    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
+    private val tagsMapper: Mapper<TagDto, Tag>
 ) : LocationsRepository {
 
     companion object {
@@ -51,12 +53,21 @@ class LocationsRepositoryImpl @Inject constructor(
         return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { citiesPagingSource }
     }
 
-    override fun getTags(): Flowable<PagingData<Tag>> {
+    override fun getTags(): Flowable<PagingData<TagItem>> {
         return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { tagsPagingSource }
     }
 
-    override fun getRoutesByCity(cityId: Long): Flowable<PagingData<Route>> {
-        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { routesPagingSourceFactory.create(cityId) }
+    override fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>> {
+        return api.requestRoutesByTag(tagId)
+            .subscribeOn(Schedulers.io())
+            .map {
+                if (it.isSuccessful) {
+                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                    Result.success(tagsMapper.map(dto).routes)
+                } else {
+                    Result.failure(createHttpError(it))
+                }
+            }
     }
 
     override fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>> {

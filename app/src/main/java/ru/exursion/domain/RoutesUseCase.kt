@@ -17,7 +17,7 @@ interface RoutesUseCase {
         const val DEFAULT_REVIEWS_AMOUNT = 2
     }
 
-    fun getRoutesByCity(cityId: Long, tagId: Int): Flowable<PagingData<Route>>
+    fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>>
     fun getRouteDetailsWithComments(
         routeId: Long,
         amountOfReviews: Int = DEFAULT_REVIEWS_AMOUNT
@@ -29,9 +29,9 @@ class RoutesUseCaseImpl @Inject constructor(
     private val reviewsRepository: ReviewsRepository,
 ) : RoutesUseCase {
 
-    override fun getRoutesByCity(cityId: Long, tagId: Int): Flowable<PagingData<Route>> {
-        return locationsRepository.getRoutesByCity(cityId)
-            .map { it.filter { it.tags.contains(tagId) } }
+    override fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>> {
+        return locationsRepository.getRoutesByTag(tagId)
+            .map { it.getOrThrow().filter { it.city == cityId } }
     }
 
     override fun getRouteDetailsWithComments(

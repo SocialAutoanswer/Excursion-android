@@ -6,13 +6,12 @@ import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
-import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.DefaultRxPagingSource
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.network.ExcursionApi
 
-class RoutesPagingSource @AssistedInject constructor(
+class LocationsByTagPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
     private val routesMapper: Mapper<RouteDto, Route>,
     @Assisted("cityId") private val city: Long,
@@ -44,6 +43,6 @@ class RoutesPagingSource @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(@Assisted("cityId") cityId: Long): RoutesPagingSource
+        fun create(@Assisted("cityId") cityId: Long): LocationsByTagPagingSource
     }
 }

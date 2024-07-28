@@ -1,18 +1,16 @@
 package ru.exursion.ui.routes.fragments
 
 import android.content.Context
-import android.content.Intent
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.fragment.findNavController
+import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
-import ru.exursion.R
 import ru.exursion.databinding.FragmentRoutesBinding
 import ru.exursion.ui.routes.RouteDetailsActivity
-import ru.exursion.ui.routes.RoutesPagingDataAdapter
+import ru.exursion.ui.routes.RoutesDelegateAdapter
 import ru.exursion.ui.routes.vm.RoutesViewModel
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
@@ -37,14 +35,9 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
         .addReadyState()
         .build()
 
-    private val adapter = RoutesPagingDataAdapter {
-        //findNavController().navigate(R.id.fragment_route_details)
-        val activity = activity ?: return@RoutesPagingDataAdapter
-        Intent(activity, RouteDetailsActivity::class.java).apply {
-            putExtra(RouteDetailsActivity.ROUTE_ID, it.id)
-            startActivity(this)
-        }
-    }
+    private val adapter = CompositeDelegateAdapter(
+        RoutesDelegateAdapter { RouteDetailsActivity.start(activity, it.id) }
+    )
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -63,7 +56,7 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
 
     override fun getStartData() {
         val cityId = arguments?.getLong(CITY_ID_BUNDLE_KEY, -1) ?: return
-        val tagId = arguments?.getInt(TAG_ID_BUNDLE_KEY, -1) ?: return
+        val tagId = arguments?.getLong(TAG_ID_BUNDLE_KEY, -1) ?: return
         viewModel.getRoutesByCityId(cityId, tagId)
     }
 
@@ -77,7 +70,7 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
 
     private fun StateMachine.Builder.addReadyState(): StateMachine.Builder {
         return addState(RoutesViewModel.RoutesState.Ready::class) {
-            adapter.submitData(lifecycle, it.routes)
+            adapter.swapData(it.routes)
         }
     }
 }

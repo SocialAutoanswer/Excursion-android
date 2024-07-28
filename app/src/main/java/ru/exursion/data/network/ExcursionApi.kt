@@ -19,7 +19,9 @@ import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetailsDto
+import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.RouteRequestDto
+import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.TagPageDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
@@ -73,11 +75,16 @@ interface ExcursionApi {
         @Query("page") page: Int
     ): Single<Response<TagPageDto>>
 
-    @GET("locations/routes/bycity/{cityId}")
+    @GET("locations/bycity/{city_id}")
     fun requestRoutesByCity(
-        @Path("cityId") cityId: Long,
+        @Path("city_id") cityId: Long,
         @Query("page") page: Int,
     ): Single<Response<RouteRequestDto>>
+
+    @GET("locations/tags/{id}")
+    fun requestRoutesByTag(
+        @Path("id") tagId: Long,
+    ): Single<Response<TagDto>>
 
     @GET("locations/routes/{routeId}")
     fun requestRouteDetailsById(

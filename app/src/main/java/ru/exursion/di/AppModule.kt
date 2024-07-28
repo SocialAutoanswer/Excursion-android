@@ -27,6 +27,7 @@ import ru.exursion.data.locations.mapper.LocationsMapper
 import ru.exursion.data.locations.mapper.PhotoMapper
 import ru.exursion.data.locations.mapper.RouteDetailsMapper
 import ru.exursion.data.locations.mapper.RoutesMapper
+import ru.exursion.data.locations.mapper.TagsItemMapper
 import ru.exursion.data.locations.mapper.TagsMapper
 import ru.exursion.data.models.Audio
 import ru.exursion.data.models.AudioDto
@@ -48,6 +49,8 @@ import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
+import ru.exursion.data.models.TagItem
+import ru.exursion.data.models.TagItemDto
 import ru.exursion.data.models.User
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
@@ -112,6 +115,8 @@ class AppModule(private val context: Context) {
 
         @Binds
         fun bindsTagsMapper(impl: TagsMapper): Mapper<TagDto, Tag>
+        @Binds
+        fun bindsTagsItemMapper(impl: TagsItemMapper): Mapper<TagItemDto, TagItem>
         @Binds
         fun bindCitiesMapper(impl: CitiesMapper): Mapper<CityDto, City>
         @Binds
