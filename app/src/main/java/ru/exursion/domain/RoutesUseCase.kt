@@ -1,8 +1,6 @@
 package ru.exursion.domain
 
-import androidx.paging.PagingData
-import androidx.paging.filter
-import io.reactivex.rxjava3.core.Flowable
+import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.locations.LocationsRepository
@@ -20,8 +18,9 @@ interface RoutesUseCase {
     fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>>
     fun getRouteDetailsWithComments(
         routeId: Long,
+        tagId: Long,
         amountOfReviews: Int = DEFAULT_REVIEWS_AMOUNT
-    ): Single<Result<RouteDetailsWithReview>>
+    ): Single<RouteDetailsWithReview>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
@@ -36,23 +35,17 @@ class RoutesUseCaseImpl @Inject constructor(
 
     override fun getRouteDetailsWithComments(
         routeId: Long,
+        tagId: Long,
         amountOfReviews: Int,
-    ): Single<Result<RouteDetailsWithReview>> {
-        return locationsRepository.getRouteDetails(routeId)
-            .zipWith(reviewsRepository.getRouteReviews(routeId)) { routeDetails, reviews ->
-                if (routeDetails.isFailure) {
-                    return@zipWith Result.failure(
-                        routeDetails.exceptionOrNull() ?: CanNotGetDataException()
-                    )
-                }
-
-                Result.success(
-                    RouteDetailsWithReview(
-                        routeDetails.getOrThrow(),
-                        reviews.getOrNull() ?: emptyList()
-                    )
-                )
-            }
-
+    ): Single<RouteDetailsWithReview> {
+        return Single.zip(
+            locationsRepository.getRoutesByTag(tagId),
+            reviewsRepository.getRouteReviewsFirstPage(routeId)
+        ) { routes, reviews ->
+            RouteDetailsWithReview(
+                routes.getOrThrow().find { it.id == routeId } ?: throw CanNotGetDataException(),
+                reviews.getOrNull() ?: emptyList()
+            )
+        }
     }
 }

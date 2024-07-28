@@ -68,6 +68,7 @@
     <string name="screen_route_details_duration">%1$s минут</string>
     <string name="screen_route_details_kilometers">%1$s КМ</string>
     <string name="screen_route_details_reviews">Отзывы</string>
+    <string name="screen_route_details_show_all"><![CDATA[<font color="%1$s"><u>Посмотреть все</u></font>]]></string>
 
     <string name="screen_profile_title">Профиль</string>
     <string name="screen_profile_favorite">Избранное</string>

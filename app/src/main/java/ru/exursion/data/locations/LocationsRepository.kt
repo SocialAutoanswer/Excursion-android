@@ -30,14 +30,12 @@ interface LocationsRepository {
     fun getCities(): Flowable<PagingData<City>>
     fun getTags(): Flowable<PagingData<TagItem>>
     fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>>
-    fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>>
     fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>>
     fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
 }
 
 class LocationsRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
-    private val routeDetailsMapper: Mapper<RouteDetailsDto, RouteDetails>,
     private val citiesPagingSource: CitiesPagingSource,
     private val tagsPagingSource: TagsPagingSource,
     private val locationMapper: Mapper<LocationDto, Location>,
@@ -66,22 +64,6 @@ class LocationsRepositoryImpl @Inject constructor(
                     Result.success(tagsMapper.map(dto).routes)
                 } else {
                     Result.failure(createHttpError(it))
-                }
-            }
-    }
-
-    override fun getRouteDetails(routeId: Long): Single<Result<RouteDetails>> {
-        return api.requestRouteDetailsById(routeId)
-            .subscribeOn(Schedulers.io())
-            .map {
-                if (it.isSuccessful) {
-                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    Result.success(routeDetailsMapper.map(dto))
-                } else {
-                    when(it.code()) {
-                        500 -> Result.failure(InternalServerException())
-                        else -> Result.failure(CanNotGetDataException())
-                    }
                 }
             }
     }

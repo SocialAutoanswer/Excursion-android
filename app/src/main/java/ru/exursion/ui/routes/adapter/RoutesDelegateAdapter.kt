@@ -1,4 +1,4 @@
-package ru.exursion.ui.routes
+package ru.exursion.ui.routes.adapter
 
 import com.bumptech.glide.Glide
 import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter

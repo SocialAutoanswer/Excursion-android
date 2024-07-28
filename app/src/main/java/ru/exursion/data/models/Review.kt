@@ -9,8 +9,6 @@ data class ReviewDto(
     @SerializedName("created_at") val createdAt: String?,
     @SerializedName("raiting") val rating: Int?,
     @SerializedName("user") val userId: Long?,
-    @SerializedName("location") val locationId: Long?,
-    @SerializedName("route") val routeId: Long?,
 )
 
 data class Review(
@@ -19,6 +17,4 @@ data class Review(
     val createdAt: LocalDateTime,
     val rating: Int,
     val userId: Long,
-    val locationId: Long,
-    val routeId: Long,
 )

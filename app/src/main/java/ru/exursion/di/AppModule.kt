@@ -80,6 +80,7 @@ import ru.exursion.ui.map.MapViewModel
 import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
+import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.routes.vm.RoutesViewModel
 
 @Module
@@ -202,6 +203,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(MapViewModel::class)
         fun bindMapViewModel(viewModel: MapViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(RouteDetailsViewModel::class)
+        fun bindRouteDetailsViewModel(viewModel: RouteDetailsViewModel): ViewModel
     }
 
 }

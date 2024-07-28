@@ -25,6 +25,7 @@
                 app:layout_constraintEnd_toEndOf="parent">
 
                 <ImageView
+                    android:id="@+id/background_image"
                     android:layout_width="match_parent"
                     android:layout_height="340dp" />
 
@@ -134,9 +135,20 @@
                 app:layout_constraintTop_toBottomOf="@id/reviews_title"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/show_all"
                 tools:listitem="@layout/item_review"
                 tools:itemCount="2"/>
+            
+            <TextView
+                android:id="@+id/show_all"
+                style="@style/Text.H4.WidthWrap"
+                android:layout_marginHorizontal="25dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginBottom="42dp"
+                tools:text="Посмотреть все"
+                app:layout_constraintTop_toBottomOf="@id/reviews_recycler"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -176,5 +188,14 @@
         app:layout_constraintStart_toEndOf="@id/buy"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
+    <include
+        android:id="@+id/loading"
+        layout="@layout/sublayout_loading"
+        android:visibility="gone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

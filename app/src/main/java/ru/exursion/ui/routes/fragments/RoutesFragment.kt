@@ -10,7 +10,7 @@ import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.databinding.FragmentRoutesBinding
 import ru.exursion.ui.routes.RouteDetailsActivity
-import ru.exursion.ui.routes.RoutesDelegateAdapter
+import ru.exursion.ui.routes.adapter.RoutesDelegateAdapter
 import ru.exursion.ui.routes.vm.RoutesViewModel
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
@@ -36,7 +36,15 @@ class RoutesFragment : StateFragment<FragmentRoutesBinding, RoutesViewModel>(
         .build()
 
     private val adapter = CompositeDelegateAdapter(
-        RoutesDelegateAdapter { RouteDetailsActivity.start(activity, it.id) }
+        RoutesDelegateAdapter {
+            if (viewModel.state.value !is RoutesViewModel.RoutesState.Ready) {
+                return@RoutesDelegateAdapter
+            }
+
+            val readyState = viewModel.state.value as RoutesViewModel.RoutesState.Ready
+
+            RouteDetailsActivity.start(activity, it.id, readyState.tagId)
+        }
     )
 
     override fun onAttach(context: Context) {

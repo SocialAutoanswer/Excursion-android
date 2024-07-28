@@ -18,7 +18,7 @@ class RoutesViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.postValue(RoutesState.Loading) }
             .subscribe ({
-                _state.postValue(RoutesState.Ready(it))
+                _state.postValue(RoutesState.Ready(it, tagId))
             }, {
                 Logger.error(RoutesViewModel::class, it)
             })
@@ -26,7 +26,7 @@ class RoutesViewModel @Inject constructor(
 
     sealed class RoutesState : State {
         object Loading : RoutesState()
-        class Ready(val routes: List<Route>) : RoutesState()
+        class Ready(val routes: List<Route>, val tagId: Long) : RoutesState()
     }
 
     sealed class RoutesEffect : Effect

@@ -1,19 +1,101 @@
 package ru.exursion.ui.routes.fragments
 
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.content.Context
 import android.view.View
-import android.view.ViewGroup
-import androidx.fragment.app.Fragment
+import androidx.core.view.isVisible
+import androidx.fragment.app.viewModels
+import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
+import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
+import ru.bibaboba.kit.states.StateMachine
+import ru.bibaboba.kit.ui.StateFragment
+import ru.bibaboba.kit.ui.getColorByAttr
+import ru.bibaboba.kit.ui.getHtmlString
+import ru.exursion.R
 import ru.exursion.databinding.FragmentRouteDetailsBinding
+import ru.exursion.ui.routes.RouteDetailsActivity
+import ru.exursion.ui.routes.adapter.ReviewsDelegateAdapter
+import ru.exursion.ui.routes.vm.RouteDetailsViewModel
+import ru.exursion.ui.shared.ext.addItemDivider
+import ru.exursion.ui.shared.ext.inject
+import javax.inject.Inject
 
-class RouteDetailsFragment : Fragment() {
+class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDetailsViewModel>(
+    FragmentRouteDetailsBinding::class.java
+) {
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        return FragmentRouteDetailsBinding.inflate(inflater, container, false).root
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+
+    override val viewModel by viewModels<RouteDetailsViewModel> { viewModelFactory }
+
+    override val stateMachine = StateMachine.Builder()
+        .lifecycleOwner(this)
+        .addLoadingState()
+        .addReadyState()
+        .build()
+
+    private val adapter = CompositeDelegateAdapter(
+        ReviewsDelegateAdapter()
+    )
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        inject()
+    }
+
+    override fun getStartData() {
+        val activity = (activity as RouteDetailsActivity?) ?: return
+        val routeId = activity.routeId ?: return
+        val tagId = activity.tagId ?: return
+        viewModel.getRouteDetails(routeId, tagId)
+    }
+
+    override fun setUpViews(view: View) = with(binding) {
+        backButton.setOnClickListener { activity?.onBackPressed() }
+        reviewsRecycler.adapter = adapter
+        context?.getColorByAttr(R.attr.exc_divider_color)?.let {
+            reviewsRecycler.addItemDivider(it)
+        }
+
+        val primaryColor = context?.getColorByAttr(R.attr.exc_color_primary).toString()
+        binding.showAll.text = context?.getHtmlString(R.string.screen_route_details_show_all, primaryColor)
+
+        showAll.isVisible = false
+        reviewsRecycler.isVisible = false
+        reviewsTitle.isVisible = false
+    }
+
+    private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
+        return addState(
+            RouteDetailsViewModel.RouteDetailsState.Loading::class,
+            callback = { binding.loading.root.isVisible = true },
+            onExit = { binding.loading.root.isVisible = false },
+        )
+    }
+
+    private fun StateMachine.Builder.addReadyState() : StateMachine.Builder {
+        return addState(RouteDetailsViewModel.RouteDetailsState.Ready::class) {
+            val routeDetails = it.details.routeDetails
+
+            if (it.details.reviews.isNotEmpty()) {
+                binding.showAll.isVisible = true
+                binding.reviewsRecycler.isVisible = true
+                binding.reviewsTitle.isVisible = true
+            }
+
+            binding.routeName.text = routeDetails.name
+            binding.duration.text = getString(R.string.screen_route_details_duration, routeDetails.durationInMinutes)
+            // TODO: брать кол-во локаций с сервера
+            binding.locationsAmount.text = resources.getQuantityString(R.plurals.screen_route_details_locations_amount, 4, 4)
+            binding.kilometers.text = getString(R.string.screen_route_details_kilometers, routeDetails.kilometers)
+            binding.description.text = routeDetails.description
+
+            adapter.swapData(it.details.reviews)
+
+            Glide.with(this@RouteDetailsFragment)
+                .load(routeDetails.image)
+                .centerCrop()
+                .into(binding.backgroundImage)
+        }
     }
 }

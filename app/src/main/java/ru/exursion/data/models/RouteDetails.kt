@@ -25,6 +25,6 @@ data class RouteDetails(
 )
 
 data class RouteDetailsWithReview(
-    val routeDetails: RouteDetails,
+    val routeDetails: Route,
     val reviews: List<Review>,
 )

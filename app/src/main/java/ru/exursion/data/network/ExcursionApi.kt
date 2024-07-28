@@ -86,15 +86,10 @@ interface ExcursionApi {
         @Path("id") tagId: Long,
     ): Single<Response<TagDto>>
 
-    @GET("locations/routes/{routeId}")
-    fun requestRouteDetailsById(
-        @Path("routeId") routeId: Long,
-    ): Single<Response<RouteDetailsDto>>
-
-    @GET("reviews/route/{routeId}")
+    @GET("reviews/{routeId}")
     fun requestRouteReviews(
         @Path("routeId") routeId: Long,
-    ): Single<Response<List<ReviewDto>>>
+    ): Single<Response<PageDto<ReviewDto>>>
 
     @GET("locations/bycity/{cityId}")
     fun requestLocationsByCity(
