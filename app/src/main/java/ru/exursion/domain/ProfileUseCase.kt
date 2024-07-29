@@ -35,7 +35,7 @@ class ProfileUseCaseImpl @Inject constructor(
     override fun editProfile(user: User) = repository.editProfile(user)
         .map { result ->
             if (result.isFailure) {
-                error(result.exceptionOrNull() ?: Exception())
+                throw result.exceptionOrNull() ?: Exception()
             }
         }
         .observeOn(AndroidSchedulers.mainThread())
@@ -44,7 +44,7 @@ class ProfileUseCaseImpl @Inject constructor(
     override fun deleteProfile() = repository.deleteProfile()
         .map { result ->
             if (result.isFailure) {
-                error(result.exceptionOrNull() ?: Exception())
+                throw result.exceptionOrNull() ?: Exception()
             }
         }
         .observeOn(AndroidSchedulers.mainThread())

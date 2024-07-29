@@ -36,6 +36,9 @@ import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Message
+import ru.exursion.data.models.MessageDto
+import ru.exursion.data.models.MessageMapper
 import ru.exursion.data.models.Photo
 import ru.exursion.data.models.PhotoDto
 import ru.exursion.data.models.Question
@@ -132,6 +135,8 @@ class AppModule(private val context: Context) {
         fun bindAudioMapper(impl: AudioMapper): Mapper<AudioDto, Audio>
         @Binds
         fun bindAudioLocationMapper(impl: AudioLocationMapper): Mapper<AudioLocationDto, AudioLocation>
+        @Binds
+        fun bindMessageMapper(impl: MessageMapper): Mapper<MessageDto, Message>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository

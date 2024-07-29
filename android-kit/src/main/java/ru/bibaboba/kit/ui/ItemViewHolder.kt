@@ -11,13 +11,13 @@ import java.lang.Exception
 open class ItemViewHolder<B: ViewBinding, T>(
     view: View,
     private val binding: B,
-    private val onBind: ((B, T) -> Unit)? = null
+    private val onBind: ((B, T, Int) -> Unit)? = null
 ) : RecyclerView.ViewHolder(view) {
 
     companion object {
         inline fun <reified B: ViewBinding, T> create(
             parent: ViewGroup,
-            noinline bind: ((B, T) -> Unit)? = null
+            noinline bind: ((B, T, Int) -> Unit)? = null
         ): ItemViewHolder<B, T> {
             val binding = B::class.java
                 .inflateBinding(LayoutInflater.from(parent.context), parent) ?: throw Exception("Cannot create view holder")
@@ -26,7 +26,7 @@ open class ItemViewHolder<B: ViewBinding, T>(
         }
     }
 
-    fun bind(item: T) {
-        onBind?.invoke(binding, item)
+    fun bind(item: T, position: Int) {
+        onBind?.invoke(binding, item, position)
     }
 }

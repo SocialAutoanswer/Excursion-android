@@ -1,21 +1,21 @@
 package ru.exursion.domain
 
-import android.annotation.SuppressLint
 import com.yandex.mapkit.geometry.BoundingBox
 import com.yandex.mapkit.geometry.Point
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
-import io.reactivex.rxjava3.core.Single.error
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.Location
+import ru.exursion.data.models.Message
 import javax.inject.Inject
 
 interface LocationUseCase {
 
     fun getLocationsByCity(cityId: Long): Single<List<Location>>
     fun getLocationById(locationId: Long): Single<AudioLocation>
+    fun changeLocationFavoriteState(locationId: Long): Single<Message>
     fun getCityBoundingBox(points: List<Point>): BoundingBox
 }
 
@@ -23,33 +23,37 @@ class LocationUseCaseImpl @Inject constructor(
     private val locationsRepository: LocationsRepository
 ): LocationUseCase {
 
-    @SuppressLint("CheckResult")
     override fun getLocationsByCity(cityId: Long): Single<List<Location>> {
         return locationsRepository.getLocationsByCity(cityId)
             .map { result ->
-//                if(result.isFailure) {
-//                    error<Exception>(result.exceptionOrNull() ?: CanNotGetDataException())
-//                }
-//                result.getOrNull() ?: emptyList()
-
-                return@map listOf(
-                    Location(1, "Музей чак чака", "Какое-то описание какого-то описания для описания описания", Point(49.112496, 55.782046), 1, listOf(1, 2)),
-                    Location(2, "Казанский кремль", "asdasd", Point(49.108244, 55.796435), 1, listOf(1, 2))
-                )
+                if(result.isFailure) {
+                    throw result.exceptionOrNull() ?: CanNotGetDataException()
+                }
+                result.getOrNull() ?: emptyList()
             }
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    @SuppressLint("CheckResult")
     override fun getLocationById(locationId: Long): Single<AudioLocation> {
         return locationsRepository.getLocationById(locationId)
             .map { result ->
                 if(result.isFailure) {
-                    error<Exception>(result.exceptionOrNull() ?: CanNotGetDataException())
+                    throw result.exceptionOrNull() ?: CanNotGetDataException()
                 }
                 result.getOrNull() ?: AudioLocation(-1, "", "", false, null, emptyList(), emptyList())
             }
             .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun changeLocationFavoriteState(locationId: Long): Single<Message> {
+        return locationsRepository.changeLocationFavoriteState(locationId)
+            .map { result ->
+                if (result.isFailure) {
+                    throw result.exceptionOrNull() ?: CanNotGetDataException()
+                }
+
+                result.getOrNull() ?: Message("")
+            }
     }
 
     override fun getCityBoundingBox(points: List<Point>): BoundingBox {

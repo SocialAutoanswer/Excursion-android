@@ -14,6 +14,7 @@
     <attr name="exc_search_view_style" format="reference" />
     <attr name="exc_rating_bar_style" format="reference" />
     <attr name="exc_card_on_background_color" format="color" />
+    <attr name="exc_player_progress_background" format="color" />
 
     <!--=======================-->
     <!--     Button colors     -->
@@ -51,6 +52,7 @@
     <attr name="exc_text_color_error" format="color" />
     <attr name="exc_text_color_on_image" format="color" />
     <attr name="exc_text_color_negative" format="color" />
+    <attr name="exc_timer_text_color" format="color" />
 
     <!--=======================-->
     <!--      Icon colors      -->

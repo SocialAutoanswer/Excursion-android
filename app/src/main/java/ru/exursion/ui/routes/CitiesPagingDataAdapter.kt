@@ -13,11 +13,11 @@ class CitiesPagingDataAdapter(
 ) : PagingDataAdapter<City, ItemViewHolder<ItemTownBinding, City>>(CitiesDiffUtilCallback) {
 
     override fun onBindViewHolder(holder: ItemViewHolder<ItemTownBinding, City>, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder<ItemTownBinding, City> {
-        return ItemViewHolder.create<ItemTownBinding, City>(parent) { binding, item ->
+        return ItemViewHolder.create<ItemTownBinding, City>(parent) { binding, item, pos ->
             binding.townName.text = item.name
             binding.root.setOnClickListener { onCityClick(item) }
 
