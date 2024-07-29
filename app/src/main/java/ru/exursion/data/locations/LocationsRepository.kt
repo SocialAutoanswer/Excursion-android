@@ -18,8 +18,6 @@ import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.Message
 import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.Route
-import ru.exursion.data.models.RouteDetails
-import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.TagItem
@@ -43,7 +41,7 @@ class LocationsRepositoryImpl @Inject constructor(
     private val tagsPagingSource: TagsPagingSource,
     private val locationMapper: Mapper<LocationDto, Location>,
     private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
-    private val messageMapper: Mapper<MessageDto, Message>
+    private val messageMapper: Mapper<MessageDto, Message>,
     private val tagsMapper: Mapper<TagDto, Tag>
 ) : LocationsRepository {
 
