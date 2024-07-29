@@ -19,6 +19,7 @@ import ru.exursion.ui.profile.DecorSettingsFragment
 import ru.exursion.ui.profile.ProfileFragment
 import ru.exursion.ui.profile.QuestionsFragment
 import ru.exursion.ui.profile.RedactProfileFragment
+import ru.exursion.ui.routes.fragments.RouteDetailsFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
 import javax.inject.Singleton
 
@@ -50,6 +51,7 @@ interface AppComponent {
     fun inject(service: MediaPlayerService)
     fun inject(fragment: LocationBottomDialog)
     fun inject(player: MapPlayer)
+    fun inject(fragment: RouteDetailsFragment)
 
     @Component.Builder
     interface Builder {

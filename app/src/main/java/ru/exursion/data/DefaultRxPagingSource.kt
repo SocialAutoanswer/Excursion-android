@@ -3,6 +3,7 @@ package ru.exursion.data
 import androidx.paging.PagingState
 import retrofit2.Response
 import ru.bibaboba.kit.paging.BibaRxPagingSource
+import ru.exursion.data.network.createHttpError
 
 abstract class DefaultRxPagingSource<T: Any> : BibaRxPagingSource<Int, T>() {
 
@@ -13,13 +14,6 @@ abstract class DefaultRxPagingSource<T: Any> : BibaRxPagingSource<Int, T>() {
     }
 
     protected fun <D> handleHttpErrors(response: Response<D>): LoadResult.Error<Int, T> {
-        return LoadResult.Error(
-            when(response.code()) {
-                500 -> InternalServerException()
-                401 -> UnauthorizedException()
-                403 -> ForbiddenException()
-                else -> CanNotGetDataException()
-            }
-        )
+        return LoadResult.Error(createHttpError(response))
     }
 }

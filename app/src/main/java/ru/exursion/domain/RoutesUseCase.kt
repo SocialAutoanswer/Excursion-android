@@ -1,8 +1,6 @@
 package ru.exursion.domain
 
-import androidx.paging.PagingData
-import androidx.paging.filter
-import io.reactivex.rxjava3.core.Flowable
+import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.locations.LocationsRepository
@@ -17,11 +15,12 @@ interface RoutesUseCase {
         const val DEFAULT_REVIEWS_AMOUNT = 2
     }
 
-    fun getRoutesByCity(cityId: Long, tagId: Int): Flowable<PagingData<Route>>
+    fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>>
     fun getRouteDetailsWithComments(
         routeId: Long,
+        tagId: Long,
         amountOfReviews: Int = DEFAULT_REVIEWS_AMOUNT
-    ): Single<Result<RouteDetailsWithReview>>
+    ): Single<RouteDetailsWithReview>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
@@ -29,30 +28,24 @@ class RoutesUseCaseImpl @Inject constructor(
     private val reviewsRepository: ReviewsRepository,
 ) : RoutesUseCase {
 
-    override fun getRoutesByCity(cityId: Long, tagId: Int): Flowable<PagingData<Route>> {
-        return locationsRepository.getRoutesByCity(cityId)
-            .map { it.filter { it.tags.contains(tagId) } }
+    override fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>> {
+        return locationsRepository.getRoutesByTag(tagId)
+            .map { it.getOrThrow().filter { it.city == cityId } }
     }
 
     override fun getRouteDetailsWithComments(
         routeId: Long,
+        tagId: Long,
         amountOfReviews: Int,
-    ): Single<Result<RouteDetailsWithReview>> {
-        return locationsRepository.getRouteDetails(routeId)
-            .zipWith(reviewsRepository.getRouteReviews(routeId)) { routeDetails, reviews ->
-                if (routeDetails.isFailure) {
-                    return@zipWith Result.failure(
-                        routeDetails.exceptionOrNull() ?: CanNotGetDataException()
-                    )
-                }
-
-                Result.success(
-                    RouteDetailsWithReview(
-                        routeDetails.getOrThrow(),
-                        reviews.getOrNull() ?: emptyList()
-                    )
-                )
-            }
-
+    ): Single<RouteDetailsWithReview> {
+        return Single.zip(
+            locationsRepository.getRoutesByTag(tagId),
+            reviewsRepository.getRouteReviewsFirstPage(routeId)
+        ) { routes, reviews ->
+            RouteDetailsWithReview(
+                routes.getOrThrow().find { it.id == routeId } ?: throw CanNotGetDataException(),
+                reviews.getOrNull() ?: emptyList()
+            )
+        }
     }
 }

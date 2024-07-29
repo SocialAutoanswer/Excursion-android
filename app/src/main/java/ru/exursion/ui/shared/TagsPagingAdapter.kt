@@ -6,46 +6,46 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.bibaboba.kit.ui.getDrawableByName
-import ru.exursion.data.models.Tag
+import ru.exursion.R
+import ru.exursion.data.models.TagItem
 import ru.exursion.databinding.ItemSelectBinding
-
+import ru.exursion.ui.shared.ext.setDrawable
 
 class TagsPagingAdapter(
-    private val onTagClick: (Tag) -> Unit
-) : PagingDataAdapter<Tag, ItemViewHolder<ItemSelectBinding, Tag>>(TagsDiffUtilCallback) {
+    private val onTagClick: (TagItem) -> Unit
+) : PagingDataAdapter<TagItem, ItemViewHolder<ItemSelectBinding, TagItem>>(TagsDiffUtilCallback) {
 
-    override fun onBindViewHolder(holder: ItemViewHolder<ItemSelectBinding, Tag>, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder<ItemSelectBinding, TagItem>, position: Int) {
         getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ItemViewHolder<ItemSelectBinding, Tag> {
-        return ItemViewHolder.create(parent) { binding, tag, pos ->
+    ): ItemViewHolder<ItemSelectBinding, TagItem> {
+        return ItemViewHolder.create(parent) { binding, tag, _ ->
             with(binding) {
                 title.text = tag.name
 
-                startIcon.context.getDrawableByName(tag.iconName)?.let {
-                    startIcon.isVisible = true
-                    startIcon.setImageDrawable(it)
-                }
+                startIcon.isVisible = true
 
-                root.setOnClickListener {
-                    onTagClick(tag)
-                }
+                startIcon.context.getDrawableByName(tag.iconName)?.let {
+                    startIcon.setImageDrawable(it)
+                } ?: run { startIcon.setDrawable(R.drawable.ic_cross) }
+
+                root.setOnClickListener { onTagClick(tag) }
             }
         }
     }
 
 }
 
-private object TagsDiffUtilCallback : DiffUtil.ItemCallback<Tag>() {
-    override fun areItemsTheSame(oldItem: Tag, newItem: Tag): Boolean {
+private object TagsDiffUtilCallback : DiffUtil.ItemCallback<TagItem>() {
+    override fun areItemsTheSame(oldItem: TagItem, newItem: TagItem): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: Tag, newItem: Tag): Boolean {
+    override fun areContentsTheSame(oldItem: TagItem, newItem: TagItem): Boolean {
         return oldItem == newItem
     }
 }

@@ -9,12 +9,12 @@
         <item name="exc_search_view_style">@style/ExcSearchView</item>
         <item name="exc_rating_bar_style">@style/RatingBar</item>
 
-        <item name="android:windowBackground">@color/black</item>
+        <item name="android:windowBackground">@color/cynical_black</item>
         <item name="exc_background_color">@color/cynical_black</item>
         <item name="exc_color_primary">@color/kazan_orange</item>
         <item name="exc_bottom_navigation_color">@color/cynical_black</item>
         <item name="exc_transparent_black">@color/black_60</item>
-        <item name="exc_divider_color">@color/midnight_black_10</item>
+        <item name="exc_divider_color">@color/bobobo_30</item>
 
         <item name="exc_button_color_primary_active">@color/kazan_orange</item>
         <item name="exc_button_color_primary_disabled">@color/bobobo</item>

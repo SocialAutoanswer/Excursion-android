@@ -11,7 +11,7 @@ import ru.exursion.data.network.ExcursionApi
 import javax.inject.Inject
 
 interface ReviewsRepository {
-    fun getRouteReviews(routeId: Long): Single<Result<List<Review>>>
+    fun getRouteReviewsFirstPage(routeId: Long): Single<Result<List<Review>>>
 }
 
 class ReviewsRepositoryImpl @Inject constructor(
@@ -19,13 +19,13 @@ class ReviewsRepositoryImpl @Inject constructor(
     private val reviewMapper: Mapper<ReviewDto, Review>,
 ) : ReviewsRepository {
 
-    override fun getRouteReviews(routeId: Long): Single<Result<List<Review>>> {
+    override fun getRouteReviewsFirstPage(routeId: Long): Single<Result<List<Review>>> {
         return api.requestRouteReviews(routeId)
             .subscribeOn(Schedulers.io())
             .map {
                 if (it.isSuccessful) {
                     val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    Result.success(reviewMapper.mapList(dto))
+                    Result.success(reviewMapper.mapList(dto.data?.filterNotNull() ?: emptyList()))
                 } else {
                     when(it.code()) {
                         500 -> Result.failure(InternalServerException())

@@ -1,4 +1,4 @@
-package ru.exursion.ui.routes
+package ru.exursion.ui.routes.adapter
 
 import android.view.ViewGroup
 import androidx.paging.PagingDataAdapter

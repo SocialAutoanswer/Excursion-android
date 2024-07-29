@@ -13,7 +13,7 @@ import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
 import ru.exursion.ui.shared.ext.addItemMargins
 import ru.exursion.databinding.FragmentChooseTownBinding
-import ru.exursion.ui.routes.CitiesPagingDataAdapter
+import ru.exursion.ui.routes.adapter.CitiesPagingDataAdapter
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
