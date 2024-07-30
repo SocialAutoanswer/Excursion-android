@@ -52,6 +52,10 @@ class LocationBottomDialog: BottomSheetDialogFragment() {
         super.onViewCreated(view, savedInstanceState)
         setUpObservers()
 
+        // No questions, really
+        dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            ?.setBackgroundColor(resources.getColor(R.color.transparent))
+
         binding.player.setPlayerUI(viewModel.getPointIsPlaying())
         binding.player.setOnPlayerClickListener(viewModel.getOnPlayerClickListener())
         viewModel.setOnPlayerTimerListener(binding.player::setCurrentPosition)

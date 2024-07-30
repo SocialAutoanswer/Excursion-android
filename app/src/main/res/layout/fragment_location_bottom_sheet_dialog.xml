@@ -1,85 +1,93 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    style="@style/MatchParent">
+    style="@style/MatchParent"
+    app:cardCornerRadius="10dp"
+    android:layout_marginBottom="-10dp">
 
-    <ImageView
-        android:id="@+id/location_image"
-        style="@style/MatchParentWrapContent"
-        android:src="@color/black_60"
-        android:layout_height="200dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        style="@style/MatchParent"
+        android:layout_marginBottom="10dp">
 
-    <View
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:background="?attr/exc_transparent_black"
-        app:layout_constraintStart_toStartOf="@id/location_image"
-        app:layout_constraintEnd_toEndOf="@id/location_image"
-        app:layout_constraintTop_toTopOf="@id/location_image"
-        app:layout_constraintBottom_toBottomOf="@id/location_image"/>
+        <ImageView
+            android:id="@+id/location_image"
+            style="@style/MatchParentWrapContent"
+            android:src="@color/black_60"
+            android:layout_height="200dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <View
-        android:id="@+id/image_divider"
-        android:layout_width="match_parent"
-        android:layout_height="10dp"
-        android:background="@drawable/shape_image_bottomer"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/location_image" />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="?attr/exc_transparent_black"
+            app:layout_constraintStart_toStartOf="@id/location_image"
+            app:layout_constraintEnd_toEndOf="@id/location_image"
+            app:layout_constraintTop_toTopOf="@id/location_image"
+            app:layout_constraintBottom_toBottomOf="@id/location_image"/>
 
-    <ImageButton
-        android:id="@+id/like_button"
-        android:src="@drawable/selector_heart"
-        style="@style/Icon.MarginEnd_25dp.MarginTop_16dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <ProgressBar
-        android:id="@+id/like_loading"
-        android:layout_width="25dp"
-        android:visibility="invisible"
-        style="@style/LoadingProgress.LayoutCenter"
-        app:layout_constraintStart_toStartOf="@id/like_button"
-        app:layout_constraintEnd_toEndOf="@id/like_button"
-        app:layout_constraintTop_toTopOf="@id/like_button"
-        app:layout_constraintBottom_toBottomOf="@id/like_button" />
-
-    <View
-        android:layout_width="65dp"
-        android:layout_height="7dp"
-        android:background="@drawable/dialog_line"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <LinearLayout
-        style="@style/MatchParentWrapContent"
-        android:orientation="vertical"
-        android:background="?attr/exc_background_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/location_image">
-
-        <TextView
-            android:id="@+id/rout_name"
-            style="@style/Text.H2.Bold.MarginHorizontal_25dp.MarginTop_32dp" />
-
-        <ru.exursion.ui.shared.PlayerView
-            android:id="@+id/player"
-            android:layout_marginTop="24dp"
+        <View
+            android:id="@+id/image_divider"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="25dp"/>
+            android:layout_height="10dp"
+            android:background="@drawable/shape_image_bottomer"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/location_image" />
 
-        <TextView
-            android:id="@+id/rout_description"
-            style="@style/Text.H5.MarginHorizontal_25dp.MarginTop_16dp"
-            android:fontFamily="@font/roboto_light"
-            android:layout_marginBottom="10dp"/>
-    </LinearLayout>
+        <ImageButton
+            android:id="@+id/like_button"
+            android:src="@drawable/selector_heart"
+            style="@style/Icon.MarginEnd_25dp.MarginTop_16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <ProgressBar
+            android:id="@+id/like_loading"
+            android:layout_width="25dp"
+            android:visibility="invisible"
+            style="@style/LoadingProgress.LayoutCenter"
+            app:layout_constraintStart_toStartOf="@id/like_button"
+            app:layout_constraintEnd_toEndOf="@id/like_button"
+            app:layout_constraintTop_toTopOf="@id/like_button"
+            app:layout_constraintBottom_toBottomOf="@id/like_button" />
+
+        <View
+            android:layout_width="65dp"
+            android:layout_height="7dp"
+            android:background="@drawable/dialog_line"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            style="@style/MatchParentWrapContent"
+            android:orientation="vertical"
+            android:background="?attr/exc_background_color"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/location_image">
+
+            <TextView
+                android:id="@+id/rout_name"
+                style="@style/Text.H2.Bold.MarginHorizontal_25dp.MarginTop_32dp" />
+
+            <ru.exursion.ui.shared.PlayerView
+                android:id="@+id/player"
+                android:layout_marginTop="24dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="25dp"/>
+
+            <TextView
+                android:id="@+id/rout_description"
+                style="@style/Text.H5.MarginHorizontal_25dp.MarginTop_16dp"
+                android:fontFamily="@font/roboto_light"
+                android:layout_marginBottom="10dp"/>
+        </LinearLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.cardview.widget.CardView>
