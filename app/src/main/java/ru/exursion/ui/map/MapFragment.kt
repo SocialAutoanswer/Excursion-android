@@ -46,7 +46,7 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
 
         cityRecycler.also {
             it.adapter = adapter
-            it.addItemMargins(27, 0)
+            it.addItemMargins(26, 0)
         }
 
         setUpPlayer()
