@@ -47,6 +47,8 @@ class MapViewModel @Inject constructor(
         }
     }
 
+    fun setIdleState() = _state.postValue(MapState.Idle)
+
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         mapPlayer.observePlayerTimer()
             .subscribe({

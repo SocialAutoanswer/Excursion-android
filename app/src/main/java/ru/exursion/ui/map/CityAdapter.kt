@@ -23,10 +23,12 @@ class CityAdapter(
     ) {
         getItem(position)?.let{ holder.bind(it, position) }
 
-        if (position == currentPosition) onItemClick(holder.itemView)
-
-        if (currentPosition == null) {
+        if (currentPosition == null && position == 0) {
             onItemClick(holder.itemView, 0)
+        }
+
+        if (currentPosition == position) {
+            onItemClick(holder.itemView, position)
         }
     }
 
@@ -44,15 +46,11 @@ class CityAdapter(
     }
 
     private fun onItemClick(view: View, position: Int) {
-        onItemClick(view)
-        onItemSelected(getItem(position) ?: return)
-        currentPosition = position
-    }
-
-    private fun onItemClick(view: View) {
         selectedView?.let { selectedView -> selectedView.isSelected = false }
         selectedView = view
         view.isSelected = true
+        onItemSelected(getItem(position) ?: return)
+        currentPosition = position
     }
 
 }

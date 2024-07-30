@@ -131,12 +131,12 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
                     setOnDismiss {
                         setUpPlayer()
                         viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
-                        stateMachine.submit(MapViewModel.MapState.Idle)
                     }
                 }
-                .show(parentFragmentManager, "location-${it.audioLocation.id}")
+                .show(parentFragmentManager, tag)
 
             viewModel.effect.removeObservers(viewLifecycleOwner)
+            viewModel.setIdleState()
         }
     }
 
