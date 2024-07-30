@@ -49,7 +49,6 @@ class ProfileRepositoryImpl @Inject constructor(
                     }
                 }
             }
-            .onErrorReturn { Result.failure(CanNotGetDataException()) }
     }
 
     override fun editProfile(user: User): Single<Result<Unit>> {

@@ -42,8 +42,8 @@ class SplashActivity : AppCompatActivity() {
 
         AuthHeaderInterceptor.setSessionToken(userSettings.token ?: "")
 
-        viewModel.profileVerified.observe(this) { verified ->
-            if (verified == null) {
+        viewModel.responseCode.observe(this) { code ->
+            if (code == null) {
                 networkErrorDialog {
                     onDismiss { finish() }
                     onNeutralClick { finish() }
@@ -51,9 +51,11 @@ class SplashActivity : AppCompatActivity() {
                 return@observe
             }
 
-            val intent = if (userSettings.token == null || verified == false) {
+            val intent = if (userSettings.token == null || code != 200) {
                 Intent(this, AuthActivity::class.java).apply {
-                    putExtra(AuthActivity.FRAGMENT_TO_NAVIGATE, R.id.enter_code_fragment)
+                    if (code == 403) {
+                        putExtra(AuthActivity.FRAGMENT_TO_NAVIGATE, R.id.enter_code_fragment)
+                    }
                 }
             } else {
                 Intent(this, MainActivity::class.java)
@@ -78,17 +80,17 @@ class SplashViewModel @Inject constructor(
 
     private fun invokeDisposable(block: () -> Disposable) = compositeDisposable.add(block())
 
-    private val _profileVerified = MutableLiveData<Boolean?>()
-    val profileVerified: LiveData<Boolean?> = _profileVerified
+    private val _responseCode = MutableLiveData<Int?>()
+    val responseCode: LiveData<Int?> = _responseCode
 
     fun getProfile() = invokeDisposable {
         profileUseCase.getProfile()
             .subscribe({
-                _profileVerified.postValue(true)
+                _responseCode.postValue(200)
             }, {
-                _profileVerified.postValue(when (it) {
-                    is ProfileNotVerified -> false
-                    is InvalidToken -> false
+                _responseCode.postValue(when (it) {
+                    is ProfileNotVerified -> 403
+                    is InvalidToken -> 401
                     else -> null
                 })
             })

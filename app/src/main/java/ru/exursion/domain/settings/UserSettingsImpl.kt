@@ -39,7 +39,7 @@ class UserSettingsImpl @Inject constructor(
 
     override fun clearAllPrefs() = prefs.edit().clear().apply()
 
-    override fun fillAllPrefs(user: User?) {
+    override fun fillAllUserPrefs(user: User?) {
         firstName = user?.firstName
         lastName = user?.lastName
         email = user?.email

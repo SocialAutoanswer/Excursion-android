@@ -19,16 +19,11 @@ interface ProfileUseCase {
 
 class ProfileUseCaseImpl @Inject constructor(
     private val repository: ProfileRepository,
-    private val userSettings: UserSettings
 ): ProfileUseCase {
 
     override fun getProfile() = repository.getProfile()
         .map { result ->
-            if (result.isFailure) {
-                userSettings.getUser()
-            } else {
-                result.getOrNull() ?: User()
-            }
+            result.getOrThrow()
         }
         .observeOn(AndroidSchedulers.mainThread())
 

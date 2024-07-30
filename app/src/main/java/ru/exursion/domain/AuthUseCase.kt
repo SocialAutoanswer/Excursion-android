@@ -4,7 +4,6 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.auth.AuthRepository
 import ru.exursion.data.models.User
-import ru.exursion.data.network.AuthHeaderInterceptor
 import ru.exursion.domain.settings.UserSettings
 import javax.inject.Inject
 
@@ -31,8 +30,7 @@ class AuthUseCaseImpl @Inject constructor(
             .doAfterSuccess {
                 if(it.isFailure) return@doAfterSuccess
 
-                userSettings.fillAllPrefs(it.getOrNull())
-                AuthHeaderInterceptor.setSessionToken(it.getOrNull()?.token ?: "")
+                userSettings.fillAllUserPrefs(it.getOrNull())
             }
             .map { result ->
                 if (result.isFailure) {
@@ -47,7 +45,7 @@ class AuthUseCaseImpl @Inject constructor(
         repository.login(user)
             .doAfterSuccess {
                 if(it.isFailure) return@doAfterSuccess
-                userSettings.fillAllPrefs(it.getOrNull())
+                userSettings.fillAllUserPrefs(it.getOrNull())
             }
             .map { result ->
                 if (result.isFailure) {
