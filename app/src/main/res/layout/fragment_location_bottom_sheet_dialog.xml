@@ -7,8 +7,7 @@
     android:layout_marginBottom="-10dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        style="@style/MatchParent"
-        android:layout_marginBottom="10dp">
+        style="@style/MatchParent">
 
         <ImageView
             android:id="@+id/location_image"
