@@ -26,7 +26,7 @@
             style="@style/Icon"
             android:scaleType="center"
             android:adjustViewBounds="true"
-            android:src="@drawable/ic_plus"
+            android:src="@drawable/animation_plus_to_cross"
             app:tint="?attr/exc_color_primary"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"

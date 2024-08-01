@@ -25,13 +25,7 @@ class TagsPagingAdapter(
     ): ItemViewHolder<ItemSelectBinding, TagItem> {
         return ItemViewHolder.create(parent) { binding, tag ->
             with(binding) {
-                title.text = tag.name
-
-                startIcon.isVisible = true
-
-                startIcon.context.getDrawableByName(tag.iconName)?.let {
-                    startIcon.setImageDrawable(it)
-                } ?: run { startIcon.setDrawable(R.drawable.ic_cross) }
+                root.text = tag.name
 
                 root.setOnClickListener { onTagClick(tag) }
             }

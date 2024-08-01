@@ -1,6 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    style="@style/MatchParent"
+    android:orientation="vertical">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <include
+        layout="@layout/sublayout_back_button_header"
+        android:id="@+id/header"
+        style="@style/MatchParentWrapContent.MarginTop_48dp" />
+
+    <Button
+        android:id="@+id/hotels_button"
+        style="@style/Button.Forward.MarginHorizontal_25dp"
+        android:text="@string/screen_favorites_hotels"
+        android:drawableStart="@drawable/ss_ic_bed"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/locations_button"
+        style="@style/Button.Forward.MarginHorizontal_25dp.MarginTop_16dp"
+        android:text="@string/screen_favorites_locations"
+        android:drawableStart="@drawable/ss_ic_culture"/>
+
+<!--    <Button-->
+<!--        android:id="@+id/routes_button"-->
+<!--        style="@style/Button.Forward.MarginHorizontal_25dp.MarginTop_16dp"-->
+<!--        android:text="@string/screen_favorites_routes"/>-->
+
+    <Button
+        android:id="@+id/events_button"
+        style="@style/Button.Forward.MarginHorizontal_25dp.MarginTop_16dp"
+        android:text="@string/screen_favorites_events"
+        android:drawableStart="@drawable/ss_ic_events" />
+
+</LinearLayout>
