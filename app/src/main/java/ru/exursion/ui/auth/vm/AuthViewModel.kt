@@ -10,6 +10,7 @@ import ru.exursion.data.IncorrectCode
 import ru.exursion.data.IncorrectPassword
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.User
+import ru.exursion.data.network.AuthHeaderInterceptor
 import ru.exursion.domain.AuthUseCase
 import ru.exursion.domain.settings.UserSettings
 import javax.inject.Inject
@@ -90,6 +91,7 @@ class AuthViewModel @Inject constructor(
             .doOnSubscribe {
                 _state.postValue(AuthState.Loading) }
             .subscribe({
+                AuthHeaderInterceptor.setSessionToken(it.token ?: "")
                 _state.postValue(AuthState.Success)
             }, {
                 when (it) {

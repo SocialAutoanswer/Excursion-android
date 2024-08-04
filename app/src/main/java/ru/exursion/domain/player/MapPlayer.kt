@@ -18,15 +18,19 @@ class MapPlayer @Inject constructor(
         }
     }
 
+    private var currentTrack: String? = null
+    private var trackCandidate: String? = null
+
     var isSomeonePlaying = false
         private set
 
-    val doIPlay: Boolean
-        get() = (currentTrack == trackCandidate && !currentTrack.isNullOrBlank())
+    fun candidateIsCurrent() = (currentTrack == trackCandidate)
+
+    fun candidateIsPlaying() = (isSomeonePlaying && candidateIsCurrent())
 
     val onPlayerClickListener = object : OnPlayerClickListener {
         override fun onPlayClick() {
-            if (!doIPlay || trackCandidate.isNullOrBlank()) setCurrentTrack(trackCandidate)
+            if (!candidateIsCurrent()) setCurrentTrack(trackCandidate)
             else playerManager.play()
         }
 
@@ -35,10 +39,8 @@ class MapPlayer @Inject constructor(
         override fun onSetPosition(position: Int) = playerManager.setPosition(position)
     }
 
-    private var currentTrack: String? = null
-    private var trackCandidate: String? = null
 
-    fun setTrackCandidate(mediaUrl: String) {
+    fun setTrackCandidate(mediaUrl: String?) {
         trackCandidate = mediaUrl
     }
 

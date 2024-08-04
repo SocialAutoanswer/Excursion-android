@@ -9,7 +9,8 @@ import ru.exursion.data.models.City
 import ru.exursion.databinding.ItemCityNameBinding
 
 class CityAdapter(
-    private val onItemSelected: (City) -> Unit
+    private val onItemSelected: (City) -> Unit,
+    var currentPosition: Int? = null
 ): PagingDataAdapter<City, ItemViewHolder<ItemCityNameBinding, City>>(
     CityDiffUtilCallback
 ) {
@@ -20,23 +21,36 @@ class CityAdapter(
         holder: ItemViewHolder<ItemCityNameBinding, City>,
         position: Int
     ) {
-        getItem(position)?.let{ holder.bind(it) }
+        getItem(position)?.let{ holder.bind(it, position) }
+
+        if (currentPosition == null && position == 0) {
+            onItemClick(holder.itemView, 0)
+        }
+
+        if (currentPosition == position) {
+            onItemClick(holder.itemView, position)
+        }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder<ItemCityNameBinding, City> {
-        return ItemViewHolder.create(parent) { binding, city ->
+        return ItemViewHolder.create(parent) { binding, city, pos ->
             binding.cityName.text = city.name
 
             binding.root.setOnClickListener {
-                selectedView?.let { selectedView -> selectedView.isSelected = false }
-                selectedView = it
-                it.isSelected = true
-                onItemSelected(city)
+                onItemClick(it, pos)
             }
         }
+    }
+
+    private fun onItemClick(view: View, position: Int) {
+        selectedView?.let { selectedView -> selectedView.isSelected = false }
+        selectedView = view
+        view.isSelected = true
+        onItemSelected(getItem(position) ?: return)
+        currentPosition = position
     }
 
 }

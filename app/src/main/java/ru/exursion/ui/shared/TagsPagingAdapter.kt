@@ -16,14 +16,14 @@ class TagsPagingAdapter(
 ) : PagingDataAdapter<TagItem, ItemViewHolder<ItemSelectBinding, TagItem>>(TagsDiffUtilCallback) {
 
     override fun onBindViewHolder(holder: ItemViewHolder<ItemSelectBinding, TagItem>, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder<ItemSelectBinding, TagItem> {
-        return ItemViewHolder.create(parent) { binding, tag ->
+        return ItemViewHolder.create(parent) { binding, tag, _ ->
             with(binding) {
                 title.text = tag.name
 

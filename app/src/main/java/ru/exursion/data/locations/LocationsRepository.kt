@@ -15,9 +15,9 @@ import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Message
+import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.Route
-import ru.exursion.data.models.RouteDetails
-import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.TagItem
@@ -32,6 +32,7 @@ interface LocationsRepository {
     fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>>
     fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>>
     fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
+    fun changeLocationFavoriteState(locationId: Long): Single<Result<Message>>
 }
 
 class LocationsRepositoryImpl @Inject constructor(
@@ -40,6 +41,7 @@ class LocationsRepositoryImpl @Inject constructor(
     private val tagsPagingSource: TagsPagingSource,
     private val locationMapper: Mapper<LocationDto, Location>,
     private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
+    private val messageMapper: Mapper<MessageDto, Message>,
     private val tagsMapper: Mapper<TagDto, Tag>
 ) : LocationsRepository {
 
@@ -106,4 +108,19 @@ class LocationsRepositoryImpl @Inject constructor(
             }
     }
 
+    override fun changeLocationFavoriteState(locationId: Long): Single<Result<Message>> {
+        return api.changeLocationFavoriteState(locationId)
+            .subscribeOn(Schedulers.io())
+            .map {
+                if (it.isSuccessful) {
+                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                    Result.success(messageMapper.map(dto))
+                } else {
+                    when(it.code()) {
+                        500 -> Result.failure(InternalServerException())
+                        else -> Result.failure(CanNotGetDataException())
+                    }
+                }
+            }
+    }
 }

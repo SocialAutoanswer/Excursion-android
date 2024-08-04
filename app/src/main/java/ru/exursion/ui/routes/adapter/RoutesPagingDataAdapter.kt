@@ -12,14 +12,14 @@ class RoutesPagingDataAdapter(
     private val onClick: (Route) -> Unit,
 ) : PagingDataAdapter<Route, ItemViewHolder<ItemRouteBinding, Route>>(RoutesDiffUtilCallback) {
     override fun onBindViewHolder(holder: ItemViewHolder<ItemRouteBinding, Route>, position: Int) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder<ItemRouteBinding, Route> {
-        return ItemViewHolder.create(parent) { binding, item ->
+        return ItemViewHolder.create(parent) { binding, item, pos ->
             with(binding) {
                 root.setOnClickListener { onClick(item) }
 

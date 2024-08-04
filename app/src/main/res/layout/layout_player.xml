@@ -54,6 +54,7 @@
                     android:id="@+id/current_time"
                     style="@style/Text.H6"
                     android:text="00:00"
+                    android:textColor="?attr/exc_timer_text_color"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />
@@ -62,6 +63,7 @@
                     android:id="@+id/track_duration"
                     style="@style/Text.H6"
                     android:text="0:00"
+                    android:textColor="?attr/exc_timer_text_color"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintBottom_toBottomOf="parent" />

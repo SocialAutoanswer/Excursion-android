@@ -21,14 +21,14 @@ class DropDownQuestionAdapter :
         holder: ItemViewHolder<ItemFrequentlyQuestionBinding, Question>,
         position: Int
     ) {
-        getItem(position)?.let { holder.bind(it) }
+        getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
     ): ItemViewHolder<ItemFrequentlyQuestionBinding, Question> {
-        return ItemViewHolder.create(parent) { binding, question ->
+        return ItemViewHolder.create(parent) { binding, question, pos ->
             with(binding) {
                 questionTitle.text = question.question
                 answerText.text = question.answer

@@ -1,6 +1,5 @@
 package ru.exursion.ui.map
 
-import android.annotation.SuppressLint
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
@@ -31,9 +30,13 @@ class MapViewModel @Inject constructor(
 
     val objectTapListenersMap = HashMap<Long, MapObjectTapListener>()
 
+    var chosenCityPosition: Int? = null
+
     fun getOnPlayerClickListener() = mapPlayer.onPlayerClickListener
 
-    fun getDoIPlay() = mapPlayer.doIPlay
+    fun getPointIsPlaying() = mapPlayer.candidateIsPlaying()
+
+    fun getPointTrackIsCurrent() = mapPlayer.candidateIsCurrent()
 
     fun getIsSomeonePlaying() = mapPlayer.isSomeonePlaying
 
@@ -44,14 +47,17 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    @SuppressLint("CheckResult")
+    fun setIdleState() = _state.postValue(MapState.Idle)
+
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         mapPlayer.observePlayerTimer()
-            .subscribe {
-                if (mapPlayer.doIPlay) {
+            .subscribe({
+                if (getPointTrackIsCurrent()) {
                     callback(it)
                 }
-            }
+            }, {
+                _effect.postValue(MapEffect.Error)
+            })
     }
 
     @OptIn(ExperimentalCoroutinesApi::class)
@@ -82,11 +88,25 @@ class MapViewModel @Inject constructor(
             })
     }
 
+    fun changeLocationFavoriteState(locationId: Long) = invokeDisposable {
+        locationsUseCase.changeLocationFavoriteState(locationId)
+            .doOnSubscribe{ _state.postValue(MapState.LikeLoading) }
+            .subscribe({
+                _state.postValue(MapState.FavoriteStateChanged(it.content))
+            }, {
+                _effect.postValue(MapEffect.Error)
+                _state.postValue(MapState.Idle)
+            })
+    }
+
     private fun getLocationById(locationId: Long) = invokeDisposable {
         locationsUseCase.getLocationById(locationId)
             .doOnSubscribe{ _state.postValue(MapState.Loading) }
             .subscribe({
-                mapPlayer.setTrackCandidate(it.audios[0].audioUrl)
+                mapPlayer.setTrackCandidate(
+                    if (it.audios.isNotEmpty()) it.audios[0].audioUrl
+                    else null
+                )
                 _state.postValue(MapState.AudioLocationReceived(it))
             }, {
                 _effect.postValue(MapEffect.Error)
@@ -96,9 +116,11 @@ class MapViewModel @Inject constructor(
     sealed class MapState: State {
         data object Idle : MapState()
         data object Loading : MapState()
+        data object LikeLoading : MapState()
         class CitiesReceived(val citiesData: PagingData<City>) : MapState()
         class LocationsReceived(val locations: List<Location>) : MapState()
         class AudioLocationReceived(val audioLocation: AudioLocation) : MapState()
+        class FavoriteStateChanged(val message: String) : MapState()
     }
 
     sealed class MapEffect: Effect {

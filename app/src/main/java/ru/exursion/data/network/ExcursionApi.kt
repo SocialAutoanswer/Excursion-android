@@ -15,6 +15,7 @@ import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.EmailConfirmCode
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
@@ -101,4 +102,9 @@ interface ExcursionApi {
     fun getLocationById(
         @Path("id") locationId: Long
     ): Single<Response<AudioLocationDto>>
+
+    @GET("locations/{id}/favorite")
+    fun changeLocationFavoriteState(
+        @Path("id") locationId: Long
+    ): Single<Response<MessageDto>>
 }
