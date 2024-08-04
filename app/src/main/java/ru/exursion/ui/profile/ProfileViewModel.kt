@@ -1,6 +1,9 @@
 package ru.exursion.ui.profile
 
+import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
+import androidx.paging.rxjava3.cachedIn
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
@@ -46,8 +49,10 @@ class ProfileViewModel @Inject constructor(
             })
     }
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     fun getQuestions() = invokeDisposable {
         profileUseCase.getQuestions()
+            .cachedIn(viewModelScope)
             .doOnSubscribe{ _state.postValue(ProfileState.Loading) }
             .subscribe({
                 _state.postValue(ProfileState.QuestionsReceived(it))
