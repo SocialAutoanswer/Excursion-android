@@ -39,7 +39,7 @@ class ProfileFragment :
 
     override fun setUpViews(view: View) = with(binding) {
         settingsBtn.setOnClickListener{ findNavController().navigate(R.id.redactProfileFragment) }
-        favoriteBtn.setOnClickListener { findNavController().navigate(R.id.favoritesFragment) }
+        favoriteBtn.setOnClickListener { findNavController().navigate(R.id.favoritesGroupFragment) }
         faqBtn.setOnClickListener { findNavController().navigate(R.id.questionsFragment) }
         notificationBtn.setOnClickListener { findNavController().navigate(R.id.notificationSettingsFragment) }
         decorBtn.setOnClickListener { findNavController().navigate(R.id.decorSettingsFragment) }

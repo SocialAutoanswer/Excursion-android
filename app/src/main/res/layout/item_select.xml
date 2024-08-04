@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Button android:id="@+id/favorite_btn"
-    style="@style/Button.Forward.MarginHorizontal_25dp"
+    style="@style/Button.Forward"
     android:text="@string/screen_profile_favorite"
     xmlns:android="http://schemas.android.com/apk/res/android" />

@@ -1,15 +1,13 @@
 package ru.exursion.ui.shared
 
 import android.view.ViewGroup
-import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.bibaboba.kit.ui.getDrawableByName
-import ru.exursion.R
 import ru.exursion.data.models.TagItem
 import ru.exursion.databinding.ItemSelectBinding
-import ru.exursion.ui.shared.ext.setDrawable
+import ru.exursion.ui.shared.ext.setStartDrawable
 
 class TagsPagingAdapter(
     private val onTagClick: (TagItem) -> Unit
@@ -26,6 +24,10 @@ class TagsPagingAdapter(
         return ItemViewHolder.create(parent) { binding, tag ->
             with(binding) {
                 root.text = tag.name
+
+                root.setStartDrawable(
+                    root.context.getDrawableByName(tag.iconName)
+                )
 
                 root.setOnClickListener { onTagClick(tag) }
             }

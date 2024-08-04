@@ -59,14 +59,16 @@ class QuestionsFragment: StateFragment<FragmentQuestionsBinding, ProfileViewMode
         return addState(
             ProfileViewModel.ProfileState.Loading::class,
             callback = { binding.loading.root.isVisible = true },
-            onExit = { binding.loading.root.isVisible = false },
+            onExit = {
+                binding.refreshLayout.isRefreshing = false
+                binding.loading.root.isVisible = false
+             }
         )
     }
 
     private fun StateMachine.Builder.addQuestionsReceivedState(): StateMachine.Builder {
         return addState(ProfileViewModel.ProfileState.QuestionsReceived::class) {
             adapter.submitData(lifecycle, it.questions)
-            binding.refreshLayout.isRefreshing = false
         }
     }
 

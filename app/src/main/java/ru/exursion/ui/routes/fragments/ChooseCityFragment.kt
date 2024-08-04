@@ -17,6 +17,7 @@ import ru.exursion.ui.routes.adapter.CitiesPagingDataAdapter
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
+import ru.exursion.ui.shared.content.BaseContentFragment
 import ru.exursion.ui.shared.ext.addErrorHandlers
 import javax.inject.Inject
 
@@ -36,7 +37,7 @@ class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityVi
     private val adapter = CitiesPagingDataAdapter {
         findNavController().navigate(
             R.id.fragment_tags,
-            bundleOf(RoutesFragment.CITY_ID_BUNDLE_KEY to it.id)
+            bundleOf(BaseContentFragment.CITY_ID_BUNDLE_KEY to it.id)
         )
     }.apply { addErrorHandlers(this@ChooseCityFragment) }
 

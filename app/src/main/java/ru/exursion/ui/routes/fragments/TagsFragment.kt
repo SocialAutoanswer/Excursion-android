@@ -14,6 +14,7 @@ import ru.exursion.databinding.FragmentTagsBinding
 import ru.exursion.ui.shared.ext.addItemMargins
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
+import ru.exursion.ui.shared.content.BaseContentFragment
 import ru.exursion.ui.shared.TagsPagingAdapter
 import javax.inject.Inject
 
@@ -35,9 +36,9 @@ class TagsFragment : StateFragment<FragmentTagsBinding, ChooseTagsViewModel>(
         findNavController().navigate(
             R.id.fragment_routes,
             bundleOf(
-                RoutesFragment.CITY_ID_BUNDLE_KEY to arguments?.getLong(RoutesFragment.CITY_ID_BUNDLE_KEY),
-                RoutesFragment.TAG_ID_BUNDLE_KEY to it.id,
-                RoutesFragment.TAG_NAME_BUNDLE_KEY to it.name,
+                BaseContentFragment.CITY_ID_BUNDLE_KEY to arguments?.getLong(BaseContentFragment.CITY_ID_BUNDLE_KEY),
+                BaseContentFragment.TAG_ID_BUNDLE_KEY to it.id,
+                BaseContentFragment.TAG_NAME_BUNDLE_KEY to it.name,
             )
         )
     }

@@ -28,7 +28,7 @@
             app:destination="@id/aboutAppFragment" />
         <action
             android:id="@+id/action_profileFragment_to_favoritesFragment"
-            app:destination="@id/favoritesFragment" />
+            app:destination="@id/favoritesGroupFragment" />
     </fragment>
     <fragment
         android:id="@+id/redactProfileFragment"
@@ -79,11 +79,32 @@
             app:destination="@id/profileFragment" />
     </fragment>
     <fragment
-        android:id="@+id/favoritesFragment"
-        android:name="ru.exursion.ui.profile.FavoritesFragment"
-        android:label="FavoritesFragment" >
+        android:id="@+id/favoritesGroupFragment"
+        android:name="ru.exursion.ui.profile.FavoriteGroupsFragment"
+        android:label="FavoritesGroupFragment" >
         <action
-            android:id="@+id/action_favoritesFragment_to_profileFragment"
+            android:id="@+id/action_favoritesGroupFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_favoritesGroupFragment_to_routesFragment"
+            app:destination="@id/routesFragment" />
+        <action
+            android:id="@+id/action_favoritesGroupFragment_to_hotelsFragment"
+            app:destination="@id/hotelsFragment" />
+        <action
+            android:id="@+id/action_favoritesGroupFragment_to_eventsFragment"
+            app:destination="@id/eventsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/routesFragment"
+        android:name="ru.exursion.ui.routes.fragments.RoutesFragment"
+        android:label="RoutesFragment" />
+    <fragment
+        android:id="@+id/hotelsFragment"
+        android:name="ru.exursion.ui.routes.fragments.HotelsFragment"
+        android:label="HotelsFragment" />
+    <fragment
+        android:id="@+id/eventsFragment"
+        android:name="ru.exursion.ui.routes.fragments.EventsFragment"
+        android:label="EventsFragment" />
 </navigation>
