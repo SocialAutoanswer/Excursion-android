@@ -10,6 +10,7 @@ import ru.bibaboba.kit.ui.utils.DropDownItemUtil
 import ru.exursion.R
 import ru.exursion.data.models.Question
 import ru.exursion.databinding.ItemFrequentlyQuestionBinding
+import ru.exursion.ui.shared.ext.startAnimatedVectorDrawable
 
 
 class DropDownQuestionAdapter :
@@ -35,10 +36,10 @@ class DropDownQuestionAdapter :
 
                 uncoverBtn.setOnClickListener{
                     if(!answerText.isVisible) {
-                        uncoverBtn.setImageDrawable(AppCompatResources.getDrawable(root.context, R.drawable.ic_cross_rounded))
+                        uncoverBtn.startAnimatedVectorDrawable(R.drawable.animation_plus_to_cross)
                         DropDownItemUtil.expand(answerText)
                     } else {
-                        uncoverBtn.setImageDrawable(AppCompatResources.getDrawable(root.context, R.drawable.ic_plus))
+                        uncoverBtn.startAnimatedVectorDrawable(R.drawable.animation_cross_to_plus)
                         DropDownItemUtil.collapse(answerText)
                     }
                 }

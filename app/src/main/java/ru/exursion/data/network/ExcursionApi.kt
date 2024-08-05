@@ -14,12 +14,13 @@ import ru.exursion.BuildConfig
 import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.EmailConfirmCode
+import ru.exursion.data.models.EventDto
+import ru.exursion.data.models.HotelDto
 import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
-import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.models.RouteRequestDto
 import ru.exursion.data.models.TagDto
@@ -76,32 +77,44 @@ interface ExcursionApi {
         @Query("page") page: Int
     ): Single<Response<TagPageDto>>
 
-    @GET("locations/bycity/{city_id}")
+    @GET("locations/bycity/{city_id}/")
     fun requestRoutesByCity(
         @Path("city_id") cityId: Long,
         @Query("page") page: Int,
     ): Single<Response<RouteRequestDto>>
 
-    @GET("locations/tags/{id}")
+    @GET("locations/tags/{id}/")
     fun requestRoutesByTag(
         @Path("id") tagId: Long,
     ): Single<Response<TagDto>>
 
-    @GET("reviews/{routeId}")
+    @GET("routes/favorites/")
+    fun getFavoriteRoutes(): Single<Response<List<RouteDto>>>
+
+    @GET("reviews/{routeId}/")
     fun requestRouteReviews(
         @Path("routeId") routeId: Long,
     ): Single<Response<PageDto<ReviewDto>>>
 
-    @GET("locations/bycity/{cityId}")
+    @GET("locations/bycity/{cityId}/")
     fun requestLocationsByCity(
         @Path("cityId") cityId: Long,
         @Query("page") page: Int
     ): Single<Response<PageDto<LocationDto>>>
 
-    @GET("locations/{id}")
+    @GET("locations/{id}/")
     fun getLocationById(
         @Path("id") locationId: Long
     ): Single<Response<AudioLocationDto>>
+
+    @GET("locations/favorites/")
+    fun getFavoriteLocations(): Single<Response<List<LocationDto>>>
+
+    @GET("hotels/favorites/")
+    fun getFavoriteHotels(): Single<Response<List<HotelDto>>>
+
+    @GET("events/favorites/")
+    fun getFavoriteEvents(): Single<Response<List<EventDto>>>
 
     @GET("locations/{id}/favorite")
     fun changeLocationFavoriteState(

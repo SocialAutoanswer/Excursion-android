@@ -11,50 +11,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/main_text"
-        style="@style/Text.H3.Center"
-        android:text="@string/screen_feedback_text"
-        android:layout_marginTop="278dp"
+    <LinearLayout
+        style="@style/MatchParent"
+        android:orientation="vertical"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/header"
-        app:layout_constraintBottom_toTopOf="@id/app_icons"/>
+        app:layout_constraintBottom_toBottomOf="parent">
 
-    <LinearLayout
-        android:id="@+id/app_icons"
-        style="@style/MatchParentWrapContent"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:layout_marginTop="32dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/main_text"
-        app:layout_constraintBottom_toTopOf="@id/web_link">
 
-        <ImageButton
-            android:id="@+id/telegram_btn"
-            style="@style/Icon.MarginHorizontal_12dp"
-            app:tint="?attr/exc_color_primary"
-            android:src="@drawable/ic_telegram"/>
+        <TextView
+            android:id="@+id/main_text"
+            style="@style/Text.H3.Center"
+            android:text="@string/screen_feedback_text"/>
 
-        <ImageButton
-            android:id="@+id/whatsapp_btn"
-            style="@style/Icon.MarginHorizontal_12dp"
-            app:tint="?attr/exc_color_primary"
-            android:src="@drawable/ic_whatsapp"/>
+        <LinearLayout
+            android:id="@+id/app_icons"
+            style="@style/MatchParentWrapContent"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="32dp">
 
+            <ImageButton
+                android:id="@+id/telegram_btn"
+                style="@style/Icon.MarginHorizontal_12dp"
+                app:tint="?attr/exc_color_primary"
+                android:src="@drawable/ic_telegram"/>
+
+            <ImageButton
+                android:id="@+id/whatsapp_btn"
+                style="@style/Icon.MarginHorizontal_12dp"
+                app:tint="?attr/exc_color_primary"
+                android:src="@drawable/ic_whatsapp"/>
+
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/web_link"
+            style="@style/Text.H5.Neutral"
+            android:layout_marginTop="24dp"
+            android:text="@string/screen_feedback_link" />
 
     </LinearLayout>
-
-
-    <TextView
-        android:id="@+id/web_link"
-        style="@style/Text.H5.Neutral"
-        android:layout_marginTop="24dp"
-        android:text="@string/screen_feedback_link"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/app_icons"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

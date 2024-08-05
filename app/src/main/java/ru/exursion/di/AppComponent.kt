@@ -19,8 +19,11 @@ import ru.exursion.ui.profile.DecorSettingsFragment
 import ru.exursion.ui.profile.ProfileFragment
 import ru.exursion.ui.profile.QuestionsFragment
 import ru.exursion.ui.profile.RedactProfileFragment
+import ru.exursion.ui.routes.fragments.EventsFragment
+import ru.exursion.ui.routes.fragments.HotelsFragment
 import ru.exursion.ui.routes.fragments.RouteDetailsFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
+import ru.exursion.ui.shared.content.BaseContentFragment
 import javax.inject.Singleton
 
 @Singleton
@@ -52,6 +55,9 @@ interface AppComponent {
     fun inject(fragment: LocationBottomDialog)
     fun inject(player: MapPlayer)
     fun inject(fragment: RouteDetailsFragment)
+    fun inject(fragment: BaseContentFragment)
+    fun inject(fragment: HotelsFragment)
+    fun inject(fragment: EventsFragment)
 
     @Component.Builder
     interface Builder {

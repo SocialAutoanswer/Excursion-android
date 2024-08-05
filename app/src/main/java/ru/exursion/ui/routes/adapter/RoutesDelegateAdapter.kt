@@ -5,14 +5,19 @@ import com.livermor.delegateadapter.delegate.ViewBindingDelegateAdapter
 import ru.exursion.data.models.Route
 import ru.exursion.databinding.ItemRouteBinding
 
-class RoutesDelegateAdapter(
-    private val onClick: (Route) -> Unit
-) : ViewBindingDelegateAdapter<Route, ItemRouteBinding>(ItemRouteBinding::inflate) {
+class RoutesDelegateAdapter
+    : ViewBindingDelegateAdapter<Route, ItemRouteBinding>(ItemRouteBinding::inflate) {
+
+    private var onClick: ((Route) -> Unit)? = null
+
+    fun setOnItemClick(callback: (Route) -> Unit) {
+        onClick = callback
+    }
 
     override fun isForViewType(item: Any) = item is Route
 
     override fun ItemRouteBinding.onBind(item: Route) {
-        root.setOnClickListener { onClick(item) }
+        root.setOnClickListener { onClick?.invoke(item) }
 
         name.text = item.name
         description.text = item.description

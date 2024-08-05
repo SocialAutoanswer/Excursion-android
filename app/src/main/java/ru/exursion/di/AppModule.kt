@@ -18,15 +18,20 @@ import ru.exursion.data.auth.AuthRepository
 import ru.exursion.data.auth.AuthRepositoryImpl
 import ru.exursion.data.auth.UserMapper
 import ru.exursion.data.auth.UserRequestMapper
+import ru.exursion.data.locations.FavoritesRepository
+import ru.exursion.data.locations.FavoritesRepositoryImpl
 import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
 import ru.exursion.data.locations.mapper.AudioLocationMapper
 import ru.exursion.data.locations.mapper.AudioMapper
+import ru.exursion.data.locations.mapper.EventMapper
+import ru.exursion.data.locations.mapper.HotelMapper
 import ru.exursion.data.locations.mapper.LocationsMapper
 import ru.exursion.data.locations.mapper.PhotoMapper
 import ru.exursion.data.locations.mapper.RouteDetailsMapper
 import ru.exursion.data.locations.mapper.RoutesMapper
+import ru.exursion.data.locations.mapper.SocialMediaMapper
 import ru.exursion.data.locations.mapper.TagsItemMapper
 import ru.exursion.data.locations.mapper.TagsMapper
 import ru.exursion.data.models.Audio
@@ -35,6 +40,10 @@ import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
+import ru.exursion.data.models.Event
+import ru.exursion.data.models.EventDto
+import ru.exursion.data.models.Hotel
+import ru.exursion.data.models.HotelDto
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.Message
@@ -50,6 +59,8 @@ import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
+import ru.exursion.data.models.SocialMedia
+import ru.exursion.data.models.SocialMediaDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.TagItem
@@ -69,6 +80,10 @@ import ru.exursion.data.reviews.ReviewsRepositoryImpl
 import ru.exursion.data.reviews.mapper.ReviewMapper
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
+import ru.exursion.domain.ContentUseCase
+import ru.exursion.domain.ContentUseCaseImpl
+import ru.exursion.domain.FavoritesUseCase
+import ru.exursion.domain.FavoritesUseCaseImpl
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.LocationUseCaseImpl
 import ru.exursion.domain.RoutesUseCase
@@ -85,6 +100,7 @@ import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.routes.vm.RoutesViewModel
+import ru.exursion.ui.shared.content.BaseContentViewModel
 
 @Module
 class AppModule(private val context: Context) {
@@ -142,12 +158,20 @@ class AppModule(private val context: Context) {
         @Binds
         fun bindAudioLocationMapper(impl: AudioLocationMapper): Mapper<AudioLocationDto, AudioLocation>
         @Binds
+        fun bindHotelMapper(impl: HotelMapper): Mapper<HotelDto, Hotel>
+        @Binds
+        fun bindSocialMediaMapper(impl: SocialMediaMapper): Mapper<SocialMediaDto, SocialMedia>
+        @Binds
+        fun bindEventMapper(impl: EventMapper): Mapper<EventDto, Event>
+        @Binds
         fun bindMessageMapper(impl: MessageMapper): Mapper<MessageDto, Message>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
         @Binds
         fun bindReviesRepository(impl: ReviewsRepositoryImpl): ReviewsRepository
+        @Binds
+        fun bindFavoritesRepository(impl: FavoritesRepositoryImpl): FavoritesRepository
 
         @Binds
         fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
@@ -157,6 +181,10 @@ class AppModule(private val context: Context) {
         fun bindRoutesUseCase(impl: RoutesUseCaseImpl): RoutesUseCase
         @Binds
         fun bindLocationUseCase(impl: LocationUseCaseImpl): LocationUseCase
+        @Binds
+        fun bindContentUseCase(impl: ContentUseCaseImpl): ContentUseCase
+        @Binds
+        fun bindFavoriteUseCase(impl: FavoritesUseCaseImpl): FavoritesUseCase
 
         @Binds
         fun bindUserRequestMapper(impl: UserRequestMapper): Mapper<UserRequestDto, User>
@@ -213,6 +241,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(RouteDetailsViewModel::class)
         fun bindRouteDetailsViewModel(viewModel: RouteDetailsViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(BaseContentViewModel::class)
+        fun bindBaseContentViewModel(viewModel: BaseContentViewModel): ViewModel
     }
 
 }
