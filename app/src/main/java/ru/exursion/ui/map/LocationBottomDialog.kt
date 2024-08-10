@@ -1,35 +1,28 @@
 package ru.exursion.ui.map
 
 import android.content.Context
-import android.content.DialogInterface
-import android.os.Bundle
-import android.view.LayoutInflater
+import android.util.Log
 import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.bumptech.glide.Glide
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.bibaboba.kit.states.StateMachine
+import ru.bibaboba.kit.ui.StateBottomSheetDialogFragment
 import ru.exursion.R
 import ru.exursion.databinding.FragmentLocationBottomSheetDialogBinding
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
-class LocationBottomDialog: BottomSheetDialogFragment() {
-
-    private var _binding: FragmentLocationBottomSheetDialogBinding? = null
-    private val binding get() = _binding!!
+class LocationBottomDialog: StateBottomSheetDialogFragment<FragmentLocationBottomSheetDialogBinding, MapViewModel>(FragmentLocationBottomSheetDialogBinding::class.java) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val viewModel by activityViewModels<MapViewModel> { viewModelFactory }
+    override val viewModel by activityViewModels<MapViewModel> { viewModelFactory }
 
-    private var onDismissCallback: (() -> Unit)? = null
-
-    private val stateMachine = StateMachine.Builder()
+    override val stateMachine = StateMachine.Builder()
         .lifecycleOwner(this)
+        .enableDebugLogs()
         .addAudioLocationReceivedState()
         .addLikeLoadingState()
         .addFavoriteStateChangedState()
@@ -41,38 +34,14 @@ class LocationBottomDialog: BottomSheetDialogFragment() {
         inject()
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ) = FragmentLocationBottomSheetDialogBinding.inflate(inflater, container, false).also { _binding = it }.root
-
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        setUpObservers()
-
+    override fun setUpViews(view: View) {
         // No questions, really
         dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             ?.setBackgroundColor(resources.getColor(R.color.transparent))
 
-        binding.player.setPlayerUI(viewModel.getPointIsPlaying())
-        binding.player.setOnPlayerClickListener(viewModel.getOnPlayerClickListener())
+        binding.player.playButton.setUiState(viewModel.getPointIsPlaying())
+        binding.player.setOnPlayerClickListener(viewModel.getPointPlayerClickListener())
         viewModel.setOnPlayerTimerListener(binding.player::setCurrentPosition)
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-        super.onDismiss(dialog)
-        onDismissCallback?.invoke()
-    }
-
-    fun setOnDismiss(callback: () -> Unit) {
-        onDismissCallback = callback
-    }
-
-    private fun setUpObservers() {
-        viewModel.state.observe(viewLifecycleOwner, stateMachine::submit)
-        viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
     }
 
     private fun changeLikeButtonState(isLoading: Boolean) = with(binding) {

@@ -12,11 +12,13 @@ import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
 import ru.exursion.data.models.City
 import ru.exursion.databinding.FragmentMapBinding
+import ru.exursion.ui.shared.ext.MarkType
+import ru.exursion.ui.shared.ext.PlaceMark
 import ru.exursion.ui.shared.ext.addItemMargins
+import ru.exursion.ui.shared.ext.addPlaceMarks
 import ru.exursion.ui.shared.ext.goToCity
 import ru.exursion.ui.shared.ext.inject
-import ru.exursion.ui.shared.ext.setBounds
-import ru.exursion.ui.shared.ext.setPlaceMarks
+import ru.exursion.ui.shared.ext.setBoundsByPoints
 import javax.inject.Inject
 
 class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapBinding::class.java) {
@@ -53,15 +55,6 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
     }
 
 
-    override fun setUpObservers() {
-        super.setUpObservers()
-
-        viewModel.cityBoundingBox.observe(viewLifecycleOwner) {
-            binding.mapView.setBounds(it)
-        }
-    }
-
-
     override fun onStart() {
         super.onStart()
         MapKitFactory.getInstance().onStart()
@@ -82,8 +75,8 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
 
     private fun setUpPlayer() {
         binding.playerView.isVisible = viewModel.getIsSomeonePlaying()
-        binding.playerView.setPlayerUI(viewModel.getIsSomeonePlaying())
-        binding.playerView.setOnPlayerClickListener(viewModel.getOnPlayerClickListener())
+        binding.playerView.playButton.setUiState(viewModel.getIsSomeonePlaying())
+        binding.playerView.setOnPlayerClickListener(viewModel.getMapPlayerClickListener())
 
         viewModel.setOnPlayerTimerListener(binding.playerView::setCurrentPosition)
     }
@@ -109,7 +102,17 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
                 viewModel.addTapListener(location.id)
             }
 
-            binding.mapView.setPlaceMarks(it.locations, viewModel.objectTapListenersMap)
+            binding.mapView.setBoundsByPoints(it.locations.map { it.point })
+
+            binding.mapView.addPlaceMarks(
+                it.locations.map { location ->
+                    PlaceMark(
+                        location.id,
+                        location.point,
+                        MarkType.AUDIO,
+                        viewModel.addTapListener(location.id))
+                }
+            )
         }
     }
 
@@ -117,8 +120,7 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
         return addState(MapViewModel.MapState.AudioLocationReceived::class) {
             val tag = "location-${it.audioLocation.id}"
 
-            val dialog = (parentFragmentManager
-                .findFragmentByTag(tag))
+            val dialog = parentFragmentManager.findFragmentByTag(tag)
 
             if (dialog != null && dialog.isVisible) return@addState
 
@@ -126,17 +128,16 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
                 binding.playerView.setTrackName(it.audioLocation.audios[0].name)
             }
 
-            LocationBottomDialog()
-                .apply {
-                    setOnDismiss {
-                        setUpPlayer()
-                        viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
-                    }
+            LocationBottomDialog().apply {
+                setOnDismiss {
+                    setUpPlayer()
+                    viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
+                    viewModel.setIdleState()
                 }
-                .show(parentFragmentManager, tag)
+            }
+            .show(parentFragmentManager, tag)
 
             viewModel.effect.removeObservers(viewLifecycleOwner)
-            viewModel.setIdleState()
         }
     }
 

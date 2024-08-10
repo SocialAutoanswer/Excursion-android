@@ -6,6 +6,14 @@
 
     <fragment
         android:id="@+id/fragment_route_details"
-        android:name="ru.exursion.ui.routes.fragments.RouteDetailsFragment" />
+        android:name="ru.exursion.ui.routes.fragments.RouteDetailsFragment" >
+        <action
+            android:id="@+id/action_fragment_route_details_to_routeMapFragment"
+            app:destination="@id/routeMapFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/routeMapFragment"
+        android:name="ru.exursion.ui.routes.fragments.RouteMapFragment"
+        android:label="RouteMapFragment" />
 
 </navigation>
