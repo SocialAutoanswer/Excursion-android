@@ -1,26 +1,26 @@
-package ru.exursion.data.locations.paging
+package ru.exursion.data.routes.paging
 
+import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.DefaultRxPagingSource
-import ru.exursion.data.models.City
-import ru.exursion.data.models.CityDto
+import ru.exursion.data.models.Tag
+import ru.exursion.data.models.TagDto
 import ru.exursion.data.network.ExcursionApi
-import ru.exursion.data.routes.paging.RouteTagsPagingSource
 import javax.inject.Inject
 
-class CitiesPagingSource @AssistedInject constructor(
+class RouteTagsPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
-    private val citiesMapper: Mapper<CityDto, City>
-) : DefaultRxPagingSource<City>() {
+    private val tagsMapper: Mapper<TagDto, Tag>
+): DefaultRxPagingSource<Tag>() {
 
-    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, City>> {
+    override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Tag>> {
         val pageNumber = params.key ?: 1
 
-        return api.getCitiesPage(pageNumber)
+        return api.getRoutesTags(pageNumber)
             .subscribeOn(Schedulers.io())
             .map { response ->
                 if (response.isSuccessful) {
@@ -28,7 +28,7 @@ class CitiesPagingSource @AssistedInject constructor(
                     val pageDto = response.body()
 
                     val data = pageDto?.data?.let {
-                        citiesMapper.mapList(it.filterNotNull())
+                        tagsMapper.mapList(it.filterNotNull())
                     } ?: emptyList()
 
                     val nextPageNumber = if (pageDto?.nextPageLink == null) null else pageNumber.inc()
@@ -43,6 +43,6 @@ class CitiesPagingSource @AssistedInject constructor(
 
     @AssistedFactory
     interface Factory {
-        fun create(): CitiesPagingSource
+        fun create(): RouteTagsPagingSource
     }
 }
