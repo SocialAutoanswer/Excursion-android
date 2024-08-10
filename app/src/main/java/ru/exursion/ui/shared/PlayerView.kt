@@ -19,24 +19,8 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
 
     private val binding = LayoutPlayerBinding.inflate(LayoutInflater.from(context), this, true)
     private var duration = 0
-    private var _playerClickListener : OnPlayerClickListener? = null
-
-    private var playerClickListener = object : OnPlayerClickListener {
-        override fun onPlayClick() {
-            setPlayerUI(true)
-            _playerClickListener?.onPlayClick()
-        }
-
-        override fun onPauseClick() {
-            setPlayerUI(false)
-            _playerClickListener?.onPauseClick()
-        }
-
-        override fun onSetPosition(position: Int) {
-            setCurrentPosition(position)
-            _playerClickListener?.onSetPosition(position)
-        }
-    }
+    private var playerClickListener : OnPlayerClickListener? = null
+    val playButton: PlayButton = binding.playBtn
 
     private val onSeekBarChangeListener = object : SimpleOnSeekBarChangedListener {
 
@@ -45,24 +29,30 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
         }
 
         override fun onStartTrackingTouch(seekBar: SeekBar?) {
-            playerClickListener.onPauseClick()
+            playerClickListener?.onPauseClick()
         }
 
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
-            playerClickListener.onSetPosition((seekBar?.progress ?: 0) * 1000)
+            playerClickListener?.onSetPosition((seekBar?.progress ?: 0) * 1000)
             binding.currentTime.text = (seekBar?.progress ?: 0).toTimeFormat()
-            playerClickListener.onPlayClick()
+            playerClickListener?.onPlayClick()
         }
     }
 
 
     init {
+        binding.trackName.text = trackName
+        binding.trackDuration.text = duration.toTimeFormat()
         binding.trackBar.setOnSeekBarChangeListener(onSeekBarChangeListener)
+        playerClickListener?.let {
+            binding.playBtn.setOnPlayerClickListener(it)
+        }
     }
 
     override fun onSaveInstanceState(): Parcelable = Bundle().apply {
         putParcelable("superState", super.onSaveInstanceState())
         putString("name", trackName)
+        putInt("duration", duration)
     }
 
     override fun onRestoreInstanceState(state: Parcelable?) {
@@ -70,6 +60,7 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
 
         if (state is Bundle) {
             trackName = state.getString("name") ?: ""
+            duration = state.getInt("duration")
             _state = state.getParcelable("superState")
         }
         super.onRestoreInstanceState(_state)
@@ -77,7 +68,8 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
 
 
     fun setOnPlayerClickListener(listener: OnPlayerClickListener) {
-        _playerClickListener = listener
+        playerClickListener = listener
+        binding.playBtn.setOnPlayerClickListener(listener)
     }
 
     fun setCurrentPosition(currentPosition: Int) {
@@ -85,12 +77,6 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
             trackBar.progress = currentPosition / 1000
             currentTime.text = (currentPosition / 1000).toTimeFormat()
         }
-
-//        if (binding.trackBar.progress == duration) {
-//            binding.trackBar.progress = 0
-//            binding.currentTime.text = 0.toTimeFormat()
-//            playerClickListener.onPauseClick()
-//        }
     }
 
     fun setDuration(dur: Int) {
@@ -103,19 +89,5 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
         this.trackName = trackName
         binding.trackName.text = trackName
     }
-
-
-    fun setPlayerUI(isPlaying: Boolean) {
-        with(binding) {
-            if(isPlaying){
-                playBtn.setImageResource(R.drawable.ic_pause)
-                playBtn.setOnClickListener { playerClickListener.onPauseClick() }
-            } else {
-                playBtn.setImageResource(R.drawable.ic_play)
-                playBtn.setOnClickListener { playerClickListener.onPlayClick() }
-            }
-        }
-    }
-
 
 }

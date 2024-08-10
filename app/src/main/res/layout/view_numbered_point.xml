@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/WrapContent"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/number"
+        style="@style/WrapContent"
+        android:background="@drawable/shape_number_text_circle"
+        android:paddingHorizontal="12dp"
+        android:paddingVertical="6dp"
+        android:textSize="16sp"
+        android:textColor="@color/selector_text_on_secondary"
+        tools:text="2" />
+
+    <ImageView
+        android:id="@+id/triangle"
+        style="@style/WrapContent"
+        android:src="@drawable/ic_triangle"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
+
+</LinearLayout>
