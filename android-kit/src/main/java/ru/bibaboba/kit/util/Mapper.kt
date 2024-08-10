@@ -8,7 +8,7 @@ interface Mapper<I, O> {
         throw NotImplementedError("Reverse map method is not implemented")
     }
 
-    fun mapList(input: List<I>): List<O> = input.map { map(it) }
+    fun mapList(input: List<I>): List<O> = input.map(::map)
 
-    fun reverseMapList(input: List<O>): List<I> = input.map { reverseMap(it) }
+    fun reverseMapList(input: List<O>): List<I> = input.map(::reverseMap)
 }

@@ -12,8 +12,7 @@ class LocationsMapper @Inject constructor() : Mapper<LocationDto, Location> {
         name = input.name ?: "",
         description = input.description ?: "",
         point = Point(input.latitude ?: 0.0, input.longitude ?: 0.0),
-        cityId = input.cityId ?: 0L,
-        routesIds = input.routes?.filterNotNull() ?: emptyList()
+        cityId = input.cityId ?: 0L
     )
 
     override fun mapList(input: List<LocationDto>): List<Location> {

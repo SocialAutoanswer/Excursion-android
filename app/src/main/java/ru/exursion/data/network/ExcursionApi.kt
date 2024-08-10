@@ -21,10 +21,9 @@ import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
 import ru.exursion.data.models.ReviewDto
+import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
-import ru.exursion.data.models.RouteRequestDto
 import ru.exursion.data.models.TagDto
-import ru.exursion.data.models.TagPageDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 
@@ -68,25 +67,36 @@ interface ExcursionApi {
 
 
     @GET("locations/cities/")
-    fun requestCitiesPage(
+    fun getCitiesPage(
         @Query("page") page: Int
     ): Single<Response<PageDto<CityDto>>>
 
-    @GET("locations/tags/")
-    fun requestTags(
+    @GET("routes/tags/")
+    fun getRoutesTags(
         @Query("page") page: Int
-    ): Single<Response<TagPageDto>>
+    ): Single<Response<PageDto<TagDto>>>
 
-    @GET("locations/bycity/{city_id}/")
-    fun requestRoutesByCity(
-        @Path("city_id") cityId: Long,
-        @Query("page") page: Int,
-    ): Single<Response<RouteRequestDto>>
+    @GET("routes/")
+    fun getRoutes(
+        @Query("page") page: Int
+    ): Single<Response<PageDto<RouteDto>>>
 
-    @GET("locations/tags/{id}/")
-    fun requestRoutesByTag(
+    @GET("routes/bytag/{id}/")
+    fun getRoutesByTag(
         @Path("id") tagId: Long,
-    ): Single<Response<TagDto>>
+        @Query("page") page: Int
+    ): Single<Response<PageDto<RouteDto>>>
+
+    @GET("routes/bycity/{id}/")
+    fun getRoutesByCity(
+        @Path("id") cityId: Long,
+        @Query("page") page: Int
+    ): Single<Response<PageDto<RouteDto>>>
+
+    @GET("api/routes/{id}/")
+    fun getRouteById(
+        @Path("id") routeId: Long
+    ): Single<Response<RouteDetailsDto>>
 
     @GET("routes/favorites/")
     fun getFavoriteRoutes(): Single<Response<List<RouteDto>>>
@@ -96,9 +106,26 @@ interface ExcursionApi {
         @Path("routeId") routeId: Long,
     ): Single<Response<PageDto<ReviewDto>>>
 
+    @GET("locations")
+    fun getLocations(
+        @Query("page") pageNum: Int
+    ): Single<Response<PageDto<LocationDto>>>
+
+    @GET("locations/bytag/{id}/")
+    fun getLocationsByTag(
+        @Path("id") tagId: Long,
+        @Query("page") pageNum: Int
+    ): Single<Response<PageDto<LocationDto>>>
+
     @GET("locations/bycity/{cityId}/")
-    fun requestLocationsByCity(
+    fun getLocationsByCity(
         @Path("cityId") cityId: Long,
+        @Query("page") page: Int
+    ): Single<Response<PageDto<LocationDto>>>
+
+    @GET("locations/byroute/{id}")
+    fun getLocationsByRoute(
+        @Path("id") routeId: Long,
         @Query("page") page: Int
     ): Single<Response<PageDto<LocationDto>>>
 

@@ -10,7 +10,6 @@ data class LocationDto(
     @SerializedName("longitude") val longitude: Double?,
     @SerializedName("latitude") val latitude: Double?,
     @SerializedName("city") val cityId: Long?,
-    @SerializedName("route") val routes: List<Long?>?,
 )
 
 data class AudioLocationDto(
@@ -20,7 +19,9 @@ data class AudioLocationDto(
     @SerializedName("audios") val audios: List<AudioDto?>?,
     @SerializedName("photos") val photos: List<PhotoDto?>?,
     @SerializedName("is_favorite") val isFavorite: Boolean?,
-    @SerializedName("description") val description: String?
+    @SerializedName("description") val description: String?,
+    @SerializedName("longitude") val longitude: Double?,
+    @SerializedName("latitude") val latitude: Double?
 )
 
 data class Location(
@@ -28,8 +29,7 @@ data class Location(
     val name: String,
     val description: String,
     val point: Point,
-    val cityId: Long,
-    val routesIds: List<Long>,
+    val cityId: Long
 )
 
 data class AudioLocation(
@@ -38,6 +38,7 @@ data class AudioLocation(
     val description: String,
     val isFavorite: Boolean,
     val city: City?,
+    val point: Point,
     val audios: List<Audio>,
     val photos: List<Photo>
 )

@@ -2,40 +2,18 @@ package ru.exursion.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class TagPageDto(
-    @SerializedName("next") val nextPage: String?,
-    @SerializedName("previous") val previousPage: String?,
-    @SerializedName("data") val tags: List<TagItemDto?>?
-)
-
-data class TagItemDto(
+data class TagDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
     @SerializedName("picture") val picture: String?,
-    @SerializedName("tags") val tags: List<Int?>?,
-    @SerializedName("routes") val routes: List<Int?>?
-)
-
-data class TagItem(
-    val id: Long,
-    val name: String,
-    val iconName: String,
-    val tagsIds: List<Int>,
-    val routesIds: List<Int>
-)
-
-data class TagDto(
-    @SerializedName("id") val id: Int?,
-    @SerializedName("name") val name: String?,
-    @SerializedName("picture") val picture: String?,
-    @SerializedName("tags") val tags: List<Int?>?,
-    @SerializedName("routes") val routes: List<RouteDto?>?
+    @SerializedName("tags") val tags: List<Long?>?,
+    @SerializedName("routes") val routes: List<Long?>?,
+    @SerializedName("type") val type: Char
 )
 
 data class Tag(
-    val id: Int,
+    val id: Long,
     val name: String,
     val iconName: String,
-    val tagsIds: List<Int>,
-    val routes: List<Route>
+    val routes: List<Long>
 )

@@ -1,8 +1,10 @@
-package ru.exursion.data.locations.mapper
+package ru.exursion.data.routes.mapper
 
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.Review
+import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
@@ -11,7 +13,8 @@ import javax.inject.Inject
 
 class RouteDetailsMapper @Inject constructor(
     private val tagsMapper: Mapper<TagDto, Tag>,
-    private val locationsMapper: Mapper<LocationDto, Location>
+    private val locationsMapper: Mapper<LocationDto, Location>,
+    private val reviewMapper: Mapper<ReviewDto, Review>
 ) : Mapper<RouteDetailsDto, RouteDetails> {
 
     override fun map(input: RouteDetailsDto) = RouteDetails(
@@ -24,6 +27,8 @@ class RouteDetailsMapper @Inject constructor(
         locations = locationsMapper.mapList(input.locations?.filterNotNull() ?: emptyList()),
         isPaid = false,
         image = "https://union-travel.ru/assets/images/ekskurs/school-bus.jpg",
+        isFavorite = input.isFavorite ?: false,
+        reviews = reviewMapper.mapList(input.reviews?.filterNotNull() ?: emptyList())
     )
 
 }
