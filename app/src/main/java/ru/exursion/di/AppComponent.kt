@@ -21,7 +21,9 @@ import ru.exursion.ui.profile.QuestionsFragment
 import ru.exursion.ui.profile.RedactProfileFragment
 import ru.exursion.ui.routes.fragments.EventsFragment
 import ru.exursion.ui.routes.fragments.HotelsFragment
+import ru.exursion.ui.routes.fragments.RouteAudiosDialog
 import ru.exursion.ui.routes.fragments.RouteDetailsFragment
+import ru.exursion.ui.routes.fragments.RouteMapFragment
 import ru.exursion.ui.routes.fragments.RoutesFragment
 import ru.exursion.ui.shared.content.BaseContentFragment
 import javax.inject.Singleton
@@ -58,6 +60,8 @@ interface AppComponent {
     fun inject(fragment: BaseContentFragment)
     fun inject(fragment: HotelsFragment)
     fun inject(fragment: EventsFragment)
+    fun inject(fragment: RouteMapFragment)
+    fun inject(fragment: RouteAudiosDialog)
 
     @Component.Builder
     interface Builder {

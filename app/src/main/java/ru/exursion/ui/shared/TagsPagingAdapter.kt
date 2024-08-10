@@ -5,22 +5,22 @@ import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.bibaboba.kit.ui.getDrawableByName
-import ru.exursion.data.models.TagItem
+import ru.exursion.data.models.Tag
 import ru.exursion.databinding.ItemSelectBinding
 import ru.exursion.ui.shared.ext.setStartDrawable
 
 class TagsPagingAdapter(
-    private val onTagClick: (TagItem) -> Unit
-) : PagingDataAdapter<TagItem, ItemViewHolder<ItemSelectBinding, TagItem>>(TagsDiffUtilCallback) {
+    private val onTagClick: (Tag) -> Unit
+) : PagingDataAdapter<Tag, ItemViewHolder<ItemSelectBinding, Tag>>(TagsDiffUtilCallback) {
 
-    override fun onBindViewHolder(holder: ItemViewHolder<ItemSelectBinding, TagItem>, position: Int) {
+    override fun onBindViewHolder(holder: ItemViewHolder<ItemSelectBinding, Tag>, position: Int) {
         getItem(position)?.let { holder.bind(it, position) }
     }
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): ItemViewHolder<ItemSelectBinding, TagItem> {
+    ): ItemViewHolder<ItemSelectBinding, Tag> {
         return ItemViewHolder.create(parent) { binding, tag, _ ->
             with(binding) {
                 root.text = tag.name
@@ -36,12 +36,12 @@ class TagsPagingAdapter(
 
 }
 
-private object TagsDiffUtilCallback : DiffUtil.ItemCallback<TagItem>() {
-    override fun areItemsTheSame(oldItem: TagItem, newItem: TagItem): Boolean {
+private object TagsDiffUtilCallback : DiffUtil.ItemCallback<Tag>() {
+    override fun areItemsTheSame(oldItem: Tag, newItem: Tag): Boolean {
         return oldItem.name == newItem.name
     }
 
-    override fun areContentsTheSame(oldItem: TagItem, newItem: TagItem): Boolean {
+    override fun areContentsTheSame(oldItem: Tag, newItem: Tag): Boolean {
         return oldItem == newItem
     }
 }

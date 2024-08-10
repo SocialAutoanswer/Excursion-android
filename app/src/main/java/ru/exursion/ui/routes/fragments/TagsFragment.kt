@@ -1,75 +1,30 @@
 package ru.exursion.ui.routes.fragments
 
-import android.content.Context
-import android.view.View
 import androidx.core.os.bundleOf
-import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import ru.bibaboba.kit.states.StateMachine
-import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
-import ru.exursion.databinding.FragmentTagsBinding
-import ru.exursion.ui.shared.ext.addItemMargins
-import ru.exursion.ui.shared.ext.inject
-import ru.exursion.ui.routes.vm.ChooseTagsViewModel
-import ru.exursion.ui.shared.content.BaseContentFragment
 import ru.exursion.ui.shared.TagsPagingAdapter
-import javax.inject.Inject
+import ru.exursion.ui.shared.content.BaseContentFragment
 
-class TagsFragment : StateFragment<FragmentTagsBinding, ChooseTagsViewModel>(
-    FragmentTagsBinding::class.java
-) {
+class TagsFragment : BaseContentFragment() {
 
-    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-
-    override val viewModel by viewModels<ChooseTagsViewModel> { viewModelFactory }
-
-    override val stateMachine = StateMachine.Builder()
-        .lifecycleOwner(this)
-        .addLoadingState()
-        .addReadyState()
-        .build()
-
-    private val adapter = TagsPagingAdapter {
+    override val adapter = TagsPagingAdapter {
         findNavController().navigate(
             R.id.fragment_routes,
             bundleOf(
-                BaseContentFragment.CITY_ID_BUNDLE_KEY to arguments?.getLong(BaseContentFragment.CITY_ID_BUNDLE_KEY),
-                BaseContentFragment.TAG_ID_BUNDLE_KEY to it.id,
-                BaseContentFragment.TAG_NAME_BUNDLE_KEY to it.name,
+                CITY_ID_BUNDLE_KEY to arguments?.getLong(CITY_ID_BUNDLE_KEY),
+                TAG_ID_BUNDLE_KEY to it.id,
+                TAG_NAME_BUNDLE_KEY to it.name,
             )
         )
     }
+    override val titleResId: Int
+        get() = if (viewModel.cityId != null)
+                    R.string.screen_favorites_routes
+                else
+                    R.string.screen_tags_recommendations_title
 
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        inject()
-    }
-
-    override fun getStartData() {
-        viewModel.requestTags()
-    }
-
-    override fun setUpViews(view: View): Unit = with(binding) {
-        recycler.also {
-            it.adapter = adapter
-            it.addItemMargins(vertical = 16)
-        }
-        header.title.setText(R.string.screen_town_routes_title)
-        header.backButton.setOnClickListener { activity?.onBackPressed() }
-    }
-
-    private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
-        return addState(
-            ChooseTagsViewModel.ChooseTagsState.Loading::class,
-            callback = { binding.loading.root.isVisible = true },
-            onExit = { binding.loading.root.isVisible = false }
-        )
-    }
-
-    private fun StateMachine.Builder.addReadyState(): StateMachine.Builder {
-        return addState(ChooseTagsViewModel.ChooseTagsState.TagsReady::class) { adapter.submitData(lifecycle, it.tags) }
+    override fun getData() {
+        viewModel.getRouteTags() // stub before recommendation added
     }
 }

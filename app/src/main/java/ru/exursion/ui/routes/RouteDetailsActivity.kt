@@ -13,13 +13,11 @@ class RouteDetailsActivity : AppCompatActivity() {
 
     companion object {
         private val ROUTE_ID = "route_id"
-        private val TAG_ID = "tag_id"
 
         fun start(activity: Activity?, routeId: Long, tagId: Long) {
             val activity = activity ?: return
             Intent(activity, RouteDetailsActivity::class.java).apply {
                 putExtra(ROUTE_ID, routeId)
-                putExtra(TAG_ID, tagId)
                 activity.startActivity(this)
             }
         }
@@ -39,10 +37,13 @@ class RouteDetailsActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         routeId = intent.getLongExtra(ROUTE_ID, -1)
-        tagId = intent.getLongExtra(TAG_ID, -1)
 
         val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_container) as NavHostFragment
         navController = navHostFragment.navController
+
+        binding.routeButton.setOnClickListener {
+            navHostFragment.navController.navigate(R.id.routeMapFragment)
+        }
     }
 
     @Deprecated("using onBackPressed")

@@ -2,6 +2,7 @@ package ru.exursion.ui.routes.fragments
 
 import android.content.Context
 import android.view.View
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -32,6 +33,7 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
         .lifecycleOwner(this)
         .addLoadingState()
         .addReadyState()
+        .addErrorEffect()
         .build()
 
     private val adapter = CompositeDelegateAdapter(
@@ -46,8 +48,7 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
     override fun getStartData() {
         val activity = (activity as RouteDetailsActivity?) ?: return
         val routeId = activity.routeId ?: return
-        val tagId = activity.tagId ?: return
-        viewModel.getRouteDetails(routeId, tagId)
+        viewModel.getRouteDetails(routeId)
     }
 
     override fun setUpViews(view: View) = with(binding) {
@@ -75,7 +76,7 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
 
     private fun StateMachine.Builder.addReadyState() : StateMachine.Builder {
         return addState(RouteDetailsViewModel.RouteDetailsState.Ready::class) {
-            val routeDetails = it.details.routeDetails
+            val routeDetails = it.details
 
             if (it.details.reviews.isNotEmpty()) {
                 binding.showAll.isVisible = true
@@ -96,6 +97,12 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
                 .load(routeDetails.image)
                 .centerCrop()
                 .into(binding.backgroundImage)
+        }
+    }
+
+    private fun StateMachine.Builder.addErrorEffect() : StateMachine.Builder {
+        return addEffect(RouteDetailsViewModel.RouteDetailsEffect.Error::class) {
+            Toast.makeText(context, R.string.undefined_error, Toast.LENGTH_SHORT).show()
         }
     }
 }

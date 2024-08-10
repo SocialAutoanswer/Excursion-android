@@ -8,9 +8,11 @@ import ru.bibaboba.kit.ui.ItemViewHolder
 import ru.exursion.data.models.Route
 import ru.exursion.databinding.ItemRouteBinding
 
-class RoutesPagingDataAdapter(
-    private val onClick: (Route) -> Unit,
-) : PagingDataAdapter<Route, ItemViewHolder<ItemRouteBinding, Route>>(RoutesDiffUtilCallback) {
+class RoutesPagingDataAdapter
+ : PagingDataAdapter<Route, ItemViewHolder<ItemRouteBinding, Route>>(RoutesDiffUtilCallback) {
+
+    private var onItemClick: ((Route) -> Unit)? = null
+
     override fun onBindViewHolder(holder: ItemViewHolder<ItemRouteBinding, Route>, position: Int) {
         getItem(position)?.let { holder.bind(it, position) }
     }
@@ -21,17 +23,21 @@ class RoutesPagingDataAdapter(
     ): ItemViewHolder<ItemRouteBinding, Route> {
         return ItemViewHolder.create(parent) { binding, item, pos ->
             with(binding) {
-                root.setOnClickListener { onClick(item) }
+                root.setOnClickListener { onItemClick?.invoke(item) }
 
                 name.text = item.name
                 description.text = item.description
 
                 Glide.with(binding.backgroundImage)
-                    .load(item.image)
+                    .load(item.imageUrl)
                     .centerCrop()
                     .into(binding.backgroundImage)
             }
         }
+    }
+
+    fun setOnItemClick(callback: (Route) -> Unit) {
+        onItemClick = callback
     }
 
 
@@ -39,7 +45,7 @@ class RoutesPagingDataAdapter(
 
 private object RoutesDiffUtilCallback : DiffUtil.ItemCallback<Route>() {
     override fun areItemsTheSame(oldItem: Route, newItem: Route): Boolean {
-        return oldItem.name == newItem.name
+        return oldItem.id == newItem.id
     }
 
     override fun areContentsTheSame(oldItem: Route, newItem: Route): Boolean {

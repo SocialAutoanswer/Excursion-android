@@ -8,13 +8,16 @@ import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import androidx.paging.LoadState
+import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
 import ru.exursion.databinding.FragmentContentExcBinding
+import ru.exursion.ui.shared.FooterLoadStateAdapter
 import ru.exursion.ui.shared.ext.addItemMargins
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
@@ -25,6 +28,7 @@ abstract class BaseContentFragment :
     companion object {
         const val CITY_ID_BUNDLE_KEY = "city_id"
         const val TAG_NAME_BUNDLE_KEY = "tag_name_id"
+        const val ROUTE_ID_BUNDLE_KEY = "route_id"
         const val TAG_ID_BUNDLE_KEY = "tag_id"
         const val IS_FAVORITE_BUNDLE_KEY = "is_favorite"
     }
@@ -40,10 +44,10 @@ abstract class BaseContentFragment :
 
     override val viewModel by viewModels<BaseContentViewModel> { viewModelFactory }
 
-    abstract val adapter: RecyclerView.Adapter<*>
+    abstract val adapter: PagingDataAdapter<*, *>
 
     @get:StringRes
-    abstract val  titleResId: Int?
+    abstract val  titleResId: Int
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -59,36 +63,52 @@ abstract class BaseContentFragment :
         viewModel.isFavorite = arguments?.getBoolean(IS_FAVORITE_BUNDLE_KEY, false) ?: false
         viewModel.cityId = arguments?.getLong(CITY_ID_BUNDLE_KEY, -1) ?: -1
         viewModel.tagId = arguments?.getLong(TAG_ID_BUNDLE_KEY, -1) ?: -1
+        viewModel.tagName = arguments?.getString(TAG_NAME_BUNDLE_KEY, getString(titleResId)) ?: getString(titleResId)
+        viewModel.routeId = arguments?.getLong(ROUTE_ID_BUNDLE_KEY, -1) ?: -1
         getData()
     }
 
     @CallSuper
     override fun setUpViews(view: View): Unit = with(binding) {
         recycler.also {
-            it.adapter = adapter
+            it.adapter = adapter.withLoadStateFooter(FooterLoadStateAdapter())
             it.addItemMargins(25, 16)
         }
 
-        header.title.text = titleResId?.let { getString(it) }
+        adapter.addLoadStateListener { loadState ->
+            if(loadState.prepend.endOfPaginationReached) {
+                if (adapter.itemCount == 0) {
+                    viewModel.setIdleState()
+                }
+            }
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.source.refresh as? LoadState.Error
+
+            errorState?.let {
+                viewModel.setIdleState()
+            }
+
+            binding.refreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+        }
+
+        header.title.text = viewModel.tagName
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
-        refreshLayout.setOnRefreshListener { getData() }
+        refreshLayout.setOnRefreshListener { adapter.refresh() }
     }
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Loading::class,
             callback = { binding.loading.root.isVisible = true },
-            onExit = {
-                binding.refreshLayout.isRefreshing = false
-                binding.loading.root.isVisible = false
-            }
+            onExit = { binding.loading.root.isVisible = false }
         )
     }
 
     private fun StateMachine.Builder.addReadyState(): StateMachine.Builder {
         return addState(BaseContentViewModel.ContentState.Ready::class) {
             readyCallback()
-            (adapter as CompositeDelegateAdapter).swapData(it.content)
+            (adapter as PagingDataAdapter<Any, *>).submitData(lifecycle, it.content)
         }
     }
 

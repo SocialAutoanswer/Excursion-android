@@ -9,7 +9,7 @@ import ru.bibaboba.kit.util.createPagingDataFlowable
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.locations.paging.CitiesPagingSource
-import ru.exursion.data.locations.paging.TagsPagingSource
+import ru.exursion.data.locations.paging.LocationsPagingSource
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
@@ -17,32 +17,24 @@ import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.Message
 import ru.exursion.data.models.MessageDto
-import ru.exursion.data.models.Route
-import ru.exursion.data.models.Tag
-import ru.exursion.data.models.TagDto
-import ru.exursion.data.models.TagItem
 import ru.exursion.data.network.ExcursionApi
-import ru.exursion.data.network.createHttpError
 import javax.inject.Inject
 
 interface LocationsRepository {
-
     fun getCities(): Flowable<PagingData<City>>
-    fun getTags(): Flowable<PagingData<TagItem>>
-    fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>>
-    fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>>
+    fun getLocations(cityId: Long? = null, tagId: Long? = null, routeId: Long? = null): Flowable<PagingData<Location>>
+    fun getLocations(cityId: Long): Single<Result<List<Location>>>
     fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
     fun changeLocationFavoriteState(locationId: Long): Single<Result<Message>>
 }
 
 class LocationsRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
-    private val citiesPagingSource: CitiesPagingSource,
-    private val tagsPagingSource: TagsPagingSource,
-    private val locationMapper: Mapper<LocationDto, Location>,
+    private val citiesPagingSourceFactory: CitiesPagingSource.Factory,
+    private val locationsPagingSourceFactory: LocationsPagingSource.Factory,
+    private val locationsMapper: Mapper<LocationDto, Location>,
     private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
-    private val messageMapper: Mapper<MessageDto, Message>,
-    private val tagsMapper: Mapper<TagDto, Tag>
+    private val messageMapper: Mapper<MessageDto, Message>
 ) : LocationsRepository {
 
     companion object {
@@ -50,39 +42,26 @@ class LocationsRepositoryImpl @Inject constructor(
     }
 
     override fun getCities(): Flowable<PagingData<City>> {
-        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { citiesPagingSource }
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { citiesPagingSourceFactory.create() }
     }
 
-    override fun getTags(): Flowable<PagingData<TagItem>> {
-        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { tagsPagingSource }
+    override fun getLocations(cityId: Long?, tagId: Long?, routeId: Long?): Flowable<PagingData<Location>> {
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) {
+            locationsPagingSourceFactory.create(
+                cityId = cityId,
+                tagId = tagId,
+                routeId = routeId
+            )
+        }
     }
 
-    override fun getRoutesByTag(tagId: Long): Single<Result<List<Route>>> {
-        return api.requestRoutesByTag(tagId)
-            .subscribeOn(Schedulers.io())
-            .map {
-                if (it.isSuccessful) {
-                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    Result.success(tagsMapper.map(dto).routes)
-                } else {
-                    Result.failure(createHttpError(it))
-                }
-            }
-    }
-
-    override fun getLocationsByCity(cityId: Long): Single<Result<List<Location>>> {
-        return api.requestLocationsByCity(cityId, 1)
+    override fun getLocations(cityId: Long): Single<Result<List<Location>>> { //a hack because only paging data comes from server
+        return api.getLocationsByCity(cityId,1)
             .subscribeOn(Schedulers.io())
             .map {
                 if(it.isSuccessful) {
                     val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
-                    
-                    val data = dto.data?.let { locations ->
-                        locationMapper.mapList(locations.filterNotNull())
-                    } ?: emptyList()
-                    
-                    Result.success(data)
-                    
+                    Result.success(locationsMapper.mapList(dto.data?.filterNotNull() ?: emptyList()))
                 } else {
                     when(it.code()) {
                         500 -> Result.failure(InternalServerException())
