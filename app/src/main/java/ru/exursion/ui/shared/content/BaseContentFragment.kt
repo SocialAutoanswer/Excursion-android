@@ -8,11 +8,9 @@ import androidx.annotation.StringRes
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
 import androidx.paging.PagingDataAdapter
-import androidx.recyclerview.widget.RecyclerView
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.R
@@ -90,6 +88,7 @@ abstract class BaseContentFragment :
             }
 
             binding.refreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+            binding.loading.root.isVisible = loadState.source.refresh is LoadState.Loading
         }
 
         header.title.text = viewModel.tagName

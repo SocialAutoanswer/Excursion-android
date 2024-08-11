@@ -1,6 +1,5 @@
 package ru.exursion.ui.shared.content
 
-import android.util.Log
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
@@ -61,7 +60,6 @@ class BaseContentViewModel @Inject constructor(
 
     private fun <D: Any> getData(method: Single<List<D>>) = invokeDisposable {
         method
-            .doOnSubscribe { _state.postValue(ContentState.Loading) }
             .subscribe({
                 if (it.isEmpty()) {
                     _state.postValue(ContentState.Idle)
@@ -79,7 +77,6 @@ class BaseContentViewModel @Inject constructor(
     private fun <D: Any> getData(method: Flowable<PagingData<D>>) = invokeDisposable {
         method
             .cachedIn(viewModelScope)
-            .doOnSubscribe { _state.postValue(ContentState.Loading) }
             .subscribe({
                 _state.postValue(ContentState.Ready(it as PagingData<Any>))
             }, {
