@@ -11,7 +11,7 @@ class UserRequestMapper @Inject constructor(): Mapper<UserRequestDto, User> {
     override fun map(input: UserRequestDto): User = User(
         input.user?.firstName ?: "",
         input.user?.lastName ?: "",
-        LocalDate.parse(input.user?.birthDate),
+        input.user?.birthDate?.let { LocalDate.parse(it) },
         input.user?.email ?: "",
         input.token ?: "",
         "", //TODO:not getting it from server,
