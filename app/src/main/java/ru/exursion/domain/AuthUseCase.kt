@@ -33,11 +33,7 @@ class AuthUseCaseImpl @Inject constructor(
                 userSettings.fillAllUserPrefs(it.getOrNull())
             }
             .map { result ->
-                if (result.isFailure) {
-                    throw result.exceptionOrNull() ?: Exception()
-                }
-
-                result.getOrNull() ?: User()
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -48,11 +44,7 @@ class AuthUseCaseImpl @Inject constructor(
                 userSettings.fillAllUserPrefs(it.getOrNull())
             }
             .map { result ->
-                if (result.isFailure) {
-                    throw result.exceptionOrNull() ?: Exception()
-                }
-
-                result.getOrNull() ?: User()
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
 
@@ -60,18 +52,14 @@ class AuthUseCaseImpl @Inject constructor(
     override fun sendAuthCode() =
         repository.sendAuthCode()
             .map { result ->
-                if (result.isFailure) {
-                    throw result.exceptionOrNull() ?: Exception()
-                }
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun confirmAuthCode(code: String) =
         repository.confirmAuthCode(code)
             .map { result ->
-                if (result.isFailure) {
-                    throw result.exceptionOrNull() ?: Exception()
-                }
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
 

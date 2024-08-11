@@ -47,5 +47,5 @@ class UserSettingsImpl @Inject constructor(
         avatarImage = user?.avatarImage
     }
 
-    override fun getUser() = User(firstName, lastName, null, email, token, avatarImage, null)
+    override fun getUser() = User(firstName, lastName, null, email, token, avatarImage, null, token != null)
 }

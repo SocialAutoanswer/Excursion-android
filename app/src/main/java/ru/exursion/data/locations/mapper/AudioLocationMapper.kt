@@ -1,5 +1,6 @@
 package ru.exursion.data.locations.mapper
 
+import com.yandex.mapkit.geometry.Point
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Audio
 import ru.exursion.data.models.AudioDto
@@ -23,6 +24,7 @@ class AudioLocationMapper @Inject constructor(
         input.description ?: "",
         input.isFavorite ?: false,
         cityMapper.map(input.city ?: CityDto(-1, "", "", "","")),
+        Point(input.latitude ?: 0.0, input.longitude ?: 0.0),
         audioMapper.mapList(input.audios?.filterNotNull() ?: emptyList()),
         photoMapper.mapList(input.photos?.filterNotNull() ?: emptyList())
     )

@@ -1,15 +1,12 @@
 package ru.exursion.ui.routes.fragments
 
-import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.exursion.R
-import ru.exursion.ui.routes.adapter.HotelsDelegateAdapter
+import ru.exursion.ui.routes.adapter.HotelsPagingDataAdapter
 import ru.exursion.ui.shared.content.BaseContentFragment
 
 class HotelsFragment: BaseContentFragment() {
 
-    private val delegateAdapter = HotelsDelegateAdapter()
-
-    override val adapter = CompositeDelegateAdapter(delegateAdapter)
+    override val adapter = HotelsPagingDataAdapter()
 
     override val titleResId: Int
         get() = R.string.screen_favorites_hotels

@@ -18,7 +18,6 @@ class HotelsDelegateAdapter
     override fun isForViewType(item: Any) = item is Hotel
 
     override fun ItemHotelBinding.onBind(item: Hotel) {
-        Log.d("asd", "in adapter $item")
         root.setOnClickListener { onClick?.invoke(item) }
 
         name.text = item.name

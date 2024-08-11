@@ -11,11 +11,12 @@ class UserRequestMapper @Inject constructor(): Mapper<UserRequestDto, User> {
     override fun map(input: UserRequestDto): User = User(
         input.user?.firstName ?: "",
         input.user?.lastName ?: "",
-        LocalDate.of(2003, 1, 1), //TODO:not getting it from server
+        input.user?.birthDate?.let { LocalDate.parse(it) },
         input.user?.email ?: "",
         input.token ?: "",
-        "", //TODO:not getting it from server
-        input.user?.password ?: ""
+        "", //TODO:not getting it from server,
+        input.user?.password ?: "",
+        input.user?.emailIsVerified ?: false
     )
 }
 
@@ -28,14 +29,17 @@ class UserMapper @Inject constructor(): Mapper<UserDto, User> {
         input.email ?: "",
         null,
         null,
+        null,
         null
     )
 
     override fun reverseMap(input: User): UserDto = UserDto(
+        null, input.password, null, null, null, null, null,
         input.firstName,
         input.lastName,
+        null,
         input.email,
-        input.password
+        null, null, null, null, null
     )
 
 }

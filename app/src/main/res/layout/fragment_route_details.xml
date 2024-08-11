@@ -11,7 +11,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/divider">
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             style="@style/MatchParent"
@@ -153,41 +153,6 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
-
-    <View
-        android:id="@+id/divider"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginBottom="24dp"
-        android:background="?attr/exc_divider_color"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buy"/>
-
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:background="?attr/exc_background_color"
-        app:layout_constraintTop_toBottomOf="@id/divider"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
-    <Button
-        android:id="@+id/buy"
-        style="@style/Button.Primary.NoWidth.MarginStart_25dp.MarginTop_24dp.MarginBottom_32dp"
-        android:text="@string/screen_route_details_buy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/locations" />
-
-    <Button
-        android:id="@+id/locations"
-        style="@style/Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp.MarginTop_24dp.MarginBottom_32dp"
-        android:text="@string/screen_route_details_route"
-        app:layout_constraintStart_toEndOf="@id/buy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <include
         android:id="@+id/loading"

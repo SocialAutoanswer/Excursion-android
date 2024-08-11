@@ -2,6 +2,7 @@ package ru.exursion
 
 import android.app.Application
 import com.yandex.mapkit.MapKitFactory
+import ru.bibaboba.kit.Logger
 import ru.bibaboba.kit.ui.utils.ThemeUtil
 import ru.exursion.data.network.AuthHeaderInterceptor
 import ru.exursion.di.AppComponent
@@ -21,6 +22,8 @@ class App : Application() {
 
     override fun onCreate() {
         super.onCreate()
+
+        Logger.init(BuildConfig.DEBUG)
 
         appComponent = DaggerAppComponent.builder()
             .appModule(AppModule(applicationContext))

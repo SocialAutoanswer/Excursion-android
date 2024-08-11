@@ -23,7 +23,7 @@ class RoutesDelegateAdapter
         description.text = item.description
 
         Glide.with(backgroundImage)
-            .load(item.image)
+            .load(item.imageUrl)
             .centerCrop()
             .into(backgroundImage)
     }

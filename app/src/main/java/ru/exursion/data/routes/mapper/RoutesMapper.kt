@@ -1,4 +1,4 @@
-package ru.exursion.data.locations.mapper
+package ru.exursion.data.routes.mapper
 
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Route
@@ -15,8 +15,8 @@ class RoutesMapper @Inject constructor() : Mapper<RouteDto, Route> {
         durationInMinutes = input.duration ?: 0,
         tags = input.tagIds?.filterNotNull() ?: emptyList(),
         price = input.price ?: 0,
-        isPaid = (input.price ?: 0) == 0,
-        image = input.imageUrl ?: "",
-        city = input.city ?: -1
+        isPaid = (input.price ?: 0) != 0,
+        imageUrl = input.imageUrl ?: "",
+        cityId = input.cityId ?: -1
     )
 }

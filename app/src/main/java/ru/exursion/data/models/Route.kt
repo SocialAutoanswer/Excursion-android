@@ -2,12 +2,6 @@ package ru.exursion.data.models
 
 import com.google.gson.annotations.SerializedName
 
-data class RouteRequestDto(
-    @SerializedName("next") val nextPage: String?,
-    @SerializedName("previous") val previousPage: String?,
-    @SerializedName("data") val routes: List<RouteDto?>?,
-)
-
 data class RouteDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
@@ -16,19 +10,19 @@ data class RouteDto(
     @SerializedName("length") val kilometers: Double?,
     @SerializedName("duration") val duration: Int?,
     @SerializedName("price") val price: Int?,
-    @SerializedName("city") val city: Long?,
-    @SerializedName("tags") val tagIds: List<Int?>?
+    @SerializedName("city") val cityId: Long?,
+    @SerializedName("tags") val tagIds: List<Long?>?
 )
 
 data class Route(
     val id: Long,
     val name: String,
     val description: String,
+    val imageUrl: String,
     val kilometers: Double,
     val durationInMinutes: Int,
-    val tags: List<Int>,
+    val tags: List<Long>,
     val price: Int,
-    val city: Long,
-    val isPaid: Boolean,
-    val image: String
+    val cityId: Long,
+    val isPaid: Boolean
 )

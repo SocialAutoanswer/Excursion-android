@@ -20,10 +20,8 @@ class MarginItemDecoration(
             if (parent.getChildAdapterPosition(view) == 0) {
                 top = marginVertical.toDpPixels(view.context)
             }
-            if (parent.getChildAdapterPosition(view) != 0) {
-                left = marginHorizontal.toDpPixels(view.context)
-                right = marginHorizontal.toDpPixels(view.context)
-            }
+            left = marginHorizontal.toDpPixels(view.context)
+            right = marginHorizontal.toDpPixels(view.context)
             bottom = marginVertical.toDpPixels(view.context)
         }
     }

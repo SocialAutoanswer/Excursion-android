@@ -1,51 +1,41 @@
 package ru.exursion.domain
 
-import android.util.Log
+import androidx.paging.PagingData
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
-import ru.exursion.data.CanNotGetDataException
-import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.models.Route
-import ru.exursion.data.models.RouteDetailsWithReview
-import ru.exursion.data.reviews.ReviewsRepository
+import ru.exursion.data.models.RouteDetails
+import ru.exursion.data.models.Tag
+import ru.exursion.data.routes.RoutesRepository
 import javax.inject.Inject
 
 interface RoutesUseCase {
-
-    companion object {
-        const val DEFAULT_REVIEWS_AMOUNT = 2
-    }
-
-    fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>>
-    fun getRouteDetailsWithComments(
-        routeId: Long,
-        tagId: Long,
-        amountOfReviews: Int = DEFAULT_REVIEWS_AMOUNT
-    ): Single<RouteDetailsWithReview>
+    fun getRoutes(cityId: Long? = null, tagId: Long? = null): Flowable<PagingData<Route>>
+    fun getRouteById(routeId: Long): Single<RouteDetails>
+    fun getRoutesTags(): Flowable<PagingData<Tag>>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
-    private val locationsRepository: LocationsRepository,
-    private val reviewsRepository: ReviewsRepository,
+    private val routesRepository: RoutesRepository
 ) : RoutesUseCase {
 
-    override fun getRoutesByCity(cityId: Long, tagId: Long): Single<List<Route>> {
-        return locationsRepository.getRoutesByTag(tagId)
-            .map { it.getOrThrow().filter { it.city == cityId } }
+    override fun getRoutes(cityId: Long?, tagId: Long?): Flowable<PagingData<Route>> {
+        return routesRepository.getRoutes(
+            cityId = cityId,
+            tagId = tagId
+        )
     }
 
-    override fun getRouteDetailsWithComments(
-        routeId: Long,
-        tagId: Long,
-        amountOfReviews: Int,
-    ): Single<RouteDetailsWithReview> {
-        return Single.zip(
-            locationsRepository.getRoutesByTag(tagId),
-            reviewsRepository.getRouteReviewsFirstPage(routeId)
-        ) { routes, reviews ->
-            RouteDetailsWithReview(
-                routes.getOrThrow().find { it.id == routeId } ?: throw CanNotGetDataException(),
-                reviews.getOrNull() ?: emptyList()
-            )
-        }
+    override fun getRouteById(routeId: Long): Single<RouteDetails> {
+        return routesRepository.getRouteById(routeId)
+            .map { result ->
+                result.getOrThrow()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getRoutesTags(): Flowable<PagingData<Tag>> {
+        return routesRepository.getRoutesTags()
     }
 }

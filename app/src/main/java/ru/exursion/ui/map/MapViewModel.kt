@@ -1,22 +1,20 @@
 package ru.exursion.ui.map
 
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
-import com.yandex.mapkit.geometry.BoundingBox
 import com.yandex.mapkit.map.MapObjectTapListener
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
-import ru.bibaboba.kit.util.asLiveData
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.City
 import ru.exursion.data.models.Location
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.player.MapPlayer
+import ru.exursion.ui.shared.PlayerView
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(
@@ -25,14 +23,13 @@ class MapViewModel @Inject constructor(
     private val mapPlayer: MapPlayer
 ): RxStateViewModel<MapViewModel.MapState, MapViewModel.MapEffect>() {
 
-    private val _cityBoundingBox = MutableLiveData<BoundingBox>()
-    val cityBoundingBox = _cityBoundingBox.asLiveData()
-
-    val objectTapListenersMap = HashMap<Long, MapObjectTapListener>()
+    private val objectTapListeners = arrayListOf<MapObjectTapListener>()
 
     var chosenCityPosition: Int? = null
 
-    fun getOnPlayerClickListener() = mapPlayer.onPlayerClickListener
+    fun getPointPlayerClickListener() = mapPlayer.pointPlayerClickListener
+
+    fun getMapPlayerClickListener() = mapPlayer.mapPlayerClickListener
 
     fun getPointIsPlaying() = mapPlayer.candidateIsPlaying()
 
@@ -40,14 +37,19 @@ class MapViewModel @Inject constructor(
 
     fun getIsSomeonePlaying() = mapPlayer.isSomeonePlaying
 
-    fun addTapListener(locationId: Long) {
-        objectTapListenersMap[locationId] = MapObjectTapListener { _, _ ->
+    fun addTapListener(locationId: Long): MapObjectTapListener {
+        val listener = MapObjectTapListener { _, _ ->
             getLocationById(locationId)
             true
         }
+
+        objectTapListeners.add(listener)
+        return listener
     }
 
-    fun setIdleState() = _state.postValue(MapState.Idle)
+    fun setIdleState() {
+        _state.value = MapState.Idle
+    }
 
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         mapPlayer.observePlayerTimer()
@@ -73,13 +75,8 @@ class MapViewModel @Inject constructor(
     }
 
     fun getLocationsByCity(cityId: Long) = invokeDisposable {
-        locationsUseCase.getLocationsByCity(cityId)
+        locationsUseCase.getLocations(cityId)
             .doOnSubscribe { _state.postValue(MapState.Loading) }
-            .doAfterSuccess{ locations ->
-                _cityBoundingBox.postValue(
-                    locationsUseCase.getCityBoundingBox(locations.map{ it.point })
-                )
-            }
             .subscribe({ locations ->
                 _state.postValue(MapState.LocationsReceived(locations))
             }, {

@@ -3,6 +3,7 @@ package ru.bibaboba.kit.states
 import androidx.annotation.IntRange
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleOwner
+import ru.bibaboba.kit.Logger
 import ru.bibaboba.kit.addObserver
 import java.lang.IllegalArgumentException
 import kotlin.reflect.KClass
@@ -15,6 +16,7 @@ class StateMachine private constructor(
     private val initialState: State?,
     private val unlimitedStateHistory: Boolean,
     private val stateHistoryLimit: Int,
+    private val loggingEnabled: Boolean = false
 ) {
 
     private var currentState: State? = initialState
@@ -39,8 +41,17 @@ class StateMachine private constructor(
      * Callback will be not invoked if [state] is equals to previous state
      */
     fun <S: State> submit(state: S) {
+        if (loggingEnabled) {
+            Logger.debug(this::class, "Submitting state: ${state::class.simpleName}")
+        }
         if (currentState == state) {
+            if (loggingEnabled) {
+                Logger.debug(this::class, "Decline state ${state::class.simpleName} cause current state the same")
+            }
             return
+        }
+        if (loggingEnabled) {
+            Logger.debug(this::class, "State ${state::class.simpleName} submitted")
         }
         currentState?.let { stateExitCallbacks[it::class]?.invoke(it) }
         submitHard(state)
@@ -93,6 +104,8 @@ class StateMachine private constructor(
         private var lifecycleOwner: LifecycleOwner? = null
         private var initialState: State? = null
 
+        private var debugEnabled = false
+
         @Suppress("Unchecked_cast")
         fun <S: State> addState(stateClass: KClass<S>, callback: (S) -> Unit): Builder {
             states[stateClass] = callback as (State) -> Unit
@@ -135,6 +148,11 @@ class StateMachine private constructor(
             return this
         }
 
+        fun enableDebugLogs(): Builder {
+            debugEnabled = true
+            return this
+        }
+
         fun build(): StateMachine {
             if (initialState != null && lifecycleOwner == null) {
                 throw IllegalStateException("Can not use initial state without lifecycle owner")
@@ -150,7 +168,8 @@ class StateMachine private constructor(
                 lifecycleOwner,
                 initialState,
                 unlimitedStateHistory,
-                stateHistoryLimit ?: STATE_HISTORY_LIMIT
+                stateHistoryLimit ?: STATE_HISTORY_LIMIT,
+                debugEnabled
             )
         }
     }

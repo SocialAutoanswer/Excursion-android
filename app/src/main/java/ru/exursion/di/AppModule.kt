@@ -20,19 +20,16 @@ import ru.exursion.data.auth.UserMapper
 import ru.exursion.data.auth.UserRequestMapper
 import ru.exursion.data.locations.FavoritesRepository
 import ru.exursion.data.locations.FavoritesRepositoryImpl
-import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
 import ru.exursion.data.locations.mapper.AudioLocationMapper
 import ru.exursion.data.locations.mapper.AudioMapper
+import ru.exursion.data.locations.mapper.CitiesMapper
 import ru.exursion.data.locations.mapper.EventMapper
 import ru.exursion.data.locations.mapper.HotelMapper
 import ru.exursion.data.locations.mapper.LocationsMapper
 import ru.exursion.data.locations.mapper.PhotoMapper
-import ru.exursion.data.locations.mapper.RouteDetailsMapper
-import ru.exursion.data.locations.mapper.RoutesMapper
 import ru.exursion.data.locations.mapper.SocialMediaMapper
-import ru.exursion.data.locations.mapper.TagsItemMapper
 import ru.exursion.data.locations.mapper.TagsMapper
 import ru.exursion.data.models.Audio
 import ru.exursion.data.models.AudioDto
@@ -63,43 +60,41 @@ import ru.exursion.data.models.SocialMedia
 import ru.exursion.data.models.SocialMediaDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
-import ru.exursion.data.models.TagItem
-import ru.exursion.data.models.TagItemDto
 import ru.exursion.data.models.User
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 import ru.exursion.data.profile.ProfileRepository
 import ru.exursion.data.profile.ProfileRepositoryImpl
 import ru.exursion.data.profile.QuestionMapper
-import ru.exursion.domain.AuthUseCase
-import ru.exursion.domain.AuthUseCaseImpl
-import ru.exursion.domain.ProfileUseCase
-import ru.exursion.domain.ProfileUseCaseImpl
 import ru.exursion.data.reviews.ReviewsRepository
 import ru.exursion.data.reviews.ReviewsRepositoryImpl
 import ru.exursion.data.reviews.mapper.ReviewMapper
+import ru.exursion.data.routes.RoutesRepository
+import ru.exursion.data.routes.RoutesRepositoryImpl
+import ru.exursion.data.routes.mapper.RouteDetailsMapper
+import ru.exursion.data.routes.mapper.RoutesMapper
+import ru.exursion.domain.AuthUseCase
+import ru.exursion.domain.AuthUseCaseImpl
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
-import ru.exursion.domain.ContentUseCase
-import ru.exursion.domain.ContentUseCaseImpl
 import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.FavoritesUseCaseImpl
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.LocationUseCaseImpl
+import ru.exursion.domain.ProfileUseCase
+import ru.exursion.domain.ProfileUseCaseImpl
 import ru.exursion.domain.RoutesUseCase
 import ru.exursion.domain.RoutesUseCaseImpl
-import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.domain.TagsUseCase
 import ru.exursion.domain.TagsUseCaseImpl
 import ru.exursion.domain.player.impl.PlayerManagerImpl
 import ru.exursion.domain.player.interfaces.PlayerManager
 import ru.exursion.ui.SplashViewModel
+import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.map.MapViewModel
 import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
-import ru.exursion.ui.routes.vm.ChooseTagsViewModel
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
-import ru.exursion.ui.routes.vm.RoutesViewModel
 import ru.exursion.ui.shared.content.BaseContentViewModel
 
 @Module
@@ -136,8 +131,6 @@ class AppModule(private val context: Context) {
         @Binds
         fun bindsTagsMapper(impl: TagsMapper): Mapper<TagDto, Tag>
         @Binds
-        fun bindsTagsItemMapper(impl: TagsItemMapper): Mapper<TagItemDto, TagItem>
-        @Binds
         fun bindCitiesMapper(impl: CitiesMapper): Mapper<CityDto, City>
         @Binds
         fun bindRoutesMapper(impl: RoutesMapper): Mapper<RouteDto, Route>
@@ -169,9 +162,11 @@ class AppModule(private val context: Context) {
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
         @Binds
-        fun bindReviesRepository(impl: ReviewsRepositoryImpl): ReviewsRepository
+        fun bindReviewsRepository(impl: ReviewsRepositoryImpl): ReviewsRepository
         @Binds
         fun bindFavoritesRepository(impl: FavoritesRepositoryImpl): FavoritesRepository
+        @Binds
+        fun bindRoutesRepository(impl: RoutesRepositoryImpl): RoutesRepository
 
         @Binds
         fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
@@ -181,8 +176,6 @@ class AppModule(private val context: Context) {
         fun bindRoutesUseCase(impl: RoutesUseCaseImpl): RoutesUseCase
         @Binds
         fun bindLocationUseCase(impl: LocationUseCaseImpl): LocationUseCase
-        @Binds
-        fun bindContentUseCase(impl: ContentUseCaseImpl): ContentUseCase
         @Binds
         fun bindFavoriteUseCase(impl: FavoritesUseCaseImpl): FavoritesUseCase
 
@@ -214,18 +207,8 @@ class AppModule(private val context: Context) {
 
         @Binds
         @IntoMap
-        @ViewModelKey(ChooseTagsViewModel::class)
-        fun bindTownRouteTypesViewModel(viewModel: ChooseTagsViewModel): ViewModel
-
-        @Binds
-        @IntoMap
         @ViewModelKey(SplashViewModel::class)
         fun bindSplashViewModel(viewModel: SplashViewModel): ViewModel
-      
-        @Binds
-        @IntoMap
-        @ViewModelKey(RoutesViewModel::class)
-        fun bindRoutesViewModel(viewModel: RoutesViewModel): ViewModel
 
         @Binds
         @IntoMap

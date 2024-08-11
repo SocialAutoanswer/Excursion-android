@@ -1,5 +1,7 @@
 package ru.exursion.data.locations.paging
 
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
@@ -7,9 +9,10 @@ import ru.exursion.data.DefaultRxPagingSource
 import ru.exursion.data.models.City
 import ru.exursion.data.models.CityDto
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.data.routes.paging.RouteTagsPagingSource
 import javax.inject.Inject
 
-class CitiesPagingSource @Inject constructor(
+class CitiesPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
     private val citiesMapper: Mapper<CityDto, City>
 ) : DefaultRxPagingSource<City>() {
@@ -17,7 +20,7 @@ class CitiesPagingSource @Inject constructor(
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, City>> {
         val pageNumber = params.key ?: 1
 
-        return api.requestCitiesPage(pageNumber)
+        return api.getCitiesPage(pageNumber)
             .subscribeOn(Schedulers.io())
             .map { response ->
                 if (response.isSuccessful) {
@@ -36,5 +39,10 @@ class CitiesPagingSource @Inject constructor(
                     handleHttpErrors(response)
                 }
             }
+    }
+
+    @AssistedFactory
+    interface Factory {
+        fun create(): CitiesPagingSource
     }
 }
