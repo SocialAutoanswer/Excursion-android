@@ -26,36 +26,22 @@ class BaseContentViewModel @Inject constructor(
     var routeId: Long? = null
     var isFavorite: Boolean = false
 
-    fun getRoutes() = getData(
-        routesUseCase.getRoutes(cityId, tagId)
-    )
+    fun getRoutes() = getData(routesUseCase.getRoutes(cityId, tagId))
 
-    fun getFavoriteRoutes() = getData(
-        favoritesUseCase.getFavoriteRoutes()
-    )
+    fun getFavoriteRoutes() = getData(favoritesUseCase.getFavoriteRoutes())
 
-    fun getLocations() = getData(
-        locationsUseCase.getLocations(cityId, tagId, routeId)
-    )
+    fun getLocations() = getData(locationsUseCase.getLocations(cityId, tagId, routeId))
 
-    fun getFavoriteLocations() = getData(
-        favoritesUseCase.getFavoriteLocations()
-    )
+    fun getFavoriteLocations() = getData(favoritesUseCase.getFavoriteLocations())
 
-    fun getFavoriteHotels() = getData(
-        favoritesUseCase.getFavoriteHotels()
-    )
+    fun getFavoriteHotels() = getData(favoritesUseCase.getFavoriteHotels())
 
-    fun getFavoriteEvents() = getData(
-        favoritesUseCase.getFavoriteEvents()
-    )
+    fun getFavoriteEvents() = getData(favoritesUseCase.getFavoriteEvents())
 
-    fun getRouteTags() = getData(
-        routesUseCase.getRoutesTags()
-    )
+    fun getRouteTags() = getData(routesUseCase.getRoutesTags())
 
     fun setIdleState() {
-        _state.postValue(ContentState.Idle)
+        _state.value = ContentState.Idle
     }
 
     private fun <D: Any> getData(method: Single<List<D>>) = invokeDisposable {

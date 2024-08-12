@@ -45,7 +45,7 @@ abstract class BaseContentFragment :
     abstract val adapter: PagingDataAdapter<*, *>
 
     @get:StringRes
-    abstract val  titleResId: Int
+    abstract val titleResId: Int
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -83,12 +83,10 @@ abstract class BaseContentFragment :
                 ?: loadState.source.prepend as? LoadState.Error
                 ?: loadState.source.refresh as? LoadState.Error
 
-            errorState?.let {
-                viewModel.setIdleState()
-            }
+            errorState?.let { viewModel.setIdleState() }
 
-            binding.refreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
-            binding.loading.root.isVisible = loadState.source.refresh is LoadState.Loading
+            refreshLayout.isRefreshing = loadState.source.refresh is LoadState.Loading
+            loading.root.isVisible = loadState.source.refresh is LoadState.Loading
         }
 
         header.title.text = viewModel.tagName
