@@ -93,7 +93,7 @@ interface ExcursionApi {
         @Query("page") page: Int
     ): Single<Response<PageDto<RouteDto>>>
 
-    @GET("api/routes/{id}/")
+    @GET("routes/{id}/")
     fun getRouteById(
         @Path("id") routeId: Long
     ): Single<Response<RouteDetailsDto>>

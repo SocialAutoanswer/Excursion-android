@@ -1,6 +1,5 @@
 package ru.exursion.data.routes.paging
 
-import android.util.Log
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
