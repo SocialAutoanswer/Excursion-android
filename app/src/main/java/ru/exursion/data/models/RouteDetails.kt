@@ -10,7 +10,7 @@ data class RouteDetailsDto(
     @SerializedName("duration") val durationInMinutes: Int?,
     @SerializedName("tags") val tags: List<TagDto?>?,
     @SerializedName("locations") val locations: List<LocationDto?>?,
-    @SerializedName("isFavorite") val isFavorite: Boolean?,
+    @SerializedName("is_favorite") val isFavorite: Boolean?,
     @SerializedName("reviews") val reviews: List<ReviewDto?>?,
     @SerializedName("locations_length") val locationsLength: Int?
 )

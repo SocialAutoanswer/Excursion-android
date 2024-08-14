@@ -7,10 +7,10 @@ import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
 import ru.exursion.data.models.Audio
 import ru.exursion.data.models.AudioLocation
+import ru.exursion.data.models.RouteDetails
 import ru.exursion.domain.RoutesUseCase
 import ru.exursion.domain.player.RoutePlayer
 import javax.inject.Inject
-import ru.exursion.data.models.RouteDetails
 
 class RouteDetailsViewModel @Inject constructor(
     private val routesUseCase: RoutesUseCase,
@@ -49,9 +49,23 @@ class RouteDetailsViewModel @Inject constructor(
             })
     }
 
+    fun changeRouteFavoriteState(routeId: Long) = invokeDisposable {
+        routesUseCase.changeRouteFavoriteState(routeId)
+            .doOnSubscribe{ _state.postValue(RouteDetailsState.LikeLoading) }
+            .subscribe({
+                _state.postValue(RouteDetailsState.FavoriteStateChanged(it.content))
+            }, {
+                _effect.postValue(RouteDetailsEffect.Error)
+                _state.postValue(RouteDetailsState.Idle)
+            })
+    }
+
     sealed class RouteDetailsState : State {
+        data object Idle : RouteDetailsState()
         data object Loading : RouteDetailsState()
+        data object LikeLoading : RouteDetailsState()
         data class Ready(val details: RouteDetails) : RouteDetailsState()
+        data class FavoriteStateChanged(val message: String): RouteDetailsState()
     }
 
     sealed class RouteDetailsEffect : Effect {

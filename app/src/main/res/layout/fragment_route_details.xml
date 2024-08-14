@@ -51,11 +51,21 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/favorite_button"
+                android:id="@+id/like_button"
                 style="@style/Icon.MarginEnd_25dp.MarginTop_52dp"
-                android:src="@drawable/ic_heart_on_image"
+                android:src="@drawable/selector_heart"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ProgressBar
+                android:id="@+id/like_loading"
+                android:layout_width="25dp"
+                android:visibility="invisible"
+                style="@style/LoadingProgress.LayoutCenter"
+                app:layout_constraintStart_toStartOf="@id/like_button"
+                app:layout_constraintEnd_toEndOf="@id/like_button"
+                app:layout_constraintTop_toTopOf="@id/like_button"
+                app:layout_constraintBottom_toBottomOf="@id/like_button" />
 
             <TextView
                 android:id="@+id/route_name"

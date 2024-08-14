@@ -93,7 +93,7 @@ interface ExcursionApi {
         @Query("page") page: Int
     ): Single<Response<PageDto<RouteDto>>>
 
-    @GET("api/routes/{id}/")
+    @GET("routes/{id}/")
     fun getRouteById(
         @Path("id") routeId: Long
     ): Single<Response<RouteDetailsDto>>
@@ -143,8 +143,13 @@ interface ExcursionApi {
     @GET("events/favorites/")
     fun getFavoriteEvents(): Single<Response<List<EventDto>>>
 
-    @GET("locations/{id}/favorite")
+    @GET("locations/{id}/favorite/")
     fun changeLocationFavoriteState(
         @Path("id") locationId: Long
+    ): Single<Response<MessageDto>>
+
+    @GET("routes/{id}/favorite/")
+    fun changeRouteFavoriteState(
+        @Path("id") routeId: Long
     ): Single<Response<MessageDto>>
 }

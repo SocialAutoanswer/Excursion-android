@@ -8,6 +8,8 @@ import ru.bibaboba.kit.util.Mapper
 import ru.bibaboba.kit.util.createPagingDataFlowable
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
+import ru.exursion.data.models.Message
+import ru.exursion.data.models.MessageDto
 import ru.exursion.data.routes.paging.RouteTagsPagingSource
 import ru.exursion.data.routes.paging.RoutesPagingSource
 import ru.exursion.data.models.Route
@@ -21,13 +23,15 @@ interface RoutesRepository {
     fun getRoutes(cityId: Long? = null, tagId: Long? = null): Flowable<PagingData<Route>>
     fun getRoutesTags(): Flowable<PagingData<Tag>>
     fun getRouteById(routeId: Long): Single<Result<RouteDetails>>
+    fun changeRouteFavoriteState(routeId: Long): Single<Result<Message>>
 }
 
 class RoutesRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
     private val routesPagingSourceFactory: RoutesPagingSource.Factory,
     private val routeTagsPagingSourceFactory: RouteTagsPagingSource.Factory,
-    private val routeMapper: Mapper<RouteDetailsDto, RouteDetails>
+    private val routeMapper: Mapper<RouteDetailsDto, RouteDetails>,
+    private val messageMapper: Mapper<MessageDto, Message>
 ) : RoutesRepository {
 
     companion object {
@@ -54,6 +58,22 @@ class RoutesRepositoryImpl @Inject constructor(
                 if(it.isSuccessful) {
                     val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
                     Result.success(routeMapper.map(dto))
+                } else {
+                    when(it.code()) {
+                        500 -> Result.failure(InternalServerException())
+                        else -> Result.failure(CanNotGetDataException())
+                    }
+                }
+            }
+    }
+
+    override fun changeRouteFavoriteState(routeId: Long): Single<Result<Message>> {
+        return api.changeRouteFavoriteState(routeId)
+            .subscribeOn(Schedulers.io())
+            .map {
+                if (it.isSuccessful) {
+                    val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                    Result.success(messageMapper.map(dto))
                 } else {
                     when(it.code()) {
                         500 -> Result.failure(InternalServerException())

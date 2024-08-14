@@ -9,7 +9,7 @@ data class LocationDto(
     @SerializedName("description") val description: String?,
     @SerializedName("longitude") val longitude: Double?,
     @SerializedName("latitude") val latitude: Double?,
-    @SerializedName("city") val cityId: Long?,
+    @SerializedName("city") val city: CityDto?,
 )
 
 data class AudioLocationDto(
