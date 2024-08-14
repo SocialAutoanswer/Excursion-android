@@ -6,6 +6,7 @@ import androidx.paging.rxjava3.cachedIn
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import ru.bibaboba.kit.Logger
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
@@ -54,6 +55,7 @@ class BaseContentViewModel @Inject constructor(
 
                 _state.postValue(ContentState.Ready(PagingData.from(it)))
             }, {
+                Logger.error(this::class, it)
                 _effect.postValue(ContentEffect.Error)
                 _state.postValue(ContentState.Idle)
             })
@@ -66,6 +68,7 @@ class BaseContentViewModel @Inject constructor(
             .subscribe({
                 _state.postValue(ContentState.Ready(it as PagingData<Any>))
             }, {
+                Logger.error(this::class, it)
                 _effect.postValue(ContentEffect.Error)
                 _state.postValue(ContentState.Idle)
             })
