@@ -11,13 +11,15 @@ import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
 import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.LocationUseCase
+import ru.exursion.domain.RecommendationsUseCase
 import ru.exursion.domain.RoutesUseCase
 import javax.inject.Inject
 
 class BaseContentViewModel @Inject constructor(
     private val locationsUseCase: LocationUseCase,
     private val routesUseCase: RoutesUseCase,
-    private val favoritesUseCase: FavoritesUseCase
+    private val favoritesUseCase: FavoritesUseCase,
+    private val recommendationsUseCase: RecommendationsUseCase
 ) : RxStateViewModel<BaseContentViewModel.ContentState, BaseContentViewModel.ContentEffect>() {
 
     var cityId: Long? = null
@@ -52,6 +54,10 @@ class BaseContentViewModel @Inject constructor(
 
     fun getRouteTags() = getData(
         routesUseCase.getRoutesTags()
+    )
+
+    fun getRecommendationsTags() = getData(
+        recommendationsUseCase.getRecommendationsTags()
     )
 
     fun setIdleState() {

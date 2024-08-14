@@ -19,12 +19,9 @@ class TagsFragment : BaseContentFragment() {
         )
     }
     override val titleResId: Int
-        get() = if (viewModel.cityId != null)
-                    R.string.screen_favorites_routes
-                else
-                    R.string.screen_tags_recommendations_title
+        get() = R.string.screen_favorites_routes
 
     override fun getData() {
-        viewModel.getRouteTags() // stub before recommendation added
+        viewModel.getRouteTags()
     }
 }

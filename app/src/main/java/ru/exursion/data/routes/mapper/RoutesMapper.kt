@@ -16,6 +16,6 @@ class RoutesMapper @Inject constructor() : Mapper<RouteDto, Route> {
         price = input.price ?: 0,
         isPaid = (input.price ?: 0) != 0,
         imageUrl = input.imageUrl ?: "",
-        cityId = input.locations?.filterNotNull()?.get(0)?.city?.id ?: -1
+        cityId = input.locations?.filterNotNull()?.get(0)?.cityId ?: -1
     )
 }
