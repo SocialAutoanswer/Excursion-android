@@ -34,6 +34,8 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
         .addLoadingState()
         .addReadyState()
         .addErrorEffect()
+        .addLikeLoadingState()
+        .addFavoriteStateChangedState()
         .build()
 
     private val adapter = CompositeDelegateAdapter(
@@ -66,12 +68,31 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
         reviewsTitle.isVisible = false
     }
 
+    private fun changeLikeButtonState(isLoading: Boolean) = with(binding) {
+        likeLoading.isVisible = isLoading
+        likeButton.visibility = if (isLoading) View.INVISIBLE else View.VISIBLE
+        likeButton.isEnabled = !isLoading
+    }
+
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
-        return addState(
-            RouteDetailsViewModel.RouteDetailsState.Loading::class,
+        return addState(RouteDetailsViewModel.RouteDetailsState.Loading::class,
             callback = { binding.loading.root.isVisible = true },
             onExit = { binding.loading.root.isVisible = false },
         )
+    }
+
+    private fun StateMachine.Builder.addLikeLoadingState(): StateMachine.Builder {
+        return addState(RouteDetailsViewModel.RouteDetailsState.LikeLoading::class,
+            callback = { changeLikeButtonState(true) },
+            onExit = { changeLikeButtonState(false) }
+        )
+    }
+
+    private fun StateMachine.Builder.addFavoriteStateChangedState(): StateMachine.Builder {
+        return addState(RouteDetailsViewModel.RouteDetailsState.FavoriteStateChanged::class) {
+            binding.likeButton.isSelected = !binding.likeButton.isSelected
+            Toast.makeText(context, it.message, Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun StateMachine.Builder.addReadyState() : StateMachine.Builder {
@@ -82,6 +103,12 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
                 binding.showAll.isVisible = true
                 binding.reviewsRecycler.isVisible = true
                 binding.reviewsTitle.isVisible = true
+            }
+
+            binding.likeButton.isSelected = routeDetails.isFavorite
+
+            binding.likeButton.setOnClickListener{ _ ->
+                viewModel.changeRouteFavoriteState(routeDetails.id)
             }
 
             binding.routeName.text = routeDetails.name

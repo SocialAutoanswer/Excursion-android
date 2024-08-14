@@ -4,6 +4,7 @@ import androidx.paging.PagingData
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
+import ru.exursion.data.models.Message
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.Tag
@@ -14,6 +15,7 @@ interface RoutesUseCase {
     fun getRoutes(cityId: Long? = null, tagId: Long? = null): Flowable<PagingData<Route>>
     fun getRouteById(routeId: Long): Single<RouteDetails>
     fun getRoutesTags(): Flowable<PagingData<Tag>>
+    fun changeRouteFavoriteState(routeId: Long): Single<Message>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
@@ -37,5 +39,13 @@ class RoutesUseCaseImpl @Inject constructor(
 
     override fun getRoutesTags(): Flowable<PagingData<Tag>> {
         return routesRepository.getRoutesTags()
+    }
+
+    override fun changeRouteFavoriteState(routeId: Long): Single<Message> {
+        return routesRepository.changeRouteFavoriteState(routeId)
+            .map { result ->
+                result.getOrThrow()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
     }
 }
