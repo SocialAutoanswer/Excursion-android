@@ -12,6 +12,7 @@ data class RouteDto(
     @SerializedName("price") val price: Int?,
     @SerializedName("city") val cityId: Long?,
     //TODO: @SerializedName("tags") val tagIds: List<Long?>?
+    @SerializedName("locations") val locations: List<LocationDto?>?
 )
 
 data class Route(
