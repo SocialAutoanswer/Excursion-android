@@ -3,6 +3,7 @@ package ru.exursion.data.locations.mapper
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
+import ru.exursion.data.models.TagType
 import javax.inject.Inject
 
 class TagsMapper @Inject constructor(): Mapper<TagDto, Tag> {
@@ -11,6 +12,6 @@ class TagsMapper @Inject constructor(): Mapper<TagDto, Tag> {
         id = input.id ?: -1,
         name = input.name ?: "",
         iconName = input.picture?.let { "ss_ic_$it" } ?: "ss_ic_all",
-        routes = input.routes?.filterNotNull() ?: emptyList()
+        tagType = TagType.ROUTES
     )
 }

@@ -66,6 +66,8 @@ import ru.exursion.data.models.UserRequestDto
 import ru.exursion.data.profile.ProfileRepository
 import ru.exursion.data.profile.ProfileRepositoryImpl
 import ru.exursion.data.profile.QuestionMapper
+import ru.exursion.data.recommendations.RecommendationsRepository
+import ru.exursion.data.recommendations.RecommendationsRepositoryImpl
 import ru.exursion.data.reviews.ReviewsRepository
 import ru.exursion.data.reviews.ReviewsRepositoryImpl
 import ru.exursion.data.reviews.mapper.ReviewMapper
@@ -85,8 +87,8 @@ import ru.exursion.domain.ProfileUseCase
 import ru.exursion.domain.ProfileUseCaseImpl
 import ru.exursion.domain.RoutesUseCase
 import ru.exursion.domain.RoutesUseCaseImpl
-import ru.exursion.domain.TagsUseCase
-import ru.exursion.domain.TagsUseCaseImpl
+import ru.exursion.domain.RecommendationsUseCase
+import ru.exursion.domain.RecommendationsUseCaseImpl
 import ru.exursion.domain.player.impl.PlayerManagerImpl
 import ru.exursion.domain.player.interfaces.PlayerManager
 import ru.exursion.ui.SplashViewModel
@@ -167,9 +169,10 @@ class AppModule(private val context: Context) {
         fun bindFavoritesRepository(impl: FavoritesRepositoryImpl): FavoritesRepository
         @Binds
         fun bindRoutesRepository(impl: RoutesRepositoryImpl): RoutesRepository
-
         @Binds
-        fun bindTagsUseCase(impl: TagsUseCaseImpl): TagsUseCase
+        fun bindRecommendationsRepository(impl: RecommendationsRepositoryImpl): RecommendationsRepository
+
+
         @Binds
         fun bindCitiesUseCase(impl: CitiesUseCaseImpl): CitiesUseCase
         @Binds
@@ -178,6 +181,8 @@ class AppModule(private val context: Context) {
         fun bindLocationUseCase(impl: LocationUseCaseImpl): LocationUseCase
         @Binds
         fun bindFavoriteUseCase(impl: FavoritesUseCaseImpl): FavoritesUseCase
+        @Binds
+        fun bindRecommendationsUseCase(impl: RecommendationsUseCaseImpl): RecommendationsUseCase
 
         @Binds
         fun bindUserRequestMapper(impl: UserRequestMapper): Mapper<UserRequestDto, User>

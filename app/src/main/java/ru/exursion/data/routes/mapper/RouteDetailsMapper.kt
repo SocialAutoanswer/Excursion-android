@@ -26,7 +26,7 @@ class RouteDetailsMapper @Inject constructor(
         tags = tagsMapper.mapList(input.tags?.filterNotNull() ?: emptyList()),
         locations = locationsMapper.mapList(input.locations?.filterNotNull() ?: emptyList()),
         isPaid = false,
-        image = "https://union-travel.ru/assets/images/ekskurs/school-bus.jpg",
+        image = input.imageUrl ?: "",
         isFavorite = input.isFavorite ?: false,
         reviews = reviewMapper.mapList(input.reviews?.filterNotNull() ?: emptyList())
     )

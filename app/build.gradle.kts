@@ -21,12 +21,13 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
 
+        val excUrl: String? = gradleLocalProperties(rootDir).getProperty("EXC_URL")
         val testAuthToken: String? = gradleLocalProperties(rootDir).getProperty("testingAuthToken")
         val supportPhoneNumber: String? = gradleLocalProperties(rootDir).getProperty("supportPhoneNumber")
         val supportTelegramUserId: String? = gradleLocalProperties(rootDir).getProperty("supportTelegramUserId")
         val mapKitApiKey: String? = gradleLocalProperties(rootDir).getProperty("MAPKIT_API_KEY")
 
-        buildConfigField("String", "EXC_URL", "\"https://killroyka-matchinc-c837.twc1.net/api/\"")
+        buildConfigField("String", "EXC_URL", "\"$excUrl\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
         buildConfigField("String", "SUPPORT_PHONE_NUMBER", "\"$supportPhoneNumber\"")
         buildConfigField("String", "SUPPORT_TELEGRAM_USER_ID", "\"$supportTelegramUserId\"")

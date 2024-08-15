@@ -20,6 +20,7 @@ import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.MessageDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.QuestionDto
+import ru.exursion.data.models.RecommendationTagsDto
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
@@ -27,7 +28,7 @@ import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 
-@EndpointUrl(BuildConfig.EXC_URL)
+@EndpointUrl(BuildConfig.EXC_URL + "/api/")
 interface ExcursionApi {
 
     @POST("auth/login/")
@@ -152,4 +153,7 @@ interface ExcursionApi {
     fun changeRouteFavoriteState(
         @Path("id") routeId: Long
     ): Single<Response<MessageDto>>
+
+    @GET("auth/recommendations/")
+    fun getRecommendationsTags() : Single<Response<RecommendationTagsDto>>
 }

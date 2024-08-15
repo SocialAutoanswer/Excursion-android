@@ -1,12 +1,12 @@
 package ru.exursion.data
 
 import androidx.annotation.CallSuper
-import dagger.assisted.Assisted
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.PageDto
+import ru.exursion.ui.shared.ext.isValidId
 
 abstract class ExcursionPagingSource<I: Any, O: Any>(
     private val mapper: Mapper<I, O>,
@@ -41,11 +41,11 @@ abstract class ExcursionPagingSource<I: Any, O: Any>(
 
     @CallSuper
     protected open fun getMethod(pageNumber: Int): Single<Response<PageDto<I>>> {
-        if (tagId != null) {
-            return getDataByTag(tagId, pageNumber)
+        if (tagId.isValidId()) {
+            return getDataByTag(tagId!!, pageNumber)
         }
-        if (cityId != null) {
-            return getDataByCity(cityId, pageNumber)
+        if (cityId.isValidId()) {
+            return getDataByCity(cityId!!, pageNumber)
         }
         // you can add new conditions below, but dont touch upper ones
 

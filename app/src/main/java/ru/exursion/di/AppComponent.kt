@@ -13,6 +13,7 @@ import ru.exursion.ui.auth.fragments.EnterCodeFragment
 import ru.exursion.ui.auth.fragments.EnterUserDataFragment
 import ru.exursion.ui.auth.fragments.SignInFragment
 import ru.exursion.ui.auth.fragments.SignUpFragment
+import ru.exursion.ui.events.RecommendationFragment
 import ru.exursion.ui.map.LocationBottomDialog
 import ru.exursion.ui.map.MapFragment
 import ru.exursion.ui.profile.DecorSettingsFragment
@@ -21,6 +22,7 @@ import ru.exursion.ui.profile.QuestionsFragment
 import ru.exursion.ui.profile.RedactProfileFragment
 import ru.exursion.ui.routes.fragments.EventsFragment
 import ru.exursion.ui.routes.fragments.HotelsFragment
+import ru.exursion.ui.routes.fragments.LocationsFragment
 import ru.exursion.ui.routes.fragments.RouteAudiosDialog
 import ru.exursion.ui.routes.fragments.RouteDetailsFragment
 import ru.exursion.ui.routes.fragments.RouteMapFragment
@@ -62,6 +64,8 @@ interface AppComponent {
     fun inject(fragment: EventsFragment)
     fun inject(fragment: RouteMapFragment)
     fun inject(fragment: RouteAudiosDialog)
+    fun inject(fragment: RecommendationFragment)
+    fun inject(fragment: LocationsFragment)
 
     @Component.Builder
     interface Builder {
