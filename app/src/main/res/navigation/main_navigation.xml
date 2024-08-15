@@ -15,10 +15,10 @@
 		android:name="ru.exursion.ui.events.RecommendationFragment" >
 		<action
 			android:id="@+id/action_fragment_recommendation_to_eventsFragment2"
-			app:destination="@id/eventsFragment2" />
+			app:destination="@id/eventsFragment" />
 		<action
 			android:id="@+id/action_fragment_recommendation_to_routesFragment2"
-			app:destination="@id/routesFragment2" />
+			app:destination="@id/routesFragment" />
 		<action
 			android:id="@+id/action_fragment_recommendation_to_locationsFragment"
 			app:destination="@id/locationsFragment" />
@@ -26,11 +26,11 @@
 
 	<include app:graph="@navigation/profile_navigation" />
 	<fragment
-		android:id="@+id/eventsFragment2"
+		android:id="@+id/eventsFragment"
 		android:name="ru.exursion.ui.routes.fragments.EventsFragment"
 		android:label="EventsFragment" />
 	<fragment
-		android:id="@+id/routesFragment2"
+		android:id="@+id/routesFragment"
 		android:name="ru.exursion.ui.routes.fragments.RoutesFragment"
 		android:label="RoutesFragment" />
 	<fragment

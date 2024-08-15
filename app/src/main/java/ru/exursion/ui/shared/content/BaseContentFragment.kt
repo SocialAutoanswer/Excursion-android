@@ -47,6 +47,8 @@ abstract class BaseContentFragment :
     @get:StringRes
     abstract val  titleResId: Int
 
+    open var isBackButtonVisible = true
+
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
@@ -91,6 +93,7 @@ abstract class BaseContentFragment :
             binding.loading.root.isVisible = loadState.source.refresh is LoadState.Loading
         }
 
+        header.backButton.isVisible = isBackButtonVisible
         header.title.text = viewModel.tagName
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
         refreshLayout.setOnRefreshListener { adapter.refresh() }

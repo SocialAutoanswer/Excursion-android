@@ -11,6 +11,7 @@ import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
 import ru.exursion.data.models.PageDto
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.ui.shared.ext.isValidId
 
 class LocationsPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
@@ -31,8 +32,8 @@ class LocationsPagingSource @AssistedInject constructor(
     override fun getData(pageNumber: Int) = api.getLocations(pageNumber)
 
     override fun getMethod(pageNumber: Int): Single<Response<PageDto<LocationDto>>> {
-        if (routeId != null) {
-            return api.getLocationsByRoute(routeId, pageNumber)
+        if (routeId.isValidId()) {
+            return api.getLocationsByRoute(routeId!!, pageNumber)
         }
 
         return super.getMethod(pageNumber)

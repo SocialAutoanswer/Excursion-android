@@ -28,7 +28,7 @@ import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
 
-@EndpointUrl(BuildConfig.EXC_URL)
+@EndpointUrl(BuildConfig.EXC_URL + "/api/")
 interface ExcursionApi {
 
     @POST("auth/login/")

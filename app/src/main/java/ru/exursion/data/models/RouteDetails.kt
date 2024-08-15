@@ -12,7 +12,8 @@ data class RouteDetailsDto(
     @SerializedName("locations") val locations: List<LocationDto?>?,
     @SerializedName("is_favorite") val isFavorite: Boolean?,
     @SerializedName("reviews") val reviews: List<ReviewDto?>?,
-    @SerializedName("locations_length") val locationsLength: Int?
+    @SerializedName("locations_length") val locationsLength: Int?,
+    @SerializedName("image") val imageUrl: String?
 )
 
 data class RouteDetails(

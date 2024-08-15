@@ -1,6 +1,7 @@
 package ru.exursion.data.routes.mapper
 
 import ru.bibaboba.kit.util.Mapper
+import ru.exursion.BuildConfig
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDto
 import javax.inject.Inject
@@ -15,7 +16,7 @@ class RoutesMapper @Inject constructor() : Mapper<RouteDto, Route> {
         durationInMinutes = input.duration ?: 0,
         price = input.price ?: 0,
         isPaid = (input.price ?: 0) != 0,
-        imageUrl = input.imageUrl ?: "",
+        imageUrl = (BuildConfig.EXC_URL + input.imageUrl),
         cityId = input.locations?.filterNotNull()?.get(0)?.cityId ?: -1
     )
 }

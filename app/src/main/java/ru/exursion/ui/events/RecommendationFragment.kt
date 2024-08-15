@@ -10,16 +10,20 @@ import ru.exursion.ui.shared.content.BaseContentFragment
 
 class RecommendationFragment : BaseContentFragment() {
 
-    override val adapter: PagingDataAdapter<*, *>
-        get() = TagsPagingAdapter {
-            val tagBundle = bundleOf(TAG_ID_BUNDLE_KEY to it.id)
+    override val adapter: PagingDataAdapter<*, *> = TagsPagingAdapter {
+        val tagBundle = bundleOf(
+            TAG_ID_BUNDLE_KEY to it.id,
+            TAG_NAME_BUNDLE_KEY to it.name
+        )
 
-            when (it.tagType) {
-                TagType.EVENTS -> findNavController().navigate(R.id.eventsFragment, tagBundle)
-                TagType.ROUTES -> findNavController().navigate(R.id.routesFragment, tagBundle)
-                TagType.LOCATIONS -> findNavController().navigate(R.id.locationsFragment, tagBundle)
-            }
+        when (it.tagType) {
+            TagType.EVENTS -> findNavController().navigate(R.id.eventsFragment, tagBundle)
+            TagType.ROUTES -> findNavController().navigate(R.id.routesFragment, tagBundle)
+            TagType.LOCATIONS -> findNavController().navigate(R.id.locationsFragment, tagBundle)
         }
+    }
+
+    override var isBackButtonVisible = false
 
     override val titleResId: Int
         get() = R.string.screen_tags_recommendations_title

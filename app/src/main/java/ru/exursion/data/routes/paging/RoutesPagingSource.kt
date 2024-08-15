@@ -1,6 +1,5 @@
 package ru.exursion.data.routes.paging
 
-import android.util.Log
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -10,6 +9,7 @@ import ru.exursion.data.models.PageDto
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDto
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.ui.shared.ext.isValidId
 
 class RoutesPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
@@ -29,7 +29,7 @@ class RoutesPagingSource @AssistedInject constructor(
     override fun getData(pageNumber: Int) = api.getRoutes(pageNumber)
 
     override fun map(pageDto: PageDto<RouteDto>?): List<Route> {
-        if (cityId != null && tagId != null) {
+        if (cityId.isValidId() && tagId.isValidId()) {
             return super.map(pageDto).filter { it.cityId == cityId }  //hack because server does not have a method with two filters
         }
         return super.map(pageDto)
