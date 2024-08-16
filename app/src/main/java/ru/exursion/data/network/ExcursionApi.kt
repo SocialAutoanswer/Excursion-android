@@ -144,12 +144,12 @@ interface ExcursionApi {
     @GET("events/favorites/")
     fun getFavoriteEvents(): Single<Response<List<EventDto>>>
 
-    @GET("locations/{id}/favorite/")
+    @POST("locations/{id}/favorite/")
     fun changeLocationFavoriteState(
         @Path("id") locationId: Long
     ): Single<Response<MessageDto>>
 
-    @GET("routes/{id}/favorite/")
+    @POST("routes/{id}/favorite/")
     fun changeRouteFavoriteState(
         @Path("id") routeId: Long
     ): Single<Response<MessageDto>>
