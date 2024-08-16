@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
+import ru.exursion.BuildConfig
 import ru.exursion.R
 import ru.exursion.ui.shared.ext.addItemMargins
 import ru.exursion.databinding.FragmentChooseTownBinding
@@ -47,6 +48,9 @@ class ChooseCityFragment : StateFragment<FragmentChooseTownBinding, ChooseCityVi
     }
 
     override fun setUpViews(view: View) {
+        if (!BuildConfig.SEARCH_ENABLED) {
+            binding.search.isVisible = false
+        }
         binding.townsList.also {
             it.adapter = adapter
             it.addItemMargins(vertical = 16)

@@ -26,12 +26,18 @@ android {
         val supportPhoneNumber: String? = gradleLocalProperties(rootDir).getProperty("supportPhoneNumber")
         val supportTelegramUserId: String? = gradleLocalProperties(rootDir).getProperty("supportTelegramUserId")
         val mapKitApiKey: String? = gradleLocalProperties(rootDir).getProperty("MAPKIT_API_KEY")
+        val searchEnabled = gradleLocalProperties(rootDir).getProperty("SEARCH_ENABLED")
+        val notificationsSettingEnabled = gradleLocalProperties(rootDir).getProperty("NOTIFICATIONS_SETTINGS_ENABLED")
+        val aboutSettingEnabled = gradleLocalProperties(rootDir).getProperty("ABOUT_SETTING_ENABLED")
 
         buildConfigField("String", "EXC_URL", "\"$excUrl\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
         buildConfigField("String", "SUPPORT_PHONE_NUMBER", "\"$supportPhoneNumber\"")
         buildConfigField("String", "SUPPORT_TELEGRAM_USER_ID", "\"$supportTelegramUserId\"")
         buildConfigField("String", "MAPKIT_API_KEY", "\"$mapKitApiKey\"")
+        buildConfigField("boolean", "SEARCH_ENABLED", searchEnabled)
+        buildConfigField("boolean", "NOTIFICATIONS_SETTINGS_ENABLED", notificationsSettingEnabled)
+        buildConfigField("boolean", "ABOUT_SETTING_ENABLED", aboutSettingEnabled)
     }
 
     buildTypes {
