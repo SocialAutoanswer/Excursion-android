@@ -2,6 +2,7 @@ package ru.exursion.domain.player.impl
 
 import android.media.MediaPlayer
 import android.util.Log
+import ru.bibaboba.kit.Logger
 import ru.exursion.domain.player.interfaces.MediaPlayerCallbacks
 import ru.exursion.domain.player.interfaces.MediaPlayerController
 
@@ -23,10 +24,11 @@ class MediaPlayerCallbacksImpl(
                 "MEDIA ERROR SERVER DIED $extra"
             )
 
-            MediaPlayer.MEDIA_ERROR_UNKNOWN -> Log.d(
-                "MediaPlayer Error",
-                "MEDIA ERROR UNKNOWN $extra"
-            )
+            MediaPlayer.MEDIA_ERROR_UNKNOWN -> {
+                Logger.debug(this::class, "MEDIA ERROR UNKNOWN $extra")
+                mediaPlayerController.stopMedia()
+                return true
+            }
         }
         return false
     }
