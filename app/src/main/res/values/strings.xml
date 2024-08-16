@@ -128,4 +128,9 @@
     <string name="screen_tags_recommendations_title">Рекомендации</string>
 
     <string name="screen_locations_title">Достопримечательности</string>
+
+    <string name="screen_reviews_title">Отзывы</string>
+    <string name="screen_review_rating">%1$.1f из %2$.1f</string>
+    <string name="screen_review_review_amount">%1$d отзыва</string>
+    <string name="screen_review_new_review_button">Оставить отзыв</string>
 </resources>

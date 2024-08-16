@@ -1,5 +1,7 @@
 package ru.exursion.data.reviews
 
+import androidx.paging.PagingData
+import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import io.reactivex.rxjava3.schedulers.Schedulers
 import ru.bibaboba.kit.util.Mapper
@@ -12,6 +14,8 @@ import javax.inject.Inject
 
 interface ReviewsRepository {
     fun getRouteReviewsFirstPage(routeId: Long): Single<Result<List<Review>>>
+
+    fun getReviews(routeId: Long): Flowable<PagingData<Review>>
 }
 
 class ReviewsRepositoryImpl @Inject constructor(
@@ -33,5 +37,9 @@ class ReviewsRepositoryImpl @Inject constructor(
                     }
                 }
             }
+    }
+
+    override fun getReviews(routeId: Long): Flowable<PagingData<Review>> {
+        return
     }
 }
