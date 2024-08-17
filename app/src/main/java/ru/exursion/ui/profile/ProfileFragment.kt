@@ -5,11 +5,13 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
+import ru.exursion.BuildConfig
 import ru.exursion.R
 import ru.exursion.databinding.FragmentProfileBinding
 import ru.exursion.domain.settings.UserSettings
@@ -38,6 +40,14 @@ class ProfileFragment :
     }
 
     override fun setUpViews(view: View) = with(binding) {
+        if (!BuildConfig.ABOUT_SETTING_ENABLED) {
+            aboutAppBtn.isVisible = false
+        }
+
+        if (!BuildConfig.NOTIFICATIONS_SETTINGS_ENABLED) {
+            notificationBtn.isVisible = false
+        }
+
         settingsBtn.setOnClickListener{ findNavController().navigate(R.id.redactProfileFragment) }
         favoriteBtn.setOnClickListener { findNavController().navigate(R.id.favoritesGroupFragment) }
         faqBtn.setOnClickListener { findNavController().navigate(R.id.questionsFragment) }

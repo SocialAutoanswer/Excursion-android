@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.yandex.mapkit.MapKitFactory
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
+import ru.exursion.BuildConfig
 import ru.exursion.R
 import ru.exursion.data.models.City
 import ru.exursion.databinding.FragmentMapBinding
@@ -44,6 +45,9 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
     }
 
     override fun setUpViews(view: View): Unit = with(binding) {
+        if (!BuildConfig.SEARCH_ENABLED) {
+            binding.searchBar.isVisible = false
+        }
         adapter = CityAdapter(::changeCity, viewModel.chosenCityPosition)
 
         cityRecycler.also {

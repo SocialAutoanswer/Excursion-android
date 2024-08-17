@@ -49,7 +49,7 @@
         <item name="exc_icon_color_on_background">@color/white</item>
         <item name="exc_icon_color_on_image">@color/white</item>
         <item name="exc_icon_color_empty">@color/foggy_mountain</item>
-        <item name="exc_icon_user_image_background">@color/gogo_gadget_guy</item>
+        <item name="exc_icon_user_image_background">@color/heavy_metal</item>
         <item name="exc_icon_user_image_foreground">@color/foggy_mountain</item>
 
         <item name="exc_input_error_color">@color/romax_red</item>

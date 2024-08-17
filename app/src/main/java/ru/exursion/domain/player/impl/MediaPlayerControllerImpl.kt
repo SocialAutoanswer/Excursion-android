@@ -6,7 +6,6 @@ import ru.exursion.domain.player.interfaces.MediaPlayerController
 import java.util.Timer
 import java.util.TimerTask
 
-
 class MediaPlayerControllerImpl(
     _mediaPlayer: MediaPlayer
 ) : MediaPlayerController {
@@ -47,8 +46,8 @@ class MediaPlayerControllerImpl(
         if (mediaPlayer.isPlaying) {
             mediaPlayer.stop()
             stopTimer()
-            updateIsPlaying(mediaPlayer.isPlaying)
         }
+        updateIsPlaying(mediaPlayer.isPlaying)
     }
 
     override fun pauseMedia() {
@@ -83,8 +82,11 @@ class MediaPlayerControllerImpl(
         currentDataSource = mediaLink
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mediaLink)
-        mediaPlayer.prepare()
-        playMedia()
+        mediaPlayer.setOnPreparedListener {
+            playMedia()
+            mediaPlayer.setOnPreparedListener(null)
+        }
+        mediaPlayer.prepareAsync()
     }
 
 }

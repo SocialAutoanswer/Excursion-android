@@ -151,7 +151,8 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
 
             binding.routeName.text = routeDetails.name
             binding.duration.text = getString(R.string.screen_route_details_duration, routeDetails.durationInMinutes)
-            binding.locationsAmount.text = resources.getQuantityString(R.plurals.screen_route_details_locations_amount, it.details.locations.size, it.details.locations.size)
+
+            binding.locationsAmount.text = resources.getQuantityString(R.plurals.screen_route_details_locations_amount, routeDetails.locations.size, routeDetails.locations.size)
             binding.kilometers.text = getString(R.string.screen_route_details_kilometers, routeDetails.kilometers)
             binding.description.text = routeDetails.description
 

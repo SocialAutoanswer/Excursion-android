@@ -52,7 +52,6 @@ class LocationBottomDialog: StateBottomSheetDialogFragment<FragmentLocationBotto
 
     private fun StateMachine.Builder.addAudioLocationReceivedState(): StateMachine.Builder {
         return addState(MapViewModel.MapState.AudioLocationReceived::class) {
-
             with(binding) {
                 routName.text = it.audioLocation.name
                 routDescription.text = it.audioLocation.description
