@@ -13,7 +13,7 @@ class LocationsMapper @Inject constructor() : Mapper<LocationDto, Location> {
         description = input.description ?: "",
         imageUrl = "https://union-travel.ru/assets/images/ekskurs/school-bus.jpg",
         point = Point(input.latitude ?: 0.0, input.longitude ?: 0.0),
-        cityId = input.cityId ?: 0L
+        cityId = input.cityId ?: -1L
     )
 
     override fun mapList(input: List<LocationDto>): List<Location> {

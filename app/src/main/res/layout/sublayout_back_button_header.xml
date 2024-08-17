@@ -11,6 +11,10 @@
     <TextView
         android:id="@+id/title"
         style="@style/Text.H2.Title"
-        tools:text="Маршруты" />
+        android:layout_marginHorizontal="100dp"
+        android:layout_gravity="center"
+        android:maxLines="1"
+        android:ellipsize="end"
+        tools:text="Достопримечательности" />
 
 </FrameLayout>

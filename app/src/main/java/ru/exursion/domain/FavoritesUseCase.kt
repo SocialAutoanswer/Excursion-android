@@ -15,6 +15,10 @@ interface FavoritesUseCase {
     fun getFavoriteLocations(): Single<List<Location>>
     fun getFavoriteHotels(): Single<List<Hotel>>
     fun getFavoriteEvents(): Single<List<Event>>
+    fun clearAllFavoriteLocations(): Single<Unit>
+    fun clearAllFavoriteRoutes(): Single<Unit>
+    fun clearAllFavoriteHotels(): Single<Unit>
+    fun clearAllFavoriteEvents(): Single<Unit>
 }
 
 class FavoritesUseCaseImpl @Inject constructor(
@@ -28,6 +32,16 @@ class FavoritesUseCaseImpl @Inject constructor(
                     throw result.exceptionOrNull() ?: CanNotGetDataException()
                 }
                 result.getOrNull() ?: emptyList()
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    private fun sendClearRequest(method: Single<Result<Unit>>): Single<Unit> {
+        return method
+            .map { result ->
+                if(result.isFailure) {
+                    throw result.exceptionOrNull() ?: CanNotGetDataException()
+                }
             }
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -46,5 +60,21 @@ class FavoritesUseCaseImpl @Inject constructor(
 
     override fun getFavoriteEvents(): Single<List<Event>> {
         return getData(favoritesRepository.getFavoriteEvents())
+    }
+
+    override fun clearAllFavoriteLocations(): Single<Unit> {
+        return sendClearRequest(favoritesRepository.clearAllFavoriteLocations())
+    }
+
+    override fun clearAllFavoriteRoutes(): Single<Unit> {
+        return sendClearRequest(favoritesRepository.clearAllFavoriteRoutes())
+    }
+
+    override fun clearAllFavoriteHotels(): Single<Unit> {
+        return sendClearRequest(favoritesRepository.clearAllFavoriteHotels())
+    }
+
+    override fun clearAllFavoriteEvents(): Single<Unit> {
+        return sendClearRequest(favoritesRepository.clearAllFavoriteEvents())
     }
 }

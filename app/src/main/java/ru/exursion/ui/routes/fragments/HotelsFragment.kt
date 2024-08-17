@@ -17,6 +17,10 @@ class HotelsFragment: BaseContentFragment() {
         }
     }
 
+    override fun onClearCLick() {
+        viewModel.clearFavoriteHotels()
+    }
+
     override fun readyCallback() {
         //add click listener for item to open full info
     }

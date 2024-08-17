@@ -33,13 +33,29 @@ class BaseContentViewModel @Inject constructor(
 
     fun getFavoriteRoutes() = getData(favoritesUseCase.getFavoriteRoutes())
 
+    fun clearFavoriteRoutes() = clearData(
+        favoritesUseCase.clearAllFavoriteRoutes()
+    )
+
     fun getLocations() = getData(locationsUseCase.getLocations(cityId, tagId, routeId))
 
     fun getFavoriteLocations() = getData(favoritesUseCase.getFavoriteLocations())
 
+    fun clearFavoriteLocations() = clearData(
+        favoritesUseCase.clearAllFavoriteLocations()
+    )
+
     fun getFavoriteHotels() = getData(favoritesUseCase.getFavoriteHotels())
 
+    fun clearFavoriteHotels() = clearData(
+        favoritesUseCase.clearAllFavoriteHotels()
+    )
+
     fun getFavoriteEvents() = getData(favoritesUseCase.getFavoriteEvents())
+
+    fun clearFavoriteEvents() = clearData(
+        favoritesUseCase.clearAllFavoriteEvents()
+    )
 
     fun getRouteTags() = getData(routesUseCase.getRoutesTags())
 
@@ -57,6 +73,7 @@ class BaseContentViewModel @Inject constructor(
 
     private fun <D: Any> getData(method: Single<List<D>>) = invokeDisposable {
         method
+            .doOnSubscribe { _state.postValue(ContentState.Loading) }
             .subscribe({
                 if (it.isEmpty()) {
                     _state.postValue(ContentState.Idle)
@@ -84,10 +101,21 @@ class BaseContentViewModel @Inject constructor(
             })
     }
 
+    private fun clearData(method: Single<Unit>) = invokeDisposable {
+        method
+            .doOnSubscribe { _state.postValue(ContentState.Loading) }
+            .subscribe({
+                _state.postValue(ContentState.ContentCleared)
+            }, {
+                _effect.postValue(ContentEffect.Error)
+            })
+    }
+
     sealed class ContentState : State {
         data object Idle : ContentState()
         data object Loading : ContentState()
         class Ready(val content: PagingData<Any>) : ContentState()
+        data object ContentCleared : ContentState()
     }
 
     sealed class ContentEffect : Effect {

@@ -17,6 +17,10 @@ class EventsFragment: BaseContentFragment() {
         }
     }
 
+    override fun onClearCLick() {
+        viewModel.clearFavoriteEvents()
+    }
+
     override fun readyCallback() {
         //add click listener for item to open full info
     }

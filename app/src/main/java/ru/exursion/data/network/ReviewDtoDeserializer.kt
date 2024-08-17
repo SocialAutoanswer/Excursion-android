@@ -5,7 +5,7 @@ import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.UserDto
 import java.lang.reflect.Type
 
-class UserDtoDeserializer : JsonDeserializer<ReviewDto?> {
+class ReviewDtoDeserializer : JsonDeserializer<ReviewDto?> {
 
     override fun deserialize(
         json: JsonElement?,
