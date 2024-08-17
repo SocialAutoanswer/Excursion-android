@@ -35,6 +35,7 @@ abstract class BaseContentFragment :
         .addLoadingState()
         .addReadyState()
         .addIdleState()
+        .addContentClearedState()
         .addErrorEffect()
         .build()
 
@@ -55,6 +56,8 @@ abstract class BaseContentFragment :
     }
 
     open fun readyCallback() {}
+
+    open fun onClearCLick() {}
 
     abstract fun getData()
 
@@ -94,20 +97,32 @@ abstract class BaseContentFragment :
         header.backButton.isVisible = isBackButtonVisible
         header.title.text = viewModel.tagName
         header.backButton.setOnClickListener{ findNavController().navigateUp() }
-        refreshLayout.setOnRefreshListener { adapter.refresh() }
+        refreshLayout.setOnRefreshListener { getData() }
     }
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Loading::class,
             callback = { binding.loading.root.isVisible = true },
-            onExit = { binding.loading.root.isVisible = false }
+            onExit = {
+                binding.loading.root.isVisible = false
+                binding.refreshLayout.isRefreshing = false
+            }
         )
     }
 
     private fun StateMachine.Builder.addReadyState(): StateMachine.Builder {
         return addState(BaseContentViewModel.ContentState.Ready::class) {
             readyCallback()
+
+            if (viewModel.isFavorite) {
+                binding.clearButton.isVisible = true
+
+                binding.clearButton.setOnClickListener {
+                    onClearCLick()
+                }
+            }
+
             (adapter as PagingDataAdapter<Any, *>).submitData(lifecycle, it.content)
         }
     }
@@ -115,9 +130,22 @@ abstract class BaseContentFragment :
     private fun StateMachine.Builder.addIdleState() : StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Idle::class,
-            callback = { binding.emptyLayout.root.isVisible = true },
-            onExit = { binding.emptyLayout.root.isVisible = false }
+            callback = {
+                binding.emptyLayout.root.isVisible = true
+                binding.clearButton.isVisible = false
+            },
+            onExit = {
+                binding.emptyLayout.root.isVisible = false
+                binding.clearButton.isVisible = true
+            }
         )
+    }
+
+    private fun StateMachine.Builder.addContentClearedState(): StateMachine.Builder {
+        return addState(BaseContentViewModel.ContentState.ContentCleared::class) {
+            adapter.notifyItemRangeRemoved(0, adapter.itemCount)
+            viewModel.setIdleState()
+        }
     }
 
     private fun StateMachine.Builder.addErrorEffect() : StateMachine.Builder {

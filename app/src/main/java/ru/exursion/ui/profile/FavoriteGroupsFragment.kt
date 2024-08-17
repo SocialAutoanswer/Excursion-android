@@ -19,6 +19,10 @@ class FavoriteGroupsFragment: BaseFragment<FragmentFavoriteGroupsBinding>(Fragme
             findNavController().navigate(R.id.routesFragment, favoriteBundle)
         }
 
+        locationsButton.setOnClickListener {
+            findNavController().navigate(R.id.locationsFragment, favoriteBundle)
+        }
+
         hotelsButton.setOnClickListener{
             findNavController().navigate(R.id.hotelsFragment, favoriteBundle)
         }

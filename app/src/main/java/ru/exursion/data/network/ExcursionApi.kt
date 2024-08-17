@@ -161,4 +161,16 @@ interface ExcursionApi {
 
     @GET("auth/recommendations/")
     fun getRecommendationsTags() : Single<Response<RecommendationTagsDto>>
+
+    @GET("locations/unfavoriteall/")
+    fun clearAllFavoriteLocations() : Single<Response<Unit>>
+
+    @GET("routes/unfavoriteall/")
+    fun clearAllFavoriteRoutes() : Single<Response<Unit>>
+
+    @GET("events/unfavoriteall/")
+    fun clearAllFavoriteEvents() : Single<Response<Unit>>
+
+    @GET("hotels/unfavoriteall/")
+    fun clearAllFavoriteHotels() : Single<Response<Unit>>
 }

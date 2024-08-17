@@ -22,6 +22,10 @@ interface FavoritesRepository {
     fun getFavoriteRoutes(): Single<Result<List<Route>>>
     fun getFavoriteHotels(): Single<Result<List<Hotel>>>
     fun getFavoriteEvents(): Single<Result<List<Event>>>
+    fun clearAllFavoriteLocations(): Single<Result<Unit>>
+    fun clearAllFavoriteRoutes(): Single<Result<Unit>>
+    fun clearAllFavoriteHotels(): Single<Result<Unit>>
+    fun clearAllFavoriteEvents(): Single<Result<Unit>>
 }
 
 class FavoritesRepositoryImpl @Inject constructor(
@@ -47,6 +51,21 @@ class FavoritesRepositoryImpl @Inject constructor(
                 }
             }
     }
+
+    private fun sendClearRequest(
+        method: Single<Response<Unit>>
+    ): Single<Result<Unit>> {
+        return method
+            .subscribeOn(Schedulers.io())
+            .map {
+                if(it.isSuccessful) {
+                    Result.success(Unit)
+                } else {
+                    Result.failure(createHttpError(it))
+                }
+            }
+    }
+
 
     override fun getFavoriteLocations(): Single<Result<List<Location>>> {
         return getData(
@@ -76,4 +95,19 @@ class FavoritesRepositoryImpl @Inject constructor(
         )
     }
 
+    override fun clearAllFavoriteLocations(): Single<Result<Unit>> {
+        return sendClearRequest(api.clearAllFavoriteLocations())
+    }
+
+    override fun clearAllFavoriteRoutes(): Single<Result<Unit>> {
+        return sendClearRequest(api.clearAllFavoriteRoutes())
+    }
+
+    override fun clearAllFavoriteHotels(): Single<Result<Unit>> {
+        return sendClearRequest(api.clearAllFavoriteHotels())
+    }
+
+    override fun clearAllFavoriteEvents(): Single<Result<Unit>> {
+        return sendClearRequest(api.clearAllFavoriteEvents())
+    }
 }

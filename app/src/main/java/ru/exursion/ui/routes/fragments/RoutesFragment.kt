@@ -1,6 +1,5 @@
 package ru.exursion.ui.routes.fragments
 
-import android.util.Log
 import ru.exursion.R
 import ru.exursion.ui.routes.RouteDetailsActivity
 import ru.exursion.ui.routes.adapter.RoutesPagingDataAdapter
@@ -19,6 +18,10 @@ class RoutesFragment: BaseContentFragment() {
         } else {
             viewModel.getRoutes()
         }
+    }
+
+    override fun onClearCLick() {
+        viewModel.clearFavoriteRoutes()
     }
 
     override fun readyCallback() {

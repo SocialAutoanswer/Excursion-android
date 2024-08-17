@@ -22,7 +22,7 @@ data class Route(
     val imageUrl: String,
     val kilometers: Double,
     val durationInMinutes: Int,
-    val tags: List<Long>,
+    //val tags: List<Long>,
     val price: Int,
     val cityId: Long,
     val isPaid: Boolean
