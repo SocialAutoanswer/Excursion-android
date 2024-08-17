@@ -17,7 +17,7 @@ class RoutePlayer @Inject constructor(
     }
 
     var currentPlayingTrackId: Long? = null
-    private set
+        private set
 
     var isSomeonePlaying = false
         private set
@@ -30,10 +30,8 @@ class RoutePlayer @Inject constructor(
         override fun onSetPosition(position: Int) = playerManager.setPosition(position)
     }
 
-    private fun setCurrentTrack(trackUrl: String?, trackId: Long) = trackUrl?.let {
+    fun setCurrentTrack(trackUrl: String, trackId: Long) {
         currentPlayingTrackId = trackId
-        playerManager.setMedia(it)
+        playerManager.setMedia(trackUrl)
     }
-
-    fun observePlayerTimer() = playerManager.getCurrentPositionObservable()
 }

@@ -68,9 +68,7 @@ import ru.exursion.data.profile.ProfileRepositoryImpl
 import ru.exursion.data.profile.QuestionMapper
 import ru.exursion.data.recommendations.RecommendationsRepository
 import ru.exursion.data.recommendations.RecommendationsRepositoryImpl
-import ru.exursion.data.reviews.ReviewsRepository
-import ru.exursion.data.reviews.ReviewsRepositoryImpl
-import ru.exursion.data.reviews.mapper.ReviewMapper
+import ru.exursion.data.routes.mapper.ReviewMapper
 import ru.exursion.data.routes.RoutesRepository
 import ru.exursion.data.routes.RoutesRepositoryImpl
 import ru.exursion.data.routes.mapper.RouteDetailsMapper
@@ -163,8 +161,6 @@ class AppModule(private val context: Context) {
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
-        @Binds
-        fun bindReviewsRepository(impl: ReviewsRepositoryImpl): ReviewsRepository
         @Binds
         fun bindFavoritesRepository(impl: FavoritesRepositoryImpl): FavoritesRepository
         @Binds

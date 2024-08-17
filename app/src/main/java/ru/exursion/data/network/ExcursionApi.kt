@@ -107,6 +107,11 @@ interface ExcursionApi {
         @Path("routeId") routeId: Long,
     ): Single<Response<PageDto<ReviewDto>>>
 
+    @POST("reviews/{routeId}")
+    fun sendRouteReview(
+
+    )
+
     @GET("locations")
     fun getLocations(
         @Query("page") pageNum: Int

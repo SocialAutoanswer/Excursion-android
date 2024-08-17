@@ -16,6 +16,7 @@ class PlayButton(context: Context, attrs: AttributeSet) : AppCompatImageButton(c
         scaleType = ScaleType.CENTER_INSIDE
         setPadding(9.toDpPixels(context))
         isEnabled = false
+        setUiState(false)
     }
 
     private var _playerClickListener : OnPlayerClickListener? = null

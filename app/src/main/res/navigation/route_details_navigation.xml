@@ -10,10 +10,17 @@
         <action
             android:id="@+id/action_fragment_route_details_to_routeMapFragment"
             app:destination="@id/routeMapFragment" />
+        <action
+            android:id="@+id/action_fragment_route_details_to_reviewsFragment"
+            app:destination="@id/reviewsFragment" />
     </fragment>
     <fragment
         android:id="@+id/routeMapFragment"
         android:name="ru.exursion.ui.routes.fragments.RouteMapFragment"
         android:label="RouteMapFragment" />
+    <fragment
+        android:id="@+id/reviewsFragment"
+        android:name="ru.exursion.ui.routes.fragments.ReviewsFragment"
+        android:label="ReviewsFragment" />
 
 </navigation>

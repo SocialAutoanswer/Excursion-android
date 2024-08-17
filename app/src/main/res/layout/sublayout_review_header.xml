@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParentWrapContent"
+    android:orientation="horizontal">
+
+    <ImageView
+        style="@style/Icon"
+        android:src="@drawable/ic_rating_star_filled"
+        android:layout_gravity="center"
+        android:layout_marginEnd="8dp"/>
+
+    <TextView
+        android:id="@+id/rating"
+        style="@style/Text.H4"
+        android:layout_width="wrap_content"
+        android:layout_marginEnd="8dp"
+        tools:text="4.8 из 5"/>
+
+    <TextView
+        android:id="@+id/reviews_count"
+        style="@style/Text.H5"
+        android:layout_width="wrap_content"
+        android:textColor="?attr/exc_text_color_hint"
+        tools:text="360 отзывов"/>
+
+</LinearLayout>

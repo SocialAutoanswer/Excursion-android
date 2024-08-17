@@ -62,13 +62,19 @@
     <string name="screen_route_details_buy">Купить</string>
     <string name="screen_route_details_route">Маршрут</string>
     <plurals name="screen_route_details_locations_amount">
-        <item quantity="one">%1$s объект</item>
-        <item quantity="other">%1$s объектов</item>
+        <item quantity="one">%1$d объект</item>
+        <item quantity="few">%1$d объекта</item>
+        <item quantity="other">%1$d объектов</item>
     </plurals>
+    <string name="screen_route_details_give_review">Оставить отзыв</string>
+    <string name="screen_route_details_start_route">Начать маршрут</string>
     <string name="screen_route_details_duration">%1$d минут</string>
     <string name="screen_route_details_kilometers">%1$.2f КМ</string>
     <string name="screen_route_details_reviews">Отзывы</string>
     <string name="screen_route_details_show_all"><![CDATA[<font color="%1$s"><u>Посмотреть все</u></font>]]></string>
+
+    <string name="screen_route_reviews_rating">%1$.2f из 5</string>
+    <string name="screen_route_reviews_count">%1$d отзыва</string>
 
     <string name="screen_profile_title">Профиль</string>
     <string name="screen_profile_favorite">Избранное</string>
@@ -128,4 +134,11 @@
     <string name="screen_tags_recommendations_title">Рекомендации</string>
 
     <string name="screen_locations_title">Достопримечательности</string>
+    
+    <string name="screen_review_dialog_title">Вам понравилось? \n Оставьте отзыв</string>
+    <string name="screen_review_dialog_hint">Написать отзыв</string>
+    <string name="screen_review_dialog_send">Отправить</string>
+
+    <string name="price">%1$d руб.</string>
+    <string name="dialog_buy_route_confirm_text">Оплатить</string>
 </resources>

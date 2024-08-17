@@ -9,7 +9,7 @@ import android.widget.LinearLayout
 import androidx.core.view.isVisible
 import ru.exursion.databinding.ViewNumberedPointBinding
 
-class NumberCircleView(context: Context): LinearLayout(context) {
+class NumberCircleView(context: Context, attributeSet: AttributeSet?): LinearLayout(context, attributeSet) {
 
     private val binding = ViewNumberedPointBinding.inflate(LayoutInflater.from(context), this, true)
     private var isTriangleVisible = false

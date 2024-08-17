@@ -22,7 +22,7 @@
         android:background="?attr/exc_divider_color"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/buy"/>
+        app:layout_constraintBottom_toTopOf="@id/buttons"/>
 
     <View
         android:layout_width="match_parent"
@@ -33,20 +33,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/buy"
-        style="@style/Button.Primary.NoWidth.MarginStart_25dp.MarginTop_24dp.MarginBottom_32dp"
-        android:text="@string/screen_route_details_buy"
-        app:layout_constraintStart_toStartOf="parent"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttons"
+        style="@style/MatchParentWrapContent"
+        app:layout_constraintStart_toEndOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/route_button" />
+        app:layout_constraintEnd_toEndOf="parent">
 
-    <Button
-        android:id="@+id/route_button"
-        style="@style/Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp.MarginTop_24dp.MarginBottom_32dp"
-        android:text="@string/screen_route_details_route"
-        app:layout_constraintStart_toEndOf="@id/buy"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <Button
+            android:id="@+id/buy"
+            style="@style/Button.Primary.NoWidth.MarginStart_25dp.MarginTop_24dp.MarginBottom_32dp"
+            android:text="@string/screen_route_details_buy"
+            android:visibility="gone"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/route_button" />
+
+        <Button
+            android:id="@+id/route_button"
+            style="@style/Button.Secondary.NoWidth.MarginStart_8dp.MarginEnd_25dp.MarginTop_24dp.MarginBottom_32dp"
+            android:text="@string/screen_route_details_route"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="@id/buy"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+        <Button
+            android:id="@+id/confirm_button"
+            style="@style/Button.Primary.MarginHorizontal_25dp"
+            android:layout_marginBottom="32dp"
+            android:visibility="gone"
+            app:layout_constraintStart_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

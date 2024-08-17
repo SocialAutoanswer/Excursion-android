@@ -10,6 +10,7 @@ import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.Message
 import ru.exursion.data.models.MessageDto
+import ru.exursion.data.models.Review
 import ru.exursion.data.routes.paging.RouteTagsPagingSource
 import ru.exursion.data.routes.paging.RoutesPagingSource
 import ru.exursion.data.models.Route
@@ -17,6 +18,7 @@ import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.data.routes.paging.ReviewsPagingSource
 import javax.inject.Inject
 
 interface RoutesRepository {
@@ -24,12 +26,14 @@ interface RoutesRepository {
     fun getRoutesTags(): Flowable<PagingData<Tag>>
     fun getRouteById(routeId: Long): Single<Result<RouteDetails>>
     fun changeRouteFavoriteState(routeId: Long): Single<Result<Message>>
+    fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>>
 }
 
 class RoutesRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
     private val routesPagingSourceFactory: RoutesPagingSource.Factory,
     private val routeTagsPagingSourceFactory: RouteTagsPagingSource.Factory,
+    private val reviewsPagingSourceFactory: ReviewsPagingSource.Factory,
     private val routeMapper: Mapper<RouteDetailsDto, RouteDetails>,
     private val messageMapper: Mapper<MessageDto, Message>
 ) : RoutesRepository {
@@ -81,5 +85,9 @@ class RoutesRepositoryImpl @Inject constructor(
                     }
                 }
             }
+    }
+
+    override fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>> {
+        return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { reviewsPagingSourceFactory.create(routeId) }
     }
 }

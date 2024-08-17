@@ -1,15 +1,12 @@
 package ru.exursion.ui.routes.fragments
 
 import android.content.Context
-import android.util.Log
 import android.view.View
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateBottomSheetDialogFragment
-import ru.exursion.data.models.Audio
-import ru.exursion.data.models.AudioLocation
 import ru.exursion.databinding.FragmentRouteLocationsDialogBinding
 import ru.exursion.ui.routes.adapter.RouteAudiosDelegateAdapter
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
@@ -24,9 +21,7 @@ class RouteAudiosDialog :
     ) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    override val viewModel by viewModels<RouteDetailsViewModel> { viewModelFactory }
-
-    private val adapter = CompositeDelegateAdapter(RouteAudiosDelegateAdapter(null))
+    override val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
 
     override val stateMachine = StateMachine.Builder()
         .build()
@@ -37,6 +32,8 @@ class RouteAudiosDialog :
     }
 
     override fun setUpViews(view: View) {
+        val adapter = CompositeDelegateAdapter(RouteAudiosDelegateAdapter(viewModel.routePlayer))
+
         binding.locationRecycler.also {
             it.adapter = adapter
             it.addItemMargins(25, 16)

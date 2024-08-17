@@ -40,7 +40,7 @@ data class PlaceMark(
 
 private fun MapView.getViewByMarkType(markType: MarkType, markId: Long): View = when(markType) {
     MarkType.AUDIO -> View(context).apply {background = AppCompatResources.getDrawable(context, R.drawable.ic_audio) }
-    MarkType.NUMBERED -> NumberCircleView(context).apply {
+    MarkType.NUMBERED -> NumberCircleView(context, null).apply {
         setNumber(markId)
         setTriangleIsVisible(true)
     }

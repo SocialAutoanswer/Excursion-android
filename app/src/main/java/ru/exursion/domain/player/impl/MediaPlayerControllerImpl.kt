@@ -18,6 +18,8 @@ class MediaPlayerControllerImpl(
         setOnCompletionListener(mediaPlayerCallbacks::onCompletion)
     }
 
+    private var currentDataSource: String? = null
+
     private var timer: Timer? = null
 
     private fun startTimer() {
@@ -73,6 +75,11 @@ class MediaPlayerControllerImpl(
     }
 
     override fun setMedia(mediaLink: String) {
+        if (currentDataSource == mediaLink) {
+            playMedia()
+            return
+        }
+        currentDataSource = mediaLink
         mediaPlayer.reset()
         mediaPlayer.setDataSource(mediaLink)
         mediaPlayer.setOnPreparedListener {

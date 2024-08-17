@@ -8,8 +8,7 @@ data class ReviewDto(
     @SerializedName("review") val reviewText: String?,
     @SerializedName("created_at") val createdAt: String?,
     @SerializedName("raiting") val rating: Int?,
-    @SerializedName("user") val user: UserDto?,
-    @SerializedName("route") val route: RouteDto?
+    @SerializedName("user") val user: UserDto?
 )
 
 data class Review(

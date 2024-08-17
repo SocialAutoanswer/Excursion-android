@@ -67,6 +67,8 @@
         
         <item name="exc_card_on_background_color">@color/white</item>
         <item name="exc_player_progress_background">@color/screeching_white</item>
+        
+        <item name="exc_input_review_background">@color/chinese_white</item>
     </style>
 
 </resources>

@@ -23,6 +23,8 @@ import ru.exursion.ui.profile.RedactProfileFragment
 import ru.exursion.ui.routes.fragments.EventsFragment
 import ru.exursion.ui.routes.fragments.HotelsFragment
 import ru.exursion.ui.routes.fragments.LocationsFragment
+import ru.exursion.ui.routes.fragments.ReviewDialogFragment
+import ru.exursion.ui.routes.fragments.ReviewsFragment
 import ru.exursion.ui.routes.fragments.RouteAudiosDialog
 import ru.exursion.ui.routes.fragments.RouteDetailsFragment
 import ru.exursion.ui.routes.fragments.RouteMapFragment
@@ -66,6 +68,8 @@ interface AppComponent {
     fun inject(fragment: RouteAudiosDialog)
     fun inject(fragment: RecommendationFragment)
     fun inject(fragment: LocationsFragment)
+    fun inject(fragment: ReviewsFragment)
+    fun inject(fragment: ReviewDialogFragment)
 
     @Component.Builder
     interface Builder {
