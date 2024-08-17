@@ -25,7 +25,8 @@ class RouteDetailsMapper @Inject constructor(
         durationInMinutes = input.durationInMinutes ?: 0,
         tags = tagsMapper.mapList(input.tags?.filterNotNull() ?: emptyList()),
         locations = locationsMapper.mapList(input.locations?.filterNotNull() ?: emptyList()),
-        isPaid = false,
+        price = input.price ?: 0,
+        isPaid = true,
         image = input.imageUrl ?: "",
         isFavorite = input.isFavorite ?: false,
         reviews = reviewMapper.mapList(input.reviews?.filterNotNull() ?: emptyList())

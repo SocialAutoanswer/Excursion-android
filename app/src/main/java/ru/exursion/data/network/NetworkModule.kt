@@ -11,6 +11,7 @@ import retrofit2.adapter.rxjava3.RxJava3CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 import ru.bibaboba.kit.retrofit.buildApi
 import ru.exursion.BuildConfig
+import ru.exursion.data.models.ReviewDto
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
@@ -20,6 +21,7 @@ class NetworkModule {
     @Provides
     fun provideGson() : Gson = GsonBuilder()
         .setLenient()
+        .registerTypeAdapter(ReviewDto::class.java, UserDtoDeserializer())
         .create()
 
     @Provides

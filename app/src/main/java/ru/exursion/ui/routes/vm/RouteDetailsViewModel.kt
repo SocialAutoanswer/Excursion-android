@@ -1,5 +1,6 @@
 package ru.exursion.ui.routes.vm
 
+import androidx.annotation.IntRange
 import com.yandex.mapkit.geometry.Point
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.bibaboba.kit.RxStateViewModel
@@ -14,7 +15,7 @@ import javax.inject.Inject
 
 class RouteDetailsViewModel @Inject constructor(
     private val routesUseCase: RoutesUseCase,
-    private val mapPlayer: RoutePlayer
+    val routePlayer: RoutePlayer
 ) : RxStateViewModel<RouteDetailsViewModel.RouteDetailsState, RouteDetailsViewModel.RouteDetailsEffect>() {
 
     var routeName: String? = "Маршрут Баумана"   //it is mock data initialize it when route details received
@@ -22,21 +23,21 @@ class RouteDetailsViewModel @Inject constructor(
         AudioLocation(1, "asd", "qweasd", false, null,
             Point(55.644838, 37.607978),
             listOf(
-                Audio(1, "Xnj", "", 1),
-                Audio(2, "asdqwe", "", 1)
+                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1),
+                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1)
             ),
             emptyList()),
 
         AudioLocation(2, "asd", "qweasd", false, null,
         Point(55.644808, 37.610966),
         listOf(                                                                                        //now it is mock data
-            Audio(1, "Xnj", "", 1),                                         //initialize it when route details received
-            Audio(2, "asdqwe", "", 1)
+            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1),                                         //initialize it when route details received
+            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1)
         ),
         emptyList())
     )
 
-    fun getIsSomeonePlaying() = mapPlayer.isSomeonePlaying
+    fun getIsSomeonePlaying() = routePlayer.isSomeonePlaying
 
     fun getRouteDetails(routeId: Long) = invokeDisposable {
         routesUseCase.getRouteById(routeId)
@@ -58,6 +59,10 @@ class RouteDetailsViewModel @Inject constructor(
                 _effect.postValue(RouteDetailsEffect.Error)
                 _state.postValue(RouteDetailsState.Idle)
             })
+    }
+
+    fun addReview(@IntRange(1, 5) rating: Int, reviewText: String) {
+
     }
 
     sealed class RouteDetailsState : State {

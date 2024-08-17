@@ -15,6 +15,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/location_recycler"
         style="@style/MatchParent0dp"
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         android:layout_marginTop="24dp"
         app:layout_constraintStart_toStartOf="@id/title"
         app:layout_constraintEnd_toEndOf="parent"

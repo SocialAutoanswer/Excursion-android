@@ -1,4 +1,4 @@
-package ru.exursion.data.reviews.mapper
+package ru.exursion.data.routes.mapper
 
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.models.Review

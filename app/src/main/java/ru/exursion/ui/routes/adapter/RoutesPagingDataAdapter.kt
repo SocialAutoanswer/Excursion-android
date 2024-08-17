@@ -1,6 +1,7 @@
 package ru.exursion.ui.routes.adapter
 
 import android.view.ViewGroup
+import androidx.core.view.isVisible
 import androidx.paging.PagingDataAdapter
 import androidx.recyclerview.widget.DiffUtil
 import com.bumptech.glide.Glide
@@ -27,6 +28,7 @@ class RoutesPagingDataAdapter
 
                 name.text = item.name
                 description.text = item.description
+                paidExcursion.isVisible = item.price != 0
 
                 Glide.with(binding.backgroundImage)
                     .load(item.imageUrl)

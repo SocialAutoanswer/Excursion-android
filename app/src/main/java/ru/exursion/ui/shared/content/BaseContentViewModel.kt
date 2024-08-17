@@ -47,6 +47,10 @@ class BaseContentViewModel @Inject constructor(
         recommendationsUseCase.getRecommendationsTags()
     )
 
+    fun getRouteReviews() = routeId?.let {
+        getData(routesUseCase.getRouteReviews(it))
+    }
+
     fun setIdleState() {
         _state.value = ContentState.Idle
     }

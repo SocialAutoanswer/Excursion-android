@@ -21,6 +21,7 @@
     <color name="black_60">#99000000</color>
     <color name="foggy_mountain">#D9D9D9</color>
     <color name="gogo_gadget_guy">#909090</color>
+    <color name="chinese_white">#E1E1E1</color>
 
     <!-- Deprecated colors -->
     <color name="brown">#362E28</color>

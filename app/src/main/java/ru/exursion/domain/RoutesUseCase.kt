@@ -5,6 +5,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Flowable
 import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.models.Message
+import ru.exursion.data.models.Review
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.Tag
@@ -16,6 +17,7 @@ interface RoutesUseCase {
     fun getRouteById(routeId: Long): Single<RouteDetails>
     fun getRoutesTags(): Flowable<PagingData<Tag>>
     fun changeRouteFavoriteState(routeId: Long): Single<Message>
+    fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
@@ -47,5 +49,9 @@ class RoutesUseCaseImpl @Inject constructor(
                 result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    override fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>> {
+        return routesRepository.getRouteReviews(routeId)
     }
 }
