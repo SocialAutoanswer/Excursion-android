@@ -36,7 +36,7 @@ class RouteAudiosDelegateAdapter(private val routePlayer: RoutePlayer) :
         locationDescription.text = item.description
         playBtn.setOnPlayerClickListener(playerClickListener)
 
-        if (routePlayer.currentPlayingTrackId == item.id) {
+        if (routePlayer.isSomeonePlaying && routePlayer.currentPlayingTrackId == item.id) {
             selectedView = this@onBind
         }
     }

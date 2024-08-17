@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.yandex.mapkit.map.MapObjectTapListener
 import ru.bibaboba.kit.ui.BaseFragment
 import ru.exursion.databinding.FragmentRouteMapBinding
+import ru.exursion.ui.routes.RouteActivityController
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.shared.ext.MarkType
 import ru.exursion.ui.shared.ext.PlaceMark
@@ -21,17 +22,20 @@ class RouteMapFragment: BaseFragment<FragmentRouteMapBinding>(FragmentRouteMapBi
     private val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
 
     private val objectTapListener = MapObjectTapListener { _, _ ->
-        RouteAudiosDialog().show(parentFragmentManager, "")
+        openAudiosDialog()
         true
     }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
+        (context as RouteActivityController).setOnOpenAudiosDialogClick { openAudiosDialog() }
     }
 
     override fun setUpViews(view: View) {
-        binding.playerView.isVisible = viewModel.getIsSomeonePlaying()
+        setUpPlayer()
+        viewModel.setOnPlayerTimerListener(binding.playerView::setCurrentPosition)
+        binding.playerView.setOnPlayerClickListener(viewModel.routePlayer.onPlayerClickListener)
 
         binding.mapView.createRoute(
             viewModel.routeAudios.map { location ->
@@ -43,5 +47,18 @@ class RouteMapFragment: BaseFragment<FragmentRouteMapBinding>(FragmentRouteMapBi
                 )
             }
         )
+    }
+
+    private fun setUpPlayer() {
+        val currentLocation = viewModel.getCurrentPlayingLocation()
+        binding.playerView.isVisible = viewModel.getIsSomeonePlaying()
+        binding.playerView.playButton.setUiState(viewModel.getIsSomeonePlaying())
+        binding.playerView.setTrackName(currentLocation?.name.toString())
+    }
+
+    private fun openAudiosDialog() {
+        RouteAudiosDialog().also {
+            it.setOnDismiss { setUpPlayer() }
+        }.show(parentFragmentManager, "tag")
     }
 }

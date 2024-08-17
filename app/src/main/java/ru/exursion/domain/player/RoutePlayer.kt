@@ -34,4 +34,6 @@ class RoutePlayer @Inject constructor(
         currentPlayingTrackId = trackId
         playerManager.setMedia(trackUrl)
     }
+
+    fun observePlayerTimer() = playerManager.getCurrentPositionObservable()
 }

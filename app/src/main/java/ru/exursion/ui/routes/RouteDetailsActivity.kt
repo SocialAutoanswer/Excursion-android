@@ -11,7 +11,6 @@ import androidx.navigation.fragment.NavHostFragment
 import ru.exursion.R
 import ru.exursion.databinding.ActivityRouteDetailsBinding
 import ru.exursion.ui.routes.fragments.ReviewDialogFragment
-import ru.exursion.ui.routes.fragments.RouteAudiosDialog
 
 class RouteDetailsActivity : AppCompatActivity(), RouteActivityController {
 
@@ -46,6 +45,7 @@ class RouteDetailsActivity : AppCompatActivity(), RouteActivityController {
 
     private var navController: NavController? = null
     private var onPayButtonClick: (() -> Unit)? = null
+    private var onOpenAudiosDialogClick: (() -> Unit)? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -117,7 +117,7 @@ class RouteDetailsActivity : AppCompatActivity(), RouteActivityController {
                     val lastDestination = navHostFragment.navController.currentBackStack.value.last().destination
 
                     if (lastDestination.id == R.id.routeMapFragment) {
-                        RouteAudiosDialog().show(supportFragmentManager, "tag")
+                        onOpenAudiosDialogClick?.invoke()
                     }
                     if (lastDestination.id == R.id.fragment_route_details) {
                         navHostFragment.navController.navigate(R.id.routeMapFragment)
@@ -129,5 +129,9 @@ class RouteDetailsActivity : AppCompatActivity(), RouteActivityController {
 
     override fun setOnPayButtonClick(callback: () -> Unit) {
         onPayButtonClick = callback
+    }
+
+    override fun setOnOpenAudiosDialogClick(callback: () -> Unit) {
+        onOpenAudiosDialogClick = callback
     }
 }

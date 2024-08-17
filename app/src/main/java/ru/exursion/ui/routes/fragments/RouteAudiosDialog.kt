@@ -5,8 +5,7 @@ import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
-import ru.bibaboba.kit.states.StateMachine
-import ru.bibaboba.kit.ui.StateBottomSheetDialogFragment
+import ru.bibaboba.kit.ui.BaseBottomSheetDialogFragment
 import ru.exursion.databinding.FragmentRouteLocationsDialogBinding
 import ru.exursion.ui.routes.adapter.RouteAudiosDelegateAdapter
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
@@ -16,15 +15,12 @@ import javax.inject.Inject
 
 
 class RouteAudiosDialog :
-    StateBottomSheetDialogFragment<FragmentRouteLocationsDialogBinding, RouteDetailsViewModel>(
+    BaseBottomSheetDialogFragment<FragmentRouteLocationsDialogBinding>(
         FragmentRouteLocationsDialogBinding::class.java
     ) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    override val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
-
-    override val stateMachine = StateMachine.Builder()
-        .build()
+    private val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -39,6 +39,17 @@ class RouteDetailsViewModel @Inject constructor(
 
     fun getIsSomeonePlaying() = routePlayer.isSomeonePlaying
 
+    fun getCurrentPlayingLocation() = routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }
+
+    fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
+        routePlayer.observePlayerTimer()
+            .subscribe({
+                callback(it)
+            }, {
+                _effect.postValue(RouteDetailsEffect.Error)
+            })
+    }
+
     fun getRouteDetails(routeId: Long) = invokeDisposable {
         routesUseCase.getRouteById(routeId)
             .observeOn(AndroidSchedulers.mainThread())
