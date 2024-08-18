@@ -14,17 +14,17 @@
 		android:id="@+id/fragment_recommendation"
 		android:name="ru.exursion.ui.events.RecommendationFragment" >
 		<action
-			android:id="@+id/action_fragment_recommendation_to_eventsFragment2"
+			android:id="@+id/action_fragment_recommendation_to_eventsFragment"
 			app:destination="@id/eventsFragment" />
 		<action
-			android:id="@+id/action_fragment_recommendation_to_routesFragment2"
+			android:id="@+id/action_fragment_recommendation_to_routesFragment"
 			app:destination="@id/routesFragment" />
 		<action
 			android:id="@+id/action_fragment_recommendation_to_locationsFragment"
 			app:destination="@id/locationsFragment" />
 		<action
-			android:id="@+id/action_fragment_recommendation_to_hotelsFragment2"
-			app:destination="@id/hotelsFragment2" />
+			android:id="@+id/action_fragment_recommendation_to_hotelsFragment"
+			app:destination="@id/hotelsFragment" />
 	</fragment>
 
 	<include app:graph="@navigation/profile_navigation" />
@@ -58,11 +58,11 @@
 		android:name="ru.exursion.ui.routes.fragments.EventDetailsFragment"
 		android:label="EventDetailsFragment" />
 	<fragment
-		android:id="@+id/hotelsFragment2"
+		android:id="@+id/hotelsFragment"
 		android:name="ru.exursion.ui.routes.fragments.HotelsFragment"
 		android:label="HotelsFragment" >
 		<action
-			android:id="@+id/action_hotelsFragment2_to_hotelDetailsFragment"
+			android:id="@+id/action_hotelsFragment_to_hotelDetailsFragment"
 			app:destination="@id/hotelDetailsFragment" />
 	</fragment>
 	<fragment
