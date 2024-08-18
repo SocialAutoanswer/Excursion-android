@@ -8,6 +8,6 @@ fun RecyclerView.addItemMargins(horizontal: Int = 0, vertical: Int = 0) {
     addItemDecoration(MarginItemDecoration(vertical, horizontal))
 }
 
-fun RecyclerView.addItemDivider(color: Int, dividerHeight: Int = 3) {
-    addItemDecoration(DividerItemDecoration(color, dividerHeight))
+fun RecyclerView.addItemDivider(color: Int, dividerHeight: Int = 3, drawLast: Boolean = true) {
+    addItemDecoration(DividerItemDecoration(color, dividerHeight, drawLast))
 }
