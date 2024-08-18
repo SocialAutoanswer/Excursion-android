@@ -130,6 +130,7 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
 
             if (it.audioLocation.audios.isNotEmpty()) {
                 binding.playerView.setTrackName(it.audioLocation.audios[0].name)
+                binding.playerView.setDurationInSeconds(it.audioLocation.audios[0].durationInSeconds)
             }
 
             LocationBottomDialog().apply {

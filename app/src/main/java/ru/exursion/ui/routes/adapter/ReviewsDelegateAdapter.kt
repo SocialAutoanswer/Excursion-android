@@ -9,7 +9,7 @@ class ReviewsDelegateAdapter : ViewBindingDelegateAdapter<Review, ItemReviewBind
     override fun isForViewType(item: Any) = item is Review
 
     override fun ItemReviewBinding.onBind(item: Review) {
-        userName.text = "Отзовиков отзыв"
+        userName.text = item.userName
         rating.rating = item.rating.toFloat()
         reviewSummary.text = item.reviewText
     }
