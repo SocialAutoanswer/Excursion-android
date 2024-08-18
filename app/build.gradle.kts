@@ -29,6 +29,7 @@ android {
         val searchEnabled = gradleLocalProperties(rootDir).getProperty("SEARCH_ENABLED")
         val notificationsSettingEnabled = gradleLocalProperties(rootDir).getProperty("NOTIFICATIONS_SETTINGS_ENABLED")
         val aboutSettingEnabled = gradleLocalProperties(rootDir).getProperty("ABOUT_SETTING_ENABLED")
+        val reviewsHeaderEnabled = gradleLocalProperties(rootDir).getProperty("REVIEW_HEADER_ENABLED")
 
         buildConfigField("String", "EXC_URL", "\"$excUrl\"")
         buildConfigField("String", "AUTH_TOKEN", testAuthToken ?: "\"\"")
@@ -38,6 +39,7 @@ android {
         buildConfigField("boolean", "SEARCH_ENABLED", searchEnabled)
         buildConfigField("boolean", "NOTIFICATIONS_SETTINGS_ENABLED", notificationsSettingEnabled)
         buildConfigField("boolean", "ABOUT_SETTING_ENABLED", aboutSettingEnabled)
+        buildConfigField("boolean", "REVIEW_HEADER_ENABLED", reviewsHeaderEnabled)
     }
 
     buildTypes {
