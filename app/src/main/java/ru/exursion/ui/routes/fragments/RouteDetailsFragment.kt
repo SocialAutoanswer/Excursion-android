@@ -5,7 +5,7 @@ import android.view.View
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
@@ -33,7 +33,7 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
 
-    override val viewModel by viewModels<RouteDetailsViewModel> { viewModelFactory }
+    override val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
 
     override val stateMachine = StateMachine.Builder()
         .lifecycleOwner(this)

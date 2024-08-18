@@ -20,29 +20,14 @@ class RouteDetailsViewModel @Inject constructor(
     val routePlayer: RoutePlayer
 ) : RxStateViewModel<RouteDetailsViewModel.RouteDetailsState, RouteDetailsViewModel.RouteDetailsEffect>() {
 
-    var routeName: String? = "Маршрут Баумана"   //it is mock data initialize it when route details received
-    var routeAudios: List<AudioLocation> = listOf(
-        AudioLocation(1, "asd", "qweasd", false, null,
-            Point(55.644838, 37.607978),
-            listOf(
-                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1, 200),
-                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1, 200)
-            ),
-            emptyList()),
-
-        AudioLocation(2, "asd", "qweasd", false, null,
-        Point(55.644808, 37.610966),
-        listOf(                                                                                        //now it is mock data
-            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1, 200),                                         //initialize it when route details received
-            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1, 200)
-        ),
-        emptyList())
-    )
+    var routeName: String? = null
+        private set
+    var routeAudios: List<AudioLocation> = emptyList()
+        private set
 
     fun getIsSomeonePlaying() = routePlayer.isSomeonePlaying
 
-    fun getCurrentPlayingAudio() =
-        routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }?.audios?.get(0)
+    fun getCurrentPlayingAudio() = routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }?.audios?.get(0)
 
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         routePlayer.observePlayerTimer()
@@ -58,6 +43,8 @@ class RouteDetailsViewModel @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
             .doOnSubscribe { _state.postValue(RouteDetailsState.Loading) }
             .subscribe({
+                routeName = it.name
+                routeAudios = it.locations
                 _state.postValue(RouteDetailsState.Ready(it))
             }, {
                 _effect.postValue(RouteDetailsEffect.Error)

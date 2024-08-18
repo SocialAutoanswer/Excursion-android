@@ -1,8 +1,8 @@
 package ru.exursion.data.routes.mapper
 
 import ru.bibaboba.kit.util.Mapper
-import ru.exursion.data.models.Location
-import ru.exursion.data.models.LocationDto
+import ru.exursion.data.models.AudioLocation
+import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.Review
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetails
@@ -13,7 +13,7 @@ import javax.inject.Inject
 
 class RouteDetailsMapper @Inject constructor(
     private val tagsMapper: Mapper<TagDto, Tag>,
-    private val locationsMapper: Mapper<LocationDto, Location>,
+    private val locationsMapper: Mapper<AudioLocationDto, AudioLocation>,
     private val reviewMapper: Mapper<ReviewDto, Review>
 ) : Mapper<RouteDetailsDto, RouteDetails> {
 
