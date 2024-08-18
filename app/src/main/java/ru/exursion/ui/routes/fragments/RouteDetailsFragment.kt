@@ -66,10 +66,11 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
         backButton.setOnClickListener { activity?.onBackPressed() }
         reviewsRecycler.also {
             it.adapter = adapter
-            it.addItemMargins(16, 25)
+            it.addItemMargins(horizontal = 25)
         }
+
         context?.getColorByAttr(R.attr.exc_divider_color)?.let {
-            reviewsRecycler.addItemDivider(it)
+            reviewsRecycler.addItemDivider(it, drawLast = false)
         }
 
         val primaryColor = context?.getColorByAttr(R.attr.exc_color_primary).toString()
@@ -156,7 +157,7 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
             binding.kilometers.text = getString(R.string.screen_route_details_kilometers, routeDetails.kilometers)
             binding.description.text = routeDetails.description
 
-            adapter.swapData(it.details.reviews)
+            adapter.swapData(it.details.reviews.subList(0, 2))
 
             Glide.with(this@RouteDetailsFragment)
                 .load(routeDetails.image)

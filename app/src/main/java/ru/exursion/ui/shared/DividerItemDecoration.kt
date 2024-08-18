@@ -6,7 +6,11 @@ import android.graphics.Rect
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
 
-class DividerItemDecoration(color: Int, private val dividerHeight: Int) : RecyclerView.ItemDecoration() {
+class DividerItemDecoration(
+    color: Int,
+    private val dividerHeight: Int,
+    private val drawLast: Boolean = true
+) : RecyclerView.ItemDecoration() {
 
     private val paint = Paint()
 
@@ -18,7 +22,7 @@ class DividerItemDecoration(color: Int, private val dividerHeight: Int) : Recycl
         val left = parent.paddingLeft
         val right = parent.width - parent.paddingRight
 
-        for (i in 0 until parent.childCount) {
+        for (i in 0 until parent.childCount - (if (drawLast) 0 else 1)) {
             val child = parent.getChildAt(i)
             val params = child.layoutParams as RecyclerView.LayoutParams
             val top = child.bottom + params.bottomMargin
