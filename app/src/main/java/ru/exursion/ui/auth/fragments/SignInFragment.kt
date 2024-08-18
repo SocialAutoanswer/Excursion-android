@@ -84,6 +84,7 @@ class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
         return addState(AuthViewModel.AuthState.Success::class) {
             val activity = activity ?: return@addState
             startActivity(Intent(activity, MainActivity::class.java))
+            activity.finish()
         }
     }
 
