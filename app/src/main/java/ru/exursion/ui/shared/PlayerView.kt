@@ -8,7 +8,6 @@ import android.view.LayoutInflater
 import android.widget.SeekBar
 import androidx.constraintlayout.widget.ConstraintLayout
 import ru.bibaboba.kit.ui.utils.SimpleOnSeekBarChangedListener
-import ru.exursion.R
 import ru.exursion.databinding.LayoutPlayerBinding
 import ru.exursion.ui.shared.ext.toTimeFormat
 
@@ -79,10 +78,9 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
         }
     }
 
-    fun setDuration(dur: Int) {
-        duration = dur / 1000 //durations is given in milliseconds (divide by 1000 gives seconds)
-        binding.trackDuration.text = duration.toTimeFormat()
-        binding.trackBar.max = duration
+    fun setDurationInSeconds(dur: Int) {
+        binding.trackDuration.text = dur.toTimeFormat()
+        binding.trackBar.max = dur
     }
 
     fun setTrackName(trackName: String) {

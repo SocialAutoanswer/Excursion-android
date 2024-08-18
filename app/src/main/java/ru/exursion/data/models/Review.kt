@@ -8,7 +8,7 @@ data class ReviewDto(
     @SerializedName("review") val reviewText: String?,
     @SerializedName("created_at") val createdAt: String?,
     @SerializedName("raiting") val rating: Int?,
-    @SerializedName("user") val user: UserDto?
+    @SerializedName("user_name") val userName: String?
 )
 
 data class Review(
@@ -16,5 +16,5 @@ data class Review(
     val reviewText: String,
     val createdAt: LocalDateTime,
     val rating: Int,
-    val user: User?
+    val userName: String
 )

@@ -24,7 +24,7 @@ class ReviewsPagingDataAdapter: PagingDataAdapter<Review, ItemViewHolder<ItemRev
     ): ItemViewHolder<ItemReviewBinding, Review> {
         return ItemViewHolder.create(parent) { binding, item, pos ->
             with(binding) {
-                userName.text = ""
+                userName.text = item.userName
                 rating.rating = item.rating.toFloat()
                 reviewSummary.text = item.reviewText
             }

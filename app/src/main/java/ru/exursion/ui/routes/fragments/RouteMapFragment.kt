@@ -50,10 +50,11 @@ class RouteMapFragment: BaseFragment<FragmentRouteMapBinding>(FragmentRouteMapBi
     }
 
     private fun setUpPlayer() {
-        val currentLocation = viewModel.getCurrentPlayingLocation()
+        val currentAudio = viewModel.getCurrentPlayingAudio()
         binding.playerView.isVisible = viewModel.getIsSomeonePlaying()
         binding.playerView.playButton.setUiState(viewModel.getIsSomeonePlaying())
-        binding.playerView.setTrackName(currentLocation?.name.toString())
+        binding.playerView.setTrackName(currentAudio?.name.toString())
+        binding.playerView.setDurationInSeconds(currentAudio?.durationInSeconds ?: 0)
     }
 
     private fun openAudiosDialog() {
