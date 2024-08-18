@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParentWrapContent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/social_media_icon"
+        style="@style/Icon"
+        tools:src="@drawable/ss_ic_phone"
+        android:layout_gravity="center" />
+
+    <TextView
+        android:id="@+id/social_media_address"
+        style="@style/Text.H4"
+        android:maxLines="1"
+        android:gravity="center_vertical"
+        android:layout_marginStart="8dp"
+        tools:text="+7(999)999-99-99" />
+
+</LinearLayout>

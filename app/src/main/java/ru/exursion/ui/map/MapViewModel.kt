@@ -12,14 +12,15 @@ import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.City
 import ru.exursion.data.models.Location
 import ru.exursion.domain.CitiesUseCase
+import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.player.MapPlayer
-import ru.exursion.ui.shared.PlayerView
 import javax.inject.Inject
 
 class MapViewModel @Inject constructor(
     private val citiesUseCase: CitiesUseCase,
     private val locationsUseCase: LocationUseCase,
+    private val favoritesUseCase: FavoritesUseCase,
     private val mapPlayer: MapPlayer
 ): RxStateViewModel<MapViewModel.MapState, MapViewModel.MapEffect>() {
 
@@ -86,7 +87,7 @@ class MapViewModel @Inject constructor(
     }
 
     fun changeLocationFavoriteState(locationId: Long) = invokeDisposable {
-        locationsUseCase.changeLocationFavoriteState(locationId)
+        favoritesUseCase.changeLocationFavoriteState(locationId)
             .doOnSubscribe{ _state.postValue(MapState.LikeLoading) }
             .subscribe({
                 _state.postValue(MapState.FavoriteStateChanged(it.content))

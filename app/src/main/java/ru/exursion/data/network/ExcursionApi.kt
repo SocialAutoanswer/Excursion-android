@@ -159,6 +159,16 @@ interface ExcursionApi {
         @Path("id") routeId: Long
     ): Single<Response<MessageDto>>
 
+    @POST("events/{id}/favorite/")
+    fun changeEventFavoriteState(
+        @Path("id") eventId: Long
+    ): Single<Response<MessageDto>>
+
+    @POST("hotels/{id}/favorite/")
+    fun changeHotelFavoriteState(
+        @Path("id") hotelId: Long
+    ): Single<Response<MessageDto>>
+
     @GET("auth/recommendations/")
     fun getRecommendationsTags() : Single<Response<RecommendationTagsDto>>
 
@@ -173,4 +183,14 @@ interface ExcursionApi {
 
     @GET("hotels/unfavoriteall/")
     fun clearAllFavoriteHotels() : Single<Response<Unit>>
+
+    @GET("events/{id}/")
+    fun getEventById(
+        @Path("id") eventId: Long
+    ): Single<Response<EventDto>>
+
+    @GET("hotels/{id}/")
+    fun getHotelById(
+        @Path("id") hotelId: Long
+    ): Single<Response<HotelDto>>
 }

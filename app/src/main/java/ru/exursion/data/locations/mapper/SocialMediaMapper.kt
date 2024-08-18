@@ -11,7 +11,6 @@ class SocialMediaMapper @Inject constructor(): Mapper<SocialMediaDto, SocialMedi
         input.id ?: -1,
         input.name ?: "",
         input.socialUrl ?: "",
-        input.pictureUrl ?: "",
-        input.hotelId ?: -1
+        input.iconName ?: ""
     )
 }
