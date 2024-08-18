@@ -130,14 +130,8 @@ abstract class BaseContentFragment :
     private fun StateMachine.Builder.addIdleState() : StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Idle::class,
-            callback = {
-                binding.emptyLayout.root.isVisible = true
-                binding.clearButton.isVisible = false
-            },
-            onExit = {
-                binding.emptyLayout.root.isVisible = false
-                binding.clearButton.isVisible = true
-            }
+            callback = { binding.emptyLayout.root.isVisible = true },
+            onExit = { binding.emptyLayout.root.isVisible = false }
         )
     }
 
