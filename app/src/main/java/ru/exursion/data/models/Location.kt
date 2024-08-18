@@ -12,6 +12,15 @@ data class LocationDto(
     @SerializedName("city") val cityId: Long?,
 )
 
+data class LocationWithCityDto(
+    @SerializedName("id") val id: Long?,
+    @SerializedName("name") val name: String?,
+    @SerializedName("description") val description: String?,
+    @SerializedName("longitude") val longitude: Double?,
+    @SerializedName("latitude") val latitude: Double?,
+    @SerializedName("city") val city: CityDto?,
+)
+
 data class AudioLocationDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,

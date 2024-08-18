@@ -30,7 +30,8 @@ class RoutesPagingSource @AssistedInject constructor(
 
     override fun map(pageDto: PageDto<RouteDto>?): List<Route> {
         if (cityId.isValidId() && tagId.isValidId()) {
-            return super.map(pageDto).filter { it.cityId == cityId }  //hack because server does not have a method with two filters
+            // hack because server does not have a method with two filters
+            return super.map(pageDto).filter { it.cityId == cityId }
         }
         return super.map(pageDto)
     }
