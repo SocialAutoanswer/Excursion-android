@@ -94,17 +94,56 @@
         <action
             android:id="@+id/action_favoritesGroupFragment_to_eventsFragment"
             app:destination="@id/eventsFragment" />
+        <action
+            android:id="@+id/action_favoritesGroupFragment_to_locationsFragment"
+            app:destination="@id/locationsFragment" />
     </fragment>
     <fragment
         android:id="@+id/routesFragment"
         android:name="ru.exursion.ui.routes.fragments.RoutesFragment"
-        android:label="RoutesFragment" />
+        android:label="RoutesFragment" >
+        <action
+            android:id="@+id/action_routesFragment_to_routeDetailsFragment"
+            app:destination="@id/routeDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/hotelsFragment"
         android:name="ru.exursion.ui.routes.fragments.HotelsFragment"
-        android:label="HotelsFragment" />
+        android:label="HotelsFragment" >
+        <action
+            android:id="@+id/action_hotelsFragment_to_hotelDetailsFragment"
+            app:destination="@id/hotelDetailsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/eventsFragment"
         android:name="ru.exursion.ui.routes.fragments.EventsFragment"
-        android:label="EventsFragment" />
+        android:label="EventsFragment" >
+        <action
+            android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
+            app:destination="@id/eventDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/eventDetailsFragment"
+        android:name="ru.exursion.ui.routes.fragments.EventDetailsFragment"
+        android:label="EventDetailsFragment" />
+    <fragment
+        android:id="@+id/hotelDetailsFragment"
+        android:name="ru.exursion.ui.routes.fragments.HotelDetailsFragment"
+        android:label="HotelDetailsFragment" />
+    <fragment
+        android:id="@+id/locationsFragment"
+        android:name="ru.exursion.ui.routes.fragments.LocationsFragment"
+        android:label="LocationsFragment" >
+        <action
+            android:id="@+id/action_locationsFragment_to_locationDetailsFragment"
+            app:destination="@id/locationDetailsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/locationDetailsFragment"
+        android:name="ru.exursion.ui.routes.fragments.LocationDetailsFragment"
+        android:label="LocationDetailsFragment" />
+    <fragment
+        android:id="@+id/routeDetailsFragment"
+        android:name="ru.exursion.ui.routes.fragments.RouteDetailsFragment"
+        android:label="RouteDetailsFragment" />
 </navigation>
