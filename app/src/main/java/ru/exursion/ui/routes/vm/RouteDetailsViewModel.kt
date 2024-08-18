@@ -23,23 +23,24 @@ class RouteDetailsViewModel @Inject constructor(
         AudioLocation(1, "asd", "qweasd", false, null,
             Point(55.644838, 37.607978),
             listOf(
-                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1),
-                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1)
+                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1, 200),
+                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1, 200)
             ),
             emptyList()),
 
         AudioLocation(2, "asd", "qweasd", false, null,
         Point(55.644808, 37.610966),
         listOf(                                                                                        //now it is mock data
-            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1),                                         //initialize it when route details received
-            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1)
+            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1, 120),                                         //initialize it when route details received
+            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1, 120)
         ),
         emptyList())
     )
 
     fun getIsSomeonePlaying() = routePlayer.isSomeonePlaying
 
-    fun getCurrentPlayingLocation() = routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }
+    fun getCurrentPlayingAudio() =
+        routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }?.audios?.get(0)
 
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         routePlayer.observePlayerTimer()

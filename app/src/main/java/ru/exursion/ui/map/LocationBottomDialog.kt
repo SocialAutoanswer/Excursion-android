@@ -1,7 +1,6 @@
 package ru.exursion.ui.map
 
 import android.content.Context
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -65,7 +64,7 @@ class LocationBottomDialog: StateBottomSheetDialogFragment<FragmentLocationBotto
                 if (it.audioLocation.audios.isNotEmpty()) {
                     val audio = it.audioLocation.audios[0]
                     player.setTrackName(audio.name)
-                    //player.setDuration(audio.duration)
+                    player.setDurationInSeconds(audio.durationInSeconds)
                 } else {
                     player.isVisible = false
                 }

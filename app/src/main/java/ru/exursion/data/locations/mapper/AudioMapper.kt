@@ -11,6 +11,7 @@ class AudioMapper @Inject constructor(): Mapper<AudioDto, Audio> {
         input.id ?: -1,
         input.name ?: "",
         input.audioUrl ?: "",
-        input.locationId ?: -1
+        input.locationId ?: -1,
+        input.durationInSeconds ?: 0
     )
 }
