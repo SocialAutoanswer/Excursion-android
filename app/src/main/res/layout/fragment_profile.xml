@@ -56,7 +56,6 @@
                 <TextView
                     android:id="@+id/user_name"
                     style="@style/Text.H3.Bold.Center"
-                    android:text="Андрей Суворов"
                     android:layout_marginTop="16dp"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
