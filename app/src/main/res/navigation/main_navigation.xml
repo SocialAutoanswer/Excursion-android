@@ -47,7 +47,11 @@
 	<fragment
 		android:id="@+id/locationsFragment"
 		android:name="ru.exursion.ui.routes.fragments.LocationsFragment"
-		android:label="LocationsFragment" />
+		android:label="LocationsFragment" >
+		<action
+			android:id="@+id/action_locationsFragment_to_locationDetailsFragment"
+			app:destination="@id/locationDetailsFragment" />
+	</fragment>
 	<include app:graph="@navigation/route_details_navigation" />
 	<fragment
 		android:id="@+id/eventDetailsFragment"
@@ -65,5 +69,9 @@
 		android:id="@+id/hotelDetailsFragment"
 		android:name="ru.exursion.ui.routes.fragments.HotelDetailsFragment"
 		android:label="HotelDetailsFragment" />
+	<fragment
+		android:id="@+id/locationDetailsFragment"
+		android:name="ru.exursion.ui.routes.fragments.LocationDetailsFragment"
+		android:label="LocationDetailsFragment" />
 
 </navigation>

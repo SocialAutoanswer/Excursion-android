@@ -104,6 +104,7 @@ import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
 import ru.exursion.ui.routes.vm.EventDetailsViewModel
 import ru.exursion.ui.routes.vm.HotelDetailsViewModel
+import ru.exursion.ui.routes.vm.LocationDetailsViewModel
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.shared.content.BaseContentViewModel
 
@@ -257,6 +258,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(HotelDetailsViewModel::class)
         fun bindHotelDetailsViewModel(viewModel: HotelDetailsViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(LocationDetailsViewModel::class)
+        fun bindLocationDetailsViewModel(viewModel: LocationDetailsViewModel): ViewModel
     }
 
 }

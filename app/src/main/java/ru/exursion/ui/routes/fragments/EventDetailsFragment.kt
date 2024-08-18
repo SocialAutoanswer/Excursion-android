@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.bumptech.glide.Glide
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
@@ -61,6 +62,8 @@ class EventDetailsFragment: StateFragment<FragmentEventDetailsBinding, EventDeta
                 binding.likeButton.setOnClickListener{ _ ->
                     viewModel.changeEventFavoriteState(eventDetails.id)
                 }
+
+                backButton.setOnClickListener { findNavController().navigateUp() }
 
                 Glide.with(this@EventDetailsFragment)
                     .load(eventDetails.imageUrl)
