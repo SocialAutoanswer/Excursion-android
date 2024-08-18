@@ -22,20 +22,48 @@
 		<action
 			android:id="@+id/action_fragment_recommendation_to_locationsFragment"
 			app:destination="@id/locationsFragment" />
+		<action
+			android:id="@+id/action_fragment_recommendation_to_hotelsFragment2"
+			app:destination="@id/hotelsFragment2" />
 	</fragment>
 
 	<include app:graph="@navigation/profile_navigation" />
 	<fragment
 		android:id="@+id/eventsFragment"
 		android:name="ru.exursion.ui.routes.fragments.EventsFragment"
-		android:label="EventsFragment" />
+		android:label="EventsFragment" >
+		<action
+			android:id="@+id/action_eventsFragment_to_eventDetailsFragment"
+			app:destination="@id/eventDetailsFragment" />
+	</fragment>
 	<fragment
 		android:id="@+id/routesFragment"
 		android:name="ru.exursion.ui.routes.fragments.RoutesFragment"
-		android:label="RoutesFragment" />
+		android:label="RoutesFragment" >
+		<action
+			android:id="@+id/action_routesFragment_to_route_details_navigation"
+			app:destination="@id/route_details_navigation" />
+	</fragment>
 	<fragment
 		android:id="@+id/locationsFragment"
 		android:name="ru.exursion.ui.routes.fragments.LocationsFragment"
 		android:label="LocationsFragment" />
+	<include app:graph="@navigation/route_details_navigation" />
+	<fragment
+		android:id="@+id/eventDetailsFragment"
+		android:name="ru.exursion.ui.routes.fragments.EventDetailsFragment"
+		android:label="EventDetailsFragment" />
+	<fragment
+		android:id="@+id/hotelsFragment2"
+		android:name="ru.exursion.ui.routes.fragments.HotelsFragment"
+		android:label="HotelsFragment" >
+		<action
+			android:id="@+id/action_hotelsFragment2_to_hotelDetailsFragment"
+			app:destination="@id/hotelDetailsFragment" />
+	</fragment>
+	<fragment
+		android:id="@+id/hotelDetailsFragment"
+		android:name="ru.exursion.ui.routes.fragments.HotelDetailsFragment"
+		android:label="HotelDetailsFragment" />
 
 </navigation>

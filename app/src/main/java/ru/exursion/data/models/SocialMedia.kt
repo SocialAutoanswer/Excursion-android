@@ -6,14 +6,12 @@ data class SocialMediaDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
     @SerializedName("url") val socialUrl: String?,
-    @SerializedName("picture") val pictureUrl: String?,
-    @SerializedName("hotel") val hotelId: Long?
+    @SerializedName("picture") val iconName: String?
 )
 
 data class SocialMedia(
     val id: Long,
     val name: String,
     val socialUrl: String,
-    val pictureUrl: String,
-    val hotelId: Long
+    val iconName: String
 )

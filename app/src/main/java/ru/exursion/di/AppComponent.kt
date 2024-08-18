@@ -20,7 +20,9 @@ import ru.exursion.ui.profile.DecorSettingsFragment
 import ru.exursion.ui.profile.ProfileFragment
 import ru.exursion.ui.profile.QuestionsFragment
 import ru.exursion.ui.profile.RedactProfileFragment
+import ru.exursion.ui.routes.fragments.EventDetailsFragment
 import ru.exursion.ui.routes.fragments.EventsFragment
+import ru.exursion.ui.routes.fragments.HotelDetailsFragment
 import ru.exursion.ui.routes.fragments.HotelsFragment
 import ru.exursion.ui.routes.fragments.LocationsFragment
 import ru.exursion.ui.routes.fragments.ReviewDialogFragment
@@ -70,6 +72,8 @@ interface AppComponent {
     fun inject(fragment: LocationsFragment)
     fun inject(fragment: ReviewsFragment)
     fun inject(fragment: ReviewDialogFragment)
+    fun inject(fragment: HotelDetailsFragment)
+    fun inject(fragment: EventDetailsFragment)
 
     @Component.Builder
     interface Builder {

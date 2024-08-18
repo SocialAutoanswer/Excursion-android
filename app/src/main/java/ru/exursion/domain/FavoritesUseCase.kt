@@ -7,6 +7,7 @@ import ru.exursion.data.locations.FavoritesRepository
 import ru.exursion.data.models.Event
 import ru.exursion.data.models.Hotel
 import ru.exursion.data.models.Location
+import ru.exursion.data.models.Message
 import ru.exursion.data.models.Route
 import javax.inject.Inject
 
@@ -19,6 +20,11 @@ interface FavoritesUseCase {
     fun clearAllFavoriteRoutes(): Single<Unit>
     fun clearAllFavoriteHotels(): Single<Unit>
     fun clearAllFavoriteEvents(): Single<Unit>
+    fun changeRouteFavoriteState(routeId: Long): Single<Message>
+    fun changeLocationFavoriteState(locationId: Long): Single<Message>
+    fun changeHotelFavoriteState(hotelId: Long): Single<Message>
+    fun changeEventFavoriteState(eventId: Long): Single<Message>
+
 }
 
 class FavoritesUseCaseImpl @Inject constructor(
@@ -31,7 +37,7 @@ class FavoritesUseCaseImpl @Inject constructor(
                 if(result.isFailure) {
                     throw result.exceptionOrNull() ?: CanNotGetDataException()
                 }
-                result.getOrNull() ?: emptyList()
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -42,6 +48,17 @@ class FavoritesUseCaseImpl @Inject constructor(
                 if(result.isFailure) {
                     throw result.exceptionOrNull() ?: CanNotGetDataException()
                 }
+            }
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
+    private fun changeFavoriteState(method: Single<Result<Message>>): Single<Message> {
+        return method
+            .map { result ->
+                if(result.isFailure) {
+                    throw result.exceptionOrNull() ?: CanNotGetDataException()
+                }
+                result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
     }
@@ -76,5 +93,21 @@ class FavoritesUseCaseImpl @Inject constructor(
 
     override fun clearAllFavoriteEvents(): Single<Unit> {
         return sendClearRequest(favoritesRepository.clearAllFavoriteEvents())
+    }
+
+    override fun changeRouteFavoriteState(routeId: Long): Single<Message> {
+        return changeFavoriteState(favoritesRepository.changeRouteFavoriteState(routeId))
+    }
+
+    override fun changeLocationFavoriteState(locationId: Long): Single<Message> {
+        return changeFavoriteState(favoritesRepository.changeLocationFavoriteState(locationId))
+    }
+
+    override fun changeHotelFavoriteState(hotelId: Long): Single<Message> {
+        return changeFavoriteState(favoritesRepository.changeHotelFavoriteState(hotelId))
+    }
+
+    override fun changeEventFavoriteState(eventId: Long): Single<Message> {
+        return changeFavoriteState(favoritesRepository.changeEventFavoriteState(eventId))
     }
 }

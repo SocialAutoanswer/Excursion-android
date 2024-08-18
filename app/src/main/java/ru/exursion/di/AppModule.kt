@@ -18,8 +18,12 @@ import ru.exursion.data.auth.AuthRepository
 import ru.exursion.data.auth.AuthRepositoryImpl
 import ru.exursion.data.auth.UserMapper
 import ru.exursion.data.auth.UserRequestMapper
+import ru.exursion.data.locations.EventRepository
+import ru.exursion.data.locations.EventRepositoryImpl
 import ru.exursion.data.locations.FavoritesRepository
 import ru.exursion.data.locations.FavoritesRepositoryImpl
+import ru.exursion.data.locations.HotelsRepository
+import ru.exursion.data.locations.HotelsRepositoryImpl
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.locations.LocationsRepositoryImpl
 import ru.exursion.data.locations.mapper.AudioLocationMapper
@@ -77,8 +81,12 @@ import ru.exursion.domain.AuthUseCase
 import ru.exursion.domain.AuthUseCaseImpl
 import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.CitiesUseCaseImpl
+import ru.exursion.domain.EventsUseCase
+import ru.exursion.domain.EventsUseCaseImpl
 import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.FavoritesUseCaseImpl
+import ru.exursion.domain.HotelsUseCase
+import ru.exursion.domain.HotelsUseCaseImpl
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.LocationUseCaseImpl
 import ru.exursion.domain.ProfileUseCase
@@ -94,6 +102,8 @@ import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.map.MapViewModel
 import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
+import ru.exursion.ui.routes.vm.EventDetailsViewModel
+import ru.exursion.ui.routes.vm.HotelDetailsViewModel
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.shared.content.BaseContentViewModel
 
@@ -167,7 +177,10 @@ class AppModule(private val context: Context) {
         fun bindRoutesRepository(impl: RoutesRepositoryImpl): RoutesRepository
         @Binds
         fun bindRecommendationsRepository(impl: RecommendationsRepositoryImpl): RecommendationsRepository
-
+        @Binds
+        fun bindEventsRepository(impl: EventRepositoryImpl): EventRepository
+        @Binds
+        fun bindHotelsRepository(impl: HotelsRepositoryImpl): HotelsRepository
 
         @Binds
         fun bindCitiesUseCase(impl: CitiesUseCaseImpl): CitiesUseCase
@@ -179,6 +192,10 @@ class AppModule(private val context: Context) {
         fun bindFavoriteUseCase(impl: FavoritesUseCaseImpl): FavoritesUseCase
         @Binds
         fun bindRecommendationsUseCase(impl: RecommendationsUseCaseImpl): RecommendationsUseCase
+        @Binds
+        fun bindEventsUseCase(impl: EventsUseCaseImpl): EventsUseCase
+        @Binds
+        fun bindHotelsUseCase(impl: HotelsUseCaseImpl): HotelsUseCase
 
         @Binds
         fun bindUserRequestMapper(impl: UserRequestMapper): Mapper<UserRequestDto, User>
@@ -230,6 +247,16 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(BaseContentViewModel::class)
         fun bindBaseContentViewModel(viewModel: BaseContentViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(EventDetailsViewModel::class)
+        fun bindEventDetailsViewModel(viewModel: EventDetailsViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(HotelDetailsViewModel::class)
+        fun bindHotelDetailsViewModel(viewModel: HotelDetailsViewModel): ViewModel
     }
 
 }

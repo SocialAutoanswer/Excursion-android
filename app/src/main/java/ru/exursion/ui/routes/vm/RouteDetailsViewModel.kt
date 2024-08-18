@@ -9,12 +9,14 @@ import ru.bibaboba.kit.states.State
 import ru.exursion.data.models.Audio
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.RouteDetails
+import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.RoutesUseCase
 import ru.exursion.domain.player.RoutePlayer
 import javax.inject.Inject
 
 class RouteDetailsViewModel @Inject constructor(
     private val routesUseCase: RoutesUseCase,
+    private val favoritesUseCase: FavoritesUseCase,
     val routePlayer: RoutePlayer
 ) : RxStateViewModel<RouteDetailsViewModel.RouteDetailsState, RouteDetailsViewModel.RouteDetailsEffect>() {
 
@@ -23,16 +25,16 @@ class RouteDetailsViewModel @Inject constructor(
         AudioLocation(1, "asd", "qweasd", false, null,
             Point(55.644838, 37.607978),
             listOf(
-                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1),
-                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3", 1)
+                Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3"),
+                Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Cant_Stop_Album_Version.mp3")
             ),
             emptyList()),
 
         AudioLocation(2, "asd", "qweasd", false, null,
         Point(55.644808, 37.610966),
         listOf(                                                                                        //now it is mock data
-            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1),                                         //initialize it when route details received
-            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3", 1)
+            Audio(1, "Xnj", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3"),                                         //initialize it when route details received
+            Audio(2, "asdqwe", "https://killroyka-matchinc-c837.twc1.net/media/LocationAudios/Red_Hot_Chili_Peppers_-_Snow_Hey_Oh_Album_Version.mp3")
         ),
         emptyList())
     )
@@ -62,7 +64,7 @@ class RouteDetailsViewModel @Inject constructor(
     }
 
     fun changeRouteFavoriteState(routeId: Long) = invokeDisposable {
-        routesUseCase.changeRouteFavoriteState(routeId)
+        favoritesUseCase.changeRouteFavoriteState(routeId)
             .doOnSubscribe{ _state.postValue(RouteDetailsState.LikeLoading) }
             .subscribe({
                 _state.postValue(RouteDetailsState.FavoriteStateChanged(it.content))

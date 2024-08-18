@@ -7,14 +7,12 @@ import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.locations.LocationsRepository
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.Location
-import ru.exursion.data.models.Message
 import javax.inject.Inject
 
 interface LocationUseCase {
     fun getLocations(cityId: Long? = null, tagId: Long? = null, routeId: Long? = null): Flowable<PagingData<Location>>
     fun getLocations(cityId: Long): Single<List<Location>>
     fun getLocationById(locationId: Long): Single<AudioLocation>
-    fun changeLocationFavoriteState(locationId: Long): Single<Message>
 }
 
 class LocationUseCaseImpl @Inject constructor(
@@ -45,11 +43,4 @@ class LocationUseCaseImpl @Inject constructor(
             .observeOn(AndroidSchedulers.mainThread())
     }
 
-    override fun changeLocationFavoriteState(locationId: Long): Single<Message> {
-        return locationsRepository.changeLocationFavoriteState(locationId)
-            .map { result ->
-                result.getOrThrow()
-            }
-            .observeOn(AndroidSchedulers.mainThread())
-    }
 }

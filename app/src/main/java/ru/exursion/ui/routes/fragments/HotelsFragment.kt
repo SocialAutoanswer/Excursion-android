@@ -1,7 +1,10 @@
 package ru.exursion.ui.routes.fragments
 
+import androidx.core.os.bundleOf
+import androidx.navigation.fragment.findNavController
 import ru.exursion.R
 import ru.exursion.ui.routes.adapter.HotelsPagingDataAdapter
+import ru.exursion.ui.routes.fragments.HotelDetailsFragment.Companion.HOTEL_ID_BUNDLE_KEY
 import ru.exursion.ui.shared.content.BaseContentFragment
 
 class HotelsFragment: BaseContentFragment() {
@@ -22,6 +25,8 @@ class HotelsFragment: BaseContentFragment() {
     }
 
     override fun readyCallback() {
-        //add click listener for item to open full info
+        adapter.setOnItemClick {
+            findNavController().navigate(R.id.hotelDetailsFragment, bundleOf(HOTEL_ID_BUNDLE_KEY to it.id))
+        }
     }
 }

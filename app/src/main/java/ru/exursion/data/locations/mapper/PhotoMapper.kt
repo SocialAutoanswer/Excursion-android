@@ -10,7 +10,6 @@ class PhotoMapper @Inject constructor(): Mapper<PhotoDto, Photo> {
     override fun map(input: PhotoDto) = Photo(
         input.id ?: -1,
         input.name ?: "",
-        input.url ?: "",
-        input.locationId ?: -1
+        input.url ?: ""
     )
 }

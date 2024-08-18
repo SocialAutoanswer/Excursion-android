@@ -6,28 +6,24 @@ import com.google.gson.annotations.SerializedName
 data class AudioDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
-    @SerializedName("audio") val audioUrl: String?,
-    @SerializedName("location") val locationId: Long?
+    @SerializedName("audio") val audioUrl: String?
 )
 
 data class PhotoDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
-    @SerializedName("photo") val url: String?,
-    @SerializedName("location") val locationId: Long?
+    @SerializedName("photo") val url: String?
 )
 
 
 data class Audio(
     val id: Long,
     val name: String,
-    val audioUrl: String,
-    val locationId: Long
+    val audioUrl: String
 )
 
 data class Photo(
     val id: Long,
     val name: String,
-    val url: String,
-    val locationId: Long
+    val url: String
 )
