@@ -75,6 +75,7 @@ class AuthViewModel @Inject constructor(
             .doOnSubscribe { _state.postValue(AuthState.Loading) }
             .subscribe({
                 _state.postValue(AuthState.Success)
+                AuthHeaderInterceptor.setSessionToken(it.token ?: "")
             }, {
                 when (it) {
                     is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
