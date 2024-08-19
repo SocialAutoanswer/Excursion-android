@@ -25,7 +25,7 @@ class UserMapper @Inject constructor(): Mapper<UserDto, User> {
     override fun map(input: UserDto): User = User(
         input.firstName ?: "",
         input.lastName ?: "",
-        LocalDate.parse(input.birthDate),
+        input.birthDate?.let { LocalDate.parse(it) },
         input.email ?: "",
         null,
         null,
