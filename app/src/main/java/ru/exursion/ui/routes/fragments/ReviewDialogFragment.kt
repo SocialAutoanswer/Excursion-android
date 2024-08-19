@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import ru.exursion.R
 import ru.exursion.databinding.FragmentDialogReviewBinding
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
 import ru.exursion.ui.shared.ext.inject
@@ -35,6 +36,8 @@ class ReviewDialogFragment: DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        dialog?.window?.setBackgroundDrawableResource(R.color.transparent)
 
         binding.confirmButton.setOnClickListener {
             viewModel.addReview(

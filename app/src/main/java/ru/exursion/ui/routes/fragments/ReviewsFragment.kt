@@ -20,11 +20,13 @@ class ReviewsFragment: BaseContentFragment() {
 
     override fun setUpViews(view: View) {
         super.setUpViews(view)
+
         val concatAdapter = if (BuildConfig.REVIEW_HEADER_ENABLED) {
              ConcatAdapter(ReviewHeaderAdapter(1.1f, 12), adapter) //TODO:change mock data
         } else {
             adapter
         }
+
         binding.recycler.adapter = concatAdapter
     }
 }
