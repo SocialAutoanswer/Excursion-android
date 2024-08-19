@@ -19,7 +19,7 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
     private val binding = LayoutPlayerBinding.inflate(LayoutInflater.from(context), this, true)
     private var duration = 0
     private var playerClickListener : OnPlayerClickListener? = null
-    val playButton: PlayButton = binding.playBtn
+    val playButton: PlayButton get() = binding.playBtn
 
     private val onSeekBarChangeListener = object : SimpleOnSeekBarChangedListener {
 
@@ -72,9 +72,13 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
     }
 
     fun setCurrentPosition(currentPosition: Int) {
+        val currentPositionInMilly = currentPosition / 1000
         with(binding) {
-            trackBar.progress = currentPosition / 1000
-            currentTime.text = (currentPosition / 1000).toTimeFormat()
+            trackBar.progress = currentPositionInMilly
+            currentTime.text = currentPositionInMilly.toTimeFormat()
+            if (currentPositionInMilly == trackBar.max) {
+                playButton.setUiState(false)
+            }
         }
     }
 

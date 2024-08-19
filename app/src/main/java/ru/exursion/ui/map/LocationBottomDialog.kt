@@ -65,8 +65,7 @@ class LocationBottomDialog: StateBottomSheetDialogFragment<FragmentLocationBotto
                     val audio = it.audioLocation.audios[0]
                     player.setTrackName(audio.name)
                     player.setDurationInSeconds(audio.durationInSeconds)
-                } else {
-                    player.isVisible = false
+                    player.isVisible = true
                 }
 
                 if (it.audioLocation.photos.isEmpty()) return@addState
