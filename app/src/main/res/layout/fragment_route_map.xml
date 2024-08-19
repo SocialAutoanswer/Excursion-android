@@ -3,6 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     style="@style/MatchParent">
 
+    <ImageView
+        android:id="@+id/back_button"
+        style="@style/Icon.Back"
+        android:layout_marginTop="48dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
     <com.yandex.mapkit.mapview.MapView
         android:id="@+id/map_view"
         style="@style/MatchParent"

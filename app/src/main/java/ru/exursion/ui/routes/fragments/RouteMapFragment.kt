@@ -5,6 +5,7 @@ import android.view.View
 import androidx.core.view.isVisible
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.yandex.mapkit.map.MapObjectTapListener
 import ru.bibaboba.kit.ui.BaseFragment
 import ru.exursion.databinding.FragmentRouteMapBinding
@@ -36,6 +37,7 @@ class RouteMapFragment: BaseFragment<FragmentRouteMapBinding>(FragmentRouteMapBi
         setUpPlayer()
         viewModel.setOnPlayerTimerListener(binding.playerView::setCurrentPosition)
         binding.playerView.setOnPlayerClickListener(viewModel.routePlayer.onPlayerClickListener)
+        binding.backButton.setOnClickListener{ findNavController().navigateUp() }
 
         binding.mapView.createRoute(
             viewModel.routeAudios.map { location ->
