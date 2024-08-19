@@ -5,6 +5,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers
 import retrofit2.Response
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException
+import ru.exursion.data.models.AudioLocation
+import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.Event
 import ru.exursion.data.models.EventDto
 import ru.exursion.data.models.Hotel
@@ -20,7 +22,7 @@ import ru.exursion.data.network.createHttpError
 import javax.inject.Inject
 
 interface FavoritesRepository {
-    fun getFavoriteLocations(): Single<Result<List<Location>>>
+    fun getFavoriteLocations(): Single<Result<List<AudioLocation>>>
     fun getFavoriteRoutes(): Single<Result<List<Route>>>
     fun getFavoriteHotels(): Single<Result<List<Hotel>>>
     fun getFavoriteEvents(): Single<Result<List<Event>>>
@@ -37,6 +39,7 @@ interface FavoritesRepository {
 class FavoritesRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
     private val locationMapper: Mapper<LocationDto, Location>,
+    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
     private val routesMapper: Mapper<RouteDto, Route>,
     private val hotelsMapper: Mapper<HotelDto, Hotel>,
     private val eventMapper: Mapper<EventDto, Event>,
@@ -89,10 +92,10 @@ class FavoritesRepositoryImpl @Inject constructor(
     }
 
 
-    override fun getFavoriteLocations(): Single<Result<List<Location>>> {
+    override fun getFavoriteLocations(): Single<Result<List<AudioLocation>>> {
         return getData(
             api.getFavoriteLocations(),
-            locationMapper
+            audioLocationMapper
         )
     }
 

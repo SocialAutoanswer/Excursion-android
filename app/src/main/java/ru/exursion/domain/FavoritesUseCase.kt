@@ -4,6 +4,7 @@ import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.locations.FavoritesRepository
+import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.Event
 import ru.exursion.data.models.Hotel
 import ru.exursion.data.models.Location
@@ -13,7 +14,7 @@ import javax.inject.Inject
 
 interface FavoritesUseCase {
     fun getFavoriteRoutes(): Single<List<Route>>
-    fun getFavoriteLocations(): Single<List<Location>>
+    fun getFavoriteLocations(): Single<List<AudioLocation>>
     fun getFavoriteHotels(): Single<List<Hotel>>
     fun getFavoriteEvents(): Single<List<Event>>
     fun clearAllFavoriteLocations(): Single<Unit>
@@ -67,7 +68,7 @@ class FavoritesUseCaseImpl @Inject constructor(
         return getData(favoritesRepository.getFavoriteRoutes())
     }
 
-    override fun getFavoriteLocations(): Single<List<Location>> {
+    override fun getFavoriteLocations(): Single<List<AudioLocation>> {
         return getData(favoritesRepository.getFavoriteLocations())
     }
 

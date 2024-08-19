@@ -27,7 +27,7 @@ class LocationDtoDeserializer : JsonDeserializer<LocationDto> {
             jsonObject?.get("description")?.asString,
             jsonObject?.get("longitude")?.asDouble,
             jsonObject?.get("latitude")?.asDouble,
-            city
+            city,
         )
     }
 }
