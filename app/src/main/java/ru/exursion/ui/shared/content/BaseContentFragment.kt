@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.paging.LoadState
+import androidx.paging.PagingData
 import androidx.paging.PagingDataAdapter
 import ru.bibaboba.kit.states.StateMachine
 import ru.bibaboba.kit.ui.StateFragment
@@ -134,14 +135,16 @@ abstract class BaseContentFragment :
     private fun StateMachine.Builder.addIdleState() : StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Idle::class,
-            callback = { binding.emptyLayout.root.isVisible = true },
+            callback = {
+                (adapter as PagingDataAdapter<Any, *>).submitData(lifecycle, PagingData.empty())
+                binding.emptyLayout.root.isVisible = true
+           },
             onExit = { binding.emptyLayout.root.isVisible = false }
         )
     }
 
     private fun StateMachine.Builder.addContentClearedState(): StateMachine.Builder {
         return addState(BaseContentViewModel.ContentState.ContentCleared::class) {
-            adapter.notifyItemRangeRemoved(0, adapter.itemCount)
             viewModel.setIdleState()
         }
     }
