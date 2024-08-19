@@ -25,7 +25,7 @@ class UserMapper @Inject constructor(): Mapper<UserDto, User> {
     override fun map(input: UserDto): User = User(
         input.firstName ?: "",
         input.lastName ?: "",
-        null,
+        LocalDate.parse(input.birthDate),
         input.email ?: "",
         null,
         null,
@@ -39,7 +39,9 @@ class UserMapper @Inject constructor(): Mapper<UserDto, User> {
         input.lastName,
         null,
         input.email,
-        null, null, null, null, null
+        null, null,
+        "${input.birthDate?.year}-${input.birthDate?.monthValue}-${input.birthDate?.dayOfMonth}"
+        , null, null
     )
 
 }
