@@ -18,6 +18,7 @@ import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.addTextChangedListener
 import ru.exursion.ui.shared.ext.inject
 import ru.exursion.ui.shared.ext.networkErrorDialog
+import ru.exursion.ui.shared.ext.setDefaultState
 import ru.exursion.ui.shared.ext.setErrorState
 import javax.inject.Inject
 
@@ -51,9 +52,20 @@ class SignUpFragment : StateFragment<FragmentSignupBinding, AuthViewModel>(
 
         passEdit.addTextChangedListener { _, _, _, _ ->
             continueButton.isEnabled = isFieldsValid()
+            setConfirmErrorVisibleState(false)
+        }
+
+        passConfirmEdit.addTextChangedListener { _, _, _, _ ->
+            continueButton.isEnabled = isFieldsValid()
+            setConfirmErrorVisibleState(false)
         }
 
         continueButton.setOnClickListener {
+            if (passEdit.text != passConfirmEdit.text) {
+                setConfirmErrorVisibleState(true)
+                return@setOnClickListener
+            }
+
             viewModel.user.email = emailEdit.text.toString()
             viewModel.user.password = passEdit.text.toString()
             viewModel.signUp()
@@ -62,9 +74,17 @@ class SignUpFragment : StateFragment<FragmentSignupBinding, AuthViewModel>(
         binding.continueHint.setOnClickListener { AppNavigator.PrivacyPolicy().navigate(::startActivity) }
     }
 
+    private fun setConfirmErrorVisibleState(isVisible: Boolean) = with(binding) {
+        if(isVisible) { passEdit.setErrorState() } else { passEdit.setDefaultState() }
+        if(isVisible) { passConfirmEdit.setErrorState() } else { passEdit.setDefaultState() }
+
+        passwordConfirmError.isVisible = isVisible
+    }
+
     private fun FragmentSignupBinding.isFieldsValid() =
         emailEdit.text.isValidEmail()
                 && passEdit.text.isValidPassword()
+                && passConfirmEdit.text.isValidPassword()
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(

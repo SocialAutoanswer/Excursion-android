@@ -22,6 +22,8 @@
 
     <string name="screen_signup_email_hint">Ваш email</string>
     <string name="screen_signup_password_hint">Придумайте 8-значный пароль</string>
+    <string name="screen_signup_password_confirm_hint">Повторите пароль</string>
+    <string name="screen_signup_password_confirm_error">Пароли не совпадают</string>
     <string name="screen_signup_code_hint">Мы отправим вам код\nподтверждения</string>
     <string name="screen_signup_continue">Продолжить</string>
     <string name="screen_signup_continue_hint">Нажимая кнопку \“Продолжить\”, вы соглашаетесь \n с политикой конфиденциальности и на обработку \n персональных данных</string>

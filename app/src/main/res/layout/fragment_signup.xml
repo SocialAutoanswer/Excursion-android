@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     style="@style/MatchParent">
 
 
@@ -32,6 +33,26 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/email_edit" />
+
+    <EditText
+        android:id="@+id/pass_confirm_edit"
+        style="@style/EditText.MarginHorizontal_25dp.MarginTop_16dp"
+        android:importantForAutofill="no"
+        android:inputType="textPassword"
+        android:hint="@string/screen_signup_password_confirm_hint"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/pass_edit" />
+    
+    <TextView
+        android:id="@+id/password_confirm_error"
+        style="@style/Text.H5.Negative"
+        android:layout_width="wrap_content"
+        android:visibility="invisible"
+        android:layout_marginTop="8dp"
+        tools:text="@string/screen_signup_password_confirm_error"
+        app:layout_constraintTop_toBottomOf="@id/pass_confirm_edit"
+        app:layout_constraintStart_toStartOf="@id/pass_confirm_edit"/>
 
     <TextView
         android:id="@+id/code_hint"
