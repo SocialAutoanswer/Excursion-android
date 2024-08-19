@@ -45,9 +45,9 @@ class RedactProfileFragment :
         saveButton.setOnClickListener{
             viewModel.editProfile(
                 User(
-                    firstName = binding.nameInput.toString(),
-                    lastName = binding.lastNameInput.toString(),
-                    email = binding.emailInput.toString()
+                    firstName = binding.nameInput.text.toString(),
+                    lastName = binding.lastNameInput.text.toString(),
+                    email = binding.emailInput.text.toString()
                 )
             )
         }
