@@ -15,6 +15,7 @@ import ru.bibaboba.kit.util.isValidEmail
 import ru.bibaboba.kit.util.isValidPassword
 import ru.exursion.R
 import ru.exursion.databinding.FragmentSigninBinding
+import ru.exursion.domain.AppNavigator
 import ru.exursion.ui.MainActivity
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.inject
@@ -65,6 +66,8 @@ class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
             viewModel.user.password = passEdit.text.toString()
             viewModel.signIn()
         }
+
+        binding.continueHint.setOnClickListener { AppNavigator.PrivacyPolicy().navigate(::startActivity) }
     }
 
     private fun FragmentSigninBinding.isFieldsValid() =

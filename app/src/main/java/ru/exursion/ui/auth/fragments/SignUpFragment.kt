@@ -13,6 +13,7 @@ import ru.bibaboba.kit.ui.StateFragment
 import ru.bibaboba.kit.util.isValidPassword
 import ru.exursion.R
 import ru.exursion.databinding.FragmentSignupBinding
+import ru.exursion.domain.AppNavigator
 import ru.exursion.ui.auth.vm.AuthViewModel
 import ru.exursion.ui.shared.ext.addTextChangedListener
 import ru.exursion.ui.shared.ext.inject
@@ -57,6 +58,8 @@ class SignUpFragment : StateFragment<FragmentSignupBinding, AuthViewModel>(
             viewModel.user.password = passEdit.text.toString()
             viewModel.signUp()
         }
+
+        binding.continueHint.setOnClickListener { AppNavigator.PrivacyPolicy().navigate(::startActivity) }
     }
 
     private fun FragmentSignupBinding.isFieldsValid() =

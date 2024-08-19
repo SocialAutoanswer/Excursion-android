@@ -14,6 +14,7 @@ import ru.bibaboba.kit.ui.StateFragment
 import ru.exursion.BuildConfig
 import ru.exursion.R
 import ru.exursion.databinding.FragmentProfileBinding
+import ru.exursion.domain.AppNavigator
 import ru.exursion.domain.settings.UserSettings
 import ru.exursion.ui.auth.AuthActivity
 import ru.exursion.ui.shared.dialog.dialog
@@ -55,6 +56,7 @@ class ProfileFragment :
         decorBtn.setOnClickListener { findNavController().navigate(R.id.decorSettingsFragment) }
         feedbackBtn.setOnClickListener { findNavController().navigate(R.id.feedbackFragment) }
         aboutAppBtn.setOnClickListener { findNavController().navigate(R.id.aboutAppFragment) }
+        policyBtn.setOnClickListener { AppNavigator.PrivacyPolicy().navigate(::startActivity) }
 
         logoutBtn.setOnClickListener{
             dialog("logout") {

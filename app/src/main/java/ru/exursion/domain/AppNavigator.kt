@@ -34,6 +34,10 @@ sealed class AppNavigator(
         Uri.parse("https://vk.com/$profileId")
     )
 
+    class PrivacyPolicy() : AppNavigator(
+        Intent.ACTION_VIEW,
+        Uri.parse(BuildConfig.PRIVACY_LINK)
+    )
 
     private fun createIntent() = Intent().apply {
         action = _action
