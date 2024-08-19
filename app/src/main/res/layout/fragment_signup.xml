@@ -48,9 +48,9 @@
         android:id="@+id/password_confirm_error"
         style="@style/Text.H5.Negative"
         android:layout_width="wrap_content"
-        android:visibility="invisible"
+        android:visibility="gone"
         android:layout_marginTop="8dp"
-        tools:text="@string/screen_signup_password_confirm_error"
+        android:text="@string/screen_signup_password_confirm_error"
         app:layout_constraintTop_toBottomOf="@id/pass_confirm_edit"
         app:layout_constraintStart_toStartOf="@id/pass_confirm_edit"/>
 
