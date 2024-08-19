@@ -53,6 +53,7 @@
             android:id="@+id/web_link"
             style="@style/Text.H5.Neutral"
             android:layout_marginTop="24dp"
+            android:visibility="gone"
             android:text="@string/screen_feedback_link" />
 
     </LinearLayout>
