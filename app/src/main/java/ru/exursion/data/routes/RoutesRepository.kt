@@ -9,11 +9,13 @@ import ru.bibaboba.kit.util.createPagingDataFlowable
 import ru.exursion.data.CanNotGetDataException
 import ru.exursion.data.InternalServerException
 import ru.exursion.data.models.Review
+import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.Tag
 import ru.exursion.data.network.ExcursionApi
+import ru.exursion.data.network.createHttpError
 import ru.exursion.data.routes.paging.ReviewsPagingSource
 import ru.exursion.data.routes.paging.RouteTagsPagingSource
 import ru.exursion.data.routes.paging.RoutesPagingSource
@@ -24,6 +26,7 @@ interface RoutesRepository {
     fun getRoutesTags(): Flowable<PagingData<Tag>>
     fun getRouteById(routeId: Long): Single<Result<RouteDetails>>
     fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>>
+    fun postReview(routeId: Long, rating: Int, review: String): Single<Unit>
 }
 
 class RoutesRepositoryImpl @Inject constructor(
@@ -69,5 +72,21 @@ class RoutesRepositoryImpl @Inject constructor(
 
     override fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>> {
         return createPagingDataFlowable(DEFAULT_PAGE_SIZE) { reviewsPagingSourceFactory.create(routeId) }
+    }
+
+    override fun postReview(routeId: Long, rating: Int, review: String): Single<Unit> {
+        return api.sendRouteReview(routeId, ReviewDto(id = null, rating = rating, reviewText = review, createdAt = null, userName = null))
+            .subscribeOn(Schedulers.io())
+            .map {
+                if (it.isSuccessful) {
+                    return@map
+                }
+
+                if (it.code() == 400) {
+                    throw IllegalArgumentException()
+                }
+
+                throw createHttpError(it)
+            }
     }
 }

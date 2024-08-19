@@ -5,8 +5,10 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.Multipart
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Part
 import retrofit2.http.Path
 import retrofit2.http.Query
 import ru.bibaboba.kit.retrofit.EndpointUrl
@@ -107,10 +109,11 @@ interface ExcursionApi {
         @Path("routeId") routeId: Long,
     ): Single<Response<PageDto<ReviewDto>>>
 
-    @POST("reviews/{routeId}")
+    @POST("reviews/{routeId}/")
     fun sendRouteReview(
-
-    )
+        @Path("routeId") routeId: Long,
+        @Body review: ReviewDto
+    ): Single<Response<Unit>>
 
     @GET("locations")
     fun getLocations(

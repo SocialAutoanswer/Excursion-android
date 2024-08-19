@@ -142,4 +142,7 @@
 
     <string name="price">%1$d руб.</string>
     <string name="dialog_buy_route_confirm_text">Оплатить</string>f
+
+    <string name="dialog_review_posted">Отзыв отправлен!</string>
+    <string name="dialog_review_already_posted">Вы уже отправили отзыв.</string>
 </resources>

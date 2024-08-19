@@ -1,9 +1,12 @@
 package ru.exursion.ui.routes.vm
 
 import androidx.annotation.IntRange
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.yandex.mapkit.geometry.Point
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import ru.bibaboba.kit.RxStateViewModel
+import ru.bibaboba.kit.SingleLiveEvent
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
 import ru.exursion.data.models.Audio
@@ -25,9 +28,12 @@ class RouteDetailsViewModel @Inject constructor(
     var routeAudios: List<AudioLocation> = emptyList()
         private set
 
+    private val _reviewPosted = SingleLiveEvent<Boolean?>()
+    val reviewPosted: LiveData<Boolean?> = _reviewPosted
+
     fun getIsSomeonePlaying() = routePlayer.isSomeonePlaying
 
-    fun getCurrentPlayingAudio() = routeAudios.find{ it.id == routePlayer.currentPlayingTrackId }?.audios?.get(0)
+    fun getCurrentPlayingAudio() = routeAudios.find { it.id == routePlayer.currentPlayingTrackId }?.audios?.get(0)
 
     fun setOnPlayerTimerListener(callback: (Int) -> Unit) = invokeDisposable {
         routePlayer.observePlayerTimer()
@@ -62,8 +68,18 @@ class RouteDetailsViewModel @Inject constructor(
             })
     }
 
-    fun addReview(@IntRange(1, 5) rating: Int, reviewText: String) {
-
+    fun addReview(routeId: Long, @IntRange(1, 5) rating: Int, reviewText: String) {
+        routesUseCase.postReview(routeId, rating, reviewText)
+            .subscribe({
+                _reviewPosted.postValue(true)
+            }, {
+                if (it is IllegalArgumentException) {
+                    _reviewPosted.postValue(false)
+                } else {
+                    _reviewPosted.postValue(null)
+                }
+               _state.postValue(RouteDetailsState.Idle)
+            })
     }
 
     sealed class RouteDetailsState : State {

@@ -73,7 +73,7 @@ class RouteDetailsActivity : AppCompatActivity(), RouteActivityController {
 
     @SuppressLint("RestrictedApi")
     override fun setButtonUiState(state: ButtonState) {
-        if(state != ButtonState.IDLE) {
+        if (state != ButtonState.IDLE) {
             setButtonUiState(ButtonState.IDLE)
         }
 

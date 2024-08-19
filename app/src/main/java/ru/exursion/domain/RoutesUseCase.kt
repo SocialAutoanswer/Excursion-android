@@ -16,6 +16,7 @@ interface RoutesUseCase {
     fun getRouteById(routeId: Long): Single<RouteDetails>
     fun getRoutesTags(): Flowable<PagingData<Tag>>
     fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>>
+    fun postReview(routeId: Long, rating: Int, review: String): Single<Unit>
 }
 
 class RoutesUseCaseImpl @Inject constructor(
@@ -43,5 +44,9 @@ class RoutesUseCaseImpl @Inject constructor(
 
     override fun getRouteReviews(routeId: Long): Flowable<PagingData<Review>> {
         return routesRepository.getRouteReviews(routeId)
+    }
+
+    override fun postReview(routeId: Long, rating: Int, review: String): Single<Unit> {
+        return routesRepository.postReview(routeId, rating, review)
     }
 }
