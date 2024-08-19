@@ -142,7 +142,7 @@ interface ExcursionApi {
     ): Single<Response<AudioLocationDto>>
 
     @GET("locations/favorites/")
-    fun getFavoriteLocations(): Single<Response<List<LocationDto>>>
+    fun getFavoriteLocations(): Single<Response<List<AudioLocationDto>>>
 
     @GET("hotels/favorites/")
     fun getFavoriteHotels(): Single<Response<List<HotelDto>>>
