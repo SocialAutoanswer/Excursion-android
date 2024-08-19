@@ -74,8 +74,14 @@ class SignInFragment : StateFragment<FragmentSigninBinding, AuthViewModel>(
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
             AuthViewModel.AuthState.Loading::class,
-            callback = { binding.loading.root.isVisible = true },
-            onExit = { binding.loading.root.isVisible = false },
+            callback = {
+                binding.loading.root.isVisible = true
+                binding.root.isEnabled = false
+            },
+            onExit = {
+                binding.loading.root.isVisible = false
+                binding.root.isEnabled = true
+            },
         )
     }
 

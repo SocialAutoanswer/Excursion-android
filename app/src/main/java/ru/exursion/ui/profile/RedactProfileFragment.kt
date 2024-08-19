@@ -4,6 +4,7 @@ import android.content.Context
 import android.content.Intent
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -25,6 +26,7 @@ class RedactProfileFragment :
     override val viewModel by viewModels<ProfileViewModel> { viewModelFactory }
 
     override val stateMachine = StateMachine.Builder()
+        .addLoadingState()
         .addProfileReceivedState()
         .addProfileEditedState()
         .addProfileDeletedState()
@@ -64,6 +66,19 @@ class RedactProfileFragment :
                 onDismiss { it?.dismiss() }
             }
         }
+    }
+
+    private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
+        return addState(ProfileViewModel.ProfileState.Loading::class,
+            callback = {
+                binding.loading.root.isVisible = true
+                binding.root.isEnabled = false
+            },
+            onExit = {
+                binding.loading.root.isVisible = false
+                binding.root.isEnabled = true
+            },
+        )
     }
 
     private fun StateMachine.Builder.addProfileReceivedState(): StateMachine.Builder {

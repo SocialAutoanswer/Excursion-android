@@ -96,8 +96,14 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
 
     private fun StateMachine.Builder.addLikeLoadingState(): StateMachine.Builder {
         return addState(RouteDetailsViewModel.RouteDetailsState.LikeLoading::class,
-            callback = { changeLikeButtonState(true) },
-            onExit = { changeLikeButtonState(false) }
+            callback = {
+                binding.loading.root.isVisible = true
+                binding.root.isEnabled = false
+            },
+            onExit = {
+                binding.loading.root.isVisible = false
+                binding.root.isEnabled = true
+            },
         )
     }
 

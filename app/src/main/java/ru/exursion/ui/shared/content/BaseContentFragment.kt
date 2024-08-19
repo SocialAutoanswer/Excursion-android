@@ -103,10 +103,14 @@ abstract class BaseContentFragment :
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(
             BaseContentViewModel.ContentState.Loading::class,
-            callback = { binding.loading.root.isVisible = true },
+            callback = {
+                binding.loading.root.isVisible = true
+                binding.root.isEnabled = false
+           },
             onExit = {
                 binding.loading.root.isVisible = false
                 binding.refreshLayout.isRefreshing = false
+                binding.root.isEnabled = false
             }
         )
     }
