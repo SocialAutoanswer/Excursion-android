@@ -6,6 +6,7 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import com.livermor.delegateadapter.delegate.CompositeDelegateAdapter
 import ru.bibaboba.kit.ui.BaseBottomSheetDialogFragment
+import ru.exursion.R
 import ru.exursion.databinding.FragmentRouteLocationsDialogBinding
 import ru.exursion.ui.routes.adapter.RouteAudiosDelegateAdapter
 import ru.exursion.ui.routes.vm.RouteDetailsViewModel
@@ -14,10 +15,9 @@ import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
 
-class RouteAudiosDialog :
-    BaseBottomSheetDialogFragment<FragmentRouteLocationsDialogBinding>(
-        FragmentRouteLocationsDialogBinding::class.java
-    ) {
+class RouteAudiosDialog : BaseBottomSheetDialogFragment<FragmentRouteLocationsDialogBinding>(
+    FragmentRouteLocationsDialogBinding::class.java
+) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private val viewModel by activityViewModels<RouteDetailsViewModel> { viewModelFactory }
@@ -28,6 +28,10 @@ class RouteAudiosDialog :
     }
 
     override fun setUpViews(view: View) {
+        // No questions, really
+        dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
+            ?.setBackgroundColor(resources.getColor(R.color.transparent))
+
         val adapter = CompositeDelegateAdapter(RouteAudiosDelegateAdapter(viewModel.routePlayer))
 
         binding.locationRecycler.also {
@@ -37,6 +41,6 @@ class RouteAudiosDialog :
 
         binding.title.text = viewModel.routeName
 
-        adapter.swapData(viewModel.routeAudios)
+        adapter.swapData(viewModel.routeAudios.filter { it.audios.isNotEmpty() })
     }
 }

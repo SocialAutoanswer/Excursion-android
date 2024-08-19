@@ -21,6 +21,8 @@ class RouteAudiosDelegateAdapter(private val routePlayer: RoutePlayer) :
     override fun ItemRouteLocationAudioBinding.onBind(item: AudioLocation) {
         val playerClickListener = object : OnPlayerClickListener {
             override fun onPlayClick() {
+                if (item.audios.isEmpty()) return
+
                 selectedView = this@onBind
                 routePlayer.setCurrentTrack(item.audios[0].audioUrl, item.id)
                 routePlayer.onPlayerClickListener.onPlayClick()
