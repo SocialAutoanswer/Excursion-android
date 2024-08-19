@@ -5,7 +5,7 @@ import android.content.Intent
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import ru.bibaboba.kit.states.StateMachine
@@ -27,7 +27,7 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
 ) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    override val viewModel by viewModels<AuthViewModel> { viewModelFactory }
+    override val viewModel by activityViewModels<AuthViewModel> { viewModelFactory }
     
     override val stateMachine = StateMachine.Builder()
         .addLoadingState()
