@@ -89,13 +89,6 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
 
     private fun StateMachine.Builder.addLoadingState(): StateMachine.Builder {
         return addState(RouteDetailsViewModel.RouteDetailsState.Loading::class,
-            callback = { binding.loading.root.isVisible = true },
-            onExit = { binding.loading.root.isVisible = false },
-        )
-    }
-
-    private fun StateMachine.Builder.addLikeLoadingState(): StateMachine.Builder {
-        return addState(RouteDetailsViewModel.RouteDetailsState.LikeLoading::class,
             callback = {
                 binding.loading.root.isVisible = true
                 binding.root.isEnabled = false
@@ -104,6 +97,13 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
                 binding.loading.root.isVisible = false
                 binding.root.isEnabled = true
             },
+        )
+    }
+
+    private fun StateMachine.Builder.addLikeLoadingState(): StateMachine.Builder {
+        return addState(RouteDetailsViewModel.RouteDetailsState.LikeLoading::class,
+            callback = { changeLikeButtonState(true) },
+            onExit = { changeLikeButtonState(false) },
         )
     }
 
