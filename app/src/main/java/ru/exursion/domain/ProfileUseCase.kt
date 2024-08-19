@@ -19,15 +19,20 @@ interface ProfileUseCase {
 
 class ProfileUseCaseImpl @Inject constructor(
     private val repository: ProfileRepository,
+    private val userSettings: UserSettings
 ): ProfileUseCase {
 
     override fun getProfile() = repository.getProfile()
         .map { result ->
             result.getOrThrow()
         }
+        .onErrorReturn {
+            userSettings.getUser()
+        }
         .observeOn(AndroidSchedulers.mainThread())
 
     override fun editProfile(user: User) = repository.editProfile(user)
+        .doAfterSuccess { userSettings.fillAllUserPrefs(user) }
         .map { result ->
             result.getOrThrow()
         }

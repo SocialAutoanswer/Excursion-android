@@ -37,6 +37,9 @@ class ProfileFragment :
     override fun onAttach(context: Context) {
         super.onAttach(context)
         inject()
+    }
+
+    override fun getStartData() {
         viewModel.getProfile()
     }
 
