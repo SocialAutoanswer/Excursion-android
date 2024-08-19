@@ -26,9 +26,6 @@ class ProfileUseCaseImpl @Inject constructor(
         .map { result ->
             result.getOrThrow()
         }
-        .onErrorReturn {
-            userSettings.getUser()
-        }
         .observeOn(AndroidSchedulers.mainThread())
 
     override fun editProfile(user: User) = repository.editProfile(user)
