@@ -31,7 +31,7 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
     
     override val stateMachine = StateMachine.Builder()
         .addLoadingState()
-        .addSuccessState()
+        .addCodeConfirmedState()
         .addErrorEffect()
         .addNetworkErrorEffect()
         .addIncorrectCodeEffect()
@@ -108,8 +108,8 @@ class EnterCodeFragment : StateFragment<FragmentEnterAuthCodeBinding, AuthViewMo
         )
     }
 
-    private fun StateMachine.Builder.addSuccessState(): StateMachine.Builder {
-        return addState(AuthViewModel.AuthState.Success::class) {
+    private fun StateMachine.Builder.addCodeConfirmedState(): StateMachine.Builder {
+        return addState(AuthViewModel.AuthState.CodeConfirmed::class) {
             val activity = activity ?: return@addState
             startActivity(Intent(activity, MainActivity::class.java))
             activity.finish()

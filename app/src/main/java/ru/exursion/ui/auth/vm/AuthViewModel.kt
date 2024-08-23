@@ -109,7 +109,7 @@ class AuthViewModel @Inject constructor(
         authUseCase.confirmAuthCode(code)
             .doOnSubscribe { _state.postValue(AuthState.Loading) }
             .subscribe({
-                _state.postValue(AuthState.Success)
+                _state.postValue(AuthState.CodeConfirmed)
             }, {
                 when (it) {
                     is InternalServerException -> _effect.postValue(AuthEffect.NetworkError)
@@ -138,6 +138,7 @@ class AuthViewModel @Inject constructor(
         data object Loading : AuthState()
         data object Success : AuthState()
         data object CodeSent : AuthState()
+        data object CodeConfirmed : AuthState()
     }
 
     sealed class AuthEffect : Effect {
