@@ -14,7 +14,9 @@ import ru.exursion.databinding.FragmentLocationBottomSheetDialogBinding
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
 
-class LocationBottomDialog: StateBottomSheetDialogFragment<FragmentLocationBottomSheetDialogBinding, MapViewModel>(FragmentLocationBottomSheetDialogBinding::class.java) {
+class LocationBottomDialog : StateBottomSheetDialogFragment<FragmentLocationBottomSheetDialogBinding, MapViewModel>(
+    FragmentLocationBottomSheetDialogBinding::class.java
+) {
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     override val viewModel by activityViewModels<MapViewModel> { viewModelFactory }

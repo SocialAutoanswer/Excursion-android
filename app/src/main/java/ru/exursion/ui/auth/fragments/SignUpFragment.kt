@@ -61,7 +61,7 @@ class SignUpFragment : StateFragment<FragmentSignupBinding, AuthViewModel>(
         }
 
         continueButton.setOnClickListener {
-            if (passEdit.text != passConfirmEdit.text) {
+            if (passEdit.text.toString() != passConfirmEdit.text.toString()) {
                 setConfirmErrorVisibleState(true)
                 return@setOnClickListener
             }

@@ -1,6 +1,5 @@
 package ru.exursion.data.recommendations
 
-import android.util.Log
 import io.reactivex.rxjava3.core.Single
 import ru.bibaboba.kit.util.Mapper
 import ru.exursion.data.CanNotGetDataException

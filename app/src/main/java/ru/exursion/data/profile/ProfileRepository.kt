@@ -27,7 +27,7 @@ class ProfileRepositoryImpl @Inject constructor(
     private val api: ExcursionApi,
     private val userMapper: Mapper<UserDto, User>,
     private val questionPagingSource: QuestionPagingSource
-): ProfileRepository {
+) : ProfileRepository {
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 10
