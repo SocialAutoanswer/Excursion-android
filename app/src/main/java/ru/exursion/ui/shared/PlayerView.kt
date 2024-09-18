@@ -65,7 +65,6 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
         super.onRestoreInstanceState(_state)
     }
 
-
     fun setOnPlayerClickListener(listener: OnPlayerClickListener) {
         playerClickListener = listener
         binding.playBtn.setOnPlayerClickListener(listener)
@@ -90,6 +89,10 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
     fun setTrackName(trackName: String) {
         this.trackName = trackName
         binding.trackName.text = trackName
+    }
+
+    fun setOnBackgroundClick(onClick: () -> Unit) {
+        binding.root.setOnClickListener{ onClick() }
     }
 
 }

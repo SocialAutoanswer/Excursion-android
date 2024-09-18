@@ -97,7 +97,7 @@ class MapViewModel @Inject constructor(
             })
     }
 
-    private fun getLocationById(locationId: Long) = invokeDisposable {
+    fun getLocationById(locationId: Long) = invokeDisposable {
         locationsUseCase.getLocationById(locationId)
             .doOnSubscribe{ _state.postValue(MapState.Loading) }
             .subscribe({

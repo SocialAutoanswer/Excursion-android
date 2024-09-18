@@ -77,7 +77,11 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
         viewModel.getLocationsByCity(city.id)
     }
 
-    private fun setUpPlayer() {
+    private fun setUpPlayer(locationId: Long? = null) {
+        locationId?.let {
+            binding.playerView.setOnBackgroundClick { viewModel.getLocationById(it) }
+        }
+
         binding.playerView.isVisible = viewModel.getIsSomeonePlaying()
         binding.playerView.playButton.setUiState(viewModel.getIsSomeonePlaying())
         binding.playerView.setOnPlayerClickListener(viewModel.getMapPlayerClickListener())
@@ -141,7 +145,7 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
 
             LocationBottomDialog().apply {
                 setOnDismiss {
-                    setUpPlayer()
+                    setUpPlayer(it.audioLocation.id)
                     viewModel.effect.observe(viewLifecycleOwner, stateMachine::submit)
                     viewModel.setIdleState()
                 }
