@@ -10,6 +10,7 @@ data class LocationDto(
     @SerializedName("longitude") val longitude: Double?,
     @SerializedName("latitude") val latitude: Double?,
     @SerializedName("city") val cityId: Long?,
+    @SerializedName("picture") val imageUrl: String?
 )
 
 data class LocationWithCityDto(

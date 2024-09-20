@@ -21,6 +21,12 @@ class LocationDtoDeserializer : JsonDeserializer<LocationDto> {
             null
         }
 
+        val picture = try {
+            jsonObject?.get("picture")?.asString
+        } catch (t: Throwable) {
+            null
+        }
+
         return LocationDto(
             jsonObject?.get("id")?.asLong,
             jsonObject?.get("name")?.asString,
@@ -28,6 +34,7 @@ class LocationDtoDeserializer : JsonDeserializer<LocationDto> {
             jsonObject?.get("longitude")?.asDouble,
             jsonObject?.get("latitude")?.asDouble,
             city,
+            picture,
         )
     }
 }

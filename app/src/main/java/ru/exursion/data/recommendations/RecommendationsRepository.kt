@@ -11,7 +11,7 @@ import ru.exursion.data.network.createHttpError
 import javax.inject.Inject
 
 interface RecommendationsRepository {
-    fun getRecommendationTags(): Single<Result<List<Tag>>>
+    fun getRecommendationTags(city: String): Single<Result<List<Tag>>>
 }
 
 class RecommendationsRepositoryImpl @Inject constructor(
@@ -19,8 +19,8 @@ class RecommendationsRepositoryImpl @Inject constructor(
     private val tagsMapper: Mapper<TagDto, Tag>
 ): RecommendationsRepository {
 
-    override fun getRecommendationTags(): Single<Result<List<Tag>>> {
-        return api.getRecommendationsTags()
+    override fun getRecommendationTags(city: String): Single<Result<List<Tag>>> {
+        return api.getRecommendationsTags(city)
             .map {
                 if (it.isSuccessful) {
                     val tags = arrayListOf<Tag>()

@@ -147,4 +147,6 @@
 
     <string name="dialog_review_posted">Отзыв отправлен!</string>
     <string name="dialog_review_already_posted">Вы уже отправили отзыв.</string>
+
+    <string name="underlined_text"><![CDATA[<u>%1$s</u>]]></string>
 </resources>

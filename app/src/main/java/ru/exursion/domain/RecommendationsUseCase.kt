@@ -8,15 +8,15 @@ import ru.exursion.data.recommendations.RecommendationsRepository
 import javax.inject.Inject
 
 interface RecommendationsUseCase {
-    fun getRecommendationsTags(): Single<List<Tag>>
+    fun getRecommendationsTags(city: String): Single<List<Tag>>
 }
 
 class RecommendationsUseCaseImpl @Inject constructor(
     private val recommendationsRepository: RecommendationsRepository
 ) : RecommendationsUseCase {
 
-    override fun getRecommendationsTags(): Single<List<Tag>> =
-        recommendationsRepository.getRecommendationTags()
+    override fun getRecommendationsTags(city: String): Single<List<Tag>> =
+        recommendationsRepository.getRecommendationTags(city)
             .map { result ->
                 result.getOrThrow()
             }

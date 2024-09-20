@@ -1,5 +1,7 @@
 package ru.exursion.ui.shared.content
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.paging.PagingData
 import androidx.paging.rxjava3.cachedIn
@@ -10,6 +12,8 @@ import ru.bibaboba.kit.Logger
 import ru.bibaboba.kit.RxStateViewModel
 import ru.bibaboba.kit.states.Effect
 import ru.bibaboba.kit.states.State
+import ru.exursion.data.models.City
+import ru.exursion.domain.CitiesUseCase
 import ru.exursion.domain.FavoritesUseCase
 import ru.exursion.domain.LocationUseCase
 import ru.exursion.domain.ProfileUseCase
@@ -22,7 +26,8 @@ class BaseContentViewModel @Inject constructor(
     private val routesUseCase: RoutesUseCase,
     private val favoritesUseCase: FavoritesUseCase,
     private val recommendationsUseCase: RecommendationsUseCase,
-    private val profileUseCase: ProfileUseCase
+    private val profileUseCase: ProfileUseCase,
+    private val citiesUseCase: CitiesUseCase,
 ) : RxStateViewModel<BaseContentViewModel.ContentState, BaseContentViewModel.ContentEffect>() {
 
     var cityId: Long? = null
@@ -30,6 +35,14 @@ class BaseContentViewModel @Inject constructor(
     var tagName: String? = null
     var routeId: Long? = null
     var isFavorite: Boolean = false
+    var cityName: String? = null
+
+    private val _citiesLiveData = MutableLiveData<List<City>>()
+    val citiesLiveData: LiveData<List<City>> = _citiesLiveData
+
+    fun getCitiesPage() = citiesUseCase.getCitiesPage(1).subscribe({
+        _citiesLiveData.postValue(it)
+    }, { })
 
     fun getRoutes() = getData(routesUseCase.getRoutes(cityId, tagId))
 
@@ -62,7 +75,7 @@ class BaseContentViewModel @Inject constructor(
     fun getRouteTags() = getData(routesUseCase.getRoutesTags())
 
     fun getRecommendationsTags() = getData(
-        recommendationsUseCase.getRecommendationsTags()
+        recommendationsUseCase.getRecommendationsTags(cityName ?: "")
     )
 
     fun getRouteReviews() = routeId?.let {

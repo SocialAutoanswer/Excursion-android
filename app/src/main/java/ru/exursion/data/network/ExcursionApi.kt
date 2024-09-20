@@ -5,6 +5,7 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
+import retrofit2.http.HTTP
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -170,8 +171,10 @@ interface ExcursionApi {
         @Path("id") hotelId: Long
     ): Single<Response<MessageDto>>
 
-    @GET("auth/recommendations/")
-    fun getRecommendationsTags() : Single<Response<RecommendationTagsDto>>
+    @GET("auth/recommendations/{city}")
+    fun getRecommendationsTags(
+        @Path("city") city: String
+    ) : Single<Response<RecommendationTagsDto>>
 
     @GET("locations/unfavoriteall/")
     fun clearAllFavoriteLocations() : Single<Response<Unit>>

@@ -11,7 +11,7 @@ class LocationsMapper @Inject constructor() : Mapper<LocationDto, Location> {
         id = input.id ?: -1,
         name = input.name ?: "",
         description = input.description ?: "",
-        imageUrl = "https://union-travel.ru/assets/images/ekskurs/school-bus.jpg",
+        imageUrl = input.imageUrl ?: "",
         point = Point(input.latitude ?: 0.0, input.longitude ?: 0.0),
         cityId = input.cityId ?: -1L
     )

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/MatchParentWrapContent.Vertical">
+    <TextView
+        style="@style/Text.H4"
+        android:textColor="?attr/exc_color_primary"
+        android:background="?attr/exc_background_color"
+        android:id="@+id/city_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center_horizontal"
+        android:layout_marginHorizontal="10dp"
+        android:padding="10dp"
+        tools:text="Казань"/>
+
+    <View
+        android:id="@+id/divider"
+        android:layout_height="1dp"
+        android:layout_width="match_parent"
+        android:background="?attr/exc_divider_color" />
+
+</LinearLayout>

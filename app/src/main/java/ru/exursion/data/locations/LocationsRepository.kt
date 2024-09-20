@@ -13,6 +13,7 @@ import ru.exursion.data.locations.paging.LocationsPagingSource
 import ru.exursion.data.models.AudioLocation
 import ru.exursion.data.models.AudioLocationDto
 import ru.exursion.data.models.City
+import ru.exursion.data.models.CityDto
 import ru.exursion.data.models.Location
 import ru.exursion.data.models.LocationDto
 import ru.exursion.data.network.ExcursionApi
@@ -20,6 +21,7 @@ import javax.inject.Inject
 
 interface LocationsRepository {
     fun getCities(): Flowable<PagingData<City>>
+    fun getCitiesPage(page: Int): Single<Result<List<City>>>
     fun getLocations(cityId: Long? = null, tagId: Long? = null, routeId: Long? = null): Flowable<PagingData<Location>>
     fun getLocations(cityId: Long): Single<Result<List<Location>>>
     fun getLocationById(locationId: Long): Single<Result<AudioLocation>>
@@ -30,11 +32,26 @@ class LocationsRepositoryImpl @Inject constructor(
     private val citiesPagingSourceFactory: CitiesPagingSource.Factory,
     private val locationsPagingSourceFactory: LocationsPagingSource.Factory,
     private val locationsMapper: Mapper<LocationDto, Location>,
-    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>
+    private val audioLocationMapper: Mapper<AudioLocationDto, AudioLocation>,
+    private val citiesMapper: Mapper<CityDto, City>
 ) : LocationsRepository {
 
     companion object {
         const val DEFAULT_PAGE_SIZE = 100
+    }
+
+    override fun getCitiesPage(page: Int): Single<Result<List<City>>> {
+        return api.getCitiesPage(page).map {
+            if(it.isSuccessful) {
+                val dto = it.body() ?: return@map Result.failure(CanNotGetDataException())
+                Result.success(citiesMapper.mapList(dto.data?.filterNotNull() ?: emptyList()))
+            } else {
+                when(it.code()) {
+                    500 -> Result.failure(InternalServerException())
+                    else -> Result.failure(CanNotGetDataException())
+                }
+            }
+        }
     }
 
     override fun getCities(): Flowable<PagingData<City>> {
