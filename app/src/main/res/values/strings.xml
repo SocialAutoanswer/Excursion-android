@@ -149,4 +149,5 @@
     <string name="dialog_review_already_posted">Вы уже отправили отзыв.</string>
 
     <string name="underlined_text"><![CDATA[<u>%1$s</u>]]></string>
+    <string name="screen_shops_title">Где поесть</string>
 </resources>

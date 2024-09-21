@@ -73,5 +73,13 @@
 		android:id="@+id/locationDetailsFragment"
 		android:name="ru.exursion.ui.routes.fragments.LocationDetailsFragment"
 		android:label="LocationDetailsFragment" />
+	<fragment
+		android:id="@+id/shopsFragment"
+		android:name="ru.exursion.ui.events.ShopsFragment"
+		android:label="ShopsFragment" />
+	<fragment
+		android:id="@+id/shopDetailsFragment"
+		android:name="ru.exursion.ui.events.ShopDetailsFragment"
+		android:label="ShopDetailsFragment" />
 
 </navigation>

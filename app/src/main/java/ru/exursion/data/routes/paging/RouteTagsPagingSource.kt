@@ -1,6 +1,5 @@
 package ru.exursion.data.routes.paging
 
-import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import io.reactivex.rxjava3.core.Single
@@ -10,12 +9,11 @@ import ru.exursion.data.DefaultRxPagingSource
 import ru.exursion.data.models.Tag
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.network.ExcursionApi
-import javax.inject.Inject
 
 class RouteTagsPagingSource @AssistedInject constructor(
     private val api: ExcursionApi,
     private val tagsMapper: Mapper<TagDto, Tag>
-): DefaultRxPagingSource<Tag>() {
+) : DefaultRxPagingSource<Tag>() {
 
     override fun loadSingle(params: LoadParams<Int>): Single<LoadResult<Int, Tag>> {
         val pageNumber = params.key ?: 1

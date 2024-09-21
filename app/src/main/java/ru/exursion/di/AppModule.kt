@@ -60,6 +60,8 @@ import ru.exursion.data.models.Route
 import ru.exursion.data.models.RouteDetails
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
+import ru.exursion.data.models.Shop
+import ru.exursion.data.models.ShopDto
 import ru.exursion.data.models.SocialMedia
 import ru.exursion.data.models.SocialMediaDto
 import ru.exursion.data.models.Tag
@@ -72,6 +74,7 @@ import ru.exursion.data.profile.ProfileRepositoryImpl
 import ru.exursion.data.profile.QuestionMapper
 import ru.exursion.data.recommendations.RecommendationsRepository
 import ru.exursion.data.recommendations.RecommendationsRepositoryImpl
+import ru.exursion.data.recommendations.ShopsMapper
 import ru.exursion.data.routes.mapper.ReviewMapper
 import ru.exursion.data.routes.RoutesRepository
 import ru.exursion.data.routes.RoutesRepositoryImpl
@@ -99,6 +102,7 @@ import ru.exursion.domain.player.impl.PlayerManagerImpl
 import ru.exursion.domain.player.interfaces.PlayerManager
 import ru.exursion.ui.SplashViewModel
 import ru.exursion.ui.auth.vm.AuthViewModel
+import ru.exursion.ui.events.ShopsViewModel
 import ru.exursion.ui.map.MapViewModel
 import ru.exursion.ui.profile.ProfileViewModel
 import ru.exursion.ui.routes.vm.ChooseCityViewModel
@@ -169,6 +173,8 @@ class AppModule(private val context: Context) {
         fun bindEventMapper(impl: EventMapper): Mapper<EventDto, Event>
         @Binds
         fun bindMessageMapper(impl: MessageMapper): Mapper<MessageDto, Message>
+        @Binds
+        fun bindShopsMapper(impl: ShopsMapper): Mapper<ShopDto, Shop>
 
         @Binds
         fun bindLocationsRepository(impl: LocationsRepositoryImpl): LocationsRepository
@@ -263,6 +269,11 @@ class AppModule(private val context: Context) {
         @IntoMap
         @ViewModelKey(LocationDetailsViewModel::class)
         fun bindLocationDetailsViewModel(viewModel: LocationDetailsViewModel): ViewModel
+
+        @Binds
+        @IntoMap
+        @ViewModelKey(ShopsViewModel::class)
+        fun bindShopsViewModel(viewModel: ShopsViewModel): ViewModel
     }
 
 }

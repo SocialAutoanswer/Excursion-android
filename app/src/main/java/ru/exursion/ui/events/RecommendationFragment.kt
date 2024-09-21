@@ -24,6 +24,7 @@ class RecommendationFragment : BaseContentFragment() {
             TagType.EVENTS -> findNavController().navigate(R.id.eventsFragment, tagBundle)
             TagType.ROUTES -> findNavController().navigate(R.id.routesFragment, tagBundle)
             TagType.LOCATIONS -> findNavController().navigate(R.id.locationsFragment, tagBundle)
+            TagType.SHOP -> findNavController().navigate(R.id.shopsFragment, tagBundle)
         }
     }
 
@@ -38,6 +39,15 @@ class RecommendationFragment : BaseContentFragment() {
             binding.header.endText.text = context?.getHtmlString(R.string.underlined_text, it)
             viewModel.cityName = it
             viewModel.getRecommendationsTags()
+            popup.dismiss()
+        }
+    }
+
+    private val popup by lazy {
+        ListPopupWindow(requireContext()).apply {
+            anchorView = binding.header.endText
+            setBackgroundDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.shape_rectangle))
+            width = 450
         }
     }
 
@@ -56,14 +66,7 @@ class RecommendationFragment : BaseContentFragment() {
 
     override fun setUpViews(view: View) {
         super.setUpViews(view)
-
-        val popup = ListPopupWindow(requireContext()).apply {
-            anchorView = binding.header.endText
-            setAdapter(citiesAdapter)
-            setBackgroundDrawable(AppCompatResources.getDrawable(requireContext(), R.drawable.shape_rectangle))
-            width = 450
-        }
-
+        popup.setAdapter(citiesAdapter)
         binding.header.endText.setOnClickListener { popup.show() }
     }
 }

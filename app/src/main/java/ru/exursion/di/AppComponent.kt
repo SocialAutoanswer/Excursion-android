@@ -14,6 +14,7 @@ import ru.exursion.ui.auth.fragments.EnterUserDataFragment
 import ru.exursion.ui.auth.fragments.SignInFragment
 import ru.exursion.ui.auth.fragments.SignUpFragment
 import ru.exursion.ui.events.RecommendationFragment
+import ru.exursion.ui.events.ShopsFragment
 import ru.exursion.ui.map.LocationBottomDialog
 import ru.exursion.ui.map.MapFragment
 import ru.exursion.ui.profile.DecorSettingsFragment
@@ -76,6 +77,7 @@ interface AppComponent {
     fun inject(fragment: HotelDetailsFragment)
     fun inject(fragment: EventDetailsFragment)
     fun inject(fragment: LocationDetailsFragment)
+    fun inject(fragment: ShopsFragment)
 
     @Component.Builder
     interface Builder {

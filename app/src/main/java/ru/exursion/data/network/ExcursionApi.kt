@@ -5,7 +5,6 @@ import retrofit2.Response
 import retrofit2.http.Body
 import retrofit2.http.DELETE
 import retrofit2.http.GET
-import retrofit2.http.HTTP
 import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Path
@@ -25,6 +24,7 @@ import ru.exursion.data.models.RecommendationTagsDto
 import ru.exursion.data.models.ReviewDto
 import ru.exursion.data.models.RouteDetailsDto
 import ru.exursion.data.models.RouteDto
+import ru.exursion.data.models.ShopDto
 import ru.exursion.data.models.TagDto
 import ru.exursion.data.models.UserDto
 import ru.exursion.data.models.UserRequestDto
@@ -197,4 +197,9 @@ interface ExcursionApi {
     fun getHotelById(
         @Path("id") hotelId: Long
     ): Single<Response<HotelDto>>
+
+    @GET("shopnfood/{id}")
+    fun getShopsAndFood(
+        @Path("id") tagId: Long
+    ): Single<Response<List<ShopDto>>>
 }

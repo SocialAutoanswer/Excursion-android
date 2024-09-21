@@ -3,13 +3,14 @@ package ru.exursion.data.models
 import com.google.gson.annotations.SerializedName
 
 enum class TagType {
-    LOCATIONS, ROUTES, EVENTS
+    LOCATIONS, ROUTES, EVENTS, SHOP
 }
 
 data class RecommendationTagsDto (
     @SerializedName("locations_tags") val locationTags: List<TagDto?>?,
     @SerializedName("routes_tags") val routeTags: List<TagDto?>?,
-    @SerializedName("events_tags") val eventTags: List<TagDto?>?
+    @SerializedName("events_tags") val eventTags: List<TagDto?>?,
+    @SerializedName("shop_tags") val shopTags: List<TagDto?>?
 )
 
 data class TagDto(

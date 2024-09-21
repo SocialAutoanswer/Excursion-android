@@ -1,14 +1,15 @@
 package ru.exursion.domain
 
-import android.util.Log
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.core.Single
+import ru.exursion.data.models.Shop
 import ru.exursion.data.models.Tag
 import ru.exursion.data.recommendations.RecommendationsRepository
 import javax.inject.Inject
 
 interface RecommendationsUseCase {
     fun getRecommendationsTags(city: String): Single<List<Tag>>
+    fun getShops(tagId: Long): Single<List<Shop>>
 }
 
 class RecommendationsUseCaseImpl @Inject constructor(
@@ -21,4 +22,10 @@ class RecommendationsUseCaseImpl @Inject constructor(
                 result.getOrThrow()
             }
             .observeOn(AndroidSchedulers.mainThread())
+
+    override fun getShops(tagId: Long): Single<List<Shop>> {
+        return recommendationsRepository.getShops(tagId)
+            .map { it.getOrThrow() }
+            .observeOn(AndroidSchedulers.mainThread())
+    }
 }
