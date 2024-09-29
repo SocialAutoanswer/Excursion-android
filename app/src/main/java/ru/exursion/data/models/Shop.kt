@@ -10,6 +10,7 @@ data class ShopDto(
     @SerializedName("is_recomended") val isRecommended: Boolean?,
     @SerializedName("address") val address: String?,
     @SerializedName("city") val cityId: Long?,
+    @SerializedName("image") val image: String?
 )
 
 data class Shop(

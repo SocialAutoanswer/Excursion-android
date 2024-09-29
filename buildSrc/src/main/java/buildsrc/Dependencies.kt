@@ -9,8 +9,8 @@ object Versions {
     const val kotlin = "1.4.20"
     val compatibility = JavaVersion.VERSION_1_8 // must be
     const val jvmTarget = "1.8"                 // the same
-    const val versionCode = 3
-    const val versionName = "1.1.0"
+    const val versionCode = 4
+    const val versionName = "1.2.0"
 
     object AndroidX {
         const val core = "1.9.0"

@@ -1,6 +1,7 @@
 package ru.exursion.data.recommendations
 
 import ru.bibaboba.kit.util.Mapper
+import ru.exursion.BuildConfig
 import ru.exursion.data.models.Shop
 import ru.exursion.data.models.ShopDto
 import javax.inject.Inject
@@ -13,6 +14,6 @@ class ShopsMapper @Inject constructor() : Mapper<ShopDto, Shop> {
         isRecommended = input.isRecommended ?: false,
         address = input.address ?: "",
         cityId = input.cityId ?: -1,
-        imageUrl = "https://as2.ftcdn.net/v2/jpg/00/53/45/31/1000_F_53453175_hVgYVz0WmvOXPd9CNzaUcwcibiGao3CL.jpg"
+        imageUrl = BuildConfig.EXC_URL + (input.image ?: "")
     )
 }

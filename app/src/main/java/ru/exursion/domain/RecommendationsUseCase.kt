@@ -21,6 +21,7 @@ class RecommendationsUseCaseImpl @Inject constructor(
             .map { result ->
                 result.getOrThrow()
             }
+            .map { it.distinct() }
             .observeOn(AndroidSchedulers.mainThread())
 
     override fun getShops(tagId: Long): Single<List<Shop>> {

@@ -10,13 +10,13 @@ data class RecommendationTagsDto (
     @SerializedName("locations_tags") val locationTags: List<TagDto?>?,
     @SerializedName("routes_tags") val routeTags: List<TagDto?>?,
     @SerializedName("events_tags") val eventTags: List<TagDto?>?,
-    @SerializedName("shop_tags") val shopTags: List<TagDto?>?
+    @SerializedName("others") val shopTags: List<TagDto?>?
 )
 
 data class TagDto(
     @SerializedName("id") val id: Long?,
     @SerializedName("name") val name: String?,
-    @SerializedName("picture") val picture: String?,
+    @SerializedName(value="picture", alternate = ["image"]) val picture: String?,
     @SerializedName("type") val type: Char
 )
 
