@@ -26,6 +26,7 @@ import ru.exursion.ui.shared.ext.addItemDivider
 import ru.exursion.ui.shared.ext.addItemMargins
 import ru.exursion.ui.shared.ext.inject
 import javax.inject.Inject
+import kotlin.math.min
 
 class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDetailsViewModel>(
     FragmentRouteDetailsBinding::class.java
@@ -163,7 +164,9 @@ class RouteDetailsFragment : StateFragment<FragmentRouteDetailsBinding, RouteDet
             binding.kilometers.text = getString(R.string.screen_route_details_kilometers, routeDetails.kilometers)
             binding.description.text = routeDetails.description
 
-            adapter.swapData(it.details.reviews.subList(0, 2))
+            if (it.details.reviews.isNotEmpty()) {
+                adapter.swapData(it.details.reviews.subList(0, min(2, it.details.reviews.size)))
+            }
 
             Glide.with(this@RouteDetailsFragment)
                 .load(routeDetails.image)
