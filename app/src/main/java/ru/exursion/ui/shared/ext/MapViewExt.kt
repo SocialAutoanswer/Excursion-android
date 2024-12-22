@@ -1,11 +1,14 @@
 package ru.exursion.ui.shared.ext
 
+import android.util.Log
 import android.view.View
 import androidx.appcompat.content.res.AppCompatResources
+import com.yandex.mapkit.Animation
 import com.yandex.mapkit.geometry.BoundingBox
 import com.yandex.mapkit.geometry.Point
 import com.yandex.mapkit.geometry.Polyline
 import com.yandex.mapkit.map.CameraPosition
+import com.yandex.mapkit.map.Map
 import com.yandex.mapkit.map.MapObjectTapListener
 import com.yandex.mapkit.mapview.MapView
 import com.yandex.runtime.ui_view.ViewProvider
@@ -46,21 +49,22 @@ private fun MapView.getViewByMarkType(markType: MarkType, markId: Long): View = 
     }
 }
 
-fun MapView.move(point: Point, zoom: Float? = null) = mapWindow.map.move(
+fun MapView.move(point: Point, zoom: Float? = null, callback: (() -> Unit)? = null) = mapWindow.map.move(
     CameraPosition(
         point,
         zoom ?: DEFAULT_ZOOM,
         DEFAULT_AZIMUTH,
         DEFAULT_TILT
-    )
-)
+    ),
+    Animation(Animation.Type.SMOOTH, 0.5f)
+) { _ -> callback?.invoke() }
 
 fun MapView.setBoundsByPoints(points: List<Point>) {
     mapWindow.map.cameraBounds.latLngBounds = getBoundingBoxByPoints(points)
 }
 
-fun MapView.goToCity(city: City) {
-    city.point?.let { move(it) }
+fun MapView.goToCity(city: City, callback: () -> Unit) {
+    city.point?.let { move(it,null, callback) }
 }
 
 fun MapView.createRoute(placeMarks: List<PlaceMark>) {

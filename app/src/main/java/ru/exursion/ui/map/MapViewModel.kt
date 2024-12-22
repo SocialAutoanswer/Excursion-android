@@ -77,7 +77,6 @@ class MapViewModel @Inject constructor(
 
     fun getLocationsByCity(cityId: Long) = invokeDisposable {
         locationsUseCase.getLocations(cityId)
-            .doOnSubscribe { _state.postValue(MapState.Loading) }
             .subscribe({ locations ->
                 _state.postValue(MapState.LocationsReceived(locations))
             }, {

@@ -73,7 +73,7 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
     }
 
     private fun changeCity(city: City) {
-        binding.mapView.goToCity(city)
+        binding.mapView.goToCity(city) {}
         viewModel.getLocationsByCity(city.id)
     }
 
@@ -115,8 +115,6 @@ class MapFragment : StateFragment<FragmentMapBinding, MapViewModel>(FragmentMapB
             it.locations.forEach { location ->
                 viewModel.addTapListener(location.id)
             }
-
-            binding.mapView.setBoundsByPoints(it.locations.map { it.point })
 
             binding.mapView.addPlaceMarks(
                 it.locations.map { location ->
