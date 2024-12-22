@@ -1,6 +1,9 @@
 package ru.exursion.ui.map
 
+import android.annotation.SuppressLint
 import android.content.Context
+import android.text.method.ScrollingMovementMethod
+import android.view.MotionEvent
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -35,14 +38,31 @@ class LocationBottomDialog : StateBottomSheetDialogFragment<FragmentLocationBott
         inject()
     }
 
-    override fun setUpViews(view: View) {
+    @SuppressLint("ClickableViewAccessibility")
+    override fun setUpViews(view: View): Unit = with(binding) {
         // No questions, really
         dialog?.findViewById<View>(com.google.android.material.R.id.design_bottom_sheet)
             ?.setBackgroundColor(resources.getColor(R.color.transparent))
 
-        binding.player.playButton.setUiState(viewModel.getPointIsPlaying())
-        binding.player.setOnPlayerClickListener(viewModel.getPointPlayerClickListener())
-        viewModel.setOnPlayerTimerListener(binding.player::setCurrentPosition)
+        routDescription.apply {
+            // workaround to make text view scrollable in bottom sheet dialog
+            movementMethod = ScrollingMovementMethod()
+            setOnScrollChangeListener { _, _, _, _, _ -> bottomSheetDialog.behavior.isDraggable = false }
+            setOnTouchListener { _, motionEvent ->
+                when (motionEvent.action) {
+                    MotionEvent.ACTION_DOWN -> bottomSheetDialog.behavior.isDraggable = false
+                    MotionEvent.ACTION_UP -> bottomSheetDialog.behavior.isDraggable = true
+                }
+                false
+            }
+
+        }
+
+
+        player.playButton.setUiState(viewModel.getPointIsPlaying())
+        player.setOnPlayerClickListener(viewModel.getPointPlayerClickListener())
+
+        viewModel.setOnPlayerTimerListener(player::setCurrentPosition)
     }
 
     private fun changeLikeButtonState(isLoading: Boolean) = with(binding) {

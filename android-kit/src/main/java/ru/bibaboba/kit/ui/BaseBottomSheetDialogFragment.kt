@@ -1,12 +1,15 @@
 package ru.bibaboba.kit.ui
 
+import android.app.Dialog
 import android.content.DialogInterface
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.CallSuper
 import androidx.viewbinding.ViewBinding
+import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import ru.bibaboba.kit.ui.utils.inflateBinding
 
@@ -17,6 +20,16 @@ open class BaseBottomSheetDialogFragment<VB: ViewBinding> (private val bindingCl
     protected val binding get() = _binding!!
 
     private var onDismissCallback: (() -> Unit)? = null
+
+    /** Don't use before [onCreateDialog] */
+    protected lateinit var bottomSheetDialog: BottomSheetDialog
+
+    override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
+        val dialog = BottomSheetDialog(requireContext(), theme)
+        dialog.setOnShowListener { bottomSheetDialog = it as BottomSheetDialog }
+
+        return dialog
+    }
 
     @CallSuper
     override fun onCreateView(
