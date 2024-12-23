@@ -30,13 +30,16 @@ class MapPlayer @Inject constructor(
 
     val pointPlayerClickListener = object : OnPlayerClickListener {
         override fun onPlayClick() {
-            if (!candidateIsCurrent())
+            if (!candidateIsCurrent()) {
                 setCurrentTrack(trackCandidate)
-            else
+            } else {
                 playerManager.play()
+            }
         }
 
-        override fun onPauseClick() = playerManager.pause()
+        override fun onPauseClick() {
+            playerManager.pause()
+        }
 
         override fun onSetPosition(position: Int) = playerManager.setPosition(position)
     }

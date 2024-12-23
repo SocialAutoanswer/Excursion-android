@@ -34,7 +34,9 @@ class PlayerView(context: Context, attributes: AttributeSet) : ConstraintLayout(
         override fun onStopTrackingTouch(seekBar: SeekBar?) {
             playerClickListener?.onSetPosition((seekBar?.progress ?: 0) * 1000)
             binding.currentTime.text = (seekBar?.progress ?: 0).toTimeFormat()
-            playerClickListener?.onPlayClick()
+            if (!playButton.isPaused) {
+                playerClickListener?.onPlayClick()
+            }
         }
     }
 

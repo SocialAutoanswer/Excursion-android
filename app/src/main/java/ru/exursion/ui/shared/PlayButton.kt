@@ -19,16 +19,21 @@ class PlayButton(context: Context, attrs: AttributeSet) : AppCompatImageButton(c
         setUiState(false)
     }
 
+    var isPaused: Boolean = true
+        private set
+
     private var _playerClickListener : OnPlayerClickListener? = null
 
     private val playerClickListener = object : OnPlayerClickListener {
         override fun onPlayClick() {
             setUiState(true)
+            isPaused = false
             _playerClickListener?.onPlayClick()
         }
 
         override fun onPauseClick() {
             setUiState(false)
+            isPaused = true
             _playerClickListener?.onPauseClick()
         }
 
