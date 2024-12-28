@@ -77,18 +77,18 @@ fun MapView.createRoute(placeMarks: List<PlaceMark>) {
     move(points[0], 25f)
 }
 
-fun MapView.addPlaceMark(placeMark: PlaceMark) {
+fun MapView.addPlaceMark(placeMark: PlaceMark, number: Long) {
     mapWindow.map.mapObjects.addPlacemark().apply {
         geometry = placeMark.point
-        setView(ViewProvider(getViewByMarkType(placeMark.markType, placeMark.id)))
+        setView(ViewProvider(getViewByMarkType(placeMark.markType, number)))
 
         placeMark.tapListener?.let { addTapListener(it) }
     }
 }
 
 fun MapView.addPlaceMarks(placeMarks: List<PlaceMark>) =
-    placeMarks.forEach { mark ->
-        addPlaceMark(mark)
+    placeMarks.forEachIndexed { i, mark ->
+        addPlaceMark(mark, i.toLong() + 1)
     }
 
 fun MapView.setPlaceMarks(placeMarks: List<PlaceMark>) {
